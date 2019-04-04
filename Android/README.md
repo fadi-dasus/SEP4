@@ -1,25 +1,25 @@
-##Development plan##
+##Development plan
 
-###Phases###
+###Phases#
 
-	####Minimum Viable Product (Mandatory)####
+	####Minimum Viable Product (Mandatory)
 		- Activity which displays CO2, Temperature, Humidity
 		- MVVM (ViewModel & LiveData, Repository)
 		- Room Database
 		- Web Services
 
-	####Expanded Minimum Viable Product (Optional)####
+	####Expanded Minimum Viable Product (Optional)
 		- Room choice
 		- Authorization
 		- Warning and Report lists activities with nice charts
 
-###Tasks###
+###Tasks
 
-	**Sequence is linear!**
+	**Sequence is linear!
 
 	1. Create Model Classes (Ainis, Vladimir, Aleksandr)
 	2.1 Room Database (Vladimir and Aleksandr)
-		_Resources_
+		_Resources
 		1. Simple Tutorial https://codelabs.developers.google.com/codelabs/android-room-with-a-view/#0
 		2. Part 1 https://codelabs.developers.google.com/codelabs/android-training-livedata-viewmodel/#1
 		3. Part 2 https://codelabs.developers.google.com/codelabs/android-training-room-delete-data/#0
