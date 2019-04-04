@@ -1,6 +1,6 @@
 ##Development plan
 
-###Phases#
+###Phases
 
 	####Minimum Viable Product (Mandatory)
 		- Activity which displays CO2, Temperature, Humidity
