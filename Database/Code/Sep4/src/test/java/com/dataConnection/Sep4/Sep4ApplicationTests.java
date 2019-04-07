@@ -40,6 +40,13 @@ public class Sep4ApplicationTests {
 		Room room = rr.findByRoomNumber("100001");
 		System.out.println("_______________________________");
 		System.out.println(room.toString());
+
+		System.out.println("_______________________________");
+		System.out.println("______________extracting date from objectid_________");
+
+		System.out.println(room.getId().getDate());
+		System.out.println("_______________________________");
+
 		System.out.println("_______________________________");
 		List<Room> roms = rr.findAll();
 		for (Room room2 : roms) {
@@ -47,10 +54,8 @@ public class Sep4ApplicationTests {
 			System.out.println(room2.toString());
 			System.out.println("_______________________________");
 		}
-		
-		
+
 		rr.findAll().forEach(System.out::println);
-		
 
 	}
 }
