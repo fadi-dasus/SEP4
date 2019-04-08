@@ -7,9 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.hateoas.ResourceSupport;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "Co2WebService")
-public class Co2 {
+public class Co2 extends ResourceSupport{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -25,20 +30,24 @@ public class Co2 {
 	@Column(name = "timestamp")
 	private String timestamp;
 
-	public int getId() {
-		return id;
-	}
+	
 
 	public Co2() {
 
 	}
-
-	public Co2(String businessKey, String value, String timestamp) {
+	 @JsonCreator
+	public Co2(@JsonProperty("co2") String businessKey, String value, String timestamp) {
 
 		this.businessKey = businessKey;
 		this.value = value;
 		this.timestamp = timestamp;
 	}
+	 
+	 
+//	 public int getId() {
+//			return id;
+//		}
+	 
 
 	public String getBusinessKey() {
 		return businessKey;
