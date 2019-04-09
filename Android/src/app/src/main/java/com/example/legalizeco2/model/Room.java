@@ -2,40 +2,34 @@ package com.example.legalizeco2.model;
 
 public class Room {
 
-    private int R_ID;
-    private CO2 co2;
-    private Temperature temperature;
-    private Humidity humidity;
+	private int ID;
 
-    public int getR_ID() {
-        return R_ID;
-    }
+	private String roomName;
 
-    public void setR_ID(int r_ID) {
-        R_ID = r_ID;
-    }
+	public Room() {
 
-    public CO2 getCo2() {
-        return co2;
-    }
+	}
 
-    public void setCo2(CO2 co2) {
-        this.co2 = co2;
-    }
+	public Room(int iD, String roomName) {
 
-    public Temperature getTemperature() {
-        return temperature;
-    }
+		ID = iD;
+		this.roomName = roomName;
+	}
 
-    public void setTemperature(Temperature temperature) {
-        this.temperature = temperature;
-    }
+	public int getID() {
+		return ID;
+	}
 
-    public Humidity getHumidity() {
-        return humidity;
-    }
+	public void setID(int iD) {
+		ID = iD;
+	}
 
-    public void setHumidity(Humidity humidity) {
-        this.humidity = humidity;
-    }
+	public String getRoomName() {
+		return roomName;
+	}
+
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+
 }

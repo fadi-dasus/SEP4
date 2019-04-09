@@ -1,23 +1,76 @@
 package com.example.legalizeco2.model;
 
+import java.sql.Date;
+
 public class CO2 {
 
-    private int C_ID;
-    private int CO2INPPM;
+    private int id;
 
-    public int getC_ID() {
-        return C_ID;
+    private final double higheAcceptableValue = 5.5;
+
+    private final double lowAcceptableValue = 0.1;
+
+    private String businessKey;
+
+    private String value;
+
+    private Date timestamp;
+
+    public CO2() {
+
     }
 
-    public void setC_ID(int c_ID) {
-        C_ID = c_ID;
+    public CO2(String businessKey, String value, Date timestamp) {
+
+        this.businessKey = businessKey;
+        this.value = value;
+        this.timestamp = timestamp;
     }
 
-    public int getCO2INPPM() {
-        return CO2INPPM;
+    public int getId() {
+        return id;
     }
 
-    public void setCO2INPPM(int CO2INPPM) {
-        this.CO2INPPM = CO2INPPM;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getBusinessKey() {
+        return businessKey;
+    }
+
+    public void setBusinessKey(String businessKey) {
+        this.businessKey = businessKey;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public double getHigheAcceptableValue() {
+        return higheAcceptableValue;
+    }
+
+    public double getLowAcceptableValue() {
+        return lowAcceptableValue;
+    }
+
+    @Override
+    public String toString() {
+        return "CO2 [id=" + id + ", higheAcceptableValue=" + higheAcceptableValue + ", lowAcceptableValue="
+                + lowAcceptableValue + ", businessKey=" + businessKey + ", value=" + value + ", timestamp=" + timestamp
+                + "]";
     }
 }
