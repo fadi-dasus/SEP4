@@ -10,8 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Co2")
-public class Co2 {
+@Table(name = "Temperature")
+public class Temperature {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -29,11 +30,11 @@ public class Co2 {
 	@Column(name = "timestamp")
 	private Date timestamp;
 
-	public Co2() {
+	public Temperature() {
 
 	}
 
-	public Co2(String businessKey, String value, Date timestamp) {
+	public Temperature(String businessKey, String value, Date timestamp) {
 
 		this.businessKey = businessKey;
 		this.value = value;
@@ -82,7 +83,7 @@ public class Co2 {
 
 	@Override
 	public String toString() {
-		return "Co2 [id=" + id + ", higheAcceptableValue=" + higheAcceptableValue + ", lowAcceptableValue="
+		return "Temperature [id=" + id + ", higheAcceptableValue=" + higheAcceptableValue + ", lowAcceptableValue="
 				+ lowAcceptableValue + ", businessKey=" + businessKey + ", value=" + value + ", timestamp=" + timestamp
 				+ "]";
 	}
