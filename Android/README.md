@@ -40,3 +40,8 @@ Tasks
 	6. Activities
 		RoomActivity (3 Text Views as of now)
 
+Libraries
+	- Retrofit2 & Retrofit2-Jackson-Converter
+	- Room Persistence Library
+	- RecyclerView
+
