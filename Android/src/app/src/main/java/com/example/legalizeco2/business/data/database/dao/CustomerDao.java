@@ -11,7 +11,6 @@ import androidx.room.Query;
 
 @Dao
 public interface CustomerDao {
-
     @Insert
     void insert(Customer customer);
 

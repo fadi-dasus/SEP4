@@ -20,6 +20,8 @@ import androidx.room.Room;
 
 public class DatabaseHelper {
 
+    //Todo: Remove the m part of the attributes
+
     public CO2Dao mCo2Dao;
     public CustomerDao mCustomerDao;
     public HumidityDao mHumidityDao;
@@ -32,7 +34,6 @@ public class DatabaseHelper {
     private LiveData<List<Customer>> mAllCustomers;
     private LiveData<List<Room>> mAllRooms;
     private LiveData<List<Warning>> mAllWarnings;
-
 
     DatabaseHelper(Context context){
         RoomDB database = RoomDB.getDatabase(context);
