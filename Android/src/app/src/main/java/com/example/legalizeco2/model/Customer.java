@@ -1,6 +1,16 @@
 package com.example.legalizeco2.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity (tableName = "Customer_table")
 public class Customer {
+
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "customer")
 
     private int ID;
 

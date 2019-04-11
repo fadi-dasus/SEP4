@@ -2,7 +2,17 @@ package com.example.legalizeco2.model;
 
 import java.sql.Date;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity (tableName = "Humidity_table")
 public class Humidity {
+
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "humidity")
 
     private int id;
 
