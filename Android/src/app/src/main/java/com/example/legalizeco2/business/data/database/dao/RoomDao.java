@@ -17,6 +17,6 @@ public interface RoomDao {
     @Query("DELETE FROM room_table")
     void deleteAll();
 
-    @Query("SELECT * FROM room_table ORDER BY room ASC")
+    @Query("SELECT * FROM room_table")
     LiveData<List<Room>> getAllRooms();
 }

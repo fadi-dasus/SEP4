@@ -18,6 +18,6 @@ public interface CustomerDao {
     @Query("DELETE FROM Customer_table")
     void deleteAll();
 
-    @Query("SELECT * FROM Customer_table ORDER BY customer ASC")
+    @Query("SELECT * FROM Customer_table")
     LiveData<List<Customer>> getAllCustomers();
 }

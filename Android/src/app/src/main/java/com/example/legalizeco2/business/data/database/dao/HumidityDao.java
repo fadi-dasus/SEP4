@@ -18,6 +18,6 @@ public interface HumidityDao {
     @Query("DELETE FROM Humidity_table")
     void deleteAll();
 
-    @Query("SELECT * FROM Humidity_table ORDER BY humidity ASC")
+    @Query("SELECT * FROM Humidity_table")
     LiveData<List<Humidity>> getAllHumidity();
 }

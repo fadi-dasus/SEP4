@@ -18,6 +18,6 @@ public interface CO2Dao {
     @Query("DELETE FROM CO2_table")
     void deleteAll();
 
-    @Query("SELECT * FROM CO2_table ORDER BY co2 ASC")
+    @Query("SELECT * FROM CO2_table")
     LiveData<List<CO2>> getAllCO2();
 }

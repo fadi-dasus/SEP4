@@ -7,14 +7,12 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Warning_table")
+@Entity(tableName = "warning_table")
 public class Warning {
 
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "warning")
-
-    private int ID;
+    private int id;
 
     private String MeasurementType;
 
@@ -42,8 +40,8 @@ public class Warning {
 
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
     public String getMeasurementType() {
@@ -96,7 +94,7 @@ public class Warning {
 
     @Override
     public String toString() {
-        return "Warning [ID=" + ID + ", MeasurementType=" + MeasurementType + ", timeStamp=" + timeStamp + ", high="
+        return "Warning [ID=" + id + ", MeasurementType=" + MeasurementType + ", timeStamp=" + timeStamp + ", high="
                 + high + ", low=" + low + ", value=" + value + ", roomName=" + roomName + "]";
     }
 }

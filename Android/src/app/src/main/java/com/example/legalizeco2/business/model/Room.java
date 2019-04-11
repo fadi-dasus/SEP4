@@ -5,14 +5,12 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Room_table")
+@Entity(tableName = "room_table")
 public class Room {
 
 	@PrimaryKey
 	@NonNull
-	@ColumnInfo(name = "room")
-
-	private int ID;
+	private int id;
 
 	private String roomName;
 
@@ -20,18 +18,18 @@ public class Room {
 
 	}
 
-	public Room(int iD, String roomName) {
+	public Room(int id, String roomName) {
 
-		ID = iD;
+		this.id = id;
 		this.roomName = roomName;
 	}
 
 	public int getID() {
-		return ID;
+		return this.id;
 	}
 
-	public void setID(int iD) {
-		ID = iD;
+	public void setID(int id) {
+		this.id = id;
 	}
 
 	public String getRoomName() {

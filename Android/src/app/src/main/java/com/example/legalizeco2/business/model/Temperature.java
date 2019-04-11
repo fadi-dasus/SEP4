@@ -7,13 +7,11 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Temperature_table")
+@Entity(tableName = "temperature_table")
 public class Temperature {
 
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "temperature")
-
     private int id;
 
     private final double higheAcceptableValue = 5.5;

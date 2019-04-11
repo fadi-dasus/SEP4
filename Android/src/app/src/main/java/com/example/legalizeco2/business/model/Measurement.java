@@ -5,13 +5,12 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Measurement_table")
+@Entity(tableName = "measurement_table")
 public class Measurement {
 
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "measurement")
-    private Integer id;
+    private int id;
 
     private CO2 co2;
 

@@ -5,14 +5,12 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity (tableName = "Customer_table")
+@Entity (tableName = "customer_table")
 public class Customer {
 
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "customer")
-
-    private int ID;
+    private int id;
 
     private String userame;
 
@@ -34,8 +32,8 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
     public String getUserame() {
@@ -72,7 +70,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer [ID=" + ID + ", userame=" + userame + ", password=" + password + ", email=" + email
+        return "Customer [ID=" + id + ", userame=" + userame + ", password=" + password + ", email=" + email
                 + ", phoneNumber=" + phoneNumber + "]";
     }
 }

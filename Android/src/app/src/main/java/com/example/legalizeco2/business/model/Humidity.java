@@ -7,13 +7,11 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity (tableName = "Humidity_table")
+@Entity (tableName = "humidity_table")
 public class Humidity {
 
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "humidity")
-
     private int id;
 
     private final double higheAcceptableValue = 5.5;

@@ -18,6 +18,6 @@ public interface WarningDao {
     @Query("DELETE FROM warning_table")
     void deleteAll();
 
-    @Query("SELECT * FROM warning_table ORDER BY warning ASC")
+    @Query("SELECT * FROM warning_table")
     LiveData<List<Warning>> getAllWarnings();
 }

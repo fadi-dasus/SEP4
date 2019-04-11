@@ -18,7 +18,7 @@ public interface MeasurementDao {
     @Query("DELETE FROM Measurement_table")
     void deleteAll();
 
-    @Query("SELECT * FROM measurement_table ORDER BY measurement ASC")
+    @Query("SELECT * FROM measurement_table")
     LiveData<List<Measurement>> getAllMeasurements();
 
 }

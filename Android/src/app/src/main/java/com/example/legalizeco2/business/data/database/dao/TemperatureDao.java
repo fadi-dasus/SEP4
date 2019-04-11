@@ -18,6 +18,6 @@ public interface TemperatureDao {
     @Query("DELETE FROM temperature_table")
     void deleteAll();
 
-    @Query("SELECT * FROM temperature_table ORDER BY temperature ASC")
+    @Query("SELECT * FROM temperature_table")
     LiveData<List<Temperature>> getAllTemperatures();
 }
