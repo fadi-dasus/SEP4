@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "warning_table")
 public class Warning {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     private int id;
 

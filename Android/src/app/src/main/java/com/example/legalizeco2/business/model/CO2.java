@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey;
 @Entity (tableName = "co2_table")
 public class CO2 {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     private int id;
 

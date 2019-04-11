@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "measurement_table")
 public class Measurement {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     private int id;
 

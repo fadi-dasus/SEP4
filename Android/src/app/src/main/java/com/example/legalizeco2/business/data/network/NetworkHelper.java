@@ -2,7 +2,9 @@ package com.example.legalizeco2.business.data.network;
 
 import com.example.legalizeco2.business.model.Room;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -45,6 +47,17 @@ public class NetworkHelper {
     }
 
     public LiveData<List<Room>> getRoomList() {
+
+        //refreshRoom();
+        //Temporary variables for generating random rooms
+        List<Room> tempRooms = new ArrayList<>();
+        for(int i = 0; i < 10; i++){
+            Random r = new Random();
+            int rNum = r.nextInt(1000)+1;
+            Room tempRoom = new Room(i, "RoomName: " + rNum);
+            tempRooms.add(tempRoom);
+        }
+        roomListData.postValue(tempRooms);
         return roomListData;
     }
 

@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey;
 @Entity (tableName = "humidity_table")
 public class Humidity {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     private int id;
 

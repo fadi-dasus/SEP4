@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "temperature_table")
 public class Temperature {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     private int id;
 
