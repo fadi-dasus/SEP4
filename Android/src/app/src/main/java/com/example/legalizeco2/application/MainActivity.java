@@ -1,8 +1,10 @@
-package com.example.legalizeco2;
+package com.example.legalizeco2.application;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.legalizeco2.R;
 
 public class MainActivity extends AppCompatActivity {
 

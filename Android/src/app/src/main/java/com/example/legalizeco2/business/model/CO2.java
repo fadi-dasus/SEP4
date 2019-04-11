@@ -1,4 +1,4 @@
-package com.example.legalizeco2.model;
+package com.example.legalizeco2.business.model;
 
 import java.sql.Date;
 
@@ -7,12 +7,12 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity (tableName = "Humidity_table")
-public class Humidity {
+@Entity (tableName = "CO2_table")
+public class CO2 {
 
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "humidity")
+    @ColumnInfo(name = "CO2")
 
     private int id;
 
@@ -26,11 +26,11 @@ public class Humidity {
 
     private Date timestamp;
 
-    public Humidity() {
+    public CO2() {
 
     }
 
-    public Humidity(String businessKey, String value, Date timestamp) {
+    public CO2(String businessKey, String value, Date timestamp) {
 
         this.businessKey = businessKey;
         this.value = value;
@@ -79,7 +79,7 @@ public class Humidity {
 
     @Override
     public String toString() {
-        return "Humidity [id=" + id + ", higheAcceptableValue=" + higheAcceptableValue + ", lowAcceptableValue="
+        return "CO2 [id=" + id + ", higheAcceptableValue=" + higheAcceptableValue + ", lowAcceptableValue="
                 + lowAcceptableValue + ", businessKey=" + businessKey + ", value=" + value + ", timestamp=" + timestamp
                 + "]";
     }

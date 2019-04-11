@@ -1,20 +1,20 @@
-package com.example.legalizeco2;
+package com.example.legalizeco2.business.data.database;
 
 import android.content.Context;
 
-import com.example.legalizeco2.dao.CO2Dao;
-import com.example.legalizeco2.dao.CustomerDao;
-import com.example.legalizeco2.dao.HumidityDao;
-import com.example.legalizeco2.dao.MeasurementDao;
-import com.example.legalizeco2.dao.RoomDao;
-import com.example.legalizeco2.dao.TemperatureDao;
-import com.example.legalizeco2.dao.WarningDao;
-import com.example.legalizeco2.model.CO2;
-import com.example.legalizeco2.model.Customer;
-import com.example.legalizeco2.model.Humidity;
-import com.example.legalizeco2.model.Measurement;
-import com.example.legalizeco2.model.Temperature;
-import com.example.legalizeco2.model.Warning;
+import com.example.legalizeco2.business.data.database.dao.CO2Dao;
+import com.example.legalizeco2.business.data.database.dao.CustomerDao;
+import com.example.legalizeco2.business.data.database.dao.HumidityDao;
+import com.example.legalizeco2.business.data.database.dao.MeasurementDao;
+import com.example.legalizeco2.business.data.database.dao.RoomDao;
+import com.example.legalizeco2.business.data.database.dao.TemperatureDao;
+import com.example.legalizeco2.business.data.database.dao.WarningDao;
+import com.example.legalizeco2.business.model.CO2;
+import com.example.legalizeco2.business.model.Customer;
+import com.example.legalizeco2.business.model.Humidity;
+import com.example.legalizeco2.business.model.Measurement;
+import com.example.legalizeco2.business.model.Temperature;
+import com.example.legalizeco2.business.model.Warning;
 
 import androidx.room.Database;
 import androidx.room.Room;
@@ -34,7 +34,7 @@ public abstract class RoomDB extends RoomDatabase {
 
     private static volatile RoomDB INSTANCE;
 
-    static RoomDB getDatabase(final Context context) {
+    public static RoomDB getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (RoomDB.class) {
                 if (INSTANCE == null) {

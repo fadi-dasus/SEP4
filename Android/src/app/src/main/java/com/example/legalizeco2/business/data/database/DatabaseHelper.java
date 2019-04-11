@@ -1,16 +1,17 @@
-package com.example.legalizeco2;
+package com.example.legalizeco2.business.data.database;
 
 import android.app.Application;
+import android.content.Context;
 
-import com.example.legalizeco2.dao.CO2Dao;
-import com.example.legalizeco2.dao.CustomerDao;
-import com.example.legalizeco2.dao.HumidityDao;
-import com.example.legalizeco2.dao.MeasurementDao;
-import com.example.legalizeco2.dao.RoomDao;
-import com.example.legalizeco2.dao.TemperatureDao;
-import com.example.legalizeco2.dao.WarningDao;
-import com.example.legalizeco2.model.Customer;
-import com.example.legalizeco2.model.Warning;
+import com.example.legalizeco2.business.data.database.dao.CO2Dao;
+import com.example.legalizeco2.business.data.database.dao.CustomerDao;
+import com.example.legalizeco2.business.data.database.dao.HumidityDao;
+import com.example.legalizeco2.business.data.database.dao.MeasurementDao;
+import com.example.legalizeco2.business.data.database.dao.RoomDao;
+import com.example.legalizeco2.business.data.database.dao.TemperatureDao;
+import com.example.legalizeco2.business.data.database.dao.WarningDao;
+import com.example.legalizeco2.business.model.Customer;
+import com.example.legalizeco2.business.model.Warning;
 
 import java.util.List;
 
@@ -33,8 +34,8 @@ public class DatabaseHelper {
     private LiveData<List<Warning>> mAllWarnings;
 
 
-    DatabaseHelper(Application application){
-        RoomDB database = RoomDB.getDatabase(application);
+    DatabaseHelper(Context context){
+        RoomDB database = RoomDB.getDatabase(context);
         // CO2
         mCo2Dao = database.co2Dao();
         // Customer

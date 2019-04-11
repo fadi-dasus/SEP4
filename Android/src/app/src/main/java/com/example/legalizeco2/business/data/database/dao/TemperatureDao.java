@@ -1,6 +1,6 @@
-package com.example.legalizeco2.dao;
+package com.example.legalizeco2.business.data.database.dao;
 
-import com.example.legalizeco2.model.Temperature;
+import com.example.legalizeco2.business.model.Temperature;
 
 import java.util.List;
 

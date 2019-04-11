@@ -1,4 +1,4 @@
-package com.example.legalizeco2.dao;
+package com.example.legalizeco2.business.data.database.dao;
 
 import java.util.List;
 

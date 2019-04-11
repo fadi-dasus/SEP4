@@ -1,4 +1,4 @@
-package com.example.legalizeco2.model;
+package com.example.legalizeco2.business.model;
 
 import java.sql.Date;
 

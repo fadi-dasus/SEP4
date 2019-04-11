@@ -1,6 +1,6 @@
-package com.example.legalizeco2.dao;
+package com.example.legalizeco2.business.data.database.dao;
 
-import com.example.legalizeco2.model.Measurement;
+import com.example.legalizeco2.business.model.Measurement;
 
 import java.util.List;
 
