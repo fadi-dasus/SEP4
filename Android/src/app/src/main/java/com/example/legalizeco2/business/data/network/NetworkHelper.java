@@ -12,6 +12,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkHelper {
 
+    //Todo: Add a loop to fetch data every 10 minutes
+
     private String BASE_URL = "https://localhost:5001/v1/";
 
     private static NetworkHelper sInstance;
@@ -42,7 +44,9 @@ public class NetworkHelper {
         return sInstance;
     }
 
-    public LiveData<List<Room>> getRoomList() {return roomListData;}
+    public LiveData<List<Room>> getRoomList() {
+        return roomListData;
+    }
 
     public void refreshRoom() {
         Call<List<Room>> call =endpoints.getRoomList();
