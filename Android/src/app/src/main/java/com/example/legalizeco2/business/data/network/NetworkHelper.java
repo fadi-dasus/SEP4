@@ -1,6 +1,8 @@
 package com.example.legalizeco2.business.data.network;
 
-import com.example.legalizeco2.business.model.Room;
+import android.util.Log;
+
+import com.example.legalizeco2.business.model.MyRoom;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,7 @@ public class NetworkHelper {
     private Retrofit retrofit;
     private APIEndpoints endpoints;
 
-    private MutableLiveData<List<Room>> roomListData;
+    private MutableLiveData<List<MyRoom>> roomListData;
 
     private NetworkHelper(){
         retrofit = new Retrofit.Builder()
@@ -46,23 +48,22 @@ public class NetworkHelper {
         return sInstance;
     }
 
-    public LiveData<List<Room>> getRoomList() {
-
+    public LiveData<List<MyRoom>> getRoomList() {
         //refreshRoom();
         //Temporary variables for generating random rooms
-        List<Room> tempRooms = new ArrayList<>();
-        for(int i = 0; i < 10; i++){
+        List<MyRoom> tempMyRooms = new ArrayList<>();
+        for(int i = 0; i < 5; i++){
             Random r = new Random();
             int rNum = r.nextInt(1000)+1;
-            Room tempRoom = new Room(i, "RoomName: " + rNum);
-            tempRooms.add(tempRoom);
+            MyRoom tempMyRoom = new MyRoom(i, "RoomName: " + rNum);
+            tempMyRooms.add(tempMyRoom);
         }
-        roomListData.postValue(tempRooms);
+        roomListData.setValue(tempMyRooms);
         return roomListData;
     }
 
     public void refreshRoom() {
-        Call<List<Room>> call =endpoints.getRoomList();
+        Call<List<MyRoom>> call = endpoints.getRoomList();
 
         CallbackList.getRoomList(call, roomListData);
     }

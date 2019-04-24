@@ -1,6 +1,6 @@
 package com.example.legalizeco2.business.data.database.dao;
 
-import com.example.legalizeco2.business.model.Room;
+import com.example.legalizeco2.business.model.MyRoom;
 
 import java.util.List;
 
@@ -15,17 +15,17 @@ import androidx.room.Update;
 public interface RoomDao {
 
     @Insert
-    void insert (Room room);
+    void insert (MyRoom myRoom);
 
     @Query("DELETE FROM room_table")
     void deleteAll();
 
     @Query("SELECT * FROM room_table")
-    LiveData<List<Room>> getAllRooms();
+    LiveData<List<MyRoom>> getAllRooms();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAllRooms(List<Room> roomList);
+    void insertAllRooms(List<MyRoom> myRoomList);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    void updateAllRooms(List<Room> roomList);
+    void updateAllRooms(List<MyRoom> myRoomList);
 }

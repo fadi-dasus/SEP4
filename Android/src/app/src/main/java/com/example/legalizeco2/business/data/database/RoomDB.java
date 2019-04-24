@@ -13,6 +13,7 @@ import com.example.legalizeco2.business.model.CO2;
 import com.example.legalizeco2.business.model.Customer;
 import com.example.legalizeco2.business.model.Humidity;
 import com.example.legalizeco2.business.model.Measurement;
+import com.example.legalizeco2.business.model.MyRoom;
 import com.example.legalizeco2.business.model.Temperature;
 import com.example.legalizeco2.business.model.Warning;
 
@@ -21,7 +22,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 @Database(entities = {CO2.class, Customer.class, Humidity.class, Measurement.class,
-          Room.class, Temperature.class, Warning.class}, version = 1, exportSchema = false)
+        MyRoom.class, Temperature.class, Warning.class}, version = 3, exportSchema = false)
 public abstract class RoomDB extends RoomDatabase {
 
     public abstract CO2Dao co2Dao();

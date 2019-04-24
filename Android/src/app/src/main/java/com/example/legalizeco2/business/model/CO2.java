@@ -1,11 +1,11 @@
 package com.example.legalizeco2.business.model;
 
-import java.sql.Date;
-
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import java.sql.Date;
 
 @Entity (tableName = "co2_table")
 public class CO2 {
@@ -14,57 +14,27 @@ public class CO2 {
     @NonNull
     private int id;
 
+    @Ignore
     private final double higheAcceptableValue = 5.5;
 
+    @Ignore
     private final double lowAcceptableValue = 0.1;
 
     private String businessKey;
 
     private String value;
 
+    @Ignore
     private Date timestamp;
 
-    public CO2() {
-
-    }
-
-    public CO2(String businessKey, String value, Date timestamp) {
-
+    public CO2(int id, String businessKey, String value) {
+        this.id = id;
         this.businessKey = businessKey;
         this.value = value;
-        this.timestamp = timestamp;
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getBusinessKey() {
-        return businessKey;
-    }
-
-    public void setBusinessKey(String businessKey) {
-        this.businessKey = businessKey;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
     }
 
     public double getHigheAcceptableValue() {
@@ -73,6 +43,18 @@ public class CO2 {
 
     public double getLowAcceptableValue() {
         return lowAcceptableValue;
+    }
+
+    public String getBusinessKey() {
+        return businessKey;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
     }
 
     @Override

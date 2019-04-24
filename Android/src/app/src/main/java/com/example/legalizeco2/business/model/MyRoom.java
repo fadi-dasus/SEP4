@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "room_table")
-public class Room {
+public class MyRoom {
 
 	@PrimaryKey(autoGenerate = true)
 	@NonNull
@@ -14,30 +14,25 @@ public class Room {
 
 	private String roomName;
 
-	public Room() {
-
-	}
-
-	public Room(int id, String roomName) {
+	public MyRoom(int id, String roomName) {
 
 		this.id = id;
 		this.roomName = roomName;
 	}
 
-	public int getID() {
-		return this.id;
-	}
-
-	public void setID(int id) {
-		this.id = id;
+	public int getId() {
+		return id;
 	}
 
 	public String getRoomName() {
 		return roomName;
 	}
 
-	public void setRoomName(String roomName) {
-		this.roomName = roomName;
+	@Override
+	public String toString() {
+		return "MyRoom{" +
+				"id=" + id +
+				", roomName='" + roomName + '\'' +
+				'}';
 	}
-
 }

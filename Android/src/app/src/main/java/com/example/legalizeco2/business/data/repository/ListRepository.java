@@ -1,27 +1,24 @@
 package com.example.legalizeco2.business.data.repository;
 
-import android.content.Context;
+import android.util.Log;
 
 import com.example.legalizeco2.business.data.database.DatabaseHelper;
 import com.example.legalizeco2.business.data.network.NetworkHelper;
-import com.example.legalizeco2.business.model.Room;
+import com.example.legalizeco2.business.model.MyRoom;
 import com.example.legalizeco2.utils.AppExecutors;
 
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 public class ListRepository {
 
-    private ListRepository sInstance;
+    private static ListRepository sInstance;
 
     private AppExecutors appExecutors;
     private NetworkHelper networkHelper;
     private DatabaseHelper databaseHelper;
-
-    private MutableLiveData<List<Room>> roomListData;
 
     /*
      * 1. NetworkHelper updates every 10 minutes and notifies roomListData
@@ -35,15 +32,15 @@ public class ListRepository {
         this.networkHelper = networkHelper;
         this.databaseHelper = databaseHelper;
 
-        networkHelper.getRoomList().observeForever(new Observer<List<Room>>() {
+        networkHelper.getRoomList().observeForever(new Observer<List<MyRoom>>() {
             @Override
-            public void onChanged(List<Room> rooms) {
-                updateRoom(rooms);
+            public void onChanged(List<MyRoom> myRooms) {
+                updateRoom(myRooms);
             }
         });
     }
 
-    public ListRepository getInstance(AppExecutors executors, NetworkHelper networkHelper, DatabaseHelper databaseHelper){
+    public static ListRepository getInstance(AppExecutors executors, NetworkHelper networkHelper, DatabaseHelper databaseHelper){
         if(sInstance == null){
             synchronized (ListRepository.class){
                 if(sInstance == null){
@@ -54,16 +51,23 @@ public class ListRepository {
         return sInstance;
     }
 
-    public LiveData<List<Room>> getRoomList(){
-        return databaseHelper.mRoomDao.getAllRooms();
+    public LiveData<List<MyRoom>> getRoomList(){
+        refreshRoomList();
+        return databaseHelper.getRoomDao().getAllRooms();
     }
 
-    public void updateRoom(List<Room> rooms){
+    public void refreshRoomList(){
+        networkHelper.getRoomList();
+    }
+
+    public void updateRoom(List<MyRoom> myRooms){
         appExecutors.diskIO().execute(() -> {
-            if(databaseHelper.mRoomDao.getAllRooms() == null){
-                databaseHelper.mRoomDao.insertAllRooms(rooms);
+            if(databaseHelper.getRoomDao().getAllRooms().getValue() == null){
+                //Log.v("TEST", databaseHelper.getRoomDao().getAllRooms().getValue().get(0).toString());
+                databaseHelper.getRoomDao().insertAllRooms(myRooms);
             } else {
-                databaseHelper.mRoomDao.updateAllRooms(rooms);
+                Log.v("TEST", "UPDATE KURWA");
+                databaseHelper.getRoomDao().updateAllRooms(myRooms);
             }
         });
     }
