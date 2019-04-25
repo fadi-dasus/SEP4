@@ -1,0 +1,540 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Sep4_GroupX2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="255" />
+          <Property Name="userame" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="co2">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="b_id" Type="varchar" MaxLength="255" />
+          <Property Name="highe_acceptable_value" Type="float" />
+          <Property Name="low_acceptable_value" Type="float" />
+          <Property Name="timestamp" Type="date" />
+          <Property Name="value" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="co2test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="b_id" Type="varchar" MaxLength="255" />
+          <Property Name="timestamp" Type="varchar" MaxLength="255" />
+          <Property Name="value" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="cutomer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="password" Type="varchar" MaxLength="255" />
+          <Property Name="phone_number" Type="varchar" MaxLength="255" />
+          <Property Name="userame" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Sep4_GroupX2.dbo.D_Room' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="D_Room">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="room_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="humidity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="b_id" Type="varchar" MaxLength="255" />
+          <Property Name="highe_acceptable_value" Type="float" />
+          <Property Name="low_acceptable_value" Type="float" />
+          <Property Name="timestamp" Type="date" />
+          <Property Name="value" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="measurement">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="co2_id" Type="int" />
+          <Property Name="humidity_id" Type="int" />
+          <Property Name="room_id" Type="int" />
+          <Property Name="temperature_id" Type="int" />
+        </EntityType>
+        <EntityType Name="room">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="room_name" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="temperature">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="b_id" Type="varchar" MaxLength="255" />
+          <Property Name="highe_acceptable_value" Type="float" />
+          <Property Name="low_acceptable_value" Type="float" />
+          <Property Name="timestamp" Type="date" />
+          <Property Name="value" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="warning">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="measurement_type" Type="varchar" MaxLength="255" />
+          <Property Name="high" Type="bit" />
+          <Property Name="low" Type="bit" />
+          <Property Name="room_name" Type="varchar" MaxLength="255" />
+          <Property Name="time_stamp" Type="date" />
+          <Property Name="value" Type="float" />
+        </EntityType>
+        <Association Name="FK3ds4xsmi5g3d3dyb3g7of31pk">
+          <End Role="co2" Type="Self.co2" Multiplicity="0..1" />
+          <End Role="measurement" Type="Self.measurement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="co2">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="measurement">
+              <PropertyRef Name="co2_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK5bpydj92tt2ksbfyky08885fc">
+          <End Role="room" Type="Self.room" Multiplicity="0..1" />
+          <End Role="measurement" Type="Self.measurement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="measurement">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKaetyvq260y54rwinvfp4fafpq">
+          <End Role="humidity" Type="Self.humidity" Multiplicity="0..1" />
+          <End Role="measurement" Type="Self.measurement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="humidity">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="measurement">
+              <PropertyRef Name="humidity_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKanlr7at8yp95cy5cc2whc5r2m">
+          <End Role="temperature" Type="Self.temperature" Multiplicity="0..1" />
+          <End Role="measurement" Type="Self.measurement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="temperature">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="measurement">
+              <PropertyRef Name="temperature_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Sep4_GroupX2ModelStoreContainer">
+          <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="co2" EntityType="Self.co2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="co2test" EntityType="Self.co2test" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cutomer" EntityType="Self.cutomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="humidity" EntityType="Self.humidity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="measurement" EntityType="Self.measurement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="room" EntityType="Self.room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="temperature" EntityType="Self.temperature" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="warning" EntityType="Self.warning" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="D_Room" EntityType="Self.D_Room" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [D_Room].[id] AS [id], 
+    [D_Room].[room_name] AS [room_name]
+    FROM [dbo].[D_Room] AS [D_Room]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK3ds4xsmi5g3d3dyb3g7of31pk" Association="Self.FK3ds4xsmi5g3d3dyb3g7of31pk">
+            <End Role="co2" EntitySet="co2" />
+            <End Role="measurement" EntitySet="measurement" />
+          </AssociationSet>
+          <AssociationSet Name="FK5bpydj92tt2ksbfyky08885fc" Association="Self.FK5bpydj92tt2ksbfyky08885fc">
+            <End Role="room" EntitySet="room" />
+            <End Role="measurement" EntitySet="measurement" />
+          </AssociationSet>
+          <AssociationSet Name="FKaetyvq260y54rwinvfp4fafpq" Association="Self.FKaetyvq260y54rwinvfp4fafpq">
+            <End Role="humidity" EntitySet="humidity" />
+            <End Role="measurement" EntitySet="measurement" />
+          </AssociationSet>
+          <AssociationSet Name="FKanlr7at8yp95cy5cc2whc5r2m" Association="Self.FKanlr7at8yp95cy5cc2whc5r2m">
+            <End Role="temperature" EntitySet="temperature" />
+            <End Role="measurement" EntitySet="measurement" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Sep4_GroupX2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="userame" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="co2">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="b_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="highe_acceptable_value" Type="Double" />
+          <Property Name="low_acceptable_value" Type="Double" />
+          <Property Name="timestamp" Type="DateTime" Precision="0" />
+          <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="measurements" Relationship="Self.FK3ds4xsmi5g3d3dyb3g7of31pk" FromRole="co2" ToRole="measurement" />
+        </EntityType>
+        <EntityType Name="co2test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="b_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="timestamp" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="cutomer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="phone_number" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="userame" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="humidity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="b_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="highe_acceptable_value" Type="Double" />
+          <Property Name="low_acceptable_value" Type="Double" />
+          <Property Name="timestamp" Type="DateTime" Precision="0" />
+          <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="measurements" Relationship="Self.FKaetyvq260y54rwinvfp4fafpq" FromRole="humidity" ToRole="measurement" />
+        </EntityType>
+        <EntityType Name="measurement">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="co2_id" Type="Int32" />
+          <Property Name="humidity_id" Type="Int32" />
+          <Property Name="room_id" Type="Int32" />
+          <Property Name="temperature_id" Type="Int32" />
+          <NavigationProperty Name="co2" Relationship="Self.FK3ds4xsmi5g3d3dyb3g7of31pk" FromRole="measurement" ToRole="co2" />
+          <NavigationProperty Name="humidity" Relationship="Self.FKaetyvq260y54rwinvfp4fafpq" FromRole="measurement" ToRole="humidity" />
+          <NavigationProperty Name="room" Relationship="Self.FK5bpydj92tt2ksbfyky08885fc" FromRole="measurement" ToRole="room" />
+          <NavigationProperty Name="temperature" Relationship="Self.FKanlr7at8yp95cy5cc2whc5r2m" FromRole="measurement" ToRole="temperature" />
+        </EntityType>
+        <EntityType Name="room">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="room_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="measurements" Relationship="Self.FK5bpydj92tt2ksbfyky08885fc" FromRole="room" ToRole="measurement" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="temperature">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="b_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="highe_acceptable_value" Type="Double" />
+          <Property Name="low_acceptable_value" Type="Double" />
+          <Property Name="timestamp" Type="DateTime" Precision="0" />
+          <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="measurements" Relationship="Self.FKanlr7at8yp95cy5cc2whc5r2m" FromRole="temperature" ToRole="measurement" />
+        </EntityType>
+        <EntityType Name="warning">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="measurement_type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="high" Type="Boolean" />
+          <Property Name="low" Type="Boolean" />
+          <Property Name="room_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="time_stamp" Type="DateTime" Precision="0" />
+          <Property Name="value" Type="Double" />
+        </EntityType>
+        <EntityType Name="D_Room">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="room_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK3ds4xsmi5g3d3dyb3g7of31pk">
+          <End Role="co2" Type="Self.co2" Multiplicity="0..1" />
+          <End Role="measurement" Type="Self.measurement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="co2">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="measurement">
+              <PropertyRef Name="co2_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKaetyvq260y54rwinvfp4fafpq">
+          <End Role="humidity" Type="Self.humidity" Multiplicity="0..1" />
+          <End Role="measurement" Type="Self.measurement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="humidity">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="measurement">
+              <PropertyRef Name="humidity_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK5bpydj92tt2ksbfyky08885fc">
+          <End Role="room" Type="Self.room" Multiplicity="0..1" />
+          <End Role="measurement" Type="Self.measurement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="measurement">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKanlr7at8yp95cy5cc2whc5r2m">
+          <End Role="temperature" Type="Self.temperature" Multiplicity="0..1" />
+          <End Role="measurement" Type="Self.measurement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="temperature">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="measurement">
+              <PropertyRef Name="temperature_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Sep4_GroupX2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admins" EntityType="Self.admin" />
+          <EntitySet Name="co2" EntityType="Self.co2" />
+          <EntitySet Name="co2test" EntityType="Self.co2test" />
+          <EntitySet Name="cutomers" EntityType="Self.cutomer" />
+          <EntitySet Name="humidities" EntityType="Self.humidity" />
+          <EntitySet Name="measurements" EntityType="Self.measurement" />
+          <EntitySet Name="rooms" EntityType="Self.room" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="temperatures" EntityType="Self.temperature" />
+          <EntitySet Name="warnings" EntityType="Self.warning" />
+          <EntitySet Name="D_Room" EntityType="Self.D_Room" />
+          <AssociationSet Name="FK3ds4xsmi5g3d3dyb3g7of31pk" Association="Self.FK3ds4xsmi5g3d3dyb3g7of31pk">
+            <End Role="co2" EntitySet="co2" />
+            <End Role="measurement" EntitySet="measurements" />
+          </AssociationSet>
+          <AssociationSet Name="FKaetyvq260y54rwinvfp4fafpq" Association="Self.FKaetyvq260y54rwinvfp4fafpq">
+            <End Role="humidity" EntitySet="humidities" />
+            <End Role="measurement" EntitySet="measurements" />
+          </AssociationSet>
+          <AssociationSet Name="FK5bpydj92tt2ksbfyky08885fc" Association="Self.FK5bpydj92tt2ksbfyky08885fc">
+            <End Role="room" EntitySet="rooms" />
+            <End Role="measurement" EntitySet="measurements" />
+          </AssociationSet>
+          <AssociationSet Name="FKanlr7at8yp95cy5cc2whc5r2m" Association="Self.FKanlr7at8yp95cy5cc2whc5r2m">
+            <End Role="temperature" EntitySet="temperatures" />
+            <End Role="measurement" EntitySet="measurements" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Sep4_GroupX2ModelStoreContainer" CdmEntityContainer="Sep4_GroupX2Entities">
+          <EntitySetMapping Name="admins">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.admin">
+              <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="userame" ColumnName="userame" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="co2">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.co2">
+              <MappingFragment StoreEntitySet="co2">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="b_id" ColumnName="b_id" />
+                <ScalarProperty Name="highe_acceptable_value" ColumnName="highe_acceptable_value" />
+                <ScalarProperty Name="low_acceptable_value" ColumnName="low_acceptable_value" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="co2test">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.co2test">
+              <MappingFragment StoreEntitySet="co2test">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="b_id" ColumnName="b_id" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cutomers">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.cutomer">
+              <MappingFragment StoreEntitySet="cutomer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="userame" ColumnName="userame" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="humidities">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.humidity">
+              <MappingFragment StoreEntitySet="humidity">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="b_id" ColumnName="b_id" />
+                <ScalarProperty Name="highe_acceptable_value" ColumnName="highe_acceptable_value" />
+                <ScalarProperty Name="low_acceptable_value" ColumnName="low_acceptable_value" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="measurements">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.measurement">
+              <MappingFragment StoreEntitySet="measurement">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="co2_id" ColumnName="co2_id" />
+                <ScalarProperty Name="humidity_id" ColumnName="humidity_id" />
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="temperature_id" ColumnName="temperature_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rooms">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.room">
+              <MappingFragment StoreEntitySet="room">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="room_name" ColumnName="room_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="temperatures">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.temperature">
+              <MappingFragment StoreEntitySet="temperature">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="b_id" ColumnName="b_id" />
+                <ScalarProperty Name="highe_acceptable_value" ColumnName="highe_acceptable_value" />
+                <ScalarProperty Name="low_acceptable_value" ColumnName="low_acceptable_value" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="warnings">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.warning">
+              <MappingFragment StoreEntitySet="warning">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="measurement_type" ColumnName="measurement_type" />
+                <ScalarProperty Name="high" ColumnName="high" />
+                <ScalarProperty Name="low" ColumnName="low" />
+                <ScalarProperty Name="room_name" ColumnName="room_name" />
+                <ScalarProperty Name="time_stamp" ColumnName="time_stamp" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="D_Room">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.D_Room">
+              <MappingFragment StoreEntitySet="D_Room">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="room_name" ColumnName="room_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

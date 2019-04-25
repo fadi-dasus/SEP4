@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Sep4_GroupX2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="userame" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="co2">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="b_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="highe_acceptable_value" Type="Double" />
+    <Property Name="low_acceptable_value" Type="Double" />
+    <Property Name="timestamp" Type="DateTime" Precision="0" />
+    <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="measurements" Relationship="Self.FK3ds4xsmi5g3d3dyb3g7of31pk" FromRole="co2" ToRole="measurement" />
+  </EntityType>
+  <EntityType Name="co2test">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="b_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="timestamp" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="cutomer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="phone_number" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="userame" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="humidity">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="b_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="highe_acceptable_value" Type="Double" />
+    <Property Name="low_acceptable_value" Type="Double" />
+    <Property Name="timestamp" Type="DateTime" Precision="0" />
+    <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="measurements" Relationship="Self.FKaetyvq260y54rwinvfp4fafpq" FromRole="humidity" ToRole="measurement" />
+  </EntityType>
+  <EntityType Name="measurement">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="co2_id" Type="Int32" />
+    <Property Name="humidity_id" Type="Int32" />
+    <Property Name="room_id" Type="Int32" />
+    <Property Name="temperature_id" Type="Int32" />
+    <NavigationProperty Name="co2" Relationship="Self.FK3ds4xsmi5g3d3dyb3g7of31pk" FromRole="measurement" ToRole="co2" />
+    <NavigationProperty Name="humidity" Relationship="Self.FKaetyvq260y54rwinvfp4fafpq" FromRole="measurement" ToRole="humidity" />
+    <NavigationProperty Name="room" Relationship="Self.FK5bpydj92tt2ksbfyky08885fc" FromRole="measurement" ToRole="room" />
+    <NavigationProperty Name="temperature" Relationship="Self.FKanlr7at8yp95cy5cc2whc5r2m" FromRole="measurement" ToRole="temperature" />
+  </EntityType>
+  <EntityType Name="room">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="room_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="measurements" Relationship="Self.FK5bpydj92tt2ksbfyky08885fc" FromRole="room" ToRole="measurement" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="temperature">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="b_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="highe_acceptable_value" Type="Double" />
+    <Property Name="low_acceptable_value" Type="Double" />
+    <Property Name="timestamp" Type="DateTime" Precision="0" />
+    <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="measurements" Relationship="Self.FKanlr7at8yp95cy5cc2whc5r2m" FromRole="temperature" ToRole="measurement" />
+  </EntityType>
+  <EntityType Name="warning">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="measurement_type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="high" Type="Boolean" />
+    <Property Name="low" Type="Boolean" />
+    <Property Name="room_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="time_stamp" Type="DateTime" Precision="0" />
+    <Property Name="value" Type="Double" />
+  </EntityType>
+  <EntityType Name="D_Room">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="room_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK3ds4xsmi5g3d3dyb3g7of31pk">
+    <End Role="co2" Type="Self.co2" Multiplicity="0..1" />
+    <End Role="measurement" Type="Self.measurement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="co2">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="measurement">
+        <PropertyRef Name="co2_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKaetyvq260y54rwinvfp4fafpq">
+    <End Role="humidity" Type="Self.humidity" Multiplicity="0..1" />
+    <End Role="measurement" Type="Self.measurement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="humidity">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="measurement">
+        <PropertyRef Name="humidity_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK5bpydj92tt2ksbfyky08885fc">
+    <End Role="room" Type="Self.room" Multiplicity="0..1" />
+    <End Role="measurement" Type="Self.measurement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="room">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="measurement">
+        <PropertyRef Name="room_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKanlr7at8yp95cy5cc2whc5r2m">
+    <End Role="temperature" Type="Self.temperature" Multiplicity="0..1" />
+    <End Role="measurement" Type="Self.measurement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="temperature">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="measurement">
+        <PropertyRef Name="temperature_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Sep4_GroupX2Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admins" EntityType="Self.admin" />
+    <EntitySet Name="co2" EntityType="Self.co2" />
+    <EntitySet Name="co2test" EntityType="Self.co2test" />
+    <EntitySet Name="cutomers" EntityType="Self.cutomer" />
+    <EntitySet Name="humidities" EntityType="Self.humidity" />
+    <EntitySet Name="measurements" EntityType="Self.measurement" />
+    <EntitySet Name="rooms" EntityType="Self.room" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="temperatures" EntityType="Self.temperature" />
+    <EntitySet Name="warnings" EntityType="Self.warning" />
+    <EntitySet Name="D_Room" EntityType="Self.D_Room" />
+    <AssociationSet Name="FK3ds4xsmi5g3d3dyb3g7of31pk" Association="Self.FK3ds4xsmi5g3d3dyb3g7of31pk">
+      <End Role="co2" EntitySet="co2" />
+      <End Role="measurement" EntitySet="measurements" />
+    </AssociationSet>
+    <AssociationSet Name="FKaetyvq260y54rwinvfp4fafpq" Association="Self.FKaetyvq260y54rwinvfp4fafpq">
+      <End Role="humidity" EntitySet="humidities" />
+      <End Role="measurement" EntitySet="measurements" />
+    </AssociationSet>
+    <AssociationSet Name="FK5bpydj92tt2ksbfyky08885fc" Association="Self.FK5bpydj92tt2ksbfyky08885fc">
+      <End Role="room" EntitySet="rooms" />
+      <End Role="measurement" EntitySet="measurements" />
+    </AssociationSet>
+    <AssociationSet Name="FKanlr7at8yp95cy5cc2whc5r2m" Association="Self.FKanlr7at8yp95cy5cc2whc5r2m">
+      <End Role="temperature" EntitySet="temperatures" />
+      <End Role="measurement" EntitySet="measurements" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
