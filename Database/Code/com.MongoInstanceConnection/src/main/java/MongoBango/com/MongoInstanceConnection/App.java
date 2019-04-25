@@ -2,17 +2,16 @@ package MongoBango.com.MongoInstanceConnection;
 
 import java.sql.SQLException;
 
-import MongoBango.com.MongoInstanceConnection.connection.DatabaseHelper;
-import MongoBango.com.MongoInstanceConnection.customerDao.Customer;
+
 
 /**
  * Hello world!
  */
 public class App {
 	public static void main(String[] args) throws SQLException {
-//		getMongo();
+	getMongo();
 		System.out.println("Hello mongo");
-		DatabaseHelper<Customer> helper =new DatabaseHelper<Customer>();
+		//DatabaseHelper<Customer> helper =new DatabaseHelper<Customer>();
 	
 	}
 
