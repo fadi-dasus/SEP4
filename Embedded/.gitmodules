@@ -1,0 +1,6 @@
+[submodule "FreeRTOS"]
+	path = FreeRTOS
+	url = https://github.com/ihavn/VIA_FreeRTOS_AVRMEGA
+[submodule "MyFirstProject/FreeRTOS"]
+	path = MyFirstProject/FreeRTOS
+	url = https://github.com/ihavn/VIA_FreeRTOS_AVRMEGA
