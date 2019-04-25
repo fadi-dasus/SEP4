@@ -21,20 +21,18 @@ public class Client
    private Socket socket;
    private String ip = "";
    
-   
-
    private DataOutputStream out;
    private DataInputStream in;
    
-   MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb+srv://fadi:Fidodido1940@fadi-pwbgj.mongodb.net/test?retryWrites=true"));
-
+  
    Gson gson;
 
-   public void connect(String ip, int port)
+   public void connect()
    {
 
       try
       {
+    	 
          socket = new Socket(ip, port);
          out = new DataOutputStream(socket.getOutputStream());
          in = new DataInputStream(socket.getInputStream());
