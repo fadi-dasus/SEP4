@@ -156,8 +156,7 @@ ADDITIONAL_DEPENDENCIES:=
 
 OUTPUT_FILE_DEP:= ./makedep.mk
 
-LIB_DEP+=  \
-../../../../Users/Roza/Documents/lessons/4semester/esw1x-s19/Pre5/Stdio_lib/libserialLib.a
+LIB_DEP+= 
 
 LINKER_SCRIPT_DEP+= 
 
