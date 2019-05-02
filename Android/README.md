@@ -20,6 +20,19 @@
 
 ### Tasks
 
+1. Review and import Model Classes (Ainis, Vladimir, Aleksandr);
+2. Web Services with Retrofit (Ainis) 
+3. ListRepository 
+4. ViewModel
+5. ViewModelFactory
+6. InjectorUtils
+7. Testing Activity 
+8. Implement Single Activity with Navigation Architecture Component
+9. MeasurementRepository
+10. Firebase Cloud Messaging
+11. Expanding on fragments for report list, warning list, report itself
+
+
 Sequence is linear!
 
 1. Create Model Classes (Ainis, Vladimir, Aleksandr)  ✓
@@ -43,6 +56,5 @@ Sequence is linear!
 
 ### Libraries
 - Retrofit2 & Retrofit2-Jackson-Converter
-- Room Persistence Library
 - RecyclerView
 
