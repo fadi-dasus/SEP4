@@ -13,27 +13,34 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name = "Admin")
-public class Admin extends ResourceSupport {
+@Table(name = "Customer")
+public class Customer extends ResourceSupport{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
 	private Integer Id;
 
-	@Column(name = "username")
+	@Column(name = "username", nullable = false)
 	private String username;
-	@Column(name = "password")
+	@Column(name = "password", nullable = false)
 	private String password;
+	@Column(name = "email")
+	private String email;
+	@Column(name = "phone", nullable = false)
+	private String phone;
+
+	public Customer() {
+
+	}
 
 	@JsonCreator
-	public Admin(@JsonProperty("admin") String username, String password) {
+	public Customer(@JsonProperty("customer") String username, String password, String email, String phone) {
 
 		this.username = username;
 		this.password = password;
-	}
-
-	public Admin() {
+		this.email = email;
+		this.phone = phone;
 	}
 
 	public String getUsername() {
@@ -52,9 +59,27 @@ public class Admin extends ResourceSupport {
 		this.password = password;
 	}
 
-	@Override
-	public String toString() {
-		return "Admin [Id=" + Id + ", username=" + username + ", password=" + password + "]";
+	public String getEmail() {
+		return email;
 	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [Id=" + Id + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", phone=" + phone + "]";
+	}
+
+	
 }

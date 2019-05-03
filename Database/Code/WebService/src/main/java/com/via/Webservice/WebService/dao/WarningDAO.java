@@ -9,24 +9,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.via.Webservice.WebService.model.Co2;
+import com.via.Webservice.WebService.model.Warning;
 
 @Transactional
 @Repository
-public class Co2DAO {
-
+public class WarningDAO {
 	@PersistenceContext
 	@Autowired
 	public EntityManager entityManager;
-
-	public Co2 getCo2ById(int id) {
-		return entityManager.find(Co2.class, id);
+	
+	public List<Warning> getAllWarnings(){
+		String query = "select m from Warning m order by m.value";
+		return (List<Warning>) entityManager.createQuery(query).getResultList();
 	}
-
-	public List<Co2> getAllCo2() {
-		String query = "select m from Co2 m order by m.value";
-
-		return (List<Co2>) entityManager.createQuery(query).getResultList();
-	}
+	
+//	public Warning getWarningCo2(Co2Test co2) {
+//		String high="550";
+//		if(co2.getHigheacceptablevalue().equals(high)) {
+//			return ;
+//		}
+//		return null;
+//	}
 
 }

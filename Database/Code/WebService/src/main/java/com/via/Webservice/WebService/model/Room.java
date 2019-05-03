@@ -7,13 +7,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.ResourceSupport;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "Room")
-public class Room {
+public class Room extends ResourceSupport{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private int ID;
+	@Column(name = "Id")
+	private Integer Id;
 
 	@Column(name = "roomName")
 	private String roomName;
@@ -22,19 +28,11 @@ public class Room {
 
 	}
 
-	public Room(int iD, String roomName) {
-
-		ID = iD;
+	@JsonCreator
+	public Room(@JsonProperty("room") String roomName) {
 		this.roomName = roomName;
 	}
 
-	public int getID() {
-		return ID;
-	}
-
-	public void setID(int iD) {
-		ID = iD;
-	}
 
 	public String getRoomName() {
 		return roomName;
