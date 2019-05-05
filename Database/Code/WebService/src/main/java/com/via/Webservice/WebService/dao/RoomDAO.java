@@ -9,24 +9,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.via.Webservice.WebService.model.Co2;
+import com.via.Webservice.WebService.model.Room;
 
 @Transactional
 @Repository
-public class Co2DAO {
-
+public class RoomDAO {
 	@PersistenceContext
 	@Autowired
 	public EntityManager entityManager;
-
-	public Co2 getCo2ById(int id) {
-		return entityManager.find(Co2.class, id);
+	
+	public Room getRoomById(int id) {
+		return entityManager.find(Room.class, id);
 	}
+	public List<Room> getAllRoom() {
+		String query = "select m from Room m order by m.value";
 
-	public List<Co2> getAllCo2() {
-		String query = "select m from Co2 m order by m.value";
-
-		return (List<Co2>) entityManager.createQuery(query).getResultList();
+		return (List<Room>) entityManager.createQuery(query).getResultList();
+	}
+	
+	public Room getRoomByName(String roomName) {
+		return entityManager.find(Room.class, roomName);
 	}
 
 }

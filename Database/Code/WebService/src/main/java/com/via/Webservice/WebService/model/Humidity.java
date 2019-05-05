@@ -1,7 +1,5 @@
 package com.via.Webservice.WebService.model;
 
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,44 +7,41 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.hateoas.ResourceSupport;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "Humidity")
-public class Humidity {
+public class Humidity extends ResourceSupport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private int id;
+	@Column(name = "Id")
+	private Integer Id;
 
-	@Column(name = "higheAcceptableValue")
-	private final double higheAcceptableValue = 5.5;
-	@Column(name = "lowAcceptableValue")
-	private final double lowAcceptableValue = 0.1;
+	static final transient String higheAcceptableValue = "some value ";
+
+	static final transient String lowAcceptableValue = "another value ";
 
 	@Column(name = "B_ID")
 	private String businessKey;
 	@Column(name = "value")
 	private String value;
 	@Column(name = "timestamp")
-	private Date timestamp;
+	private String timestamp;
 
 	public Humidity() {
 
 	}
 
-	public Humidity(String businessKey, String value, Date timestamp) {
+	@JsonCreator
+	public Humidity(@JsonProperty("humidity") String businessKey, String value, String timestamp) {
 
 		this.businessKey = businessKey;
 		this.value = value;
 		this.timestamp = timestamp;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getBusinessKey() {
@@ -65,30 +60,26 @@ public class Humidity {
 		this.value = value;
 	}
 
-	public Date getTimestamp() {
+	public String getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(Date timestamp) {
+	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
 
-	public double getHigheAcceptableValue() {
+	public static String getHigheacceptablevalue() {
 		return higheAcceptableValue;
 	}
 
-	public double getLowAcceptableValue() {
+	public static String getLowacceptablevalue() {
 		return lowAcceptableValue;
 	}
 
 	@Override
 	public String toString() {
-		return "Humidity [id=" + id + ", higheAcceptableValue=" + higheAcceptableValue + ", lowAcceptableValue="
-				+ lowAcceptableValue + ", businessKey=" + businessKey + ", value=" + value + ", timestamp=" + timestamp
+		return "Humidity [Id=" + Id + ", businessKey=" + businessKey + ", value=" + value + ", timestamp=" + timestamp
 				+ "]";
 	}
-	
-	
-	
 
 }

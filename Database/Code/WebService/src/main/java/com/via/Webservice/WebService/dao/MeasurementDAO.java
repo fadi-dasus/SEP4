@@ -9,24 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.via.Webservice.WebService.model.Co2;
+import com.via.Webservice.WebService.model.Measurement;
 
 @Transactional
 @Repository
-public class Co2DAO {
-
+public class MeasurementDAO {
 	@PersistenceContext
 	@Autowired
 	public EntityManager entityManager;
+	
+	public List<Measurement> getAllMeasurement(){
+		String query = "select m from Measurement";
 
-	public Co2 getCo2ById(int id) {
-		return entityManager.find(Co2.class, id);
-	}
+		return (List<Measurement>) entityManager.createQuery(query).getResultList();
 
-	public List<Co2> getAllCo2() {
-		String query = "select m from Co2 m order by m.value";
-
-		return (List<Co2>) entityManager.createQuery(query).getResultList();
 	}
 
 }

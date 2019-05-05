@@ -9,18 +9,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.hateoas.ResourceSupport;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "Warning")
-public class Warning {
+public class Warning extends ResourceSupport{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private int ID;
+	@Column(name = "Id")
+	private Integer Id;
 	@Column(name = "MeasurementType")
 	private String MeasurementType;
 	@Column(name = "timeStamp")
-	private Date timeStamp;
+	private String timeStamp;
 	@Column(name = "high")
 	private boolean high;
 	@Column(name = "low")
@@ -30,7 +35,8 @@ public class Warning {
 	@Column(name = "roomName")
 	private String roomName;
 
-	public Warning(String measurementType, Date timeStamp, boolean high, boolean low, double value, String roomName) {
+	@JsonCreator
+	public Warning(@JsonProperty("warning") String measurementType, String timeStamp, boolean high, boolean low, double value, String roomName) {
 
 		MeasurementType = measurementType;
 		this.timeStamp = timeStamp;
@@ -44,10 +50,6 @@ public class Warning {
 
 	}
 
-	public int getID() {
-		return ID;
-	}
-
 	public String getMeasurementType() {
 		return MeasurementType;
 	}
@@ -56,11 +58,11 @@ public class Warning {
 		MeasurementType = measurementType;
 	}
 
-	public Date getTimeStamp() {
+	public String getTimeStamp() {
 		return timeStamp;
 	}
 
-	public void setTimeStamp(Date timeStamp) {
+	public void setTimeStamp(String timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 
@@ -98,7 +100,7 @@ public class Warning {
 
 	@Override
 	public String toString() {
-		return "Warning [ID=" + ID + ", MeasurementType=" + MeasurementType + ", timeStamp=" + timeStamp + ", high="
+		return "Warning [Id=" + Id + ", MeasurementType=" + MeasurementType + ", timeStamp=" + timeStamp + ", high="
 				+ high + ", low=" + low + ", value=" + value + ", roomName=" + roomName + "]";
 	}
 
