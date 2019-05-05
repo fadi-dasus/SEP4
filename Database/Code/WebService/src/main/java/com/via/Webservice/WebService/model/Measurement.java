@@ -68,6 +68,4 @@ public class Measurement extends ResourceSupport {
 	public void setRoom(Room room) {
 		this.room = room;
 	}
-	
-
 }
