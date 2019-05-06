@@ -180,6 +180,9 @@
     <Compile Include="Drivers\mh_z19.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Drivers\serial.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Drivers\stdio_driver.h">
       <SubType>compile</SubType>
     </Compile>
@@ -306,9 +309,6 @@
     <Compile Include="myTasks.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="serial\serial.h">
-      <SubType>compile</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="FreeRTOS\" />
@@ -317,7 +317,6 @@
     <Folder Include="FreeRTOS\Lib" />
     <Folder Include="FreeRTOS\src\" />
     <Folder Include="Drivers" />
-    <Folder Include="serial" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Drivers\libIotLibrary.a">
