@@ -24,14 +24,34 @@
 2. Web Services with Retrofit (Ainis) 
 3. ListRepository 
 4. ViewModel
-5. ViewModelFactory
-6. InjectorUtils
-7. Testing Activity 
-8. Implement Single Activity with Navigation Architecture Component
-9. MeasurementRepository
-10. Firebase Cloud Messaging
-11. Expanding on fragments for report list, warning list, report itself
+6. Navigation Architecture Components 
+7. Implement Single Activity with Navigation Architecture Component
+8. MeasurementRepository
+9. Firebase Cloud Messaging
+10. Expanding on fragments for report list, warning list, report itself
 
+### Web API To Follow
+
+- Base URL: https://localhost:8080/sep4/
+
+*Room*
+- /room/{id} - get individual room by ID 
+- /roomAll - get all rooms
+
+*CO2*
+- /co2/{id} - gets individual CO2 by ID
+- /co2all - gets all CO2
+
+*Humidity*
+- /humidity/{id} - gets individual Humidity by ID
+- /humidityAll - gets all humidities
+
+*Temperature*
+- /temperature/{id} - get individual temperature by ID
+- /temperatureAll - get all temperatures
+
+*Warning*
+- /warningAll - get all warnings
 
 Sequence is linear!
 
