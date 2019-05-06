@@ -25,6 +25,7 @@
  
 mh_z19_return_code_t rc;
 int CO2_ppm;
+
 void my_co2_call_back(uint16_t CO2_ppm);
 mh_z19_create(ser_USART3 com_port,
 void(*)(uint16_t CO2_ppm) my_co2_call_back);

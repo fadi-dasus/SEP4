@@ -8,7 +8,7 @@ int const CO2_Timer=1000/portTICK_PERIOD_MS;
 void my_co2_call_back(uint16_t CO2_ppm)
 {
 	CO2_value_ppm = CO2_ppm; 
-	printf(" %d CO2 value: ", *private CO2_ppm);
+	printf(" %d CO2 value: ", CO2_value_ppm);
 	
 }
 mh_z19_create(ser_USART3 com_port,
