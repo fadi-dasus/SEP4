@@ -147,7 +147,31 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="FreeRTOS\CFile1.c">
+    <Compile Include="Drivers\hcSr501.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\hih8120.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\ihal.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\iled.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\i_register_access.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\lora_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\mh_z19.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\stdio_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Drivers\tsl2591.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="FreeRTOS\FreeRTOSTraceDriver\FreeRTOSTraceDriver.c">
@@ -243,16 +267,13 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="CO2Sensor.c">
+    <Compile Include="MH_Z19.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="CO2Sensor.h">
+    <Compile Include="MH_Z19.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MyLora.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MyLora.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="myQueue.c">
@@ -273,6 +294,9 @@
     <Compile Include="myTasks.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="serial\serial.h">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="FreeRTOS\" />
@@ -280,8 +304,16 @@
     <Folder Include="FreeRTOS\FreeRTOSTraceDriver\" />
     <Folder Include="FreeRTOS\Lib" />
     <Folder Include="FreeRTOS\src\" />
+    <Folder Include="Drivers" />
+    <Folder Include="serial" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Drivers\libIotLibrary.a">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Drivers\Library Readme.txt">
+      <SubType>compile</SubType>
+    </None>
     <None Include="FreeRTOS\.git">
       <SubType>compile</SubType>
     </None>
@@ -289,9 +321,6 @@
       <SubType>compile</SubType>
     </None>
     <None Include="FreeRTOS\Lib\libserialLib.a">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="FreeRTOS\readme.md">
       <SubType>compile</SubType>
     </None>
     <None Include="FreeRTOS\src\.gitignore">

@@ -23,9 +23,7 @@ myTasks.d myTasks.o: .././myTasks.c .././myTasks.h \
  ../FreeRTOS/src/../FreeRTOSTraceDriver/FreeRTOSTraceDriver.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
- ../FreeRTOS/src/task.h .././CO2Sensor.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
- .././MyLora.h
+ ../FreeRTOS/src/task.h .././CO2Sensor.h .././MyLora.h
 
 .././myTasks.h:
 
@@ -86,7 +84,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../FreeRTOS/src/task.h:
 
 .././CO2Sensor.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h:
 
 .././MyLora.h:
