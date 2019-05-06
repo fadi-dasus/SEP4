@@ -12,10 +12,6 @@
 
 #include "../FreeRTOSTraceDriver/FreeRTOSTraceDriver.h"
 
-#include "mySemaphores.h"
-#include "myQueue.h"
-#include "myTasks.h"
-#include "myCO2Sensor.h"
 
 
 int main(void)
@@ -24,10 +20,8 @@ int main(void)
 	trace_init();
 
 
-	createSemaphores();
-	createTasks();
-	createQueues();
-	createCO2Drivers();
+	
+	
 	
 	vTaskStartScheduler(); // initialize and run the freeRTOS scheduler. Execution should never return here.
 

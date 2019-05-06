@@ -282,36 +282,6 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="myCO2Sensor.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="myCO2Sensor.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="myLoRa.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="myLoRa.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="myQueue.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="myQueue.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="mySemaphores.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="mySemaphores.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="myTasks.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="myTasks.h">
-      <SubType>compile</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="FreeRTOS\" />

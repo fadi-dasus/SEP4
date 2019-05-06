@@ -26,13 +26,3 @@ FreeRTOS\src\variantHooks.c
 
 main.c
 
-myCO2Sensor.c
-
-myLoRa.c
-
-myQueue.c
-
-mySemaphores.c
-
-myTasks.c
-
