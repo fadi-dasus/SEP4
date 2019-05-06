@@ -22,7 +22,7 @@
 void createTasks(void);
 
 // tasks
-void taskMeassureCO2( void *pvParameters );
+void taskMh_z19_take_meassuring( void *pvParameters );
 void taskSendData( void *pvParameters );
 
 #endif /* MYTASKS_H_ */

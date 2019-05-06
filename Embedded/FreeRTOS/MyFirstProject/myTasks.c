@@ -5,12 +5,12 @@
  *  Author: robis
  */ 
 #include "myTasks.h"
-#include "CO2Sensor.h"
+#include "MH_Z19.h"
 #include "MyLora.h"
 
 void createTasks(void) {
 	xTaskCreate(
-		taskMeassureCO2
+		taskMh_z19_take_meassuring
 	,  (const portCHAR *)"TaskMeassureCO2"
 	,  configMINIMAL_STACK_SIZE
 	,  NULL

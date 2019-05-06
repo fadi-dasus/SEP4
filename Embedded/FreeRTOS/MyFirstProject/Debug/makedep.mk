@@ -2,8 +2,6 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-FreeRTOS\CFile1.c
-
 FreeRTOS\FreeRTOSTraceDriver\FreeRTOSTraceDriver.c
 
 FreeRTOS\src\croutine.c
@@ -28,7 +26,7 @@ FreeRTOS\src\variantHooks.c
 
 main.c
 
-CO2Sensor.c
+MH_Z19.c
 
 MyLora.c
 

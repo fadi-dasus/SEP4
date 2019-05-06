@@ -16,7 +16,7 @@
 #include "mySemaphores.h"
 #include "myQueue.h"
 #include "myTasks.h"
-#include "CO2Sensor.h"
+#include "MH_Z19.h"
 
 
 int main(void)
@@ -28,7 +28,7 @@ int main(void)
 	createSemaphores();
 	createTasks();
 	createQueues();
-	co2SensCreate();
+	mh_z19_create();
 	
 	vTaskStartScheduler(); // initialize and run the freeRTOS scheduler. Execution should never return here.
 
