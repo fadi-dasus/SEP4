@@ -4,7 +4,6 @@
 * Created: 15/10/2018 13:08:53
 * Author : IHA
 */
-
 #include <avr/io.h>
 #include <avr/sfr_defs.h>
 
@@ -16,7 +15,7 @@
 #include "mySemaphores.h"
 #include "myQueue.h"
 #include "myTasks.h"
-#include "MH_Z19.h"
+#include "myCO2Sensor.h"
 
 
 int main(void)
@@ -28,12 +27,10 @@ int main(void)
 	createSemaphores();
 	createTasks();
 	createQueues();
-	mh_z19_create();
+	createCO2Drivers();
 	
 	vTaskStartScheduler(); // initialize and run the freeRTOS scheduler. Execution should never return here.
 
-
-	
 	/* Replace with your application code */
 	while (1)
 	{

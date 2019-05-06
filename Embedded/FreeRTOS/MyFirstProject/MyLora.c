@@ -5,3 +5,17 @@
  *  Author: robis
  */ 
 
+#include "myLoRa.h"
+
+// to-do
+// 1. initialize/create drivers
+
+// 2. send data
+
+void createLoRaDriver(){
+	
+}
+
+void sendData(){
+	
+}

@@ -26,9 +26,9 @@ FreeRTOS\src\variantHooks.c
 
 main.c
 
-MH_Z19.c
+myCO2Sensor.c
 
-MyLora.c
+myLoRa.c
 
 myQueue.c
 

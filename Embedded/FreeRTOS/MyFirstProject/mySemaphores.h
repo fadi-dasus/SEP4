@@ -7,9 +7,7 @@
 #include <semphr.h>
 
 // define semaphore handle
-SemaphoreHandle_t xMeasurementSemaphore;
-SemaphoreHandle_t xLoRaSemaphore;
-
+SemaphoreHandle_t xTestSemaphore;
 
 void createSemaphores(void);
 
