@@ -1,0 +1,11 @@
+{
+    "id" : 1,
+
+    "eui" : "faf",
+    
+    "timestamp" : "124365578345634",
+
+    "temperature" : 143,
+    "humidity" : 3423,
+    "co2" : 45345
+}

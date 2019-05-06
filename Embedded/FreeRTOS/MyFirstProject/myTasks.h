@@ -24,5 +24,7 @@ void createTasks(void);
 // tasks
 void taskMh_z19_take_meassuring( void *pvParameters );
 void taskSendData( void *pvParameters );
+void taskRunTimer( void *pvParameters);
+void taskCheckQueue( void *pvParameters);
 
 #endif /* MYTASKS_H_ */

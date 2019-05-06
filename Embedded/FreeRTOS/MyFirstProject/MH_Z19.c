@@ -1,39 +1,41 @@
-#include "Drivers/mh_z19.h"
+#include "MH_Z19.h"
 
-void mh_z19_call_back(uint16_t ppm)
+static uint16_t CO2_value_ppm;
+int const CO2_Timer=1000/portTICK_PERIOD_MS;
+
+
+
+void my_co2_call_back(uint16_t CO2_ppm)
 {
-	// Here you can use the CO2 ppm value
+	CO2_value_ppm = CO2_ppm; 
+	printf(" %d CO2 value: ", CO2_value_ppm);
+	
+}
+mh_z19_create(ser_USART3 com_port,
+void(*)(uint16_t CO2_ppm) my_co2_call_back)
+{
+	CO2_value_ppm = CO2_ppm;
+	
 	
 }
 
-void mh_z19_create(e_com_port_t com_port,	void(*)(uint16_t ppm) 	mh_z19_call_back )
+rc void getCo2(uint16_t *CO2_ppm)
 {
-	
-	
-
-}
-
-rc mh_z19_take_meassuring(void)
-{
-	
-	rc = mh_z19_take_meassuring();
-	if (rc != MHZ19_OK)
-	{
-		// Something went wrong
-		printf ("something went wrong\n");
-	}
-	else
-	{
+	#pragma clang diagnostic push
+	#pragma clang diagnostic ignored "-Wmissing-noreturn"
+	TickType_t xLastWakeTimeCO2=xTaskGetTickCount();
+	while(1){
+		xSemaphoreTake(*semaphore,CO2_Timer*60);
+		printf("CO2 TASK %d \n",xLastWakeTimeCO2);
 		
-		
+		rc = mh_z19_take_meassuring();
+		if (rc != MHZ19_OK )
+		{
+			printf("CO2_SENSOR_ERROR\n");
+		}
+		xSemaphoreGive(*semaphore);
+		vTaskDelayUntil(&xLastWakeTimeCO2,SENSOR_TIMER*60);
 	}
-	
-	
-}
-
-rc mh_z19_get_co2_ppm(uint16_t *ppm)
-{
-	
-	
+	#pragma clang diagnostic pop
 }
 

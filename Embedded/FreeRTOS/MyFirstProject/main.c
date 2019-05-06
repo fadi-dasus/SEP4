@@ -32,6 +32,8 @@ int main(void)
 	
 	vTaskStartScheduler(); // initialize and run the freeRTOS scheduler. Execution should never return here.
 
+
+	
 	/* Replace with your application code */
 	while (1)
 	{
