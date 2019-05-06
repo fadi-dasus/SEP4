@@ -38,8 +38,7 @@ SUBDIRS :=  \
 ../FreeRTOS/FreeRTOSTraceDriver/ \
 ../FreeRTOS/Lib \
 ../FreeRTOS/src/ \
-../Drivers \
-../serial
+../Drivers
 
 
 # Add inputs and outputs from these tool invocations to the build variables 

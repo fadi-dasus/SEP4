@@ -7,7 +7,7 @@
  */ 
 
 #ifndef MH_Z19_H_
-#endif MH_Z19_H_
+#define MH_Z19_H_
 
 
 
@@ -19,6 +19,7 @@
 #include "semphr.h"
 #include "queue.h"
 #include "Drivers/mh_z19.h"
+#include "serial.h"
 #include "timers.h"
 #include "util/delay.h"
  
