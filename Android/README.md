@@ -25,10 +25,9 @@
 3. ListRepository 
 4. ViewModel
 6. Navigation Architecture Components 
-7. Implement Single Activity with Navigation Architecture Component
-8. MeasurementRepository
-9. Firebase Cloud Messaging
-10. Expanding on fragments for report list, warning list, report itself
+7. MeasurementRepository
+8. Firebase Cloud Messaging
+9. Expanding on fragments for report list, warning list, report itself
 
 ### Web API To Follow
 

@@ -2,9 +2,11 @@ package com.example.sensorsproject.business.networking;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.sensorsproject.business.models.MyRoom;
+import com.example.sensorsproject.business.networking.requests.GetAllRoomsRunnable;
 import com.example.sensorsproject.utils.AppExecutors;
 import com.example.sensorsproject.utils.Constants;
 
@@ -42,12 +44,16 @@ public class NetworkHelper {
      * GET ALL ROOMS
      */
 
-    public void getAllRooms(){
+    public LiveData<List<MyRoom>> getAllRooms(){
+        return roomList;
+    }
+
+    public void searchAllRooms(){
         if(getAllRoomsRunnable != null){
             getAllRoomsRunnable = null;
         }
 
-        getAllRoomsRunnable = new GetAllRoomsRunnable();
+        getAllRoomsRunnable = new GetAllRoomsRunnable(TAG, roomList);
         final Future handler = AppExecutors.getInstance().networkIO().submit(getAllRoomsRunnable);
 
         AppExecutors.getInstance().networkIO().schedule(new Runnable() {
@@ -57,31 +63,4 @@ public class NetworkHelper {
             }
         }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
     }
-
-    private class GetAllRoomsRunnable implements  Runnable{
-
-        @Override
-        public void run() {
-            try {
-                Response<List<MyRoom>> response = getAllRooms().execute();
-
-                if(response.code() == 200){
-                    List<MyRoom> list = new ArrayList<>(response.body());
-                    roomList.postValue(list);
-                    Log.d(TAG, "onRoomListFetchSuccess: Fetched successfully!");
-                } else {
-                    Log.d(TAG, "onRoomListFetchFailure: " + response.errorBody().string());
-                    roomList.postValue(null);
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        private Call<List<MyRoom>> getAllRooms(){
-            return ServiceGenerator.getSensorsAPI().getAllRooms();
-        }
-    }
-
 }

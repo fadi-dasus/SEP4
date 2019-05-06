@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.sensorsproject.application.views.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_roomChoiceFragment"
+            app:destination="@id/roomChoiceFragment"
+            app:popUpTo="@+id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/roomChoiceFragment"
+        android:name="com.example.sensorsproject.application.views.RoomChoiceFragment"
+        android:label="Room Choice"
+        tools:layout="@layout/fragment_room_choice">
+        <action
+            android:id="@+id/action_roomChoiceFragment_to_roomMainFragment"
+            app:destination="@id/roomMainFragment"
+            app:popUpTo="@+id/roomChoiceFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/roomMainFragment"
+        android:name="com.example.sensorsproject.application.views.RoomMainFragment"
+        android:label="Sensors"
+        tools:layout="@layout/fragment_room_main">
+        <action
+            android:id="@+id/action_roomMainFragment_to_reportListFragment"
+            app:destination="@id/reportListFragment" />
+        <action
+            android:id="@+id/action_roomMainFragment_to_warningListFragment"
+            app:destination="@id/warningListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportListFragment"
+        android:name="com.example.sensorsproject.application.views.ReportListFragment"
+        android:label="Report List"
+        tools:layout="@layout/fragment_report_list">
+        <action
+            android:id="@+id/action_reportListFragment_to_reportFragment"
+            app:destination="@id/reportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/warningListFragment"
+        android:name="com.example.sensorsproject.application.views.WarningListFragment"
+        android:label="Warning List"
+        tools:layout="@layout/fragment_warning_list">
+        <action
+            android:id="@+id/action_warningListFragment_to_warningFragment"
+            app:destination="@id/warningFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="com.example.sensorsproject.application.views.ReportFragment"
+        android:label="Report"
+        tools:layout="@layout/fragment_report" />
+    <fragment
+        android:id="@+id/warningFragment"
+        android:name="com.example.sensorsproject.application.views.WarningFragment"
+        android:label="Warning"
+        tools:layout="@layout/fragment_warning" />
+</navigation>

@@ -16,10 +16,10 @@ import com.example.sensorsproject.application.MainActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LoginFragment extends Fragment {
+public class RoomChoiceFragment extends Fragment {
 
 
-    public LoginFragment() {
+    public RoomChoiceFragment() {
         // Required empty public constructor
     }
 
@@ -27,11 +27,11 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
+        View view = inflater.inflate(R.layout.fragment_room_choice, container, false);
 
-        Button button = view.findViewById(R.id.button);
+        Button button = view.findViewById(R.id.button2);
         button.setOnClickListener((View v) -> {
-            MainActivity.navController.navigate(R.id.action_loginFragment_to_roomChoiceFragment);
+            MainActivity.navController.navigate(R.id.action_roomChoiceFragment_to_roomMainFragment);
         });
 
         return view;

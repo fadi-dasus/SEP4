@@ -16,16 +16,29 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 }
 
 dependencies {
 
     //Version definitions
-    def retrofitVersion ="2.5.0";
+    def retrofitVersion = "2.5.0";
+    def nav_version = "2.1.0-alpha02"
 
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    //Navigation Architecture Components
+    implementation "androidx.navigation:navigation-fragment:$nav_version"
+    implementation "androidx.navigation:navigation-ui:$nav_version"
+
+    //Butterknife
+    implementation 'com.jakewharton:butterknife:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 
     //Vanilla Implementations
     implementation fileTree(dir: 'libs', include: ['*.jar'])
