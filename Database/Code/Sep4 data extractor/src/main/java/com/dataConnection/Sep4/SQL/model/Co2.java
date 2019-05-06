@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name = "Co2")
@@ -16,6 +17,11 @@ public class Co2 {
 	@Column(name = "co2_id")
 	private Integer id;
 
+
+
+	@Column(name = "timestamp")
+	private Date date;
+
 	@Column(name = "ppm")
 	private String ppm;
 
@@ -23,9 +29,9 @@ public class Co2 {
 
 	}
 
-	public Co2(String ppm) {
+	public Co2(Date date, String ppm) {
 
-		
+		this.date=date;
 		this.ppm = ppm;
 	}
 
@@ -44,6 +50,10 @@ public class Co2 {
 	public void setPpm(String ppm) {
 		this.ppm = ppm;
 	}
+
+	public Date getDate() { return date; }
+
+	public void setDate(Date date) { this.date = date; }
 
 	@Override
 	public String toString() {
