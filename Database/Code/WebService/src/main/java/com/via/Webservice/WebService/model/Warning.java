@@ -1,12 +1,12 @@
 package com.via.Webservice.WebService.model;
 
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.hateoas.ResourceSupport;
@@ -16,38 +16,53 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "Warning")
-public class Warning extends ResourceSupport{
+public class Warning extends ResourceSupport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
 	private Integer Id;
+
 	@Column(name = "MeasurementType")
 	private String MeasurementType;
+
 	@Column(name = "timeStamp")
 	private String timeStamp;
+
 	@Column(name = "high")
 	private boolean high;
+
 	@Column(name = "low")
 	private boolean low;
+
 	@Column(name = "value")
 	private double value;
-	@Column(name = "roomName")
-	private String roomName;
+
+	@ManyToOne
+	private Room room;
+
+
+
+	public Warning() {
+
+	}
 
 	@JsonCreator
-	public Warning(@JsonProperty("warning") String measurementType, String timeStamp, boolean high, boolean low, double value, String roomName) {
-
+	public Warning(@JsonProperty("warning") Integer id, String measurementType, String timeStamp, boolean high,
+			boolean low, double value, Room room) {
+		super();
+		Id = id;
 		MeasurementType = measurementType;
 		this.timeStamp = timeStamp;
 		this.high = high;
 		this.low = low;
 		this.value = value;
-		this.roomName = roomName;
+		this.room = room;
+	
 	}
 
-	public Warning() {
-
+	public void setId(Integer id) {
+		Id = id;
 	}
 
 	public String getMeasurementType() {
@@ -90,18 +105,20 @@ public class Warning extends ResourceSupport{
 		this.value = value;
 	}
 
-	public String getRoomName() {
-		return roomName;
+	public Room getRoom() {
+		return room;
 	}
 
-	public void setRoomName(String roomName) {
-		this.roomName = roomName;
+	public void setRoom(Room room) {
+		this.room = room;
 	}
 
 	@Override
 	public String toString() {
 		return "Warning [Id=" + Id + ", MeasurementType=" + MeasurementType + ", timeStamp=" + timeStamp + ", high="
-				+ high + ", low=" + low + ", value=" + value + ", roomName=" + roomName + "]";
+				+ high + ", low=" + low + ", value=" + value + ", room=" + room + "]";
 	}
+
+	
 
 }

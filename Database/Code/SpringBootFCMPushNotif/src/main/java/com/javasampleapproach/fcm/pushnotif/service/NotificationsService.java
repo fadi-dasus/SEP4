@@ -32,7 +32,7 @@ public class NotificationsService {
 		return CompletableFuture.completedFuture(firebaseResponse);
 	}
 	
-	@Scheduled(fixedRate = 1000)
+	@Scheduled(fixedRate = 4000)
 	public void send() {
 
 		JSONObject body = new JSONObject();

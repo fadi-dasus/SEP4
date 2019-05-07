@@ -23,6 +23,7 @@ public class Co2DAO {
 		return entityManager.find(Co2.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Co2> getAllCo2() {
 		String query = "select m from Co2 m order by m.value";
 

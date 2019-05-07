@@ -5,9 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -19,10 +19,27 @@ public class Room extends ResourceSupport{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
-	private Integer Id;
+	private int Id;
 
 	@Column(name = "roomName")
 	private String roomName;
+	
+	@OneToOne
+	private Device device;
+
+	
+
+	public void setId(Integer id) {
+		Id = id;
+	}
+
+	public Device getDevice() {
+		return device;
+	}
+
+	public void setDevice(Device device) {
+		this.device = device;
+	}
 
 	public Room() {
 

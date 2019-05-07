@@ -1,6 +1,7 @@
 package com.via.Webservice.WebService.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ public class RoomService {
 	@Autowired
 	RoomDAO dao;
 	
-	public Room getRoomById(int id) {
+	public Optional<Room> getRoomById(int id) {
 		return dao.getRoomById(id);
 	}
 
@@ -21,7 +22,8 @@ public class RoomService {
 		return dao.getAllRoom();
 	}
 	public Room getRoomByName(String name) {
-		return dao.getRoomByName(name);
+		return null;
+			//	dao.getRoomByName(name);
 	}
 
 }
