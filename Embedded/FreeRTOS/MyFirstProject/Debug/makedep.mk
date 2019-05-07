@@ -26,13 +26,3 @@ FreeRTOS\src\variantHooks.c
 
 main.c
 
-MH_Z19.c
-
-MyLora.c
-
-myQueue.c
-
-mySemaphores.c
-
-myTasks.c
-
