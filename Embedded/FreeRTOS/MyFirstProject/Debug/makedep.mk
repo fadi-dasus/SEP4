@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+co2Sensor.c
+
 FreeRTOS\FreeRTOSTraceDriver\FreeRTOSTraceDriver.c
 
 FreeRTOS\src\croutine.c
@@ -25,4 +27,10 @@ FreeRTOS\src\timers.c
 FreeRTOS\src\variantHooks.c
 
 main.c
+
+mySemaphores.c
+
+myTasks.c
+
+myTimers.c
 
