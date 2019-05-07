@@ -21,9 +21,8 @@ public class RoomService {
 	public List<Room> getAllRoom() {
 		return dao.getAllRoom();
 	}
-	public Room getRoomByName(String name) {
-		return null;
-			//	dao.getRoomByName(name);
-	}
+//	public Optional<Room> getRoomByName(String name) {
+//		return dao.getRoomByName(name);
+//	}
 
 }

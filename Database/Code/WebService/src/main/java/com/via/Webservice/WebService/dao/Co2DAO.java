@@ -1,6 +1,7 @@
 package com.via.Webservice.WebService.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,19 +16,16 @@ import com.via.Webservice.WebService.model.Co2;
 @Repository
 public class Co2DAO {
 
-	@PersistenceContext
 	@Autowired
-	public EntityManager entityManager;
+	public Co2Respository co2Respository;
 
-	public Co2 getCo2ById(int id) {
-		return entityManager.find(Co2.class, id);
+	public Optional<Co2> getCo2ById(int id) {
+		return co2Respository.findById(id);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Co2> getAllCo2() {
-		String query = "select m from Co2 m order by m.value";
-
-		return (List<Co2>) entityManager.createQuery(query).getResultList();
+		return (List<Co2>) co2Respository.findAll();
 	}
 
 }

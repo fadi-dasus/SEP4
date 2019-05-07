@@ -4,6 +4,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,12 +25,12 @@ public class HumidityController {
 	
 	@GetMapping("/humidity/{id}")
 	public ResponseEntity<Humidity> getHumidityById(@PathVariable("id") Integer id) {
-		Humidity humidity = service.getHumidityById(id);
+		Optional<Humidity> humidity = service.getHumidityById(id);
 		if (humidity!=null) {
-			humidity.add(linkTo(methodOn(HumidityController.class).getHumidityById(id)).withSelfRel());
+//			humidity.add(linkTo(methodOn(HumidityController.class).getHumidityById(id)).withSelfRel());
 
 
-		return new ResponseEntity<Humidity>(humidity, HttpStatus.OK);
+		return new ResponseEntity<Humidity>(HttpStatus.OK);
 		}
 		else 
 			return new ResponseEntity<>( HttpStatus.NOT_FOUND);

@@ -14,25 +14,19 @@ import com.via.Webservice.WebService.model.Room;
 public class RoomDAO {
 
 	@Autowired
-	public RoomRepository entityManager;
+	public RoomRepository roomRepository;
 	
 	public Optional<Room> getRoomById(int id) {
-		return entityManager.findById(id);
+		return roomRepository.findById(id);
 	}
 	
-	
+//	public Optional<Room> getRoomByName(String name) {
+//		return roomRepository.getRoomByName(name);
+//	}
+
 	public List<Room> getAllRoom() {
-		
-		
-		return (List<Room>) entityManager.findAll();
-	
-	
-	
-	
-	 
+
+		return (List<Room>) roomRepository.findAll();
+
 	}
-	
-
-
-
 }

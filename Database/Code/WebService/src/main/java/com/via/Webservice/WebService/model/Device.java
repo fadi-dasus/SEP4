@@ -15,32 +15,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @Table(name = "Device")
 public class Device extends ResourceSupport {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
-	private Integer Id;
-
+	private int Id;
 	@Column(name = "name")
 	private String name;
 	@Column(name = "UIE")
 	private String uie;
 
-	@JsonCreator
-	public Device(@JsonProperty("Device") Integer id, String name, String uie) {
+	public Device() {
 		super();
-		Id = id;
+	}
+
+	@JsonCreator
+	public Device(@JsonProperty("device") String name, String uie) {
+		super();
 		this.name = name;
 		this.uie = uie;
-	}
-
-	@Override
-	public String toString() {
-		return "Device [Id=" + Id + ", name=" + name + ", uie=" + uie + "]";
-	}
-
-	public void setId(Integer id) {
-		Id = id;
 	}
 
 	public String getName() {
@@ -57,6 +49,15 @@ public class Device extends ResourceSupport {
 
 	public void setUie(String uie) {
 		this.uie = uie;
+	}
+
+	public void setId(int id) {
+		Id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "Device [Id=" + Id + ", name=" + name + ", uie=" + uie + "]";
 	}
 
 }

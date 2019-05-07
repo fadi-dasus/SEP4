@@ -1,5 +1,7 @@
 package com.via.Webservice.WebService.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,49 +21,43 @@ public class Temperature extends ResourceSupport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "T_Id")
-	private Integer T_Id;
+	@Column(name = "Id")
+	private int Id;
 
 	@ManyToOne
 	private Room room;
 
-	public Room getRoom() {
-		return room;
-	}
+	@Column(name = "status")
+	private String status;
 
-	public void setRoom(Room room) {
-		this.room = room;
-	}
+	final transient int higheAcceptableValue = 1;
 
-	static final transient String higheAcceptableValue = "some value ";
+	final transient int lowAcceptableValue = 0;
 
-	static final transient String lowAcceptableValue = "another value ";
-
-	@Column(name = "Temperature_ID")
-	private String Temperature_ID;
 	@Column(name = "value")
 	private String value;
 	@Column(name = "timestamp")
-	private String timestamp;
+	private Timestamp timestamp;
 
 	public Temperature() {
 
 	}
 
 	@JsonCreator
-	public Temperature(@JsonProperty("temperature") String businessKey, Room room, String value, String timestamp) {
+	public Temperature(@JsonProperty("temperature") Room room, String value, Timestamp timestamp) {
 		this.room = room;
-		this.Temperature_ID = businessKey;
+
 		this.value = value;
 		this.timestamp = timestamp;
 	}
-
-	public String getBusinessKey() {
-		return Temperature_ID;
+	
+	
+	public String getStatus() {
+		return status;
 	}
 
-	public void setBusinessKey(String businessKey) {
-		this.Temperature_ID = businessKey;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String getValue() {
@@ -72,26 +68,37 @@ public class Temperature extends ResourceSupport {
 		this.value = value;
 	}
 
-	public String getTimestamp() {
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
+	public Timestamp getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(String timestamp) {
+	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}
 
-	public static String getHigheacceptablevalue() {
+	public int getHigheacceptablevalue() {
 		return higheAcceptableValue;
 	}
 
-	public static String getLowacceptablevalue() {
+	public int getLowacceptablevalue() {
 		return lowAcceptableValue;
 	}
 
 	@Override
 	public String toString() {
-		return "Temperature [Id=" + T_Id + ", businessKey=" + Temperature_ID + ", value=" + value + ", timestamp="
-				+ timestamp + "]";
+		return "Temperature [Id=" + Id + ", room=" + room + ", status=" + status + ", higheAcceptableValue="
+				+ higheAcceptableValue + ", lowAcceptableValue=" + lowAcceptableValue + ", value=" + value
+				+ ", timestamp=" + timestamp + "]";
 	}
+
+	
 
 }

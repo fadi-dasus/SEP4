@@ -1,5 +1,7 @@
 package com.via.Webservice.WebService.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,51 +21,56 @@ public class Humidity extends ResourceSupport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "H_Id")
-	private Integer H_Id;
+	@Column(name = "Id")
+	private int Id;
 	@ManyToOne
 	private Room room;
-	
-	public Room getRoom() {
-		return room;
-	}
 
-	public void setRoom(Room room) {
-		this.room = room;
-	}
-	
+	@Column(name = "status")
+	private String status;
 
-	static final transient String higheAcceptableValue = "some value ";
+	final transient int higheAcceptableValue = 1;
 
-	static final transient String lowAcceptableValue = "another value ";
+	final transient int lowAcceptableValue = 0;
 
-	@Column(name = "Humidity_ID")
-	private String Humidity_ID;
 	@Column(name = "value")
 	private String value;
+
 	@Column(name = "timestamp")
-	private String timestamp;
+	private Timestamp timestamp;
 
 	public Humidity() {
 
 	}
 
 	@JsonCreator
-	public Humidity(@JsonProperty("humidity") String businessKey, String value, String timestamp,Room room) {
+	public Humidity(@JsonProperty("humidity") String value, Timestamp timestamp, Room room) {
 		this.room = room;
-		this.Humidity_ID = businessKey;
+
 		this.value = value;
 		this.timestamp = timestamp;
 	}
-
-	public String getBusinessKey() {
-		return Humidity_ID;
+	
+	public String getStatus() {
+		return status;
 	}
 
-	public void setBusinessKey(String businessKey) {
-		this.Humidity_ID = businessKey;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
+
+	public void setId(int id) {
+		this.Id = id;
+	}
+	
+	public int getHigheAcceptableValue() {
+		return higheAcceptableValue;
+	}
+
+	public int getLowAcceptableValue() {
+		return lowAcceptableValue;
+	}
 	public String getValue() {
 		return value;
 	}
@@ -72,26 +79,37 @@ public class Humidity extends ResourceSupport {
 		this.value = value;
 	}
 
-	public String getTimestamp() {
+	public Timestamp getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(String timestamp) {
+	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}
 
-	public static String getHigheacceptablevalue() {
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
+	public int getHigheacceptablevalue() {
 		return higheAcceptableValue;
 	}
 
-	public static String getLowacceptablevalue() {
+	public int getLowacceptablevalue() {
 		return lowAcceptableValue;
 	}
 
 	@Override
 	public String toString() {
-		return "Humidity [Id=" + H_Id + ", businessKey=" + Humidity_ID + ", value=" + value + ", timestamp=" + timestamp
-				+ "]";
+		return "Humidity [Id=" + Id + ", room=" + room + ", status=" + status + ", higheAcceptableValue="
+				+ higheAcceptableValue + ", lowAcceptableValue=" + lowAcceptableValue + ", value=" + value
+				+ ", timestamp=" + timestamp + "]";
 	}
+
+	
 
 }

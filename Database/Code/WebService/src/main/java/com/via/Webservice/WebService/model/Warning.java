@@ -1,12 +1,13 @@
 package com.via.Webservice.WebService.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.hateoas.ResourceSupport;
@@ -21,19 +22,13 @@ public class Warning extends ResourceSupport {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
-	private Integer Id;
+	private int Id;
 
 	@Column(name = "MeasurementType")
 	private String MeasurementType;
 
 	@Column(name = "timeStamp")
-	private String timeStamp;
-
-	@Column(name = "high")
-	private boolean high;
-
-	@Column(name = "low")
-	private boolean low;
+	private Timestamp timeStamp;
 
 	@Column(name = "value")
 	private double value;
@@ -41,27 +36,35 @@ public class Warning extends ResourceSupport {
 	@ManyToOne
 	private Room room;
 
-
+	@Column(name = "status")
+	private String status;
 
 	public Warning() {
 
 	}
 
 	@JsonCreator
-	public Warning(@JsonProperty("warning") Integer id, String measurementType, String timeStamp, boolean high,
-			boolean low, double value, Room room) {
-		super();
+	public Warning(@JsonProperty("warning") Integer id, String measurementType, Timestamp timeStamp, double value,
+			Room room) {
+
 		Id = id;
 		MeasurementType = measurementType;
 		this.timeStamp = timeStamp;
-		this.high = high;
-		this.low = low;
+
 		this.value = value;
 		this.room = room;
-	
+
 	}
 
-	public void setId(Integer id) {
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public void setId(int id) {
 		Id = id;
 	}
 
@@ -73,28 +76,12 @@ public class Warning extends ResourceSupport {
 		MeasurementType = measurementType;
 	}
 
-	public String getTimeStamp() {
+	public Timestamp getTimeStamp() {
 		return timeStamp;
 	}
 
-	public void setTimeStamp(String timeStamp) {
+	public void setTimeStamp(Timestamp timeStamp) {
 		this.timeStamp = timeStamp;
-	}
-
-	public boolean isHigh() {
-		return high;
-	}
-
-	public void setHigh(boolean high) {
-		this.high = high;
-	}
-
-	public boolean isLow() {
-		return low;
-	}
-
-	public void setLow(boolean low) {
-		this.low = low;
 	}
 
 	public double getValue() {
@@ -115,10 +102,8 @@ public class Warning extends ResourceSupport {
 
 	@Override
 	public String toString() {
-		return "Warning [Id=" + Id + ", MeasurementType=" + MeasurementType + ", timeStamp=" + timeStamp + ", high="
-				+ high + ", low=" + low + ", value=" + value + ", room=" + room + "]";
+		return "Warning [Id=" + Id + ", MeasurementType=" + MeasurementType + ", timeStamp=" + timeStamp + ", value="
+				+ value + ", room=" + room + ", status=" + status + "]";
 	}
-
-	
 
 }

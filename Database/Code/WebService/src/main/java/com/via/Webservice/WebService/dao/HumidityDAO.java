@@ -1,6 +1,7 @@
 package com.via.Webservice.WebService.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,18 +15,16 @@ import com.via.Webservice.WebService.model.Humidity;
 @Transactional
 @Repository
 public class HumidityDAO {
-	@PersistenceContext
 	@Autowired
-	public EntityManager entityManager;
-	
-	public Humidity getHumidityById(int id) {
-		return entityManager.find(Humidity.class, id);
+	public HumidityRepository humidityRepository;
+
+	public Optional<Humidity> getHumidityById(int id) {
+		return humidityRepository.findById(id);
 	}
 
 	public List<Humidity> getAllHumidity() {
-		String query = "select m from Humidity m order by m.value";
 
-		return (List<Humidity>) entityManager.createQuery(query).getResultList();
+		return (List<Humidity>) humidityRepository.findAll();
 	}
 
 }

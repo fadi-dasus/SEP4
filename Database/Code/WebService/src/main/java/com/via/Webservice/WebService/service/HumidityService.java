@@ -1,6 +1,7 @@
 package com.via.Webservice.WebService.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class HumidityService {
 	@Autowired
 	HumidityDAO dao;
 	
-	public Humidity getHumidityById(int id) {
+	public Optional<Humidity> getHumidityById(int id) {
 		return dao.getHumidityById(id);
 	}
 
