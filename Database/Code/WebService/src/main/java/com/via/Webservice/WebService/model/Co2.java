@@ -1,5 +1,7 @@
 package com.via.Webservice.WebService.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,45 +20,51 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Co2 extends ResourceSupport {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "C_Id")
-	private Integer C_Id;
+	@Column(name = "id")
+	private int id;
+
+	final transient int higheAcceptableValue = 1;
+
+	final transient int lowAcceptableValue = 0;
 
 	@ManyToOne
 	private Room room;
-	
-	public Room getRoom() {
-		return room;
-	}
 
-	public void setRoom(Room room) {
-		this.room = room;
-	}
+	@Column(name = "status")
+	private String status;
 
-	static final transient String higheAcceptableValue = "some value ";
-
-	static final transient String lowAcceptableValue = "another value ";
-
-	@Column(name = "Co2_ID")
-	private String co2_id;
 	@Column(name = "value")
 	private String value;
+
 	@Column(name = "timestamp")
-	private String timestamp;
+	private Timestamp timestamp;
 
 	public Co2() {
 
 	}
 
 	@JsonCreator
-	public Co2(@JsonProperty("co2") String businessKey, String value, String timestamp, Room room) {
+	public Co2(@JsonProperty("co2") String value, Timestamp timestamp, Room room) {
 		this.room = room;
-		this.co2_id = businessKey;
+
 		this.value = value;
 		this.timestamp = timestamp;
 	}
 
-	public String getBusinessKey() {
-		return co2_id;
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
 	}
 
 	public String getValue() {
@@ -67,25 +75,29 @@ public class Co2 extends ResourceSupport {
 		this.value = value;
 	}
 
-	public String getTimestamp() {
+	public Timestamp getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(String timestamp) {
+	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}
 
-	public static String getHigheacceptablevalue() {
+	public int getHigheacceptablevalue() {
 		return higheAcceptableValue;
 	}
 
-	public static String getLowacceptablevalue() {
+	public int getLowacceptablevalue() {
 		return lowAcceptableValue;
 	}
 
 	@Override
 	public String toString() {
-		return "Co2 [Id=" + C_Id + ", businessKey=" + co2_id + ", value=" + value + ", timestamp=" + timestamp + "]";
+		return "Co2 [id=" + id + ", higheAcceptableValue=" + higheAcceptableValue + ", lowAcceptableValue="
+				+ lowAcceptableValue + ", room=" + room + ", status=" + status + ", value=" + value + ", timestamp="
+				+ timestamp + "]";
 	}
+
+	
 
 }
