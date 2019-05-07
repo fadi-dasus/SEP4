@@ -29,7 +29,7 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        Button button = view.findViewById(R.id.button);
+        Button button = view.findViewById(R.id.login_button);
         button.setOnClickListener((View v) -> {
             MainActivity.navController.navigate(R.id.action_loginFragment_to_roomChoiceFragment);
         });
