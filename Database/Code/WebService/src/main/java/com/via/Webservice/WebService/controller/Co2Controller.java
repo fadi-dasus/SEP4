@@ -4,6 +4,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,14 +26,14 @@ public class Co2Controller {
 
 	@GetMapping("/co2/{id}")
 	public ResponseEntity<Co2> getCo2ById(@PathVariable("id") Integer id) {
-		Co2 co2 = service.getCo2ById(id);
+		Optional<Co2> co2 = service.getCo2ById(id);
 		if (co2!=null) {
 		
 		
-		co2.add(linkTo(methodOn(Co2Controller.class).getCo2ById(id)).withSelfRel());
+		//co2.add(linkTo(methodOn(Co2Controller.class).getCo2ById(id)).withSelfRel());
 
 
-		return new ResponseEntity<Co2>(co2, HttpStatus.OK);
+		return new ResponseEntity<Co2>(HttpStatus.OK);
 		}
 		else 
 			return new ResponseEntity<>( HttpStatus.NOT_FOUND);

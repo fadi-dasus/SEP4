@@ -1,6 +1,7 @@
 package com.via.Webservice.WebService.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
@@ -16,7 +17,7 @@ public class TemperatureService {
 	TemperatureDAO dao;
 	public EntityManager entityManager;
 	
-	public Temperature getTemperatureById(int id) {
+	public Optional<Temperature> getTemperatureById(int id) {
 		return dao.getTemperatureById(id);
 	}
 

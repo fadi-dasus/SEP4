@@ -14,13 +14,11 @@ import com.via.Webservice.WebService.model.Warning;
 @Transactional
 @Repository
 public class WarningDAO {
-	@PersistenceContext
 	@Autowired
-	public EntityManager entityManager;
+	public WarningRepository warningRepository;
 	
 	public List<Warning> getAllWarnings(){
-		String query = "select m from Warning m order by m.value";
-		return (List<Warning>) entityManager.createQuery(query).getResultList();
+		return (List<Warning>) warningRepository.findAll();
 	}
 	
 //	public Warning getWarningCo2(Co2Test co2) {

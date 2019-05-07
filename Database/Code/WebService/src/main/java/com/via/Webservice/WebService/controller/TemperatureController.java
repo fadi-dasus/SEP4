@@ -4,6 +4,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,13 +25,13 @@ public class TemperatureController {
 	
 	@GetMapping("/temperature/{id}")
 	public ResponseEntity<Temperature> getTemperatureById(@PathVariable("id") Integer id) {
-		Temperature temperature = service.getTemperatureById(id);
+		Optional<Temperature> temperature = service.getTemperatureById(id);
 		if (temperature!=null) {
 		
-			temperature.add(linkTo(methodOn(TemperatureController.class).getTemperatureById(id)).withSelfRel());
+			//temperature.add(linkTo(methodOn(TemperatureController.class).getTemperatureById(id)).withSelfRel());
 
 
-		return new ResponseEntity<Temperature>(temperature, HttpStatus.OK);
+		return new ResponseEntity<Temperature>(HttpStatus.OK);
 		}
 		else 
 			return new ResponseEntity<>( HttpStatus.NOT_FOUND);

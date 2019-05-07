@@ -1,11 +1,5 @@
 package com.via.Webservice.WebService.controller;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
-
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,30 +15,12 @@ import com.via.Webservice.WebService.service.DeviceService;
 @RequestMapping("/sep4")
 public class DeviceController {
 	@Autowired
-	DeviceService service;
-	
+	private DeviceService service;
+
 	@GetMapping("/device/{id}")
 	public ResponseEntity<Device> getDeviceById(@PathVariable("id") Integer id) {
-		Optional<Device> room = service.getDeviceById(id);
-		if (room!=null) {
-		
-		
-			//room.add(linkTo(methodOn(RoomController.class).getRoomById(id)).withSelfRel());
-
-
-		return new ResponseEntity<Device>(HttpStatus.OK);
-		}
-		else 
-			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
-
+		Device device = service.getDeviceById(id);
+		return new ResponseEntity<Device>(device, HttpStatus.OK);
 	}
 
-	@GetMapping("/deviceAll")
-	public ResponseEntity<List<Device>> getAllDevice() {
-		List<Device> list = service.getAllDevice();
-		Device device = new Device();
-		device.add(linkTo(methodOn(RoomController.class).getAllRoom()).withSelfRel());
-		return new ResponseEntity<List<Device>>(list, HttpStatus.OK);
-
-	}
 }

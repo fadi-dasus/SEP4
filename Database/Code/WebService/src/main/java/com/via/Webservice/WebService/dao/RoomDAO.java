@@ -19,6 +19,10 @@ public class RoomDAO {
 	public Optional<Room> getRoomById(int id) {
 		return roomRepository.findById(id);
 	}
+	
+//	public Optional<Room> getRoomByName(String name) {
+//		return roomRepository.getRoomByName(name);
+//	}
 
 	public List<Room> getAllRoom() {
 

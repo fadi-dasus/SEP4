@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.via.Webservice.WebService.model.Room;
@@ -47,5 +48,21 @@ public class RoomController {
 		return new ResponseEntity<List<Room>>(list, HttpStatus.OK);
 
 	}
+	
+//	@GetMapping("/room/name")
+//	public ResponseEntity<Room> getRoomByName(@RequestParam("roomName") String roomName) {
+//		Optional<Room> room = service.getRoomByName(roomName);
+//		if (room!=null) {
+//		
+//		
+//			//room.add(linkTo(methodOn(RoomController.class).getRoomById(id)).withSelfRel());
+//
+//
+//		return new ResponseEntity<Room>(HttpStatus.OK);
+//		}
+//		else 
+//			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+//
+//	}
 
 }

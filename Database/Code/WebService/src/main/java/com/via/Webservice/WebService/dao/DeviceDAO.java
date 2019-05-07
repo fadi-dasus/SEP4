@@ -1,7 +1,7 @@
 package com.via.Webservice.WebService.dao;
 
-import java.util.List;
-import java.util.Optional;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,16 +12,13 @@ import com.via.Webservice.WebService.model.Device;
 @Transactional
 @Repository
 public class DeviceDAO {
+	@PersistenceContext
 	@Autowired
-	public DeviceRepository deviceRepository;
-	public Optional<Device> getDeviceById(int id) {
-		return deviceRepository.findById(id);
-	}
-
-	public List<Device> getAllDevice() {
-
-		return (List<Device>) deviceRepository.findAll();
-
+	public EntityManager entityManager;
+	
+	public Device getDeviceById(int id) {
+		return entityManager.find(Device.class, id);
+		
 	}
 
 }
