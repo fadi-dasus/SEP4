@@ -23,21 +23,21 @@ public class RoomController {
 	@Autowired
 	RoomService service;
 	
-//	@GetMapping("/room/{id}")
-//	public ResponseEntity<Room> getRoomById(@PathVariable("id") Integer id) {
-//		Room room = service.getRoomById(id);
-//		if (room!=null) {
-//		
-//		
-//			// room.add(linkTo(methodOn(RoomController.class).getRoomById(id)).withSelfRel());
-//
-//
-//		return new ResponseEntity<Room>(room, HttpStatus.OK);
-//		}
-//		else 
-//			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
-//
-//	}
+	@GetMapping("/room/{id}")
+	public ResponseEntity<Room> getRoomById(@PathVariable("id") Integer id) {
+		Optional<Room> room = service.getRoomById(id);
+		if (room!=null) {
+		
+		
+			//room.add(linkTo(methodOn(RoomController.class).getRoomById(id)).withSelfRel());
+
+
+		return new ResponseEntity<Room>(HttpStatus.OK);
+		}
+		else 
+			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+
+	}
 
 	@GetMapping("/roomAll")
 	public ResponseEntity<List<Room>> getAllRoom() {

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "Room")
-public class Room extends ResourceSupport{
+public class Room extends ResourceSupport {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
@@ -23,23 +23,9 @@ public class Room extends ResourceSupport{
 
 	@Column(name = "roomName")
 	private String roomName;
-	
+
 	@OneToOne
 	private Device device;
-
-	
-
-	public void setId(Integer id) {
-		Id = id;
-	}
-
-	public Device getDevice() {
-		return device;
-	}
-
-	public void setDevice(Device device) {
-		this.device = device;
-	}
 
 	public Room() {
 
@@ -50,13 +36,29 @@ public class Room extends ResourceSupport{
 		this.roomName = roomName;
 	}
 
-
 	public String getRoomName() {
 		return roomName;
 	}
 
 	public void setRoomName(String roomName) {
 		this.roomName = roomName;
+	}
+
+	public void setId(Integer id) {
+		Id = id;
+	}
+
+	public Device getDevice() {
+		return device;
+	}
+
+
+	public void setDevice(Device device) {
+		this.device = device;
+	}
+	@Override
+	public String toString() {
+		return "Room [Id=" + Id + ", roomName=" + roomName + ", device=" + device + "]";
 	}
 
 }

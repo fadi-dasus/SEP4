@@ -20,8 +20,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Co2 extends ResourceSupport {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
+	@Column(name = "Id")
+	private int Id;
 
 	final transient int higheAcceptableValue = 1;
 
@@ -93,7 +93,7 @@ public class Co2 extends ResourceSupport {
 
 	@Override
 	public String toString() {
-		return "Co2 [id=" + id + ", higheAcceptableValue=" + higheAcceptableValue + ", lowAcceptableValue="
+		return "Co2 [Id=" + Id + ", higheAcceptableValue=" + higheAcceptableValue + ", lowAcceptableValue="
 				+ lowAcceptableValue + ", room=" + room + ", status=" + status + ", value=" + value + ", timestamp="
 				+ timestamp + "]";
 	}

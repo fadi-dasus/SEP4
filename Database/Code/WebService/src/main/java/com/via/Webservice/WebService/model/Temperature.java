@@ -21,19 +21,14 @@ public class Temperature extends ResourceSupport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
+	@Column(name = "Id")
+	private int Id;
 
 	@ManyToOne
 	private Room room;
 
 	@Column(name = "status")
 	private String status;
-
-	
-
-	
-
 
 	final transient int higheAcceptableValue = 1;
 
@@ -99,7 +94,7 @@ public class Temperature extends ResourceSupport {
 
 	@Override
 	public String toString() {
-		return "Temperature [id=" + id + ", room=" + room + ", status=" + status + ", higheAcceptableValue="
+		return "Temperature [Id=" + Id + ", room=" + room + ", status=" + status + ", higheAcceptableValue="
 				+ higheAcceptableValue + ", lowAcceptableValue=" + lowAcceptableValue + ", value=" + value
 				+ ", timestamp=" + timestamp + "]";
 	}

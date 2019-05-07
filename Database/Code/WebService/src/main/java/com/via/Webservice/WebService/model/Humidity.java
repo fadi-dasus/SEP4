@@ -21,17 +21,17 @@ public class Humidity extends ResourceSupport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
+	@Column(name = "Id")
+	private int Id;
 	@ManyToOne
 	private Room room;
 
 	@Column(name = "status")
 	private String status;
 
-	final transient int higheAcceptableValue = 0;
+	final transient int higheAcceptableValue = 1;
 
-	final transient int lowAcceptableValue = 1;
+	final transient int lowAcceptableValue = 0;
 
 	@Column(name = "value")
 	private String value;
@@ -61,7 +61,7 @@ public class Humidity extends ResourceSupport {
 
 
 	public void setId(int id) {
-		this.id = id;
+		this.Id = id;
 	}
 	
 	public int getHigheAcceptableValue() {
@@ -105,7 +105,7 @@ public class Humidity extends ResourceSupport {
 
 	@Override
 	public String toString() {
-		return "Humidity [id=" + id + ", room=" + room + ", status=" + status + ", higheAcceptableValue="
+		return "Humidity [Id=" + Id + ", room=" + room + ", status=" + status + ", higheAcceptableValue="
 				+ higheAcceptableValue + ", lowAcceptableValue=" + lowAcceptableValue + ", value=" + value
 				+ ", timestamp=" + timestamp + "]";
 	}

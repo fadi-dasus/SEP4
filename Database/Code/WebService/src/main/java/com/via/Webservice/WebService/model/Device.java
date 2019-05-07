@@ -19,7 +19,7 @@ public class Device extends ResourceSupport {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
-	private Integer Id;
+	private int Id;
 
 	@Column(name = "name")
 	private String name;
@@ -27,19 +27,14 @@ public class Device extends ResourceSupport {
 	private String uie;
 
 	@JsonCreator
-	public Device(@JsonProperty("Device") Integer id, String name, String uie) {
+	public Device(@JsonProperty("Device") int id, String name, String uie) {
 		super();
 		Id = id;
 		this.name = name;
 		this.uie = uie;
 	}
 
-	@Override
-	public String toString() {
-		return "Device [Id=" + Id + ", name=" + name + ", uie=" + uie + "]";
-	}
-
-	public void setId(Integer id) {
+	public void setId(int id) {
 		Id = id;
 	}
 
@@ -57,6 +52,11 @@ public class Device extends ResourceSupport {
 
 	public void setUie(String uie) {
 		this.uie = uie;
+	}
+
+	@Override
+	public String toString() {
+		return "Device [Id=" + Id + ", name=" + name + ", uie=" + uie + "]";
 	}
 
 }
