@@ -18,8 +18,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Co2 extends ResourceSupport {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Id")
-	private Integer Id;
+	@Column(name = "C_Id")
+	private Integer C_Id;
 
 	@ManyToOne
 	private Room room;
@@ -36,8 +36,8 @@ public class Co2 extends ResourceSupport {
 
 	static final transient String lowAcceptableValue = "another value ";
 
-	@Column(name = "B_ID")
-	private String businessKey;
+	@Column(name = "Co2_ID")
+	private String co2_id;
 	@Column(name = "value")
 	private String value;
 	@Column(name = "timestamp")
@@ -50,13 +50,13 @@ public class Co2 extends ResourceSupport {
 	@JsonCreator
 	public Co2(@JsonProperty("co2") String businessKey, String value, String timestamp, Room room) {
 		this.room = room;
-		this.businessKey = businessKey;
+		this.co2_id = businessKey;
 		this.value = value;
 		this.timestamp = timestamp;
 	}
 
 	public String getBusinessKey() {
-		return businessKey;
+		return co2_id;
 	}
 
 	public String getValue() {
@@ -85,7 +85,7 @@ public class Co2 extends ResourceSupport {
 
 	@Override
 	public String toString() {
-		return "Co2 [Id=" + Id + ", businessKey=" + businessKey + ", value=" + value + ", timestamp=" + timestamp + "]";
+		return "Co2 [Id=" + C_Id + ", businessKey=" + co2_id + ", value=" + value + ", timestamp=" + timestamp + "]";
 	}
 
 }

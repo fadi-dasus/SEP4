@@ -19,8 +19,8 @@ public class Temperature extends ResourceSupport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Id")
-	private Integer Id;
+	@Column(name = "T_Id")
+	private Integer T_Id;
 
 	@ManyToOne
 	private Room room;
@@ -37,8 +37,8 @@ public class Temperature extends ResourceSupport {
 
 	static final transient String lowAcceptableValue = "another value ";
 
-	@Column(name = "B_ID")
-	private String businessKey;
+	@Column(name = "Temperature_ID")
+	private String Temperature_ID;
 	@Column(name = "value")
 	private String value;
 	@Column(name = "timestamp")
@@ -51,17 +51,17 @@ public class Temperature extends ResourceSupport {
 	@JsonCreator
 	public Temperature(@JsonProperty("temperature") String businessKey, Room room, String value, String timestamp) {
 		this.room = room;
-		this.businessKey = businessKey;
+		this.Temperature_ID = businessKey;
 		this.value = value;
 		this.timestamp = timestamp;
 	}
 
 	public String getBusinessKey() {
-		return businessKey;
+		return Temperature_ID;
 	}
 
 	public void setBusinessKey(String businessKey) {
-		this.businessKey = businessKey;
+		this.Temperature_ID = businessKey;
 	}
 
 	public String getValue() {
@@ -90,7 +90,7 @@ public class Temperature extends ResourceSupport {
 
 	@Override
 	public String toString() {
-		return "Temperature [Id=" + Id + ", businessKey=" + businessKey + ", value=" + value + ", timestamp="
+		return "Temperature [Id=" + T_Id + ", businessKey=" + Temperature_ID + ", value=" + value + ", timestamp="
 				+ timestamp + "]";
 	}
 

@@ -19,8 +19,8 @@ public class Humidity extends ResourceSupport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Id")
-	private Integer Id;
+	@Column(name = "H_Id")
+	private Integer H_Id;
 	@ManyToOne
 	private Room room;
 	
@@ -37,8 +37,8 @@ public class Humidity extends ResourceSupport {
 
 	static final transient String lowAcceptableValue = "another value ";
 
-	@Column(name = "B_ID")
-	private String businessKey;
+	@Column(name = "Humidity_ID")
+	private String Humidity_ID;
 	@Column(name = "value")
 	private String value;
 	@Column(name = "timestamp")
@@ -51,17 +51,17 @@ public class Humidity extends ResourceSupport {
 	@JsonCreator
 	public Humidity(@JsonProperty("humidity") String businessKey, String value, String timestamp,Room room) {
 		this.room = room;
-		this.businessKey = businessKey;
+		this.Humidity_ID = businessKey;
 		this.value = value;
 		this.timestamp = timestamp;
 	}
 
 	public String getBusinessKey() {
-		return businessKey;
+		return Humidity_ID;
 	}
 
 	public void setBusinessKey(String businessKey) {
-		this.businessKey = businessKey;
+		this.Humidity_ID = businessKey;
 	}
 
 	public String getValue() {
@@ -90,7 +90,7 @@ public class Humidity extends ResourceSupport {
 
 	@Override
 	public String toString() {
-		return "Humidity [Id=" + Id + ", businessKey=" + businessKey + ", value=" + value + ", timestamp=" + timestamp
+		return "Humidity [Id=" + H_Id + ", businessKey=" + Humidity_ID + ", value=" + value + ", timestamp=" + timestamp
 				+ "]";
 	}
 
