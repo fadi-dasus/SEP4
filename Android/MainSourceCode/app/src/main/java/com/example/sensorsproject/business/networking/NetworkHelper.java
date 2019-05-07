@@ -49,7 +49,15 @@ public class NetworkHelper {
     }
 
     public void searchAllRooms(){
-        if(getAllRoomsRunnable != null){
+        //Temporary Code
+
+        ArrayList<MyRoom> list = new ArrayList<>();
+        list.add(new MyRoom(0, "Room 0"));
+        list.add(new MyRoom(1, "Room 1"));
+        list.add(new MyRoom(2, "Room 2"));
+        roomList.postValue(list);
+        //Networking Code
+       /* if(getAllRoomsRunnable != null){
             getAllRoomsRunnable = null;
         }
 
@@ -61,6 +69,6 @@ public class NetworkHelper {
             public void run() {
                 handler.cancel(true);
             }
-        }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
+        }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);*/
     }
 }

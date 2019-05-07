@@ -25,8 +25,9 @@ android {
 dependencies {
 
     //Version definitions
-    def retrofitVersion = "2.5.0";
+    def retrofitVersion = "2.5.0"
     def nav_version = "2.1.0-alpha02"
+    def lifecycle_version = "2.0.0"
 
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
@@ -39,6 +40,9 @@ dependencies {
     //Butterknife
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 
     //Vanilla Implementations
     implementation fileTree(dir: 'libs', include: ['*.jar'])
