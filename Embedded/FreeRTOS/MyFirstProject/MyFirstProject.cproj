@@ -313,10 +313,10 @@
     <Compile Include="myTimers.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="temp_humSensors.c">
+    <Compile Include="temp_humSensor.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="temp_humSensors.h">
+    <Compile Include="temp_humSensor.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

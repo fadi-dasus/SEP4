@@ -60,7 +60,7 @@ C_SRCS +=  \
 ../mySemaphores.c \
 ../myTasks.c \
 ../myTimers.c \
-../temp_humSensors.c
+../temp_humSensor.c
 
 
 PREPROCESSING_SRCS += 
@@ -87,7 +87,7 @@ myLora.o \
 mySemaphores.o \
 myTasks.o \
 myTimers.o \
-temp_humSensors.o
+temp_humSensor.o
 
 OBJS_AS_ARGS +=  \
 co2Sensor.o \
@@ -107,7 +107,7 @@ myLora.o \
 mySemaphores.o \
 myTasks.o \
 myTimers.o \
-temp_humSensors.o
+temp_humSensor.o
 
 C_DEPS +=  \
 co2Sensor.d \
@@ -127,7 +127,7 @@ myLora.d \
 mySemaphores.d \
 myTasks.d \
 myTimers.d \
-temp_humSensors.d
+temp_humSensor.d
 
 C_DEPS_AS_ARGS +=  \
 co2Sensor.d \
@@ -147,7 +147,7 @@ myLora.d \
 mySemaphores.d \
 myTasks.d \
 myTimers.d \
-temp_humSensors.d
+temp_humSensor.d
 
 OUTPUT_FILE_PATH +=MyFirstProject.elf
 
@@ -251,16 +251,13 @@ FreeRTOS/src/variantHooks.o: ../FreeRTOS/src/variantHooks.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include" -I"../FreeRTOS/src" -I"../../../Stdio_lib" -I"../Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-<<<<<<< HEAD
 	@echo Finished building: $<
 	
 
 ./myLora.o: .././myLora.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)D:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DF_CPU=16000000L  -I"D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include" -I"../FreeRTOS/src" -I"../../../Stdio_lib" -I"../Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-=======
->>>>>>> bb87e9fdd169e23cfc84f3ad6d2d2c55d387e554
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include" -I"../FreeRTOS/src" -I"../../../Stdio_lib" -I"../Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
@@ -285,7 +282,7 @@ FreeRTOS/src/variantHooks.o: ../FreeRTOS/src/variantHooks.c
 	@echo Finished building: $<
 	
 
-./temp_humSensors.o: .././temp_humSensors.c
+./temp_humSensor.o: .././temp_humSensor.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include" -I"../FreeRTOS/src" -I"../../../Stdio_lib" -I"../Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
