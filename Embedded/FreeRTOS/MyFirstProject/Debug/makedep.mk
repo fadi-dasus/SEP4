@@ -28,6 +28,8 @@ FreeRTOS\src\variantHooks.c
 
 main.c
 
+myLora.c
+
 mySemaphores.c
 
 myTasks.c

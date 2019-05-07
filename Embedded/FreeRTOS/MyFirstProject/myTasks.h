@@ -19,10 +19,12 @@
 #include <task.h>
 
 TaskHandle_t xCO2MeasureTask;
+TaskHandle_t xLoRaSendDataTask;
 
 void create_tasks(void);
 
 void co2_measure_task(void *pvParameters);
+void lora_send_data_task( void *pvParameters);
 
 
 #endif /* CO2SENSOR_H_ */

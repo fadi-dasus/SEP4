@@ -289,6 +289,12 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="myLora.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="myLora.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="mySemaphores.c">
       <SubType>compile</SubType>
     </Compile>

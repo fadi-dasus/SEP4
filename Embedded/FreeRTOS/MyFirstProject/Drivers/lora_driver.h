@@ -33,7 +33,7 @@ These functions you will not normally need, it will normally be enough to use th
 #ifndef LORA_DRIVER_H_
 #define LORA_DRIVER_H_
 #include <stdbool.h>
-#include <serial/serial.h>
+#include <serial.h>
 
 //#include <lorawan_config.h>
 

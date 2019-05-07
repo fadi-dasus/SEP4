@@ -23,12 +23,13 @@ int main(void)
 {
 	DDRA |= _BV(DDA0) | _BV(DDA7);
 	trace_init();
-	
 	stdioCreate(0);
 
 	co2_sensor_init();
 	
 	create_tasks();
+	
+	//printf("test"); // why is this running in loop ?
 	
 	vTaskStartScheduler(); // initialize and run the freeRTOS scheduler. Execution should never return here.
 

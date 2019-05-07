@@ -17,6 +17,7 @@ void co2_measure() {
 	
 	if ((rc = mh_z19_take_meassuring()) != MHZ19_OK) {
 		printf("CO2_SENSOR_ERROR\n");
+		vTaskDelay(10);
 	}
 		//xSemaphoreGive(*semaphore);
 		//vTaskDelayUntil(&xLastWakeTimeCO2,SENSOR_TIMER*60);
