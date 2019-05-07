@@ -1,30 +1,32 @@
 package com.example.sensorsproject.business.models;
 
-import java.sql.Date;
+import com.google.gson.annotations.Expose;
 
 public class CO2 {
 
-    private int id;
+    private String id;
 
+    @Expose
     private final double higheAcceptableValue = 5.5;
 
+    @Expose
     private final double lowAcceptableValue = 0.1;
-
-    private String businessKey;
 
     private String value;
 
-    private Date timestamp;
+    private String timestamp;
 
-    public CO2(int id, String businessKey, String value) {
+    public CO2(String id, String value, String timestamp) {
         this.id = id;
-        this.businessKey = businessKey;
         this.value = value;
+        this.timestamp = timestamp;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
+
+    public void setId(String id) {this.id = id;}
 
     public double getHigheAcceptableValue() {
         return higheAcceptableValue;
@@ -34,22 +36,17 @@ public class CO2 {
         return lowAcceptableValue;
     }
 
-    public String getBusinessKey() {
-        return businessKey;
-    }
 
     public String getValue() {
         return value;
     }
 
-    public Date getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
     @Override
     public String toString() {
-        return "CO2 [id=" + id + ", higheAcceptableValue=" + higheAcceptableValue + ", lowAcceptableValue="
-                + lowAcceptableValue + ", businessKey=" + businessKey + ", value=" + value + ", timestamp=" + timestamp
-                + "]";
+        return "CO2 ID: " + id + " Value: " + value;
     }
 }

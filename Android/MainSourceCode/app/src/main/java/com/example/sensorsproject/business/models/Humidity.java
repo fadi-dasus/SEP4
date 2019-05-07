@@ -1,28 +1,30 @@
 package com.example.sensorsproject.business.models;
 
+import com.google.gson.annotations.Expose;
+
 import java.sql.Date;
 
 public class Humidity {
 
-    private int id;
+    private String id;
 
+    @Expose
     private final double higheAcceptableValue = 5.5;
 
+    @Expose
     private final double lowAcceptableValue = 0.1;
-
-    private String businessKey;
 
     private String value;
 
-    private Date timestamp;
+    private String timestamp;
 
-    public Humidity(int id, String businessKey, String value) {
+    public Humidity(String id, String value, String timestamp) {
         this.id = id;
-        this.businessKey = businessKey;
         this.value = value;
+        this.timestamp = timestamp;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -34,22 +36,17 @@ public class Humidity {
         return lowAcceptableValue;
     }
 
-    public String getBusinessKey() {
-        return businessKey;
-    }
 
     public String getValue() {
         return value;
     }
 
-    public Date getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
     @Override
     public String toString() {
-        return "Humidity [id=" + id + ", higheAcceptableValue=" + higheAcceptableValue + ", lowAcceptableValue="
-                + lowAcceptableValue + ", businessKey=" + businessKey + ", value=" + value + ", timestamp=" + timestamp
-                + "]";
+        return "Humidity: " + "Timestamp: " + timestamp + " value: " + value + " ID: " + id;
     }
 }
