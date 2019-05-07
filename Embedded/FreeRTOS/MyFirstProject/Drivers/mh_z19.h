@@ -38,9 +38,9 @@ These functions will not normally be used, and be very careful to know what you 
 #define MH_Z19_H_
 #include <stdbool.h>
 #include <stdint.h>
-#include <serial/serial.h>
+#include <serial.h>
 
-mh_z19_return_code_t rc;
+//mh_z19_return_code_t rc;
 
 /**
 \ingroup mh_z19_driver_driver_return_codes
