@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.hateoas.ResourceSupport;
@@ -14,13 +15,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "Co2")
-public class Co2 extends ResourceSupport{
+public class Co2 extends ResourceSupport {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
 	private Integer Id;
+
+	@ManyToOne
+	private Room room;
 	
-	
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
 	static final transient String higheAcceptableValue = "some value ";
 
 	static final transient String lowAcceptableValue = "another value ";
@@ -32,19 +43,18 @@ public class Co2 extends ResourceSupport{
 	@Column(name = "timestamp")
 	private String timestamp;
 
-	
-
 	public Co2() {
 
 	}
-	 @JsonCreator
-	public Co2(@JsonProperty("co2") String businessKey, String value, String timestamp) {
 
+	@JsonCreator
+	public Co2(@JsonProperty("co2") String businessKey, String value, String timestamp, Room room) {
+		this.room = room;
 		this.businessKey = businessKey;
 		this.value = value;
 		this.timestamp = timestamp;
 	}
-	 
+
 	public String getBusinessKey() {
 		return businessKey;
 	}

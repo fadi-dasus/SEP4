@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.hateoas.ResourceSupport;
@@ -20,6 +21,17 @@ public class Humidity extends ResourceSupport {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
 	private Integer Id;
+	@ManyToOne
+	private Room room;
+	
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+	
 
 	static final transient String higheAcceptableValue = "some value ";
 
@@ -37,8 +49,8 @@ public class Humidity extends ResourceSupport {
 	}
 
 	@JsonCreator
-	public Humidity(@JsonProperty("humidity") String businessKey, String value, String timestamp) {
-
+	public Humidity(@JsonProperty("humidity") String businessKey, String value, String timestamp,Room room) {
+		this.room = room;
 		this.businessKey = businessKey;
 		this.value = value;
 		this.timestamp = timestamp;

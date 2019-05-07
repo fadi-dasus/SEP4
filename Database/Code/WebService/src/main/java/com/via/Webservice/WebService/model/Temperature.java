@@ -1,12 +1,11 @@
 package com.via.Webservice.WebService.model;
 
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.hateoas.ResourceSupport;
@@ -22,6 +21,17 @@ public class Temperature extends ResourceSupport {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
 	private Integer Id;
+
+	@ManyToOne
+	private Room room;
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
 
 	static final transient String higheAcceptableValue = "some value ";
 
@@ -39,8 +49,8 @@ public class Temperature extends ResourceSupport {
 	}
 
 	@JsonCreator
-	public Temperature(@JsonProperty("temperature") String businessKey, String value, String timestamp) {
-
+	public Temperature(@JsonProperty("temperature") String businessKey, Room room, String value, String timestamp) {
+		this.room = room;
 		this.businessKey = businessKey;
 		this.value = value;
 		this.timestamp = timestamp;
