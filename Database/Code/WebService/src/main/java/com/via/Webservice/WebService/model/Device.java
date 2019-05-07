@@ -21,16 +21,18 @@ public class Device extends ResourceSupport {
 	@Column(name = "Id")
 	private int Id;
 
-	@Column(name = "name")
-	private String name;
+	@Column(name = "deviceName")
+	private String deviceName;
 	@Column(name = "UIE")
 	private String uie;
 
-	@JsonCreator
-	public Device(@JsonProperty("Device") int id, String name, String uie) {
+	public Device() {
 		super();
-		Id = id;
-		this.name = name;
+	}
+
+	@JsonCreator
+	public Device(@JsonProperty("device")String deviceName, String uie) {
+		this.deviceName = deviceName;
 		this.uie = uie;
 	}
 
@@ -38,12 +40,12 @@ public class Device extends ResourceSupport {
 		Id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getDeviceName() {
+		return deviceName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setDeviceName(String deviceName) {
+		this.deviceName = deviceName;
 	}
 
 	public String getUie() {
@@ -56,7 +58,7 @@ public class Device extends ResourceSupport {
 
 	@Override
 	public String toString() {
-		return "Device [Id=" + Id + ", name=" + name + ", uie=" + uie + "]";
+		return "Device [Id=" + Id + ", deviceName=" + deviceName + ", uie=" + uie + "]";
 	}
 
 }

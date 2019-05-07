@@ -7,22 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.via.Webservice.WebService.model.Room;
+import com.via.Webservice.WebService.model.Device;
 
 @Transactional
 @Repository
-public class RoomDAO {
-
+public class DeviceDAO {
 	@Autowired
-	public RoomRepository roomRepository;
-	
-	public Optional<Room> getRoomById(int id) {
-		return roomRepository.findById(id);
+	public DeviceRepository deviceRepository;
+	public Optional<Device> getDeviceById(int id) {
+		return deviceRepository.findById(id);
 	}
 
-	public List<Room> getAllRoom() {
+	public List<Device> getAllDevice() {
 
-		return (List<Room>) roomRepository.findAll();
+		return (List<Device>) deviceRepository.findAll();
 
 	}
+
 }
