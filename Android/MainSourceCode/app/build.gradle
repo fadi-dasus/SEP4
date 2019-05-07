@@ -56,4 +56,6 @@ dependencies {
     //Gauge Dependancy
     implementation 'com.github.Pygmalion69:Gauge:1.5'
 
+    // recycler view
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
