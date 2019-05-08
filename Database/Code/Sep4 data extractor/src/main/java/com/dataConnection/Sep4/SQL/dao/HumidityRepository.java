@@ -4,6 +4,9 @@ import com.dataConnection.Sep4.SQL.model.Co2;
 import com.dataConnection.Sep4.SQL.model.Humidity;
 import org.springframework.data.repository.CrudRepository;
 
-public interface HumidityRepository extends CrudRepository<Humidity, Integer> {
+import java.util.List;
 
+public interface HumidityRepository extends CrudRepository<Humidity, Integer> {
+    @Override
+    List<Humidity> findAll();
 }

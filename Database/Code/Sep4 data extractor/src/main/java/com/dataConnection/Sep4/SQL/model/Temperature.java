@@ -1,56 +1,86 @@
 package com.dataConnection.Sep4.SQL.model;
 
-import javax.persistence.*;
+import org.bson.types.ObjectId;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Table(name = "Temperature")
+@Table(name = "temperature")
 public class Temperature {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "temperature_id")
+	@Column(name = "id")
 	private Integer id;
 
-
+	@Column(name = "status")
+	private String status;
 
 	@Column(name = "timestamp")
 	private Date date;
 
-	@Column(name = "tempInC")
-	private String tempInC;
+	@Column(name = "value")
+	private String value;
 
-	public Temperature() {
+	@Column(name = "room")
+	private int room;
+
+	public Temperature(){
 
 	}
 
-	public Temperature(Date date, String tempInC) {
-
-		this.date=date;
-		this.tempInC = tempInC;
+	public Temperature(String status, Date date, String value, int room) {
+		this.status = status;
+		this.date = date;
+		this.value = value;
+		this.room = room;
 	}
 
-	public Integer getId() {
-		return id;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public String getTempInC() { return tempInC; }
-
-	public void setTempInC(String ppm) {
-		this.tempInC = tempInC;
+	public Date getDate() {
+		return date;
 	}
 
-	public Date getDate() { return date; }
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-	public void setDate(Date date) { this.date = date; }
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public int getRoom() {
+		return room;
+	}
+
+	public void setRoom(int room) {
+		this.room = room;
+	}
 
 	@Override
 	public String toString() {
-		return "Temperature [id=" + id + ", tempInC=" + tempInC + "]";
+		return "Temperature{" +
+				"status='" + status + '\'' +
+				", date=" + date +
+				", value='" + value + '\'' +
+				", room=" + room +
+				'}';
 	}
-
 }

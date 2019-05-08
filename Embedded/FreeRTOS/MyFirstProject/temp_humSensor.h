@@ -6,8 +6,8 @@
  *  Author: Roza
  */ 
 
-#ifndef TEMP_HUMSENSORS_H_
-#define TEMP_HUMSENSORS_H_
+#ifndef TEMP_HUMSENSOR_H_
+#define TEMP_HUMSENSOR_H_
 
 #include "ATMEGA_FreeRTOS.h"
 
@@ -20,7 +20,7 @@
 
 
 
-void temp_hum_sensors_init();
+void temp_hum_sensor_init();
 void temp_hum_measure();
 float temp_get_value();
 float hum_get_value();

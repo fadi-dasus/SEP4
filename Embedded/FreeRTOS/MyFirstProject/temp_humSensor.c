@@ -6,16 +6,16 @@
  *  Author: Roza
  */ 
 
-#include "temp_humSensors.h"
+#include "temp_humSensor.h"
 float hum = 0.0;
 float temp = 0.0;
 
 // create drivers
-void temp_hum_sensors_init() 
+void temp_hum_sensor_init() 
 {	
 	if ( HIH8120_OK == hih8120Create() )
 	{
-		printf("temp_hum_sensors_created \n");
+		printf("temp_hum_sensor_created \n");
 	}
 }
 

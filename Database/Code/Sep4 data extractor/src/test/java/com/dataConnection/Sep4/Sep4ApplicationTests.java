@@ -7,10 +7,12 @@ import com.dataConnection.Sep4.SQL.dao.TemperatureRepository;
 import com.dataConnection.Sep4.SQL.model.Humidity;
 import com.dataConnection.Sep4.SQL.model.Temperature;
 import com.dataConnection.Sep4.mongo.*;
+import com.dataConnection.Sep4.mongo.MongoModel.EUIMongo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.dataConnection.Sep4.SQL.dao.Co2Repository;
@@ -24,34 +26,23 @@ public class Sep4ApplicationTests {
 	Co2Repository co2;
 
 	@Autowired
-	RoomRepository rr;
-
-	@Autowired
-	Co2MongoRepository cr;
-
-	@Autowired
 	HumidityRepository humidity;
-
-	@Autowired
-	HumidityMongoRepository hr;
 
 	@Autowired
 	TemperatureRepository temperature;
 
 	@Autowired
-	TemperatureMongoRepository tr;
+	EUIMongoRepository er;
 
-
-
+	private List<EUIMongo> EUI;
 
 	@Test
 	public void loadCo2() {
 		co2.deleteAll();
-		List<Co2Mongo> list = cr.findAll();
-
-		for(int i =0; i< list.size(); i++)
+		EUI = er.findAll();
+		for(int i =0; i< EUI.size(); i++)
 		{
-			co2.save(new Co2(list.get(i).getId().getDate(),list.get(i).getPpm()));
+			co2.save(new Co2(null,EUI.get(i).getTimestamp(),EUI.get(i).getCo2(),1));
 		}
 
 		co2.findAll().forEach(System.out::println);
@@ -59,13 +50,27 @@ public class Sep4ApplicationTests {
 	}
 
 	@Test
+	@Scheduled(fixedRate = 5000)
+	public void updateCO2()
+	{
+		EUI = er.findAll();
+
+		int value = EUI.size()-co2.findAll().size();
+
+		for(int i =EUI.size()-value; i<EUI.size(); i++)
+		{
+			co2.save(new Co2(null,EUI.get(i).getTimestamp(),EUI.get(i).getCo2(),1));
+		}
+	}
+
+
+	@Test
 	public void loadHumidity() {
 		humidity.deleteAll();
-		List<HumidityMongo> list = hr.findAll();
-
-		for(int i =0; i< list.size(); i++)
+		EUI = er.findAll();
+		for(int i =0; i< EUI.size(); i++)
 		{
-			humidity.save(new Humidity(list.get(i).getId().getDate(),list.get(i).getPercentage()));
+			humidity.save(new Humidity(null,EUI.get(i).getTimestamp(),EUI.get(i).getHumidity(),1));
 		}
 
 		humidity.findAll().forEach(System.out::println);
@@ -73,13 +78,26 @@ public class Sep4ApplicationTests {
 	}
 
 	@Test
+	@Scheduled(fixedRate = 5000)
+	public void updateHumidity()
+	{
+		EUI = er.findAll();
+
+		int value = EUI.size()-co2.findAll().size();
+
+		for(int i =EUI.size()-value; i<EUI.size(); i++)
+		{
+			humidity.save(new Humidity(null,EUI.get(i).getTimestamp(),EUI.get(i).getHumidity(),1));
+		}
+	}
+
+	@Test
 	public void loadTemperature() {
 		temperature.deleteAll();
-		List<TemperatureMongo> list = tr.findAll();
-
-		for(int i =0; i< list.size(); i++)
+		EUI = er.findAll();
+		for(int i =0; i< EUI.size(); i++)
 		{
-			temperature.save(new Temperature(list.get(i).getId().getDate(),list.get(i).getTempInC()));
+			temperature.save(new Temperature(null,EUI.get(i).getTimestamp(),EUI.get(i).getTemperature(),1));
 		}
 
 		temperature.findAll().forEach(System.out::println);
@@ -87,27 +105,19 @@ public class Sep4ApplicationTests {
 	}
 
 	@Test
-	public void contextLoadsMongo() {
-//		rr.insert(new Room("100001"));
-		Room room = rr.findByRoomNumber("100001");
-		System.out.println("_______________________________");
-		System.out.println(room.toString());
+	@Scheduled(fixedRate = 5000)
+	public void updateTemperature()
+	{
+		EUI = er.findAll();
 
-		System.out.println("_______________________________");
-		System.out.println("______________extracting date from objectid_________");
+		int value = EUI.size()-co2.findAll().size();
 
-		System.out.println(room.getId().getDate());
-		System.out.println("_______________________________");
-
-		System.out.println("_______________________________");
-		List<Room> roms = rr.findAll();
-		for (Room room2 : roms) {
-			System.out.println(" this is the room from the list ");
-			System.out.println(room2.toString());
-			System.out.println("_______________________________");
+		for(int i =EUI.size()-value; i<EUI.size(); i++)
+		{
+			temperature.save(new Temperature(null,EUI.get(i).getTimestamp(),EUI.get(i).getTemperature(),1));
 		}
-
-		rr.findAll().forEach(System.out::println);
-
 	}
+
+
+
 }
