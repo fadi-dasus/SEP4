@@ -1,5 +1,8 @@
 package com.via.Webservice.WebService.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.via.Webservice.WebService.model.Customer;
-import com.via.Webservice.WebService.service.CustomerService;
+import com.via.Webservice.WebService.service.Customer.CustomerService;
 
 @RestController
 @RequestMapping("/sep4")
@@ -24,30 +27,17 @@ public class CustomerController {
 
 	@GetMapping("/customer/{id}")
 	public ResponseEntity<Customer> getCustomerById(@PathVariable("id") Integer id) {
-		Customer customer = customerService.getCustomerById(id);
-		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
-	}
-
-	@PostMapping("/customer")
-	public ResponseEntity<Void> addCustomer(@RequestBody Customer customer)  {
-	boolean exist = customerService.customerExist(customer.getUsername());
-		if (exist) {
-		return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-		}
-		HttpHeaders headers = new HttpHeaders();
-		customerService.addCustomer(customer);
-
-		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-
+		Optional<Customer> customer = customerService.findCustomerById(id);
+		return new ResponseEntity<Customer>(HttpStatus.OK);
 	}
 
 	@GetMapping("/customer/username")
-	public ResponseEntity<Customer> getCustomerByUsername(@RequestParam("username") String username)
+	public ResponseEntity<List<Customer>> getCustomerByUsername(@RequestParam("username") String username)
 			 {
 
-		Customer customer = customerService.getCustomerByUsername(username);
+		List<Customer> customer = customerService.findByUsername(username);
 
-		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
+		return new ResponseEntity<List<Customer>>(customer, HttpStatus.OK);
 	}
 
 }

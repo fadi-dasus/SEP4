@@ -44,7 +44,6 @@ public class RoomController {
 		return new ResponseEntity<Iterable<Room>>(list, HttpStatus.OK);
 
 	}
-//	
 	@GetMapping("/room/name")
 	public ResponseEntity<List<Room>> getRoomByName(@RequestParam("roomName") String roomName) {
 		List<Room> room = service.findByRoomName(roomName);
