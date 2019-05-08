@@ -28,11 +28,7 @@ public class RoomController {
 	public ResponseEntity<Room> getRoomById(@PathVariable("id") Integer id) {
 		Optional<Room> room = service.findRoomById(id);
 		if (room!=null) {
-		
-		
-			//room.add(linkTo(methodOn(RoomController.class).getRoomById(id)).withSelfRel());
-
-
+	
 		return new ResponseEntity<Room>(HttpStatus.OK);
 		}
 		else 
@@ -53,10 +49,6 @@ public class RoomController {
 	public ResponseEntity<List<Room>> getRoomByName(@RequestParam("roomName") String roomName) {
 		List<Room> room = service.findByRoomName(roomName);
 		if (room!=null) {
-		
-		
-			//room.add(linkTo(methodOn(RoomController.class).getRoomById(id)).withSelfRel());
-
 
 		return new ResponseEntity<List<Room>>(HttpStatus.OK);
 		}

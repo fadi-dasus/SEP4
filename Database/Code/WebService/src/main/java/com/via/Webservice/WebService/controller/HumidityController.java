@@ -26,8 +26,6 @@ public class HumidityController {
 	public ResponseEntity<Humidity> findHumidityById(@PathVariable("id") Integer id) {
 		Optional<Humidity> humidity = service.findHumidityById(id);
 		if (humidity!=null) {
-//			humidity.add(linkTo(methodOn(HumidityController.class).getHumidityById(id)).withSelfRel());
-
 
 		return new ResponseEntity<Humidity>(HttpStatus.OK);
 		}
@@ -42,6 +40,10 @@ public class HumidityController {
 		Humidity humidity = new Humidity();
 		humidity.add(linkTo(methodOn(HumidityController.class).findAllHumidity()).withSelfRel());
 		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);
+		//TODO when android get all co2 it should be based on date 
+		// we will publish the co2 from out database just from today 
+		// then we need to give them the new data every 10 mi
+		// so we need to retrieve data from our sql every 10 m (just implement the function and call it from here)
 
 	}
 

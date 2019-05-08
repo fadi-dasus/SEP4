@@ -42,6 +42,10 @@ public class TemperatureController {
 		Temperature temperature = new Temperature();
 		temperature.add(linkTo(methodOn(TemperatureController.class).findAllTemperature()).withSelfRel());
 		return new ResponseEntity<Iterable<Temperature>>(list, HttpStatus.OK);
+		//TODO when android get all co2 it should be based on date 
+		// we will publish the co2 from out database just from today 
+		// then we need to give them the new data every 10 mi
+		// so we need to retrieve data from our sql every 10 m (just implement the function and call it from here)
 	}
 
 }

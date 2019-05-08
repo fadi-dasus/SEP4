@@ -28,23 +28,24 @@ public class Co2Controller {
 		Optional<Co2> co2 = service.findCo2ById(id);
 		if (co2!=null) {
 		
-		
-		//co2.add(linkTo(methodOn(Co2Controller.class).getCo2ById(id)).withSelfRel());
-
-
 		return new ResponseEntity<Co2>(HttpStatus.OK);
 		}
 		else 
 			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
 
 	}
+	
 
 	@GetMapping("/co2All")
-	public ResponseEntity<Iterable<Co2>> findCo2ById2() {
+	public ResponseEntity<Iterable<Co2>> findAllCo2() {
 		Iterable<Co2> list = service.findAllCo2();
 		Co2 co2 = new Co2();
-		co2.add(linkTo(methodOn(Co2Controller.class).findCo2ById2()).withSelfRel());
+		co2.add(linkTo(methodOn(Co2Controller.class).findAllCo2()).withSelfRel());
 		return new ResponseEntity<Iterable<Co2>>(list, HttpStatus.OK);
+		//TODO when android get all co2 it should be based on date 
+		// we will publish the co2 from out database just from today 
+		// then we need to give them the new data every 10 mi
+		// so we need to retrieve data from our sql every 10 m (just implement the function and call it from here)
 
 	}
 

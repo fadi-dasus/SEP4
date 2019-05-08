@@ -25,6 +25,7 @@ public class WarningController {
 		Warning warning = new Warning();
 		warning.add(linkTo(methodOn(WarningController.class).findAllWarnings()).withSelfRel());
 		return new ResponseEntity<Iterable<Warning>>(list, HttpStatus.OK);
+		
 
 	}
 
