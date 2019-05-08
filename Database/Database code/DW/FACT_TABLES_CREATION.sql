@@ -1,7 +1,7 @@
 use DW;
 
-create table Warning_D ( W_ID  int , 
-Warning_ID  int,
+create table Warning_D ( W_ID  int IDENTITY, 
+Warning_ID  int  ,
 m_Type     varchar(50),
 status    varchar(50),
 t_Stamp     datetime2(7),
@@ -15,7 +15,7 @@ primary key (W_ID)
 
 
 create table Room_D(
-R_ID  int , 
+R_ID  int  IDENTITY, 
 Room_ID  int,
 room_name     varchar(50),
 device_name    varchar(50),
