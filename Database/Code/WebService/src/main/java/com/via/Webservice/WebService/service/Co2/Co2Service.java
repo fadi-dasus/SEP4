@@ -1,15 +1,15 @@
-package com.via.Webservice.WebService.service;
+package com.via.Webservice.WebService.service.Co2;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.via.Webservice.WebService.dao.Co2Respository;
+import com.via.Webservice.WebService.dao.Co2.Co2Respository;
 import com.via.Webservice.WebService.model.Co2;
 
 @Service
-public class Co2Service {
+public class Co2Service implements ICo2Service {
 
 	@Autowired
 	Co2Respository dao;

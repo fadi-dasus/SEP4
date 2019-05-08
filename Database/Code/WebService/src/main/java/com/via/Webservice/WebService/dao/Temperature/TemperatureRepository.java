@@ -1,4 +1,4 @@
-package com.via.Webservice.WebService.dao;
+package com.via.Webservice.WebService.dao.Temperature;
 
 import org.springframework.data.repository.CrudRepository;
 

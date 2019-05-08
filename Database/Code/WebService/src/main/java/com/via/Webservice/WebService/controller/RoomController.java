@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.via.Webservice.WebService.model.Room;
-import com.via.Webservice.WebService.service.RoomService;
+import com.via.Webservice.WebService.service.Room.RoomService;
 
 @RestController
 @RequestMapping("/sep4")

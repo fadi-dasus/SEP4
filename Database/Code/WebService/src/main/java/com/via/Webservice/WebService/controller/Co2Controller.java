@@ -3,7 +3,6 @@ package com.via.Webservice.WebService.controller;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.via.Webservice.WebService.model.Co2;
-import com.via.Webservice.WebService.service.Co2Service;
+import com.via.Webservice.WebService.service.Co2.Co2Service;
 
 @RestController
 @RequestMapping("/sep4")

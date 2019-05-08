@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.via.Webservice.WebService.model.Humidity;
-import com.via.Webservice.WebService.service.HumidityService;
+import com.via.Webservice.WebService.service.Humidity.HumidityService;
 
 @RestController
 @RequestMapping("/sep4")

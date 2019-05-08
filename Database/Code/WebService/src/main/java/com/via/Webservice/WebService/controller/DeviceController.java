@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.via.Webservice.WebService.model.Device;
-import com.via.Webservice.WebService.service.DeviceService;
+import com.via.Webservice.WebService.service.Device.DeviceService;
 
 @RestController
 @RequestMapping("/sep4")

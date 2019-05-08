@@ -1,15 +1,15 @@
-package com.via.Webservice.WebService.service;
+package com.via.Webservice.WebService.service.Humidity;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.via.Webservice.WebService.dao.HumidityRepository;
+import com.via.Webservice.WebService.dao.Humidity.HumidityRepository;
 import com.via.Webservice.WebService.model.Humidity;
 
 @Service
-public class HumidityService {
+public class HumidityService implements IHumidityService{
 
 	@Autowired
 	HumidityRepository dao;

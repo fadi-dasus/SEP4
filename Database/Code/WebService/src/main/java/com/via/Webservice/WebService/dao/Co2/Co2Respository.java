@@ -1,4 +1,4 @@
-package com.via.Webservice.WebService.dao;
+package com.via.Webservice.WebService.dao.Co2;
 
 import org.springframework.data.repository.CrudRepository;
 
