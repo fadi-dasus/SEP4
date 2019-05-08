@@ -24,14 +24,14 @@ public class Co2Controller {
 	Co2Service service;
 
 	@GetMapping("/co2/{id}")
-	public ResponseEntity<Co2> getCo2ById(@PathVariable("id") Integer id) {
+	public ResponseEntity<Optional<Co2>> getCo2ById(@PathVariable("id") Integer id) {
 		Optional<Co2> co2 = service.findCo2ById(id);
 		if (co2!=null) {
 		
-		return new ResponseEntity<Co2>(HttpStatus.OK);
+		return new ResponseEntity<Optional<Co2>>(co2,HttpStatus.OK);
 		}
 		else 
-			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Optional<Co2>>( HttpStatus.NOT_FOUND);
 
 	}
 	

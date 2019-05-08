@@ -23,17 +23,17 @@ public class TemperatureController {
 	TemperatureService service;
 	
 	@GetMapping("/temperature/{id}")
-	public ResponseEntity<Temperature> findTemperatureById(@PathVariable("id") Integer id) {
+	public ResponseEntity<Optional<Temperature>> findTemperatureById(@PathVariable("id") Integer id) {
 		Optional<Temperature> temperature = service.findTemperatureById(id);
 		if (temperature!=null) {
 		
 			//temperature.add(linkTo(methodOn(TemperatureController.class).getTemperatureById(id)).withSelfRel());
 
 
-		return new ResponseEntity<Temperature>(HttpStatus.OK);
+		return new ResponseEntity<Optional<Temperature>>(temperature,HttpStatus.OK);
 		}
 		else 
-			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Optional<Temperature>>(temperature,HttpStatus.NOT_FOUND);
 
 	}
 	@GetMapping("/temperatureAll")

@@ -25,14 +25,14 @@ public class RoomController {
 	RoomService service;
 	
 	@GetMapping("/room/{id}")
-	public ResponseEntity<Room> getRoomById(@PathVariable("id") Integer id) {
+	public ResponseEntity<Optional<Room>> getRoomById(@PathVariable("id") Integer id) {
 		Optional<Room> room = service.findRoomById(id);
 		if (room!=null) {
 	
-		return new ResponseEntity<Room>(HttpStatus.OK);
+		return new ResponseEntity<Optional<Room>>(room,HttpStatus.OK);
 		}
 		else 
-			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Optional<Room>>(room, HttpStatus.NOT_FOUND);
 
 	}
 

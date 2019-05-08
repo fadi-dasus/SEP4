@@ -23,14 +23,14 @@ public class HumidityController {
 	HumidityService service;
 	
 	@GetMapping("/humidity/{id}")
-	public ResponseEntity<Humidity> findHumidityById(@PathVariable("id") Integer id) {
+	public ResponseEntity<Optional<Humidity>> findHumidityById(@PathVariable("id") Integer id) {
 		Optional<Humidity> humidity = service.findHumidityById(id);
 		if (humidity!=null) {
 
-		return new ResponseEntity<Humidity>(HttpStatus.OK);
+		return new ResponseEntity<Optional<Humidity>>(humidity,HttpStatus.OK);
 		}
 		else 
-			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Optional<Humidity>>(humidity,HttpStatus.NOT_FOUND);
 
 	}
 

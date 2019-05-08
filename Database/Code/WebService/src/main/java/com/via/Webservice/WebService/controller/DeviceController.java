@@ -25,13 +25,14 @@ public class DeviceController {
 	DeviceService service;
 
 	@GetMapping("/device/{id}")
-	public ResponseEntity<Device> getDeviceById(@PathVariable("id") Integer id) {
+	public ResponseEntity<Optional<Device>> getDeviceById(@PathVariable("id") int id) {
 		Optional<Device> device = service.findDeviceById(id);
+		System.out.println(device.toString());
 		if(device!=null) {
-			return new ResponseEntity<Device>(HttpStatus.OK);
+			return new ResponseEntity<Optional<Device>>(device,HttpStatus.OK);
 		}
 		else
-		return new ResponseEntity<Device>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<Optional<Device>>(HttpStatus.NOT_FOUND);
 		
 	}
 	@GetMapping("/deviceAll")

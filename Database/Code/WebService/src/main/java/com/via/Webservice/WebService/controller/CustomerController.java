@@ -26,9 +26,9 @@ public class CustomerController {
 	private CustomerService customerService;
 
 	@GetMapping("/customer/{id}")
-	public ResponseEntity<Customer> getCustomerById(@PathVariable("id") Integer id) {
+	public ResponseEntity<Optional<Customer>> getCustomerById(@PathVariable("id") Integer id) {
 		Optional<Customer> customer = customerService.findCustomerById(id);
-		return new ResponseEntity<Customer>(HttpStatus.OK);
+		return new ResponseEntity<Optional<Customer>>(customer,HttpStatus.OK);
 	}
 
 	@GetMapping("/customer/username")
