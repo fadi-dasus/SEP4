@@ -7,17 +7,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.sensorsproject.R;
-import com.example.sensorsproject.application.MainActivity;
+import com.example.sensorsproject.application.adapters.RoomChoiceAdapter;
 import com.example.sensorsproject.application.viewmodels.ListViewModel;
 import com.example.sensorsproject.business.models.MyRoom;
 
@@ -32,9 +30,11 @@ import butterknife.ButterKnife;
 public class RoomChoiceFragment extends Fragment {
 
     private ListViewModel listViewModel;
-    private ArrayAdapter<MyRoom> spinnerAdapter;
 
-    @BindView(R.id.room_spinner) Spinner roomSpinner;
+    @BindView(R.id.room_choice_recyclerview)
+    RecyclerView mRecyclerView;
+    private RoomChoiceAdapter mAdapter;
+    private ListViewModel mMainActivityViewModel;
 
     public RoomChoiceFragment() {
         // Required empty public constructor
@@ -47,9 +47,6 @@ public class RoomChoiceFragment extends Fragment {
         //Initialize view models
         listViewModel = ViewModelProviders.of(getActivity()).get(ListViewModel.class);
 
-        //Initialize Spinner adapter
-        spinnerAdapter = new ArrayAdapter<MyRoom>(getContext(), android.R.layout.simple_spinner_dropdown_item);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
     @Override
@@ -58,35 +55,35 @@ public class RoomChoiceFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_room_choice, container, false);
         ButterKnife.bind(this, view);
 
-        //After views are binded, set spinner adapter
-        roomSpinner.setAdapter(spinnerAdapter);
 
-        Button button = view.findViewById(R.id.button2);
-        button.setOnClickListener((View v) -> {
-            MainActivity.navController.navigate(R.id.action_roomChoiceFragment_to_roomMainFragment);
+        mMainActivityViewModel = ViewModelProviders.of(this).get(ListViewModel.class);
+
+
+
+        mMainActivityViewModel.getAllRooms().observe(this, new Observer<List<MyRoom>>() {
+
+            //override
+            public void onChanged(@Nullable List<MyRoom> myRoomList) {
+                if (myRoomList != null)
+                {
+                    mAdapter.updateRoomList(myRoomList);
+                }
+
+            }
         });
-
-        Button buttonGetRooms = view.findViewById(R.id.btn_get_room);
-        buttonGetRooms.setOnClickListener((View v) -> {
-            listViewModel.searchAllRooms();
-        });
-
-        subscribeObservers();
-
+        initRecyclerView();
+        mMainActivityViewModel.searchAllRooms();
         return view;
     }
 
-    private void subscribeObservers(){
-        listViewModel.getAllRooms().observe(this, myRooms -> {
-            if(myRooms != null){
-                if(myRooms.size() > 0){
-                    Toast.makeText(getActivity(), "RoomID: " + myRooms.get(0).getId(), Toast.LENGTH_SHORT).show();
-                    spinnerAdapter.clear();
-                    spinnerAdapter.addAll(myRooms);
-                    spinnerAdapter.notifyDataSetChanged();
-                }
-            }
-        });
+    private void initRecyclerView()
+    {
+        mAdapter = new RoomChoiceAdapter(getContext());
+        RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
     }
+
+
 
 }
