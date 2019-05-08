@@ -2,8 +2,10 @@ package com.dataConnection.Sep4;
 
 import java.util.List;
 
+import com.dataConnection.Sep4.SQL.dao.DeviceRepository;
 import com.dataConnection.Sep4.SQL.dao.HumidityRepository;
 import com.dataConnection.Sep4.SQL.dao.TemperatureRepository;
+import com.dataConnection.Sep4.SQL.model.Device;
 import com.dataConnection.Sep4.SQL.model.Humidity;
 import com.dataConnection.Sep4.SQL.model.Temperature;
 import com.dataConnection.Sep4.mongo.*;
@@ -32,9 +34,39 @@ public class Sep4ApplicationTests {
 	TemperatureRepository temperature;
 
 	@Autowired
+	DeviceRepository device;
+
+	@Autowired
 	EUIMongoRepository er;
 
 	private List<EUIMongo> EUI;
+
+	@Test
+	public void loadDevice() {
+		device.deleteAll();
+		EUI = er.findAll();
+		for(int i =0; i< EUI.size(); i++)
+		{
+			device.save(new Device(EUI.get(i).getName(),EUI.get(i).getUie()));
+		}
+
+		device.findAll().forEach(System.out::println);
+		System.out.println("_______________________________");
+	}
+
+	@Test
+	@Scheduled(fixedRate = 5000)
+	public void updateDevie()
+	{
+		EUI = er.findAll();
+
+		int value = EUI.size()-co2.findAll().size();
+
+		for(int i =EUI.size()-value; i<EUI.size(); i++)
+		{
+			device.save(new Device(EUI.get(i).getName(),EUI.get(i).getUie()));
+		}
+	}
 
 	@Test
 	public void loadCo2() {
@@ -42,7 +74,7 @@ public class Sep4ApplicationTests {
 		EUI = er.findAll();
 		for(int i =0; i< EUI.size(); i++)
 		{
-			co2.save(new Co2(null,EUI.get(i).getTimestamp(),EUI.get(i).getCo2(),1));
+			co2.save(new Co2(null,EUI.get(i).getTimestamp(),EUI.get(i).getCo2(),null));
 		}
 
 		co2.findAll().forEach(System.out::println);
@@ -59,7 +91,7 @@ public class Sep4ApplicationTests {
 
 		for(int i =EUI.size()-value; i<EUI.size(); i++)
 		{
-			co2.save(new Co2(null,EUI.get(i).getTimestamp(),EUI.get(i).getCo2(),1));
+			co2.save(new Co2(null,EUI.get(i).getTimestamp(),EUI.get(i).getCo2(),null));
 		}
 	}
 
@@ -70,7 +102,7 @@ public class Sep4ApplicationTests {
 		EUI = er.findAll();
 		for(int i =0; i< EUI.size(); i++)
 		{
-			humidity.save(new Humidity(null,EUI.get(i).getTimestamp(),EUI.get(i).getHumidity(),1));
+			humidity.save(new Humidity(null,EUI.get(i).getTimestamp(),EUI.get(i).getHumidity(),null));
 		}
 
 		humidity.findAll().forEach(System.out::println);
@@ -87,7 +119,7 @@ public class Sep4ApplicationTests {
 
 		for(int i =EUI.size()-value; i<EUI.size(); i++)
 		{
-			humidity.save(new Humidity(null,EUI.get(i).getTimestamp(),EUI.get(i).getHumidity(),1));
+			humidity.save(new Humidity(null,EUI.get(i).getTimestamp(),EUI.get(i).getHumidity(),null));
 		}
 	}
 
@@ -97,7 +129,7 @@ public class Sep4ApplicationTests {
 		EUI = er.findAll();
 		for(int i =0; i< EUI.size(); i++)
 		{
-			temperature.save(new Temperature(null,EUI.get(i).getTimestamp(),EUI.get(i).getTemperature(),1));
+			temperature.save(new Temperature(null,EUI.get(i).getTimestamp(),EUI.get(i).getTemperature(),null));
 		}
 
 		temperature.findAll().forEach(System.out::println);
@@ -114,10 +146,8 @@ public class Sep4ApplicationTests {
 
 		for(int i =EUI.size()-value; i<EUI.size(); i++)
 		{
-			temperature.save(new Temperature(null,EUI.get(i).getTimestamp(),EUI.get(i).getTemperature(),1));
+			temperature.save(new Temperature(null,EUI.get(i).getTimestamp(),EUI.get(i).getTemperature(),null));
 		}
 	}
-
-
 
 }
