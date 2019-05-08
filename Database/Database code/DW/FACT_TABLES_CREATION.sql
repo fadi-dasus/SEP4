@@ -6,6 +6,8 @@ m_Type     varchar(50),
 status    varchar(50),
 t_Stamp     datetime2(7),
 value       varchar(255),
+"ValidFrom" nvarchar(20) not null DEFAULT '01/05/2019',
+	"Validto" nvarchar(20) not null DEFAULT '01/05/2099'
 
 primary key (W_ID)
 
@@ -17,6 +19,8 @@ R_ID  int ,
 Room_ID  int,
 room_name     varchar(50),
 device_name    varchar(50),
+"ValidFrom" nvarchar(20) not null DEFAULT '01/05/2019',
+	"Validto" nvarchar(20) not null DEFAULT '01/05/2099'
 
 primary key (R_ID)
 );
