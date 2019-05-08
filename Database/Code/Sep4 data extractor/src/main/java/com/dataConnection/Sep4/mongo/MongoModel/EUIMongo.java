@@ -6,6 +6,7 @@ import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -15,8 +16,11 @@ public class EUIMongo {
     @Id
     private ObjectId _id;
 
-    @Field("EUI")
-    private String eui;
+    @Field("UIE")
+    private String uie;
+
+    @Field("Name")
+    private String name;
 
     @Field("Timestamp")
     private Date timestamp;
@@ -45,12 +49,12 @@ public class EUIMongo {
         this._id = _id;
     }
 
-    public String getEui() {
-        return eui;
+    public String getUie() {
+        return uie;
     }
 
-    public void setEui(String eui) {
-        this.eui = eui;
+    public void setUie(String eui) {
+        this.uie = eui;
     }
 
     public Date getTimestamp() {
@@ -81,15 +85,22 @@ public class EUIMongo {
         return temperature;
     }
 
-    public void setTemperature(String temperature) {
-        this.temperature = temperature;
+    public void setTemperature(String temperature) { this.temperature = temperature; }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "EUIMongo{" +
                 "_id=" + _id +
-                ", eui='" + eui + '\'' +
+                ", uie='" + uie + '\'' +
+                ", name='" + name + '\'' +
                 ", timestamp='" + timestamp + '\'' +
                 ", co2='" + co2 + '\'' +
                 ", humidity='" + humidity + '\'' +

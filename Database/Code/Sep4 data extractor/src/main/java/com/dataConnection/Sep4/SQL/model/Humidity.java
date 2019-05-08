@@ -2,41 +2,37 @@ package com.dataConnection.Sep4.SQL.model;
 
 import org.bson.types.ObjectId;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
-@Table(name = "humidity")
+@Table(name = "Humidity")
 public class Humidity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Integer id;
+	@Column(name = "Id")
+	private int id;
+
+	@ManyToOne
+	private Room room;
 
 	@Column(name = "status")
 	private String status;
 
-	@Column(name = "timestamp")
-	private Date date;
-
 	@Column(name = "value")
 	private String value;
 
-	@Column(name = "room")
-	private int room;
+	@Column(name = "timestamp")
+	private Date date;
 
 	public Humidity(){
 
 	}
 
 
-	public Humidity(String status, Date date, String value, int room) {
+	public Humidity(String status, Date date, String value, Room room) {
 		this.status = status;
 		this.date = date;
 		this.value = value;
@@ -67,11 +63,11 @@ public class Humidity {
 		this.value = value;
 	}
 
-	public int getRoom() {
+	public Room getRoom() {
 		return room;
 	}
 
-	public void setRoom(int room) {
+	public void setRoom(Room room) {
 		this.room = room;
 	}
 
