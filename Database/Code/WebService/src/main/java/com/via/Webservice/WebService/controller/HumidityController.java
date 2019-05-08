@@ -3,7 +3,6 @@ package com.via.Webservice.WebService.controller;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +23,8 @@ public class HumidityController {
 	HumidityService service;
 	
 	@GetMapping("/humidity/{id}")
-	public ResponseEntity<Humidity> getHumidityById(@PathVariable("id") Integer id) {
-		Optional<Humidity> humidity = service.getHumidityById(id);
+	public ResponseEntity<Humidity> findHumidityById(@PathVariable("id") Integer id) {
+		Optional<Humidity> humidity = service.findHumidityById(id);
 		if (humidity!=null) {
 //			humidity.add(linkTo(methodOn(HumidityController.class).getHumidityById(id)).withSelfRel());
 
@@ -38,11 +37,11 @@ public class HumidityController {
 	}
 
 	@GetMapping("/humidityAll")
-	public ResponseEntity<List<Humidity>> getAllHumidity() {
-		List<Humidity> list = service.getAllHumidity();
+	public ResponseEntity<Iterable<Humidity>> findAllHumidity() {
+		Iterable<Humidity> list = service.findAllHumidity();
 		Humidity humidity = new Humidity();
-		humidity.add(linkTo(methodOn(HumidityController.class).getAllHumidity()).withSelfRel());
-		return new ResponseEntity<List<Humidity>>(list, HttpStatus.OK);
+		humidity.add(linkTo(methodOn(HumidityController.class).findAllHumidity()).withSelfRel());
+		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);
 
 	}
 

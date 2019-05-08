@@ -22,11 +22,11 @@ public class WarningController {
 	WarningService service;
 	
 	@GetMapping("/warningAll")
-	public ResponseEntity<List<Warning>> getAllWarnings() {
-		List<Warning> list = service.getAllWarning();
+	public ResponseEntity<Iterable<Warning>> findAllWarnings() {
+		Iterable<Warning> list = service.findAllWarning();
 		Warning warning = new Warning();
-		warning.add(linkTo(methodOn(WarningController.class).getAllWarnings()).withSelfRel());
-		return new ResponseEntity<List<Warning>>(list, HttpStatus.OK);
+		warning.add(linkTo(methodOn(WarningController.class).findAllWarnings()).withSelfRel());
+		return new ResponseEntity<Iterable<Warning>>(list, HttpStatus.OK);
 
 	}
 

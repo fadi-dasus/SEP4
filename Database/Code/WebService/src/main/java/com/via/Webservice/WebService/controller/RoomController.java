@@ -26,7 +26,7 @@ public class RoomController {
 	
 	@GetMapping("/room/{id}")
 	public ResponseEntity<Room> getRoomById(@PathVariable("id") Integer id) {
-		Optional<Room> room = service.getRoomById(id);
+		Optional<Room> room = service.findRoomById(id);
 		if (room!=null) {
 		
 		
@@ -41,28 +41,28 @@ public class RoomController {
 	}
 
 	@GetMapping("/roomAll")
-	public ResponseEntity<List<Room>> getAllRoom() {
-		List<Room> list = service.getAllRoom();
+	public ResponseEntity<Iterable<Room>> findAllRoom() {
+		Iterable<Room> list = service.findAllRoom();
 		Room room = new Room();
-		room.add(linkTo(methodOn(RoomController.class).getAllRoom()).withSelfRel());
-		return new ResponseEntity<List<Room>>(list, HttpStatus.OK);
+		room.add(linkTo(methodOn(RoomController.class).findAllRoom()).withSelfRel());
+		return new ResponseEntity<Iterable<Room>>(list, HttpStatus.OK);
 
 	}
-	
-//	@GetMapping("/room/name")
-//	public ResponseEntity<Room> getRoomByName(@RequestParam("roomName") String roomName) {
-//		Optional<Room> room = service.getRoomByName(roomName);
-//		if (room!=null) {
-//		
-//		
-//			//room.add(linkTo(methodOn(RoomController.class).getRoomById(id)).withSelfRel());
-//
-//
-//		return new ResponseEntity<Room>(HttpStatus.OK);
-//		}
-//		else 
-//			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
-//
-//	}
+//	
+	@GetMapping("/room/name")
+	public ResponseEntity<List<Room>> getRoomByName(@RequestParam("roomName") String roomName) {
+		List<Room> room = service.findByRoomName(roomName);
+		if (room!=null) {
+		
+		
+			//room.add(linkTo(methodOn(RoomController.class).getRoomById(id)).withSelfRel());
+
+
+		return new ResponseEntity<List<Room>>(HttpStatus.OK);
+		}
+		else 
+			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+
+	}
 
 }

@@ -26,7 +26,7 @@ public class Co2Controller {
 
 	@GetMapping("/co2/{id}")
 	public ResponseEntity<Co2> getCo2ById(@PathVariable("id") Integer id) {
-		Optional<Co2> co2 = service.getCo2ById(id);
+		Optional<Co2> co2 = service.findCo2ById(id);
 		if (co2!=null) {
 		
 		
@@ -41,11 +41,11 @@ public class Co2Controller {
 	}
 
 	@GetMapping("/co2All")
-	public ResponseEntity<List<Co2>> getCo2ById2() {
-		List<Co2> list = service.getAllCo2();
+	public ResponseEntity<Iterable<Co2>> findCo2ById2() {
+		Iterable<Co2> list = service.findAllCo2();
 		Co2 co2 = new Co2();
-		co2.add(linkTo(methodOn(Co2Controller.class).getCo2ById2()).withSelfRel());
-		return new ResponseEntity<List<Co2>>(list, HttpStatus.OK);
+		co2.add(linkTo(methodOn(Co2Controller.class).findCo2ById2()).withSelfRel());
+		return new ResponseEntity<Iterable<Co2>>(list, HttpStatus.OK);
 
 	}
 
