@@ -1,4 +1,4 @@
-package com.example.sensorsproject.business.networking;
+package com.example.sensorsproject.business.data.networking;
 
 import com.example.sensorsproject.business.models.CO2;
 import com.example.sensorsproject.business.models.Humidity;

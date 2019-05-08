@@ -1,6 +1,4 @@
-package com.example.sensorsproject.business.networking;
-
-import android.util.Log;
+package com.example.sensorsproject.business.data.networking;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -10,12 +8,12 @@ import com.example.sensorsproject.business.models.Humidity;
 import com.example.sensorsproject.business.models.MyRoom;
 import com.example.sensorsproject.business.models.Temperature;
 import com.example.sensorsproject.business.models.Warning;
-import com.example.sensorsproject.business.networking.requests.GetAllCo2sRunnable;
-import com.example.sensorsproject.business.networking.requests.GetAllHumiditiesRunnable;
-import com.example.sensorsproject.business.networking.requests.GetAllRoomsRunnable;
-import com.example.sensorsproject.business.networking.requests.GetAllTemperaturesRunnable;
-import com.example.sensorsproject.business.networking.requests.GetAllWarningsRunnable;
-import com.example.sensorsproject.business.networking.requests.GetOneDataRunnable;
+import com.example.sensorsproject.business.data.networking.requests.GetAllCo2sRunnable;
+import com.example.sensorsproject.business.data.networking.requests.GetAllHumiditiesRunnable;
+import com.example.sensorsproject.business.data.networking.requests.GetAllRoomsRunnable;
+import com.example.sensorsproject.business.data.networking.requests.GetAllTemperaturesRunnable;
+import com.example.sensorsproject.business.data.networking.requests.GetAllWarningsRunnable;
+import com.example.sensorsproject.business.data.networking.requests.GetOneDataRunnable;
 import com.example.sensorsproject.utils.AppExecutors;
 import com.example.sensorsproject.utils.Constants;
 

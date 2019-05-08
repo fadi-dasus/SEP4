@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData;
 import com.example.sensorsproject.business.models.CO2;
 import com.example.sensorsproject.business.models.Humidity;
 import com.example.sensorsproject.business.models.Temperature;
-import com.example.sensorsproject.business.networking.NetworkHelper;
+import com.example.sensorsproject.business.data.networking.NetworkHelper;
 
 import java.util.List;
 

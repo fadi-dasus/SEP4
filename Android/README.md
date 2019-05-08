@@ -20,14 +20,26 @@
 
 ### Tasks
 
-1. Review and import Model Classes (Ainis, Vladimir, Aleksandr);
-2. Web Services with Retrofit (Ainis) 
-3. ListRepository 
-4. ViewModel
-6. Navigation Architecture Components 
-7. MeasurementRepository
-8. Firebase Cloud Messaging
-9. Expanding on fragments for report list, warning list, report itself
+1. Review and import Model Classes (Ainis, Vladimir, Aleksandr) ✓
+2. MVVM Skeleton Code ✓
+3. Web Services with Retrofit (Ainis) ✓
+4. Repositories ✓
+5. ViewModels ✓
+6. Navigation Architecture Components ✓
+7. All Fragment skeleton code implementation ✓
+8. Expanded LoginFragment ✓
+9. Expanded RoomMainFragment ✓
+10. Expanded RoomChoice ✓
+11. Updated Models ✓
+12. Connection to Spring Framework ✓
+13. Firebase Cloud Messaging 
+14. Expanded ReportList
+15. Expanded WarningList
+16. Apply Material Design to the whole project
+17. Toolbar
+18. Expanding on fragments for report list, warning list, report itself
+19. Bottom Navigation View 
+20. Notifications to warn user
 
 ### Web API To Follow
 
@@ -52,28 +64,56 @@
 *Warning*
 - /warningAll - get all warnings
 
-Sequence is linear!
+##Tutorials to read
 
-1. Create Model Classes (Ainis, Vladimir, Aleksandr)  ✓
-2. Room Database (Vladimir and Aleksandr)
+*Sequence is linear!*
+
+
+- Room Database
 	1. Simple Tutorial https://codelabs.developers.google.com/codelabs/android-room-with-a-view/#0
 	2. Part 1 https://codelabs.developers.google.com/codelabs/android-training-livedata-viewmodel/#1   
 	3. Part 2 https://codelabs.developers.google.com/codelabs/android-training-room-delete-data/#0
-3 Web Services (Ainis) (Random data is provided using Math.Random)
+- Web Services
 	1. Intro to Retrofit 2 https://zeroturnaround.com/rebellabs/getting-started-with-retrofit-2/ 
-4. Repository Pattern (Ainis, Vladimir Aleksandr)
+- Repository Pattern
 	1. Tutorial about whole MVVM structure https://codelabs.developers.google.com/codelabs/build-app-with-arch-components/index.html?index=..%2F..index#0
-5. ViewModel & ViewModelFactory
-	ListViewModel Vladimir
-	MeasurementViewModel Aleksandr
-	ViewModelFactory Ainis
+- ViewModel
 	1. Livedata - https://developer.android.com/topic/libraries/architecture/livedata
 	2. ViewModel - https://developer.android.com/topic/libraries/architecture/viewmodel
-6. InjectorUtils & AppExecutors (Ainis)
-7. Activities
-	RoomActivity (3 Text Views as of now)
 
 ### Libraries
-- Retrofit2 & Retrofit2-Jackson-Converter
-- RecyclerView
+
+```
+
+	//Version definitions
+    def retrofitVersion = "2.5.0"
+    def nav_version = "2.1.0-alpha02"
+    def lifecycle_version = "2.0.0"
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    //Firebase Cloud Messaging
+    implementation 'com.google.firebase:firebase-messaging:18.0.0'
+    implementation 'com.google.firebase:firebase-core:16.0.9'
+
+    //Navigation Architecture Components
+    implementation "androidx.navigation:navigation-fragment:$nav_version"
+    implementation "androidx.navigation:navigation-ui:$nav_version"
+
+    //Butterknife
+    implementation 'com.jakewharton:butterknife:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+
+    //Gauge Custom View
+    implementation 'com.github.Pygmalion69:Gauge:1.5'
+
+    //Recyclerview
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+```
 

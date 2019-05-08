@@ -1,11 +1,11 @@
-package com.example.sensorsproject.business.networking.requests;
+package com.example.sensorsproject.business.data.networking.requests;
 
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.sensorsproject.business.models.MyRoom;
-import com.example.sensorsproject.business.networking.ServiceGenerator;
+import com.example.sensorsproject.business.data.networking.ServiceGenerator;
 
 import java.io.IOException;
 import java.util.ArrayList;

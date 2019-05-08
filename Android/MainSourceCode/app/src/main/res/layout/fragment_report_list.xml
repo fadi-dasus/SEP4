@@ -42,4 +42,88 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_live_co2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="No data"
+        app:layout_constraintEnd_toEndOf="@+id/label_co2"
+        app:layout_constraintStart_toStartOf="@+id/label_co2"
+        app:layout_constraintTop_toBottomOf="@+id/label_co2" />
+
+    <TextView
+        android:id="@+id/text_live_humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="No data"
+        app:layout_constraintEnd_toEndOf="@+id/label_humidity"
+        app:layout_constraintStart_toStartOf="@+id/label_humidity"
+        app:layout_constraintTop_toBottomOf="@+id/label_humidity" />
+
+    <TextView
+        android:id="@+id/text_live_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="No data"
+        app:layout_constraintEnd_toEndOf="@+id/label_temperature"
+        app:layout_constraintStart_toStartOf="@+id/label_temperature"
+        app:layout_constraintTop_toBottomOf="@+id/label_temperature" />
+
+    <TextView
+        android:id="@+id/label_co2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="CO2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toStartOf="@+id/label_humidity"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_get_temperature_all" />
+
+    <TextView
+        android:id="@+id/label_humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Humidity"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toStartOf="@+id/label_temperature"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/label_co2"
+        app:layout_constraintTop_toBottomOf="@+id/button_get_temperature_all" />
+
+    <TextView
+        android:id="@+id/label_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Temperature"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/label_humidity"
+        app:layout_constraintTop_toBottomOf="@+id/button_get_temperature_all" />
+
+    <TextView
+        android:id="@+id/label_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Last updated:"
+        app:layout_constraintStart_toStartOf="@+id/text_live_co2"
+        app:layout_constraintTop_toBottomOf="@+id/text_live_co2" />
+
+    <TextView
+        android:id="@+id/text_live_timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="No data"
+        app:layout_constraintBaseline_toBaselineOf="@+id/label_refresh"
+        app:layout_constraintStart_toEndOf="@+id/label_refresh" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,20 +5,25 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sensorsproject.R;
+import com.example.sensorsproject.application.viewmodels.LiveDataViewModel;
 import com.example.sensorsproject.application.viewmodels.MeasurementViewModel;
 import com.example.sensorsproject.business.models.CO2;
 import com.example.sensorsproject.business.models.Humidity;
 import com.example.sensorsproject.business.models.Temperature;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -28,7 +33,13 @@ public class ReportListFragment extends Fragment {
 
     private View fragmentView;
 
+    @BindView(R.id.text_live_co2) TextView textLiveCo2;
+    @BindView(R.id.text_live_humidity) TextView textLiveHumidity;
+    @BindView(R.id.text_live_temperature) TextView textLiveTemperature;
+    @BindView(R.id.text_live_timestamp) TextView textLiveTimestamp;
+
     private MeasurementViewModel measurementViewModel;
+    private LiveDataViewModel liveDataViewModel;
 
     public ReportListFragment() {
         // Required empty public constructor
@@ -38,6 +49,7 @@ public class ReportListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         measurementViewModel = ViewModelProviders.of(getActivity()).get(MeasurementViewModel.class);
+        liveDataViewModel = ViewModelProviders.of(getActivity()).get(LiveDataViewModel.class);
     }
 
     @Override
@@ -46,13 +58,47 @@ public class ReportListFragment extends Fragment {
         fragmentView = inflater.inflate(R.layout.fragment_report_list, container, false);
         ButterKnife.bind(this, fragmentView);
 
-        subscribeObservers();
+        liveDataViewModel.subscribe("DATA");
+        subscribeWebServiceObservers();
+        subscribeLiveDataObservers();
         temporaryButtons();
 
         return fragmentView;
     }
 
-    private void subscribeObservers(){
+    @Override
+    public void onStop() {
+        liveDataViewModel.unsubscribe("E304");
+        super.onStop();
+    }
+
+    private void subscribeLiveDataObservers(){
+        liveDataViewModel.getLiveCo2().observe(this, co2 -> {
+            if(co2 != null){
+                textLiveCo2.setText(co2.getValue());
+            }
+        });
+
+        liveDataViewModel.getLiveHumidity().observe(this, humidity -> {
+            if(humidity != null){
+                textLiveHumidity.setText(humidity.getValue());
+            }
+        });
+
+        liveDataViewModel.getLiveTemperature().observe(this, temperature -> {
+            if(temperature != null){
+                textLiveTemperature.setText(temperature.getValue());
+            }
+        });
+
+        liveDataViewModel.getLiveTimestamp().observe(this, timestamp -> {
+            if(timestamp != null){
+                textLiveTimestamp.setText(timestamp);
+            }
+        });
+    }
+
+    private void subscribeWebServiceObservers(){
         measurementViewModel.getAllCo2s().observe(this, co2List -> {
             if(co2List != null){
                 String toString = "";
