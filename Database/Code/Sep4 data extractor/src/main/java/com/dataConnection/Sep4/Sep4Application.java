@@ -11,6 +11,7 @@ public class Sep4Application
 {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(Sep4Application.class, args);
 	}
 

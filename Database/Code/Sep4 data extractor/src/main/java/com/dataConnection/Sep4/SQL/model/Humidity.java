@@ -1,54 +1,87 @@
 package com.dataConnection.Sep4.SQL.model;
 
-import javax.persistence.*;
+import org.bson.types.ObjectId;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Table(name = "Humidity")
+@Table(name = "humidity")
 public class Humidity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "humidity_id")
+	@Column(name = "id")
 	private Integer id;
 
-
+	@Column(name = "status")
+	private String status;
 
 	@Column(name = "timestamp")
 	private Date date;
 
-	@Column(name = "percentage")
-	private String percentage;
+	@Column(name = "value")
+	private String value;
 
-	public Humidity() {
+	@Column(name = "room")
+	private int room;
+
+	public Humidity(){
 
 	}
 
-	public Humidity(Date date, String percentage) {
 
-		this.date=date;
-		this.percentage = percentage;
+	public Humidity(String status, Date date, String value, int room) {
+		this.status = status;
+		this.date = date;
+		this.value = value;
+		this.room = room;
 	}
 
-	public Integer getId() {
-		return id;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public String getPercentage() { return percentage; }
+	public Date getDate() {
+		return date;
+	}
 
-	public void setPercentage(String percentage) { this.percentage = percentage; }
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-	public Date getDate() { return date; }
+	public String getValue() {
+		return value;
+	}
 
-	public void setDate(Date date) { this.date = date; }
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public int getRoom() {
+		return room;
+	}
+
+	public void setRoom(int room) {
+		this.room = room;
+	}
 
 	@Override
 	public String toString() {
-		return "Humidity [id=" + id + ", percentage=" + percentage + "]";
+		return "Humidity{" +
+				"status='" + status + '\'' +
+				", date=" + date +
+				", value='" + value + '\'' +
+				", room=" + room +
+				'}';
 	}
-
 }
