@@ -4,7 +4,10 @@ import androidx.lifecycle.LiveData;
 
 import com.example.sensorsproject.business.models.CO2;
 import com.example.sensorsproject.business.models.Humidity;
+import com.example.sensorsproject.business.models.Temperature;
 import com.example.sensorsproject.business.networking.NetworkHelper;
+
+import java.util.List;
 
 public class MeasurementRepository {
 
@@ -24,26 +27,22 @@ public class MeasurementRepository {
     }
 
     /*
-     * GET ONE CO2
+     * GET LIVE DATA
      */
 
-    public LiveData<CO2> getOneCo2(){
-        return networkHelper.getOneCo2();
-    }
+    public LiveData<List<CO2>> getAllCo2s(){ return networkHelper.getAllCo2s();}
 
-    public void searchOneCo2(String id){
-        networkHelper.searchOneCo2(id);
-    }
+    public LiveData<List<Humidity>> getAllHumidities() {return networkHelper.getAllHumidities();}
+
+    public LiveData<List<Temperature>> getAllTemperatures() {return networkHelper.getAllTemperatures();}
 
     /*
-     * GET ONE HUMIDITY
+     * UPDATE LIVE DATA
      */
 
-    public LiveData<Humidity> getOneHumidity(){
-        return networkHelper.getOneHumidity();
-    }
+    public void searchAllCo2s() {networkHelper.searchAllCo2s();}
 
-    public void searchOneHumidity(String id){
-        networkHelper.searchOneHumidity(id);
-    }
+    public void searchAllHumidities() {networkHelper.searchAllHumidities();}
+
+    public void searchAllTemperatures() {networkHelper.searchAllTemperatures();}
 }

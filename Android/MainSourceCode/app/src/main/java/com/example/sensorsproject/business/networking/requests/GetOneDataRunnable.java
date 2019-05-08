@@ -40,10 +40,11 @@ public class GetOneDataRunnable<T> implements  Runnable{
             if(response.code() == 200){
 
                 T item = response.body();
+                Log.d(TAG, "getData: HUMIDITY " + item.toString());
                 data.postValue(item);
-                Log.d(TAG, "onRoomListFetchSuccess: Fetched successfully!");
+                Log.d(TAG, "on" + type + "ListFetchSuccess: Fetched successfully!");
             } else {
-                Log.d(TAG, "onRoomListFetchFailure: " + response.errorBody().string());
+                Log.d(TAG, "on" + type + "ListFetchFailure: " + response.errorBody().string());
                 data.postValue(null);
             }
 

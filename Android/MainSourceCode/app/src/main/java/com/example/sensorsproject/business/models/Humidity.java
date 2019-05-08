@@ -40,6 +40,6 @@ public class Humidity {
 
     @Override
     public String toString() {
-        return "Humidity: " + "Timestamp: " + timestamp + " value: " + value;
+        return "Humidity: " + " Value: " + value + " Timestamp: " + timestamp;
     }
 }

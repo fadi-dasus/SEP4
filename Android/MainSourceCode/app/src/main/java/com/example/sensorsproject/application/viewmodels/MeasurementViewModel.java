@@ -5,7 +5,10 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.sensorsproject.business.models.CO2;
 import com.example.sensorsproject.business.models.Humidity;
+import com.example.sensorsproject.business.models.Temperature;
 import com.example.sensorsproject.business.repositories.MeasurementRepository;
+
+import java.util.List;
 
 public class MeasurementViewModel extends ViewModel {
 
@@ -16,26 +19,22 @@ public class MeasurementViewModel extends ViewModel {
     }
 
     /*
-     * GET ONE CO2
+     * GET LIVE DATA
      */
 
-    public LiveData<CO2> getOneCo2(){
-        return repository.getOneCo2();
-    }
+    public LiveData<List<CO2>> getAllCo2s(){ return repository.getAllCo2s();}
 
-    public void searchOneCo2(String id){
-        repository.searchOneCo2(id);
-    }
+    public LiveData<List<Humidity>> getAllHumidities() {return repository.getAllHumidities();}
+
+    public LiveData<List<Temperature>> getAllTemperatures() {return repository.getAllTemperatures();}
 
     /*
-     * GET ONE HUMIDITY
+     * UPDATE LIVE DATA
      */
 
-    public LiveData<Humidity> getOneHumidity(){
-        return repository.getOneHumidity();
-    }
+    public void searchAllCo2s() {repository.searchAllCo2s();}
 
-    public void searchOneHumidity(String id){
-        repository.searchOneHumidity(id);
-    }
+    public void searchAllHumidities() {repository.searchAllHumidities();}
+
+    public void searchAllTemperatures() {repository.searchAllTemperatures();}
 }

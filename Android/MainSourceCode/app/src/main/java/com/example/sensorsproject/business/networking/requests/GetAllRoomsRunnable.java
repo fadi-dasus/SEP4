@@ -1,6 +1,5 @@
 package com.example.sensorsproject.business.networking.requests;
 
-import android.app.Service;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
@@ -30,7 +29,7 @@ public class GetAllRoomsRunnable implements  Runnable{
     @Override
     public void run() {
         try {
-            Response<List<MyRoom>> response = getAllRooms().execute();
+            Response<List<MyRoom>> response = getApiCall().execute();
 
             if(response.code() == 200){
                 List<MyRoom> list = new ArrayList<>(response.body());
@@ -46,7 +45,7 @@ public class GetAllRoomsRunnable implements  Runnable{
         }
     }
 
-    private Call<List<MyRoom>> getAllRooms(){
+    private Call<List<MyRoom>> getApiCall(){
         return sg.getSensorsAPI().getAllRooms();
     }
 }

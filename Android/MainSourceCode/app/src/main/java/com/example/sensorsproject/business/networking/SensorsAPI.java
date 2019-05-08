@@ -18,10 +18,10 @@ public interface SensorsAPI {
      * ROOM
      */
 
-    @GET("/roomAll")
+    @GET("roomAll")
     Call<List<MyRoom>> getAllRooms();
 
-    @GET("/room/{id}")
+    @GET("room/{id}")
     Call<MyRoom> getOneRoom(@Path("id") String id);
 
     /*

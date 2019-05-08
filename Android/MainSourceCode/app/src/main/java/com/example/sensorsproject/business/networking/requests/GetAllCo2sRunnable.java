@@ -5,40 +5,39 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.sensorsproject.business.models.CO2;
+import com.example.sensorsproject.business.models.MyRoom;
 import com.example.sensorsproject.business.networking.ServiceGenerator;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class GetOneCO2Runnable implements  Runnable{
+public class GetAllCo2sRunnable implements  Runnable{
 
     private ServiceGenerator sg;
-    private MutableLiveData<CO2> data;
+    private MutableLiveData<List<CO2>> data;
     private String TAG;
-    private String id;
 
-    public GetOneCO2Runnable(String tag, MutableLiveData<CO2> data, String id){
-        this.data = data;
+    public GetAllCo2sRunnable(String tag, MutableLiveData<List<CO2>> list){
+        this.data = list;
         this.TAG = tag;
-        this.id = id;
         sg = ServiceGenerator.getInstance();
     }
 
     @Override
     public void run() {
         try {
-            Response<CO2> response = getData().execute();
+            Response<List<CO2>> response = getApiCall().execute();
 
-            Log.d(TAG, "searchOneCo2: " + response.code());
             if(response.code() == 200){
-
-                CO2 co2 = response.body();
-                data.postValue(co2);
-                Log.d(TAG, "onRoomListFetchSuccess: Fetched successfully!");
+                List<CO2> list = new ArrayList<>(response.body());
+                data.postValue(list);
+                Log.d(TAG, "onCO2ListFetchSuccess: Fetched successfully!");
             } else {
-                Log.d(TAG, "onRoomListFetchFailure: " + response.errorBody().string());
+                Log.d(TAG, "onCO2ListFetchFailure: " + response.errorBody().string());
                 data.postValue(null);
             }
 
@@ -47,7 +46,7 @@ public class GetOneCO2Runnable implements  Runnable{
         }
     }
 
-    private Call<CO2> getData(){
-        return sg.getSensorsAPI().getOneCo2(id);
+    private Call<List<CO2>> getApiCall(){
+        return sg.getSensorsAPI().getAllCo2();
     }
 }

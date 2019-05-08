@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.sensorsproject.R;
+import com.example.sensorsproject.application.MainActivity;
 import com.example.sensorsproject.application.adapters.RoomChoiceAdapter;
 import com.example.sensorsproject.application.viewmodels.ListViewModel;
 import com.example.sensorsproject.business.models.MyRoom;
@@ -58,7 +59,9 @@ public class RoomChoiceFragment extends Fragment {
 
         mMainActivityViewModel = ViewModelProviders.of(this).get(ListViewModel.class);
 
-
+        view.findViewById(R.id.button_next_fragment).setOnClickListener((View v) -> {
+            MainActivity.navController.navigate(R.id.action_roomChoiceFragment_to_roomMainFragment);
+        });
 
         mMainActivityViewModel.getAllRooms().observe(this, new Observer<List<MyRoom>>() {
 

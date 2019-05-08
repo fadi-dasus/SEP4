@@ -35,8 +35,6 @@ public class Temperature {
 
     @Override
     public String toString() {
-        return "Temperature [higheAcceptableValue=" + higheAcceptableValue + ", lowAcceptableValue="
-                + lowAcceptableValue + ", value=" + value + ", timestamp=" + timestamp
-                + "]";
+        return "Temperature: " + " Value: " + value + " Timestamp: " + timestamp;
     }
 }

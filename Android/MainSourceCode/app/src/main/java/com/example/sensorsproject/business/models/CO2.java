@@ -38,6 +38,6 @@ public class CO2 {
 
     @Override
     public String toString() {
-        return "CO2: " + " Value: " + value;
+        return "CO2: " + " Value: " + value + " Timestamp: " + timestamp;
     }
 }
