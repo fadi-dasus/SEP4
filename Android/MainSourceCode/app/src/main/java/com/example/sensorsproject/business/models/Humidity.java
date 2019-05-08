@@ -6,8 +6,6 @@ import java.sql.Date;
 
 public class Humidity {
 
-    private String id;
-
     @Expose
     private final double higheAcceptableValue = 5.5;
 
@@ -18,14 +16,9 @@ public class Humidity {
 
     private String timestamp;
 
-    public Humidity(String id, String value, String timestamp) {
-        this.id = id;
+    public Humidity(String value, String timestamp) {
         this.value = value;
         this.timestamp = timestamp;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public double getHigheAcceptableValue() {
@@ -47,6 +40,6 @@ public class Humidity {
 
     @Override
     public String toString() {
-        return "Humidity: " + "Timestamp: " + timestamp + " value: " + value + " ID: " + id;
+        return "Humidity: " + "Timestamp: " + timestamp + " value: " + value;
     }
 }

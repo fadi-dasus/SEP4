@@ -2,8 +2,6 @@ package com.example.sensorsproject.business.models;
 
 public class Customer {
 
-    private int id;
-
     private String username;
 
     private String password;
@@ -12,16 +10,11 @@ public class Customer {
 
     private String phoneNumber;
 
-    public Customer(int id, String username, String password, String email, String phoneNumber) {
-        this.id = id;
+    public Customer(String username, String password, String email, String phoneNumber) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getUsername() {
@@ -42,7 +35,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer [ID=" + id + ", username=" + username + ", password=" + password + ", email=" + email
+        return "Customer [ID=" + ", username=" + username + ", password=" + password + ", email=" + email
                 + ", phoneNumber=" + phoneNumber + "]";
     }
 }

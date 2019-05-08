@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData;
 
 import com.example.sensorsproject.business.models.CO2;
 import com.example.sensorsproject.business.models.Humidity;
-import com.example.sensorsproject.business.models.Measurement;
 import com.example.sensorsproject.business.networking.NetworkHelper;
 
 public class MeasurementRepository {

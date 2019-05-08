@@ -4,8 +4,6 @@ import com.google.gson.annotations.Expose;
 
 public class CO2 {
 
-    private String id;
-
     @Expose
     private final double higheAcceptableValue = 5.5;
 
@@ -16,17 +14,10 @@ public class CO2 {
 
     private String timestamp;
 
-    public CO2(String id, String value, String timestamp) {
-        this.id = id;
+    public CO2(String value, String timestamp) {
         this.value = value;
         this.timestamp = timestamp;
     }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {this.id = id;}
 
     public double getHigheAcceptableValue() {
         return higheAcceptableValue;
@@ -47,6 +38,6 @@ public class CO2 {
 
     @Override
     public String toString() {
-        return "CO2 ID: " + id + " Value: " + value;
+        return "CO2: " + " Value: " + value;
     }
 }

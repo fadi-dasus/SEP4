@@ -4,11 +4,9 @@ import java.sql.Date;
 
 public class Warning {
 
-    private int id;
-
     private String measurementType;
 
-    private Date timeStamp;
+    private String timeStamp;
 
     private boolean high;
 
@@ -18,24 +16,20 @@ public class Warning {
 
     private String roomName;
 
-    public Warning(int id, String measurementType, boolean high, boolean low, double value, String roomName) {
-        this.id = id;
+    public Warning(String measurementType, boolean high, boolean low, double value, String roomName, String timeStamp) {
         this.measurementType = measurementType;
         this.high = high;
         this.low = low;
         this.value = value;
         this.roomName = roomName;
-    }
-
-    public int getId() {
-        return id;
+        this.timeStamp = timeStamp;
     }
 
     public String getMeasurementType() {
         return measurementType;
     }
 
-    public Date getTimeStamp() {
+    public String getTimeStamp() {
         return timeStamp;
     }
 
@@ -57,7 +51,7 @@ public class Warning {
 
     @Override
     public String toString() {
-        return "Warning [ID=" + id + ", measurementType=" + measurementType + ", timeStamp=" + timeStamp + ", high="
+        return "Warning [measurementType=" + measurementType + ", timeStamp=" + timeStamp + ", high="
                 + high + ", low=" + low + ", value=" + value + ", roomName=" + roomName + "]";
     }
 }

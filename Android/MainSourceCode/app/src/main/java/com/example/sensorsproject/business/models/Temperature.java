@@ -4,26 +4,17 @@ import java.sql.Date;
 
 public class Temperature {
 
-    private int id;
-
     private final double higheAcceptableValue = 5.5;
 
     private final double lowAcceptableValue = 0.1;
 
-    private String businessKey;
-
     private String value;
 
-    private Date timestamp;
+    private String timestamp;
 
-    public Temperature(int id, String businessKey, String value) {
-        this.id = id;
-        this.businessKey = businessKey;
+    public Temperature(String value, String timestamp) {
         this.value = value;
-    }
-
-    public int getId() {
-        return id;
+        this.timestamp = timestamp;
     }
 
     public double getHigheAcceptableValue() {
@@ -34,22 +25,18 @@ public class Temperature {
         return lowAcceptableValue;
     }
 
-    public String getBusinessKey() {
-        return businessKey;
-    }
-
     public String getValue() {
         return value;
     }
 
-    public Date getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
     @Override
     public String toString() {
-        return "Temperature [id=" + id + ", higheAcceptableValue=" + higheAcceptableValue + ", lowAcceptableValue="
-                + lowAcceptableValue + ", businessKey=" + businessKey + ", value=" + value + ", timestamp=" + timestamp
+        return "Temperature [higheAcceptableValue=" + higheAcceptableValue + ", lowAcceptableValue="
+                + lowAcceptableValue + ", value=" + value + ", timestamp=" + timestamp
                 + "]";
     }
 }
