@@ -1,5 +1,7 @@
 package com.example.sensorsproject.business.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Date;
 
 public class Temperature {
@@ -8,13 +10,17 @@ public class Temperature {
 
     private final double lowAcceptableValue = 0.1;
 
+    @SerializedName("temperature")
     private String value;
 
     private String timestamp;
 
-    public Temperature(String value, String timestamp) {
+    private MyRoom room;
+
+    public Temperature(String value, String timestamp, MyRoom room) {
         this.value = value;
         this.timestamp = timestamp;
+        this.room = room;
     }
 
     public double getHigheAcceptableValue() {
@@ -33,8 +39,12 @@ public class Temperature {
         return timestamp;
     }
 
+    public MyRoom getRoom() {
+        return room;
+    }
+
     @Override
     public String toString() {
-        return "Temperature: " + " Value: " + value + " Timestamp: " + timestamp;
+        return "Temperature: " + " Value: " + value + " Timestamp: " + timestamp + "Room: " + room.getRoomName();
     }
 }

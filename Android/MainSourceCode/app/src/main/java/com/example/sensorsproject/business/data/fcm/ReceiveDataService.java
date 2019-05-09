@@ -34,9 +34,9 @@ public class ReceiveDataService extends FirebaseMessagingService {
             Log.i(TAG, "onMessageReceived: " + temp_value);
             Log.i(TAG, "onMessageReceived: " + timestamp);
 
-            CO2 co2 = new CO2(co2_value, timestamp);
-            Humidity humidity = new Humidity(hum_value, timestamp);
-            Temperature temperature = new Temperature(temp_value, timestamp);
+            CO2 co2 = new CO2(co2_value, timestamp, null);
+            Humidity humidity = new Humidity(hum_value, timestamp, null);
+            Temperature temperature = new Temperature(temp_value, timestamp, null);
             FCMHelper.getInstance().updateLiveData(co2, humidity, temperature, timestamp);
         }
     }

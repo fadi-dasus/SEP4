@@ -54,4 +54,12 @@ public class LiveDataRepository {
     public LiveData<String> getLiveTimestamp(){
         return fcmHelper.getLiveTimestamp();
     }
+
+    public LiveData<String> getCurrentRoom() {return fcmHelper.getCurrentRoom();}
+
+    /*
+     * SETTERS
+     */
+
+    public void setCurrentRoom(String roomName) {fcmHelper.setCurrentRoom(roomName);}
 }

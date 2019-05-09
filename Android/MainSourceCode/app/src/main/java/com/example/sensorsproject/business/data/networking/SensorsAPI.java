@@ -18,46 +18,43 @@ public interface SensorsAPI {
      * ROOM
      */
 
-    @GET("roomAll")
+    @GET("room/all")
     Call<List<MyRoom>> getAllRooms();
-
-    @GET("room/{id}")
-    Call<MyRoom> getOneRoom(@Path("id") String id);
 
     /*
      * CO2
      */
 
-    @GET("co2All")
+    @GET("co2/all")
     Call<List<CO2>> getAllCo2();
 
-    @GET("co2/{id}")
-    Call<CO2> getOneCo2(@Path("id") String id);
+    @GET("co2/room/{id}")
+    Call<List<CO2>> getAllCo2ByRoomId(@Path("id") String roomId);
 
     /*
      * HUMIDITY
      */
 
-    @GET("humidityAll")
+    @GET("humidity/all")
     Call<List<Humidity>> getAllHumidity();
 
     @GET("humidity/{id}")
-    Call<Humidity> getOneHumidity(@Path("id") String id);
+    Call<List<Humidity>> getAllHumidityByRoomId(@Path("id") String roomId);
 
     /*
      * TEMPERATURE
      */
 
-    @GET("temperatureAll")
+    @GET("temperature/all")
     Call<List<Temperature>> getAllTemperature();
 
-    @GET("temperature/{id}")
-    Call<Temperature> getOneTemperature();
+    @GET("temperature/room/{id}")
+    Call<List<Temperature>> getAllTemperatureByRoomId(@Path("id") String roomId);
 
     /*
      * WARNING
      */
 
-    @GET("warningAll")
+    @GET("warning/all")
     Call<List<Warning>> getAllWarnings();
 }

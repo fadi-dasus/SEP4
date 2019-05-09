@@ -11,14 +11,17 @@ import androidx.lifecycle.ViewModelProviders;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sensorsproject.R;
 import com.example.sensorsproject.application.MainActivity;
+import com.example.sensorsproject.application.viewmodels.ListViewModel;
 import com.example.sensorsproject.application.viewmodels.LiveDataViewModel;
 import com.example.sensorsproject.business.models.CO2;
 import com.example.sensorsproject.business.models.MyRoom;
@@ -35,6 +38,7 @@ public class RoomMainFragment extends Fragment {
 
     private ArrayAdapter<MyRoom> spinnerAdapter;
     private LiveDataViewModel liveDataViewModel;
+    private ListViewModel listViewModel;
 
     @BindView(R.id.gauge) Gauge gauge;
     @BindView(R.id.spinner_main) Spinner mainSpinner;
@@ -59,11 +63,13 @@ public class RoomMainFragment extends Fragment {
 
         //Initialize view models
         liveDataViewModel = ViewModelProviders.of(getActivity()).get(LiveDataViewModel.class);
-        liveDataViewModel.setCurrentSensor("co2");
+        listViewModel = ViewModelProviders.of(getActivity()).get(ListViewModel.class);
 
         //Initialize spinner adapter
         spinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Set current sensor according to XML Gauge view
+        liveDataViewModel.setCurrentSensor("co2");
 
     }
 
@@ -73,14 +79,16 @@ public class RoomMainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_room_main, container, false);
         ButterKnife.bind(this, view);
 
+        //TEST
+        Toast.makeText(getContext(), "Subscribed room: " + liveDataViewModel.getCurrentRoom().getValue(), Toast.LENGTH_SHORT).show();
+
         //Setting spinner adapter
+        spinnerAdapter.clear();
+        if(listViewModel.getAllRooms().getValue() != null){
+            spinnerAdapter.clear();
+            spinnerAdapter.addAll(listViewModel.getAllRooms().getValue());
+        }
         mainSpinner.setAdapter(spinnerAdapter);
-        //TEMPORARY VALUES
-        liveDataViewModel.subscribe("E304");
-        mainRoomTextView.setText("Room1");
-        co2mainTextView.setText("400");
-        tempMainTextView.setText("27");
-        humMainTextView.setText("72");
 
         //Set up Gauge
         gauge.setNeedleStepFactor(10f);
@@ -102,12 +110,39 @@ public class RoomMainFragment extends Fragment {
         start.setOnClickListener(v ->
                 gauge.moveToValue(400));
 
-        tempMainLogoView.setOnClickListener(v -> liveDataViewModel.setCurrentSensor("temperature"));
+        tempMainLogoView.setOnClickListener(v -> {
+            //Checks if the same sensor is not selected already
+            if(!liveDataViewModel.getCurrentSensor().getValue().equals("temperature"))
+                liveDataViewModel.setCurrentSensor("temperature");
+        });
 
 
-        co2MainLogoView.setOnClickListener(v -> liveDataViewModel.setCurrentSensor("co2"));
+        co2MainLogoView.setOnClickListener(v -> {
+            //Checks if the same sensor is not selected already
+            if(!liveDataViewModel.getCurrentSensor().getValue().equals("co2"))
+                liveDataViewModel.setCurrentSensor("co2");
+        });
 
-        humMaimLogoView.setOnClickListener(v -> liveDataViewModel.setCurrentSensor("humidity"));
+        humMaimLogoView.setOnClickListener(v -> {
+            //Checks if the same sensor is not selected already
+            if(!liveDataViewModel.getCurrentSensor().getValue().equals("humidity"))
+                liveDataViewModel.setCurrentSensor("humidity");
+        });
+
+        mainSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                MyRoom currentRoom = (MyRoom) parent.getItemAtPosition(position);
+                liveDataViewModel.unsubscribe(liveDataViewModel.getCurrentRoom().getValue());
+                liveDataViewModel.subscribe(currentRoom.getRoomName());
+                //Todo: Update liveData according to selected room
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void subscribeObservers(){
@@ -177,8 +212,8 @@ public class RoomMainFragment extends Fragment {
                 else if(sensor.equals("temperature")){
                     float tempValue = Float.parseFloat(tempMainTextView.getText().toString());
                     gauge.setLowerText("C");
-                    gauge.setMaxValue(Constants.HUMIDITY_MAX_VALUE);
-                    gauge.setMinValue(Constants.HUMIDITY_MIN_VALUE);
+                    gauge.setMaxValue(Constants.TEMPERATURE_MAX_VALUE);
+                    gauge.setMinValue(Constants.TEMPERATURE_MIN_VALUE);
                     gauge.setUpperText("Temperature");
                     gauge.setUpperTextSize(35);
                     gauge.setTotalNicks(120);

@@ -15,7 +15,7 @@ public class FCMHelper {
 
     private static FCMHelper sInstance;
     private FirebaseMessaging firebaseMessaging;
-    private String currentRoom;
+    private MutableLiveData<String> currentRoom;
 
     private MutableLiveData<CO2> liveCo2;
     private MutableLiveData<Humidity> liveHumidity;
@@ -23,12 +23,12 @@ public class FCMHelper {
     private MutableLiveData<String> liveTimestamp;
 
     private FCMHelper(){
-        currentRoom = "";
         firebaseMessaging = FirebaseMessaging.getInstance();
         liveCo2 = new MutableLiveData<>();
         liveHumidity = new MutableLiveData<>();
         liveTemperature = new MutableLiveData<>();
         liveTimestamp = new MutableLiveData<>();
+        currentRoom = new MutableLiveData<>();
     }
 
     public static FCMHelper getInstance(){
@@ -39,13 +39,13 @@ public class FCMHelper {
     }
 
     public void subscribe(String roomName){
-        currentRoom = roomName;
+        currentRoom.postValue(roomName);
         Log.i("TEST", "A BENT JAU SUBSCRIBINI: " + roomName);
-        firebaseMessaging.subscribeToTopic(currentRoom);
+        firebaseMessaging.subscribeToTopic(roomName);
     }
 
     public void unsubscribe(String roomName){
-        firebaseMessaging.unsubscribeFromTopic(currentRoom);
+        firebaseMessaging.unsubscribeFromTopic(roomName);
     }
 
     public LiveData<CO2> getLiveCo2() {
@@ -63,6 +63,10 @@ public class FCMHelper {
     public LiveData<String> getLiveTimestamp(){
         return liveTimestamp;
     }
+
+    public LiveData<String> getCurrentRoom() {return currentRoom;}
+
+    public void setCurrentRoom(String roomName) {currentRoom.postValue(roomName);}
 
     public void updateLiveData(CO2 co2, Humidity humidity, Temperature temperature, String timestamp){
         liveCo2.postValue(co2);

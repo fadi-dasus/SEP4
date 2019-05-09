@@ -18,6 +18,7 @@ import com.example.sensorsproject.R;
 import com.example.sensorsproject.application.MainActivity;
 import com.example.sensorsproject.application.adapters.RoomChoiceAdapter;
 import com.example.sensorsproject.application.viewmodels.ListViewModel;
+import com.example.sensorsproject.application.viewmodels.LiveDataViewModel;
 import com.example.sensorsproject.business.models.MyRoom;
 
 import java.util.List;
@@ -28,7 +29,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RoomChoiceFragment extends Fragment {
+public class RoomChoiceFragment extends Fragment implements RoomChoiceAdapter.OnRoomListener {
 
     private ListViewModel listViewModel;
 
@@ -36,6 +37,7 @@ public class RoomChoiceFragment extends Fragment {
     RecyclerView mRecyclerView;
     private RoomChoiceAdapter mAdapter;
     private ListViewModel mMainActivityViewModel;
+    private LiveDataViewModel liveDataViewModel;
 
     public RoomChoiceFragment() {
         // Required empty public constructor
@@ -47,6 +49,7 @@ public class RoomChoiceFragment extends Fragment {
 
         //Initialize view models
         listViewModel = ViewModelProviders.of(getActivity()).get(ListViewModel.class);
+        liveDataViewModel = ViewModelProviders.of(getActivity()).get(LiveDataViewModel.class);
 
     }
 
@@ -75,18 +78,26 @@ public class RoomChoiceFragment extends Fragment {
             }
         });
         initRecyclerView();
+
+        //Initialize all rooms in MutableLiveData from web services
         mMainActivityViewModel.searchAllRooms();
         return view;
     }
 
     private void initRecyclerView()
     {
-        mAdapter = new RoomChoiceAdapter(getContext());
+        mAdapter = new RoomChoiceAdapter(getContext(), this);
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
     }
 
-
-
+    //Implements on room click
+    @Override
+    public void onRoomClick(int position) {
+        String roomName = mAdapter.getRoomNameById(position);
+        liveDataViewModel.setCurrentRoom(roomName);
+        liveDataViewModel.subscribe(roomName);
+        MainActivity.navController.navigate(R.id.action_roomChoiceFragment_to_roomMainFragment);
+    }
 }

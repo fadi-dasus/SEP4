@@ -46,23 +46,22 @@
 - Base URL: https://localhost:8080/sep4/
 
 *Room*
-- room/{id} - get individual room by ID 
-- roomAll - get all rooms
+- /room/all - get all rooms
 
 *CO2*
-- co2/{id} - gets individual CO2 by ID
-- co2all - gets all CO2
+- co2/all - gets all CO2
+- co2/room/{id} - gets all CO2 by room id
 
 *Humidity*
-- humidity/{id} - gets individual Humidity by ID
-- humidityAll - gets all humidities
+- humidity/all - gets all humidities
+- humidity/room/{id} - gets all humidities by room id
 
 *Temperature*
-- temperature/{id} - get individual temperature by ID
-- temperatureAll - get all temperatures
+- temperature/all - gets all temperatures
+- temperature/room/{id} - gets all temperatures by room id
 
 *Warning*
-- warningAll - get all warnings
+- warning/all - gets all warnings
 
 ###Tutorials to read
 

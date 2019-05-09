@@ -19,10 +19,12 @@ public class RoomChoiceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 {
     private List<MyRoom> mMyRoom;
     private Context mContext;
+    private OnRoomListener onRoomListener;
 
-    public RoomChoiceAdapter(Context context) {
+    public RoomChoiceAdapter(Context context, OnRoomListener onRoomListener) {
         mMyRoom = new ArrayList<>();
         mContext = context;
+        this.onRoomListener = onRoomListener;
     }
 
     public void updateRoomList(List<MyRoom> list)
@@ -35,7 +37,8 @@ public class RoomChoiceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_view_item, viewGroup, false);
-        ViewHolder vh = new ViewHolder(view);
+
+        ViewHolder vh = new ViewHolder(view, onRoomListener);
         return vh;
     }
 
@@ -53,15 +56,32 @@ public class RoomChoiceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
-    private class ViewHolder extends RecyclerView.ViewHolder {
+    private class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mId;
         private TextView mText;
+        private OnRoomListener onRoomListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnRoomListener onRoomListener) {
             super(itemView);
             mId = itemView.findViewById(R.id.id_recyclerview);
             mText = itemView.findViewById(R.id.text_recyclerview);
+            this.onRoomListener = onRoomListener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onRoomListener.onRoomClick(getAdapterPosition());
+        }
+    }
+
+    public String getRoomNameById(int position){
+        return mMyRoom.get(position).getRoomName();
+    }
+
+    public interface OnRoomListener{
+        void onRoomClick(int position);
     }
 }

@@ -55,11 +55,15 @@ public class LiveDataViewModel extends ViewModel {
         return currentSensor;
     }
 
+    public LiveData<String> getCurrentRoom() {return repository.getCurrentRoom();}
+
     /*
      * SETTERS
      */
 
-    public void setCurrentSensor(String s){
-        currentSensor.postValue(s);
+    public void setCurrentSensor(String sensorName){
+        currentSensor.postValue(sensorName);
     }
+
+    public void setCurrentRoom(String roomName) {repository.setCurrentRoom(roomName);}
 }
