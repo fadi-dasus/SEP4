@@ -23,7 +23,7 @@ public class CO2Conttoller {
 
     private List<EUIMongo> EUI;
 
-   Room room;
+    Room room;
     
     Device device;
 
