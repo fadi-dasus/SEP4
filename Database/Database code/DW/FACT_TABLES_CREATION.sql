@@ -1,17 +1,18 @@
 use DW;
 
-create table Warning_D ( W_ID  int IDENTITY, 
-Warning_ID  int  ,
-m_Type     varchar(50),
-status    varchar(50),
-t_Stamp     datetime2(7),
-value       varchar(255),
-"ValidFrom" nvarchar(20) not null DEFAULT '01/05/2019',
-	"Validto" nvarchar(20) not null DEFAULT '01/05/2099'
+GO
 
-primary key (W_ID)
+drop table if exists Fact_CO2
+drop table if exists Fact_Humidity
+drop table if exists Fact_Temperature
+drop table if exists Fact_Warning
+drop table if exists Room_D
+drop table if exists Calendar_D
+drop table if exists Time_D
 
-);
+go 
+
+
 
 
 create table Room_D(
@@ -20,7 +21,7 @@ Room_ID  int,
 room_name     varchar(50),
 device_name    varchar(50),
 "ValidFrom" nvarchar(20) not null DEFAULT '01/05/2019',
-	"Validto" nvarchar(20) not null DEFAULT '01/05/2099'
+"Validto" nvarchar(20) not null DEFAULT '01/05/2099'
 
 primary key (R_ID)
 );
@@ -82,47 +83,60 @@ END
 
 
 
-create table Fact_CO2 (D_ID   int,
+create table Fact_CO2 (
+D_ID   int,
 R_ID int,
-W_ID   int,
 T_ID    int,
 value varchar(255),
 
-primary key (D_ID,R_ID, W_ID, T_ID),
+primary key (D_ID,R_ID, T_ID),
 foreign key ("D_ID") references [DW].[dbo].[Calendar_D] ( "D_ID" ),
 foreign key ("R_ID") references [DW].[dbo].[Room_D] ( "R_ID" ),
-foreign key ("W_ID") references [DW].[dbo].[Warning_D] ( "W_ID" ) ,
 foreign key ("T_ID") references [DW].[dbo].[Time_D] ( "T_ID" ) 
 
 );
 
 
-create table Fact_Temperature (D_ID   int,
+create table Fact_Temperature (
+D_ID   int,
 R_ID int,
-W_ID   int,
 T_ID    int,
 value varchar(255),
 
-primary key (D_ID,R_ID, W_ID, T_ID),
+primary key (D_ID,R_ID,  T_ID),
 foreign key ("D_ID") references [DW].[dbo].[Calendar_D] ( "D_ID" ),
 foreign key ("R_ID") references [DW].[dbo].[Room_D] ( "R_ID" ),
-foreign key ("W_ID") references [DW].[dbo].[Warning_D] ( "W_ID" ) ,
 foreign key ("T_ID") references [DW].[dbo].[Time_D] ( "T_ID" ) 
 
 );
 
 
 
-create table Fact_Humidity (D_ID   int,
+create table Fact_Humidity (
+D_ID   int,
 R_ID int,
-W_ID   int,
 T_ID    int,
 value varchar(255),
 
-primary key (D_ID,R_ID, W_ID, T_ID),
+primary key (D_ID,R_ID, T_ID),
 foreign key ("D_ID") references [DW].[dbo].[Calendar_D] ( "D_ID" ),
 foreign key ("R_ID") references [DW].[dbo].[Room_D] ( "R_ID" ),
-foreign key ("W_ID") references [DW].[dbo].[Warning_D] ( "W_ID" ) ,
+foreign key ("T_ID") references [DW].[dbo].[Time_D] ( "T_ID" ) 
+
+);
+
+
+create table Fact_Warning (
+D_ID   int,
+R_ID int,
+T_ID    int,
+value varchar(255),
+m_Type     varchar(50),
+status    varchar(50),
+
+primary key (D_ID,R_ID, T_ID),
+foreign key ("D_ID") references [DW].[dbo].[Calendar_D] ( "D_ID" ),
+foreign key ("R_ID") references [DW].[dbo].[Room_D] ( "R_ID" ),
 foreign key ("T_ID") references [DW].[dbo].[Time_D] ( "T_ID" ) 
 
 );
