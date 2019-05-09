@@ -23,16 +23,16 @@ public class CO2Conttoller {
 
     private List<EUIMongo> EUI;
 
-    Room room;
-    
-    Device device;
+    private Room room;
+
+    private Device device;
 
     public void loadCo2() {
         co2.deleteAll();
         EUI = er.findAll();
 
         for (int i = 0; i < EUI.size(); i++) {
-            co2.save(new Co2("unknown", EUI.get(i).getTimestamp(), EUI.get(i).getCo2(), room = new Room("Unknown", device = new Device(EUI.get(i).getName(), EUI.get(i).getUie()))));
+            co2.save(new Co2("UNKNOWN", EUI.get(i).getTimestamp(), EUI.get(i).getCo2(), null));
         }
 
         co2.findAll().forEach(System.out::println);
@@ -49,8 +49,11 @@ public class CO2Conttoller {
 
         
         for (int i = EUI.size() - value; i < EUI.size(); i++) {
-            co2.save(new Co2("unknown", EUI.get(i).getTimestamp(), EUI.get(i).getCo2(), room = new Room("Unknown", device = new Device(EUI.get(i).getName(), EUI.get(i).getUie()))));
+            co2.save(new Co2("UNKNOWN", EUI.get(i).getTimestamp(), EUI.get(i).getCo2(),null ));
         }
-    }
+    }else
+        {
+            System.out.println("No values in db");
+        }
     }
 }

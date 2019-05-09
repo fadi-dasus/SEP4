@@ -36,15 +36,16 @@ public class DeviceController {
         System.out.println("_______________________________");
     }
 
-    public void updateDevie()
-    {
+    public void updateDevie() {
         EUI = er.findAll();
+        if (EUI != null && co2.findAll() != null) {
+            int value = EUI.size() - co2.findAll().size();
 
-        int value = EUI.size()-co2.findAll().size();
-
-        for(int i =EUI.size()-value; i<EUI.size(); i++)
-        {
-            device.save(new Device(EUI.get(i).getName(),EUI.get(i).getUie()));
+            for (int i = EUI.size() - value; i < EUI.size(); i++) {
+                device.save(new Device(EUI.get(i).getName(), EUI.get(i).getUie()));
+            }
+        }else {
+            System.out.println("No values in db");
+        }
         }
     }
-}

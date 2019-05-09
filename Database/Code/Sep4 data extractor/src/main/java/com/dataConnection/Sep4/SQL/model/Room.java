@@ -21,8 +21,7 @@ public class Room {
 	@Column(name = "roomName")
 	private String roomName;
 
-	@OneToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name = "device_id")
+	@OneToOne
 	private Device device;
 
 	public Room(String roomName, Device device) {
