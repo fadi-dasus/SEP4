@@ -2,7 +2,7 @@ package com.dataConnection.Sep4.SQL.Controllers;
 
 import com.dataConnection.Sep4.SQL.dao.Co2Repository;
 import com.dataConnection.Sep4.SQL.dao.HumidityRepository;
-import com.dataConnection.Sep4.SQL.dao.TemperatureRepository;
+
 import com.dataConnection.Sep4.SQL.model.Device;
 import com.dataConnection.Sep4.SQL.model.Humidity;
 import com.dataConnection.Sep4.SQL.model.Room;
@@ -26,11 +26,10 @@ public class HumidityController {
     @Autowired
     EUIMongoRepository er;
 
-    @Autowired
-    Room room;
+  
+    private Room room;
 
-    @Autowired
-    Device device;
+    private Device device;
 
     private List<EUIMongo> EUI;
 
@@ -52,6 +51,7 @@ public class HumidityController {
     public void updateHumidity()
     {
         EUI = er.findAll();
+        if(EUI!= null && co2.findAll() != null) {
 
         int value = EUI.size()-co2.findAll().size();
 
@@ -59,5 +59,6 @@ public class HumidityController {
         {
             humidity.save(new Humidity("unknown",EUI.get(i).getTimestamp(),EUI.get(i).getHumidity(),room = new Room("Unknown", device=new Device(EUI.get(i).getName(), EUI.get(i).getUie()))));
         }
+    }
     }
 }

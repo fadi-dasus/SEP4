@@ -23,7 +23,8 @@ public class CO2Conttoller {
 
     private List<EUIMongo> EUI;
 
-    Room room;
+   Room room;
+    
     Device device;
 
     public void loadCo2() {
@@ -37,16 +38,19 @@ public class CO2Conttoller {
         co2.findAll().forEach(System.out::println);
         System.out.println("_______________________________");
     }
+    
 
     @Scheduled(fixedRate = 5000)
     public void updateCO2() {
         EUI = er.findAll();
+        if(EUI!= null && co2.findAll() != null) {
 
         int value = EUI.size() - co2.findAll().size();
 
-
+        
         for (int i = EUI.size() - value; i < EUI.size(); i++) {
             co2.save(new Co2("unknown", EUI.get(i).getTimestamp(), EUI.get(i).getCo2(), room = new Room("Unknown", device = new Device(EUI.get(i).getName(), EUI.get(i).getUie()))));
         }
+    }
     }
 }

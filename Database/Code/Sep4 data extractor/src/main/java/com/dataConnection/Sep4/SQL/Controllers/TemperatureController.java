@@ -47,6 +47,7 @@ public class TemperatureController {
     public void updateTemperature()
     {
         EUI = er.findAll();
+        if(EUI!= null && co2.findAll() != null) {
 
         int value = EUI.size()-co2.findAll().size();
 
@@ -55,5 +56,6 @@ public class TemperatureController {
         {
             temperature.save(new Temperature("unknown",EUI.get(i).getTimestamp(),EUI.get(i).getTemperature(),room = new Room("Unknown", device=new Device(EUI.get(i).getName(), EUI.get(i).getUie()))));
         }
+    }
     }
 }
