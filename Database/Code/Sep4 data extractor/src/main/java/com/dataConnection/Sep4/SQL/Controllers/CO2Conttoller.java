@@ -8,9 +8,11 @@ import com.dataConnection.Sep4.mongo.EUIMongoRepository;
 import com.dataConnection.Sep4.mongo.MongoModel.EUIMongo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CO2Conttoller {
 
     @Autowired
@@ -28,9 +30,8 @@ public class CO2Conttoller {
         co2.deleteAll();
         EUI = er.findAll();
 
-        for(int i =0; i< EUI.size(); i++)
-        {
-            co2.save(new Co2("unknown",EUI.get(i).getTimestamp(),EUI.get(i).getCo2(),room = new Room("Unknown", device=new Device(EUI.get(i).getName(), EUI.get(i).getUie()))));
+        for (int i = 0; i < EUI.size(); i++) {
+            co2.save(new Co2("unknown", EUI.get(i).getTimestamp(), EUI.get(i).getCo2(), room = new Room("Unknown", device = new Device(EUI.get(i).getName(), EUI.get(i).getUie()))));
         }
 
         co2.findAll().forEach(System.out::println);
@@ -38,16 +39,14 @@ public class CO2Conttoller {
     }
 
     @Scheduled(fixedRate = 5000)
-    public void updateCO2()
-    {
+    public void updateCO2() {
         EUI = er.findAll();
 
-        int value = EUI.size()-co2.findAll().size();
+        int value = EUI.size() - co2.findAll().size();
 
 
-        for(int i =EUI.size()-value; i<EUI.size(); i++)
-        {
-            co2.save(new Co2("unknown",EUI.get(i).getTimestamp(),EUI.get(i).getCo2(),room = new Room("Unknown", device=new Device(EUI.get(i).getName(), EUI.get(i).getUie()))));
+        for (int i = EUI.size() - value; i < EUI.size(); i++) {
+            co2.save(new Co2("unknown", EUI.get(i).getTimestamp(), EUI.get(i).getCo2(), room = new Room("Unknown", device = new Device(EUI.get(i).getName(), EUI.get(i).getUie()))));
         }
     }
 }
