@@ -53,6 +53,7 @@ public class Room extends ResourceSupport {
 		Id = id;
 	}
 
+
 	public Device getDevice() {
 		return device;
 	}
