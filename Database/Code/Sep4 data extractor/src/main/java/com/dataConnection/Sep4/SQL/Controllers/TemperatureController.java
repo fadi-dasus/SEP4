@@ -35,7 +35,7 @@ public class TemperatureController {
         EUI = er.findAll();
         for(int i =0; i< EUI.size(); i++)
         {
-            temperature.save(new Temperature("unknown",EUI.get(i).getTimestamp(),EUI.get(i).getTemperature(),room = new Room("Unknown", device=new Device(EUI.get(i).getName(), EUI.get(i).getUie()))));
+            temperature.save(new Temperature("UNKNOWN",EUI.get(i).getTimestamp(),EUI.get(i).getTemperature(),null));
         }
 
         temperature.findAll().forEach(System.out::println);
@@ -54,8 +54,10 @@ public class TemperatureController {
 
         for(int i =EUI.size()-value; i<EUI.size(); i++)
         {
-            temperature.save(new Temperature("unknown",EUI.get(i).getTimestamp(),EUI.get(i).getTemperature(),room = new Room("Unknown", device=new Device(EUI.get(i).getName(), EUI.get(i).getUie()))));
+            temperature.save(new Temperature("UNKNOWN",EUI.get(i).getTimestamp(),EUI.get(i).getTemperature(),null));
         }
-    }
+    }else {
+            System.out.println("No values in db");
+        }
     }
 }

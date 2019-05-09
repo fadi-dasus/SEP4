@@ -39,7 +39,7 @@ public class HumidityController {
 
         for(int i =0; i< EUI.size(); i++)
         {
-            humidity.save(new Humidity("unknown",EUI.get(i).getTimestamp(),EUI.get(i).getHumidity(),room = new Room("Unknown", device=new Device(EUI.get(i).getName(), EUI.get(i).getUie()))));
+            humidity.save(new Humidity("UNKNOWN",EUI.get(i).getTimestamp(),EUI.get(i).getHumidity(),null));
         }
 
         humidity.findAll().forEach(System.out::println);
@@ -57,8 +57,10 @@ public class HumidityController {
 
         for(int i =EUI.size()-value; i<EUI.size(); i++)
         {
-            humidity.save(new Humidity("unknown",EUI.get(i).getTimestamp(),EUI.get(i).getHumidity(),room = new Room("Unknown", device=new Device(EUI.get(i).getName(), EUI.get(i).getUie()))));
+            humidity.save(new Humidity("UNKNOWN",EUI.get(i).getTimestamp(),EUI.get(i).getHumidity(),null));
         }
-    }
+    }else{
+            System.out.println("No values in db");
+        }
     }
 }
