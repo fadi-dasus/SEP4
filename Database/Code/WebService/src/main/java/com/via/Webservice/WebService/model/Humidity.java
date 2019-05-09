@@ -2,17 +2,15 @@ package com.via.Webservice.WebService.model;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.springframework.hateoas.ResourceSupport;
 
@@ -27,7 +25,9 @@ public class Humidity extends ResourceSupport {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
 	private int Id;
+	
 	@ManyToOne
+	@JoinColumn(name="room_id")
 	private Room room;
 
 	@Column(name = "status")

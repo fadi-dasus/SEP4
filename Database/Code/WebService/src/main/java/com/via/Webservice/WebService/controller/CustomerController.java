@@ -16,19 +16,19 @@ import com.via.Webservice.WebService.model.Customer;
 import com.via.Webservice.WebService.service.Customer.CustomerService;
 
 @RestController
-@RequestMapping("/sep4")
+@RequestMapping("/sep4/customer")
 public class CustomerController {
 
 	@Autowired
 	private CustomerService customerService;
 
-	@GetMapping("/customer/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Customer>> getCustomerById(@PathVariable("id") Integer id) {
 		Optional<Customer> customer = customerService.findCustomerById(id);
 		return new ResponseEntity<Optional<Customer>>(customer,HttpStatus.OK);
 	}
 
-	@GetMapping("/customer/username")
+	@GetMapping("/username")
 	public ResponseEntity<List<Customer>> getCustomerByUsername(@RequestParam("username") String username)
 			 {
 

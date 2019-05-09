@@ -19,12 +19,12 @@ import com.via.Webservice.WebService.model.Room;
 import com.via.Webservice.WebService.service.Room.RoomService;
 
 @RestController
-@RequestMapping("/sep4")
+@RequestMapping("/sep4/room")
 public class RoomController {
 	@Autowired
 	RoomService service;
 	
-	@GetMapping("/room/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Room>> getRoomById(@PathVariable("id") Integer id) {
 		Optional<Room> room = service.findRoomById(id);
 		if (room!=null) {
@@ -36,7 +36,7 @@ public class RoomController {
 
 	}
 
-	@GetMapping("/roomAll")
+	@GetMapping("/all")
 	public ResponseEntity<Iterable<Room>> findAllRoom() {
 		Iterable<Room> list = service.findAllRoom();
 		Room room = new Room();
@@ -44,15 +44,15 @@ public class RoomController {
 		return new ResponseEntity<Iterable<Room>>(list, HttpStatus.OK);
 
 	}
-	@GetMapping("/room/name")
+	@GetMapping("/name")
 	public ResponseEntity<List<Room>> getRoomByName(@RequestParam("roomName") String roomName) {
 		List<Room> room = service.findByRoomName(roomName);
 		if (room!=null) {
 
-		return new ResponseEntity<List<Room>>(HttpStatus.OK);
+		return new ResponseEntity<List<Room>>(room,HttpStatus.OK);
 		}
 		else 
-			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(room, HttpStatus.NOT_FOUND);
 
 	}
 

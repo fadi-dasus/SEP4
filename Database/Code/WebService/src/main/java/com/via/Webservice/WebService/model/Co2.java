@@ -1,12 +1,14 @@
 package com.via.Webservice.WebService.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -28,6 +30,7 @@ public class Co2 extends ResourceSupport {
 	final transient int lowAcceptableValue = 0;
 
 	@ManyToOne
+	@JoinColumn(name="room_id")
 	private Room room;
 
 	@Column(name = "status")
@@ -35,6 +38,9 @@ public class Co2 extends ResourceSupport {
 
 	@Column(name = "value")
 	private String value;
+
+	@Column(name = "date")
+	private LocalDateTime date;
 
 	@Column(name = "timestamp")
 	private Timestamp timestamp;
@@ -44,9 +50,9 @@ public class Co2 extends ResourceSupport {
 	}
 
 	@JsonCreator
-	public Co2(@JsonProperty("co2") String value, Timestamp timestamp, Room room) {
+	public Co2(@JsonProperty("co2") String value, LocalDateTime date, Timestamp timestamp, Room room) {
 		this.room = room;
-
+		this.date = date;
 		this.value = value;
 		this.timestamp = timestamp;
 	}
@@ -91,13 +97,18 @@ public class Co2 extends ResourceSupport {
 		return lowAcceptableValue;
 	}
 
-	@Override
-	public String toString() {
-		return "Co2 [Id=" + Id + ", higheAcceptableValue=" + higheAcceptableValue + ", lowAcceptableValue="
-				+ lowAcceptableValue + ", room=" + room + ", status=" + status + ", value=" + value + ", timestamp="
-				+ timestamp + "]";
+	public LocalDateTime getDate() {
+		return date;
 	}
 
-	
+	public void setDate(LocalDateTime date) {
+		this.date = date;
+	}
+
+	@Override
+	public String toString() {
+		return "Co2 [Id=" + Id + ", room=" + room + ", status=" + status + ", value=" + value + ", date=" + date
+				+ ", timestamp=" + timestamp + "]";
+	}
 
 }

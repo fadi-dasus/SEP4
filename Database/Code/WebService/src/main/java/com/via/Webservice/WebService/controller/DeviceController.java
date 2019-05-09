@@ -19,12 +19,12 @@ import com.via.Webservice.WebService.model.Device;
 import com.via.Webservice.WebService.service.Device.DeviceService;
 
 @RestController
-@RequestMapping("/sep4")
+@RequestMapping("/sep4/device")
 public class DeviceController {
 	@Autowired
 	DeviceService service;
 
-	@GetMapping("/device/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Device>> getDeviceById(@PathVariable("id") int id) {
 		Optional<Device> device = service.findDeviceById(id);
 		System.out.println(device.toString());
@@ -35,7 +35,7 @@ public class DeviceController {
 		return new ResponseEntity<Optional<Device>>(HttpStatus.NOT_FOUND);
 		
 	}
-	@GetMapping("/deviceAll")
+	@GetMapping("/all")
 	public ResponseEntity<Iterable<Device>> findAllDevice() {
 		Iterable<Device> list = service.findAllDevice();
 		Device device = new Device();
@@ -44,7 +44,7 @@ public class DeviceController {
 
 	}
 	
-	@GetMapping("/device/name")
+	@GetMapping("/name")
 	public ResponseEntity<List<Device>> findDeviceByName(@RequestParam("name") String name) {
 		List<Device> device = service.findByDiviceName(name);
 		if(device!=null) {

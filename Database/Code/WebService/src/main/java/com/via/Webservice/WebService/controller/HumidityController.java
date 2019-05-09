@@ -14,38 +14,39 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.via.Webservice.WebService.model.Co2;
 import com.via.Webservice.WebService.model.Humidity;
 import com.via.Webservice.WebService.service.Humidity.HumidityService;
 
 @RestController
-@RequestMapping("/sep4")
+@RequestMapping("/sep4/humidity")
 public class HumidityController {
 	@Autowired
 	HumidityService service;
-	
-	@GetMapping("/humidity/{id}")
+
+	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Humidity>> findHumidityById(@PathVariable("id") Integer id) {
 		Optional<Humidity> humidity = service.findHumidityById(id);
-		if (humidity!=null) {
+		if (humidity != null) {
 
-		return new ResponseEntity<Optional<Humidity>>(humidity,HttpStatus.OK);
-		}
-		else 
-			return new ResponseEntity<Optional<Humidity>>(humidity,HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Optional<Humidity>>(humidity, HttpStatus.OK);
+		} else
+			return new ResponseEntity<Optional<Humidity>>(humidity, HttpStatus.NOT_FOUND);
 
 	}
 
-	@GetMapping("/humidityAll")
+	@GetMapping("/all")
 	public ResponseEntity<Iterable<Humidity>> findAllHumidity() {
-		Iterable<Humidity> list = service.findByDate();
+		Iterable<Humidity> list = service.findAllHumidity();
 		Humidity humidity = new Humidity();
 		humidity.add(linkTo(methodOn(HumidityController.class).findAllHumidity()).withSelfRel());
 		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);
-		//TODO when android get all co2 it should be based on date 
-		// we will publish the co2 from out database just from today 
-		// then we need to give them the new data every 10 mi
-		// so we need to retrieve data from our sql every 10 m (just implement the function and call it from here)
+	}
 
+	@GetMapping("/room/{id}")
+	public ResponseEntity<Iterable<Humidity>> findAllHumidity(@PathVariable("id") int room_id) {
+		Iterable<Humidity> list = service.findByHumidityRoom(room_id);
+		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);
 	}
 
 }

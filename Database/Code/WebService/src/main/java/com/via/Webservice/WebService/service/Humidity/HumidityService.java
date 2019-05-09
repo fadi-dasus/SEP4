@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.via.Webservice.WebService.dao.Humidity.HumidityRepository;
 import com.via.Webservice.WebService.model.Humidity;
+import com.via.Webservice.WebService.model.Room;
 
 @Service
 public class HumidityService implements IHumidityService {
@@ -32,5 +33,11 @@ public class HumidityService implements IHumidityService {
 		// Date date= new Date();
 		return dao.findByDate(date);
 
+	}
+
+	@Override
+	public List<Humidity> findByHumidityRoom(int room_id) {
+		Room room=new Room(room_id);
+		return dao.findByRoom(room);
 	}
 }

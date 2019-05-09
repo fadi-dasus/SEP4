@@ -31,9 +31,14 @@ public class Room extends ResourceSupport {
 
 	}
 
+	public Room(int id) {
+		this.Id = id;
+	}
+
 	@JsonCreator
-	public Room(@JsonProperty("room") String roomName) {
+	public Room(@JsonProperty("room") String roomName, Device device) {
 		this.roomName = roomName;
+		this.device=device;
 	}
 
 	public String getRoomName() {
@@ -52,10 +57,10 @@ public class Room extends ResourceSupport {
 		return device;
 	}
 
-
 	public void setDevice(Device device) {
 		this.device = device;
 	}
+
 	@Override
 	public String toString() {
 		return "Room [Id=" + Id + ", roomName=" + roomName + ", device=" + device + "]";

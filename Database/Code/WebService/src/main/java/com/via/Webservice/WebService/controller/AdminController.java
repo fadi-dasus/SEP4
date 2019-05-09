@@ -16,19 +16,19 @@ import com.via.Webservice.WebService.model.Admin;
 import com.via.Webservice.WebService.service.Admin.AdminService;
 
 @RestController
-@RequestMapping("/sep4")
+@RequestMapping("/sep4/admin")
 public class AdminController {
 	@Autowired
 	AdminService adminService;
 	
-	@GetMapping("/admin/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Admin>> getAdminById(@PathVariable("id") Integer id) {
 		Optional<Admin> admin = adminService.findAdminById(id);
 		return new ResponseEntity<Optional<Admin>>(admin,HttpStatus.OK);
 
 	}
 
-	@GetMapping("/admin/username")
+	@GetMapping("/username")
 	public ResponseEntity<List<Admin>> getAdminByUsername(@RequestParam("username") String username)
 			 {
 

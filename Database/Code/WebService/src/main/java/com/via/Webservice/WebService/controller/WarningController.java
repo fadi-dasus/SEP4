@@ -14,12 +14,12 @@ import com.via.Webservice.WebService.model.Warning;
 import com.via.Webservice.WebService.service.Warning.WarningService;
 
 @RestController
-@RequestMapping("/sep4")
+@RequestMapping("/sep4/warning")
 public class WarningController {
 	@Autowired
 	WarningService service;
 	
-	@GetMapping("/warningAll")
+	@GetMapping("/all")
 	public ResponseEntity<Iterable<Warning>> findAllWarnings() {
 		Iterable<Warning> list = service.findAllWarning();
 		Warning warning = new Warning();
