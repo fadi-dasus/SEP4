@@ -15,8 +15,11 @@
 #include <stdio.h>
 #include <stdio_driver.h>
 
+#include "myTimers.h"
 #include "co2Sensor.h"
 #include "myTasks.h"
+#include "mySemaphores.h"
+#include "myLora.h"
 
 
 int main(void)
@@ -25,11 +28,23 @@ int main(void)
 	trace_init();
 	stdioCreate(0);
 
+	// initialization of resources
+	// semaphores
+	semaphores_init();
+	// timers
+	timers_init();
+	// sensors
 	co2_sensor_init();
+	// lora
+	lora_init();
 	
+	// tasks
 	create_tasks();
 	
-	//printf("test"); // why is this running in loop ?
+	// timers start
+	//xTimerStart(TempHumTimer, 0);
+	//xTimerStart(CO2Timer, 0);
+	xTimerStart(LoRaTimer, 0);
 	
 	vTaskStartScheduler(); // initialize and run the freeRTOS scheduler. Execution should never return here.
 

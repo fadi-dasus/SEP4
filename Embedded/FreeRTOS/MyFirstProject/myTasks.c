@@ -1,17 +1,32 @@
+
 #include "myTasks.h"
 #include "co2Sensor.h"
 #include "myLora.h"
+#include "mySemaphores.h"
+#include "myTimers.h"
+#include <timers.h>
+
+//int rand_val = 1234;
 
 void create_tasks(void) {
 	
-	xTaskCreate(
+	/*xTaskCreate(
 		co2_measure_task,
 		"CO2 Task",
 		configMINIMAL_STACK_SIZE,
 		(void*) 1,
 		2,
-		&xCO2MeasureTask
-	);
+		&CO2MeasureTask
+	);*/	
+	
+	/*xTaskCreate(
+		temp_hum_measure_task,
+		"temp hum Task",
+		configMINIMAL_STACK_SIZE,
+		(void*) 1,
+		2,
+		&TempHumMeasureTask
+	);*/
 	
 	xTaskCreate(
 		lora_send_data_task,
@@ -19,7 +34,7 @@ void create_tasks(void) {
 		configMINIMAL_STACK_SIZE,
 		(void*) 1,
 		2,
-		&xLoRaSendDataTask
+		&LoRaSendDataTask
 	);
 }
 
@@ -27,42 +42,55 @@ void co2_measure_task(void *pvParameters) {
 	// remove compiler warnings
 	(void)pvParameters;
 	
+	
+	
 	while(1) {
+	
 		
-		vTaskDelay(1000/portTICK_PERIOD_MS);
-		printf("atask co2");
-		vTaskDelay(1000/portTICK_PERIOD_MS);
-		co2_measure();
-		printf("CO2 value = %i \n", co2_get_value());
 		
-		vTaskDelay(2000/portTICK_PERIOD_MS);
+		//printf("CO2 task");
+		//vTaskDelay(50/portTICK_PERIOD_MS);
+		if(xSemaphoreTake(CO2Semaphore, portMAX_DELAY) == pdTRUE) {
+			vTaskDelay(8000/portTICK_PERIOD_MS);
+		
+			co2_measure();
+			uint16_t co2 = co2_get_value();
+			printf("CO2 value = %d \n", co2);
+			xSemaphoreGive(CO2Semaphore);
+		}
 	}
 }
 
 void lora_send_data_task(void *pvParameters) {
 	
-	// remove complier warnings
-	(void)pvParameters;
-	//static e_LoRa_return_code_t rc;
-
-	// Hardware reset of LoRaWAN transceiver
-	lora_driver_reset_rn2483(1);
-	vTaskDelay(2);
-	lora_driver_reset_rn2483(0);
-	// Give it a chance to wakeup
-	vTaskDelay(150);
-
-	lora_driver_flush_buffers(); // get rid of first version string from module after reset!
-
-	lora_init();
 	
-	uplink_payload.len = 6;
-	uplink_payload.port_no = 2;
-
 	while(1){
+			printf("task lora");
+			vTaskDelay(1000/portTICK_PERIOD_MS);
+			
+		if(xSemaphoreTake(LoRaSemaphore, portMAX_DELAY) == pdTRUE){
+			vTaskDelay(4000/portTICK_PERIOD_MS);
+			lora_start();
+			lora_send_data();
+		}
+	}
+}
+
+
+void temp_hum_measure_task(void *pvParameters) {
+	// remove compiler warnings
+	(void)pvParameters;
+	
+	
+	while(1) {
 		
-		printf("btask lora");
-		lora_send_data();
-		vTaskDelay(10000/portTICK_PERIOD_MS);
+		//printf("temp task");
+		//vTaskDelay(50/portTICK_PERIOD_MS);
+		if(xSemaphoreTake(TempHumSemaphore, portMAX_DELAY) == pdTRUE) {
+			vTaskDelay(4000/portTICK_PERIOD_MS);
+			//temp_measure();
+			//printf("temp value = %i \n", /*co2_get_value()*/ rand_val);
+			xSemaphoreGive(TempHumSemaphore);
+		}
 	}
 }

@@ -30,7 +30,7 @@ void co2_callback(uint16_t co2_ppm) {
 }
 
 
-uint16_t* co2_get_value() {
-	return co2_ppm_pointer;
+uint16_t co2_get_value() {
+	return *co2_ppm_pointer;
 }
 
