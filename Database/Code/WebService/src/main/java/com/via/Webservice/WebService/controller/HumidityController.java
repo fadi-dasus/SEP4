@@ -3,6 +3,7 @@ package com.via.Webservice.WebService.controller;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class HumidityController {
 
 	@GetMapping("/humidityAll")
 	public ResponseEntity<Iterable<Humidity>> findAllHumidity() {
-		Iterable<Humidity> list = service.findAllHumidity();
+		Iterable<Humidity> list = service.findByDate();
 		Humidity humidity = new Humidity();
 		humidity.add(linkTo(methodOn(HumidityController.class).findAllHumidity()).withSelfRel());
 		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);
