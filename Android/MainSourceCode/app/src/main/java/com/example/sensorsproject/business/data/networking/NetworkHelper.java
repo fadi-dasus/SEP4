@@ -3,16 +3,19 @@ package com.example.sensorsproject.business.data.networking;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.sensorsproject.business.data.networking.requests.GetCo2sByRoomId;
+import com.example.sensorsproject.business.data.networking.requests.GetHumiditiesByRoomId;
+import com.example.sensorsproject.business.data.networking.requests.GetTemperaturesByRoomId;
 import com.example.sensorsproject.business.models.CO2;
 import com.example.sensorsproject.business.models.Humidity;
 import com.example.sensorsproject.business.models.MyRoom;
 import com.example.sensorsproject.business.models.Temperature;
 import com.example.sensorsproject.business.models.Warning;
-import com.example.sensorsproject.business.data.networking.requests.GetAllCo2sRunnable;
-import com.example.sensorsproject.business.data.networking.requests.GetAllHumiditiesRunnable;
-import com.example.sensorsproject.business.data.networking.requests.GetAllRoomsRunnable;
-import com.example.sensorsproject.business.data.networking.requests.GetAllTemperaturesRunnable;
-import com.example.sensorsproject.business.data.networking.requests.GetAllWarningsRunnable;
+import com.example.sensorsproject.business.data.networking.requests.GetAllCo2s;
+import com.example.sensorsproject.business.data.networking.requests.GetAllHumidities;
+import com.example.sensorsproject.business.data.networking.requests.GetAllRooms;
+import com.example.sensorsproject.business.data.networking.requests.GetAllTemperatures;
+import com.example.sensorsproject.business.data.networking.requests.GetAllWarnings;
 import com.example.sensorsproject.utils.AppExecutors;
 import com.example.sensorsproject.utils.Constants;
 
@@ -31,19 +34,25 @@ public class NetworkHelper {
     private MutableLiveData<List<Warning>> warningList;
     //Todo: ReportList webview links
 
-    //Measurements
-    private MutableLiveData<List<CO2>> co2List;
-    private MutableLiveData<List<Humidity>> humidityList;
-    private MutableLiveData<List<Temperature>> temperatureList;
+    //All Measurements
+    private MutableLiveData<List<CO2>> co2All;
+    private MutableLiveData<List<Humidity>> humidityAll;
+    private MutableLiveData<List<Temperature>> temperatureAll;
 
-
+    //Measurements By Room Id
+    private MutableLiveData<List<CO2>> co2ByRoomId;
+    private MutableLiveData<List<Humidity>> humidityByRoomId;
+    private MutableLiveData<List<Temperature>> temperatureByRoomId;
 
     //Runnables
-    private GetAllRoomsRunnable getAllRoomsRunnable;
-    private GetAllCo2sRunnable getAllCo2sRunnable;
-    private GetAllHumiditiesRunnable getAllHumiditiesRunnable;
-    private GetAllTemperaturesRunnable getAllTemperaturesRunnable;
-    private GetAllWarningsRunnable getAllWarningsRunnable;
+    private GetAllRooms getAllRooms;
+    private GetAllCo2s getAllCo2S;
+    private GetAllHumidities getAllHumidities;
+    private GetAllTemperatures getAllTemperatures;
+    private GetAllWarnings getAllWarnings;
+    private GetCo2sByRoomId getCo2SByRoomId;
+    private GetHumiditiesByRoomId getHumiditiesByRoomId;
+    private GetTemperaturesByRoomId getTemperaturesByRoomId;
 
     private NetworkHelper(){
         //Lists
@@ -51,9 +60,9 @@ public class NetworkHelper {
         warningList = new MutableLiveData<>();
 
         //Measurements
-        co2List = new MutableLiveData<>();
-        humidityList = new MutableLiveData<>();
-        temperatureList = new MutableLiveData<>();
+        co2All = new MutableLiveData<>();
+        humidityAll = new MutableLiveData<>();
+        temperatureAll = new MutableLiveData<>();
     }
 
     public static NetworkHelper getInstance(){
@@ -72,20 +81,24 @@ public class NetworkHelper {
     }
 
     public LiveData<List<CO2>> getAllCo2s() {
-        return co2List;
+        return co2All;
     }
 
-    public LiveData<List<Humidity>> getAllHumidities() {
-        return humidityList;
-    }
+    public LiveData<List<Humidity>> getAllHumidities() { return humidityAll; }
 
     public LiveData<List<Temperature>> getAllTemperatures() {
-        return temperatureList;
+        return temperatureAll;
     }
 
     public LiveData<List<Warning>> getAllWarnings() {
         return warningList;
     }
+
+    public LiveData<List<CO2>> getCo2ByRoomId() {return co2ByRoomId;}
+
+    public LiveData<List<Humidity>> getHumidityByRoomId() {return humidityByRoomId;}
+
+    public LiveData<List<Temperature>> getTemperatureByRoomId() {return temperatureByRoomId;}
 
     /*
      * UPDATE LIVE DATA
@@ -93,12 +106,12 @@ public class NetworkHelper {
 
     public void searchAllRooms(){
         //Networking Code
-        if(getAllRoomsRunnable != null){
-            getAllRoomsRunnable = null;
+        if(getAllRooms != null){
+            getAllRooms = null;
         }
 
-        getAllRoomsRunnable = new GetAllRoomsRunnable(TAG, roomList);
-        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllRoomsRunnable);
+        getAllRooms = new GetAllRooms(TAG, roomList);
+        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllRooms);
 
         AppExecutors.getInstance().networkIO().schedule(() -> {
             handler.cancel(true);
@@ -107,12 +120,12 @@ public class NetworkHelper {
 
     public void searchAllCo2s(){
         //Networking Code
-        if(getAllCo2sRunnable != null){
-            getAllCo2sRunnable = null;
+        if(getAllCo2S != null){
+            getAllCo2S = null;
         }
 
-        getAllCo2sRunnable = new GetAllCo2sRunnable(TAG, co2List);
-        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllCo2sRunnable);
+        getAllCo2S = new GetAllCo2s(TAG, co2All);
+        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllCo2S);
 
         AppExecutors.getInstance().networkIO().schedule(() -> {
             handler.cancel(true);
@@ -121,12 +134,12 @@ public class NetworkHelper {
 
     public void searchAllHumidities(){
         //Networking Code
-        if(getAllHumiditiesRunnable != null){
-            getAllHumiditiesRunnable = null;
+        if(getAllHumidities != null){
+            getAllHumidities = null;
         }
 
-        getAllHumiditiesRunnable = new GetAllHumiditiesRunnable(TAG, humidityList);
-        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllHumiditiesRunnable);
+        getAllHumidities = new GetAllHumidities(TAG, humidityAll);
+        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllHumidities);
 
         AppExecutors.getInstance().networkIO().schedule(() -> {
             handler.cancel(true);
@@ -135,12 +148,12 @@ public class NetworkHelper {
 
     public void searchAllTemperatures(){
         //Networking Code
-        if(getAllTemperaturesRunnable != null){
-            getAllTemperaturesRunnable = null;
+        if(getAllTemperatures != null){
+            getAllTemperatures = null;
         }
 
-        getAllTemperaturesRunnable= new GetAllTemperaturesRunnable(TAG, temperatureList);
-        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllTemperaturesRunnable);
+        getAllTemperatures = new GetAllTemperatures(TAG, temperatureAll);
+        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllTemperatures);
 
         AppExecutors.getInstance().networkIO().schedule(() -> {
             handler.cancel(true);
@@ -149,12 +162,54 @@ public class NetworkHelper {
 
     public void searchAllWarnings(){
         //Networking Code
-        if(getAllWarningsRunnable!= null){
-            getAllWarningsRunnable = null;
+        if(getAllWarnings != null){
+            getAllWarnings = null;
         }
 
-        getAllWarningsRunnable = new GetAllWarningsRunnable(TAG, warningList);
-        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllWarningsRunnable);
+        getAllWarnings = new GetAllWarnings(TAG, warningList);
+        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllWarnings);
+
+        AppExecutors.getInstance().networkIO().schedule(() -> {
+            handler.cancel(true);
+        }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
+    }
+
+    public void searchCo2ByRoomId(String roomId){
+        //Networking Code
+        if(getCo2SByRoomId != null){
+            getCo2SByRoomId = null;
+        }
+
+        getCo2SByRoomId = new GetCo2sByRoomId(TAG, co2ByRoomId, roomId);
+        final Future handler = AppExecutors.getInstance().networkIO().submit(getCo2SByRoomId);
+
+        AppExecutors.getInstance().networkIO().schedule(() -> {
+            handler.cancel(true);
+        }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
+    }
+
+    public void searchHumidityByRoomId(String roomId){
+        //Networking Code
+        if(getHumiditiesByRoomId != null){
+            getHumiditiesByRoomId = null;
+        }
+
+        getHumiditiesByRoomId = new GetHumiditiesByRoomId(TAG, humidityByRoomId, roomId);
+        final Future handler = AppExecutors.getInstance().networkIO().submit(getHumiditiesByRoomId);
+
+        AppExecutors.getInstance().networkIO().schedule(() -> {
+            handler.cancel(true);
+        }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
+    }
+
+    public void searchTemperatureByRoomId(String roomId){
+        //Networking Code
+        if(getTemperaturesByRoomId != null){
+            getTemperaturesByRoomId = null;
+        }
+
+        getTemperaturesByRoomId = new GetTemperaturesByRoomId(TAG, temperatureByRoomId, roomId);
+        final Future handler = AppExecutors.getInstance().networkIO().submit(getTemperaturesByRoomId);
 
         AppExecutors.getInstance().networkIO().schedule(() -> {
             handler.cancel(true);

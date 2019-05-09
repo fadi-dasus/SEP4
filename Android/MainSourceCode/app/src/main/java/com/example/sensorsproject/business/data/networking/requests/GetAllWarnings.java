@@ -4,7 +4,7 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.sensorsproject.business.models.CO2;
+import com.example.sensorsproject.business.models.Warning;
 import com.example.sensorsproject.business.data.networking.ServiceGenerator;
 
 import java.io.IOException;
@@ -14,29 +14,29 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class GetAllCo2sRunnable implements  Runnable{
+public class GetAllWarnings implements  Runnable{
 
     private ServiceGenerator sg;
-    private MutableLiveData<List<CO2>> data;
+    private MutableLiveData<List<Warning>> data;
     private String TAG;
 
-    public GetAllCo2sRunnable(String tag, MutableLiveData<List<CO2>> list){
+    public GetAllWarnings(String tag, MutableLiveData<List<Warning>> list){
         this.data = list;
         this.TAG = tag;
-        sg = ServiceGenerator.getInstance();
+        this.sg = ServiceGenerator.getInstance();
     }
 
     @Override
     public void run() {
         try {
-            Response<List<CO2>> response = getApiCall().execute();
+            Response<List<Warning>> response = getApiCall().execute();
 
             if(response.code() == 200){
-                List<CO2> list = new ArrayList<>(response.body());
+                List<Warning> list = new ArrayList<>(response.body());
                 data.postValue(list);
-                Log.d(TAG, "onCO2ListFetchSuccess: Fetched successfully!");
+                Log.d(TAG, "onWarningListFetchSuccess: Fetched successfully!");
             } else {
-                Log.d(TAG, "onCO2ListFetchFailure: " + response.errorBody().string());
+                Log.d(TAG, "onWarningListFetchFailure: " + response.errorBody().string());
                 data.postValue(null);
             }
 
@@ -45,7 +45,7 @@ public class GetAllCo2sRunnable implements  Runnable{
         }
     }
 
-    private Call<List<CO2>> getApiCall(){
-        return sg.getSensorsAPI().getAllCo2();
+    private Call<List<Warning>> getApiCall(){
+        return sg.getSensorsAPI().getAllWarnings();
     }
 }

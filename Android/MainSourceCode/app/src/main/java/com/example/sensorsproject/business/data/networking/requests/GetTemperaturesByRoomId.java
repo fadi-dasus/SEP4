@@ -4,8 +4,8 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.sensorsproject.business.models.Temperature;
 import com.example.sensorsproject.business.data.networking.ServiceGenerator;
+import com.example.sensorsproject.business.models.Temperature;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,16 +14,18 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class GetAllTemperaturesRunnable implements  Runnable{
+public class GetTemperaturesByRoomId implements  Runnable{
 
     private ServiceGenerator sg;
     private MutableLiveData<List<Temperature>> data;
     private String TAG;
+    private String roomId;
 
-    public GetAllTemperaturesRunnable(String tag, MutableLiveData<List<Temperature>> list){
+    public GetTemperaturesByRoomId(String tag, MutableLiveData<List<Temperature>> list, String roomId){
         this.data = list;
         this.TAG = tag;
-        sg = ServiceGenerator.getInstance();
+        this.sg = ServiceGenerator.getInstance();
+        this.roomId = roomId;
     }
 
     @Override
@@ -46,6 +48,6 @@ public class GetAllTemperaturesRunnable implements  Runnable{
     }
 
     private Call<List<Temperature>> getApiCall(){
-        return sg.getSensorsAPI().getAllTemperature();
+        return sg.getSensorsAPI().getAllTemperatureByRoomId(roomId);
     }
 }

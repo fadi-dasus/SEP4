@@ -14,16 +14,16 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class GetAllRoomsRunnable implements  Runnable{
+public class GetAllRooms implements  Runnable{
 
     private ServiceGenerator sg;
     private MutableLiveData<List<MyRoom>> roomList;
     private String TAG;
 
-    public GetAllRoomsRunnable(String tag, MutableLiveData<List<MyRoom>> list){
+    public GetAllRooms(String tag, MutableLiveData<List<MyRoom>> list){
         this.roomList = list;
         this.TAG = tag;
-        sg = ServiceGenerator.getInstance();
+        this.sg = ServiceGenerator.getInstance();
     }
 
     @Override

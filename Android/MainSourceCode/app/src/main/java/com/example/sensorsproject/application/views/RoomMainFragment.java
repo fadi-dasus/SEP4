@@ -133,7 +133,8 @@ public class RoomMainFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 MyRoom currentRoom = (MyRoom) parent.getItemAtPosition(position);
-                liveDataViewModel.unsubscribe(liveDataViewModel.getCurrentRoom().getValue());
+                if(liveDataViewModel.getCurrentRoom() != null)
+                    liveDataViewModel.unsubscribe(liveDataViewModel.getCurrentRoom().getValue());
                 liveDataViewModel.subscribe(currentRoom.getRoomName());
                 //Todo: Update liveData according to selected room
             }

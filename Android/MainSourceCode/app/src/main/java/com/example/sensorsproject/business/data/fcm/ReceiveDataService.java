@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.sensorsproject.business.models.CO2;
 import com.example.sensorsproject.business.models.Humidity;
+import com.example.sensorsproject.business.models.MyRoom;
 import com.example.sensorsproject.business.models.Temperature;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -28,15 +29,16 @@ public class ReceiveDataService extends FirebaseMessagingService {
             String hum_value = map.get("hum_value");
             String temp_value = map.get("temp_value");
             String timestamp = map.get("timestamp");
+            String roomName = FCMHelper.getInstance().getCurrentRoom().getValue();
 
             Log.i(TAG, "onMessageReceived: " + co2_value);
             Log.i(TAG, "onMessageReceived: " + hum_value);
             Log.i(TAG, "onMessageReceived: " + temp_value);
             Log.i(TAG, "onMessageReceived: " + timestamp);
 
-            CO2 co2 = new CO2(co2_value, timestamp, null);
-            Humidity humidity = new Humidity(hum_value, timestamp, null);
-            Temperature temperature = new Temperature(temp_value, timestamp, null);
+            CO2 co2 = new CO2(co2_value, timestamp, new MyRoom(roomName));
+            Humidity humidity = new Humidity(hum_value, timestamp, new MyRoom(roomName));
+            Temperature temperature = new Temperature(temp_value, timestamp, new MyRoom(roomName));
             FCMHelper.getInstance().updateLiveData(co2, humidity, temperature, timestamp);
         }
     }

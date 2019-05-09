@@ -14,16 +14,16 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class GetAllHumiditiesRunnable implements  Runnable{
+public class GetAllHumidities implements  Runnable{
 
     private ServiceGenerator sg;
     private MutableLiveData<List<Humidity>> data;
     private String TAG;
 
-    public GetAllHumiditiesRunnable(String tag, MutableLiveData<List<Humidity>> list){
+    public GetAllHumidities(String tag, MutableLiveData<List<Humidity>> list){
         this.data = list;
         this.TAG = tag;
-        sg = ServiceGenerator.getInstance();
+        this.sg = ServiceGenerator.getInstance();
     }
 
     @Override
