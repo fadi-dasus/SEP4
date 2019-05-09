@@ -86,26 +86,54 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
+        android:id="@+id/label_co2_metric"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="ppm"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@+id/co2_main_textView"
+        app:layout_constraintStart_toEndOf="@+id/co2_main_textView" />
+
+    <TextView
         android:id="@+id/co2_main_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/co2_main_logo"
-        app:layout_constraintEnd_toEndOf="@+id/co2_main_logo"
-        app:layout_constraintStart_toStartOf="@+id/co2_main_logo"
-        tools:text="400 ppm" />
+        gauge:layout_constraintBottom_toTopOf="@+id/co2_main_logo"
+        gauge:layout_constraintEnd_toEndOf="@+id/co2_main_logo"
+        gauge:layout_constraintStart_toStartOf="@+id/co2_main_logo"
+        tools:text="400" />
+
+    <TextView
+        android:id="@+id/label_humidity_metric"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="%"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@+id/hum_main_textView"
+        app:layout_constraintStart_toEndOf="@+id/hum_main_textView" />
+
+    <TextView
+        android:id="@+id/label_celsius_metrics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="C"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@+id/temp_main_textView"
+        app:layout_constraintStart_toEndOf="@+id/temp_main_textView" />
 
     <TextView
         android:id="@+id/temp_main_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
         android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/temp_main_logo"
-        app:layout_constraintEnd_toEndOf="@+id/temp_main_logo"
-        app:layout_constraintStart_toStartOf="@+id/temp_main_logo"
-        tools:text="27 C" />
+        android:textColor="@color/colorAccent"
+        gauge:layout_constraintBottom_toTopOf="@+id/temp_main_logo"
+        gauge:layout_constraintEnd_toEndOf="@+id/temp_main_logo"
+        gauge:layout_constraintStart_toStartOf="@+id/temp_main_logo"
+        tools:text="27" />
 
     <TextView
         android:id="@+id/hum_main_textView"
@@ -116,7 +144,7 @@
         app:layout_constraintBottom_toTopOf="@+id/hum_main_logo"
         app:layout_constraintEnd_toEndOf="@+id/hum_main_logo"
         app:layout_constraintStart_toStartOf="@+id/hum_main_logo"
-        tools:text="72%" />
+        tools:text="72" />
 
     <Button
         android:id="@+id/nextFragmentBtn"
@@ -127,7 +155,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="NextFragemnt"
-        app:layout_constraintBottom_toTopOf="@+id/temp_main_textView"
+        app:layout_constraintBottom_toTopOf="@+id/label_humidity_metric"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -160,6 +188,26 @@
         app:layout_constraintStart_toEndOf="@+id/reset"
         app:layout_constraintTop_toBottomOf="@+id/gauge" />
 
+    <TextView
+        android:id="@+id/label_timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        android:layout_marginBottom="16dp"
+        android:text="Last update:"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/timestamp_main_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@+id/label_timestamp"
+        app:layout_constraintStart_toEndOf="@+id/label_timestamp"
+        tools:text="2019.05.09 11:15 AM" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

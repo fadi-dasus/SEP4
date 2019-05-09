@@ -1,6 +1,7 @@
 package com.example.sensorsproject.application.viewmodels;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.sensorsproject.business.models.CO2;
@@ -11,9 +12,11 @@ import com.example.sensorsproject.business.repositories.LiveDataRepository;
 public class LiveDataViewModel extends ViewModel {
 
     private LiveDataRepository repository;
+    private MutableLiveData<String> currentSensor;
 
     public LiveDataViewModel(){
         repository = LiveDataRepository.getInstance();
+        currentSensor = new MutableLiveData<>();
     }
 
     /*
@@ -46,5 +49,17 @@ public class LiveDataViewModel extends ViewModel {
 
     public LiveData<String> getLiveTimestamp(){
         return repository.getLiveTimestamp();
+    }
+
+    public LiveData<String> getCurrentSensor(){
+        return currentSensor;
+    }
+
+    /*
+     * SETTERS
+     */
+
+    public void setCurrentSensor(String s){
+        currentSensor.postValue(s);
     }
 }
