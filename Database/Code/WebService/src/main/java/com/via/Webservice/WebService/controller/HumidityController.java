@@ -3,7 +3,7 @@ package com.via.Webservice.WebService.controller;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-import java.util.List;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,36 +14,39 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.via.Webservice.WebService.model.Co2;
 import com.via.Webservice.WebService.model.Humidity;
-import com.via.Webservice.WebService.service.HumidityService;
+import com.via.Webservice.WebService.service.Humidity.HumidityService;
 
 @RestController
-@RequestMapping("/sep4")
+@RequestMapping("/sep4/humidity")
 public class HumidityController {
 	@Autowired
 	HumidityService service;
-	
-	@GetMapping("/humidity/{id}")
-	public ResponseEntity<Humidity> getHumidityById(@PathVariable("id") Integer id) {
-		Optional<Humidity> humidity = service.getHumidityById(id);
-		if (humidity!=null) {
-//			humidity.add(linkTo(methodOn(HumidityController.class).getHumidityById(id)).withSelfRel());
 
+	@GetMapping("/{id}")
+	public ResponseEntity<Optional<Humidity>> findHumidityById(@PathVariable("id") Integer id) {
+		Optional<Humidity> humidity = service.findHumidityById(id);
+		if (humidity != null) {
 
-		return new ResponseEntity<Humidity>(HttpStatus.OK);
-		}
-		else 
-			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Optional<Humidity>>(humidity, HttpStatus.OK);
+		} else
+			return new ResponseEntity<Optional<Humidity>>(humidity, HttpStatus.NOT_FOUND);
 
 	}
 
-	@GetMapping("/humidityAll")
-	public ResponseEntity<List<Humidity>> getAllHumidity() {
-		List<Humidity> list = service.getAllHumidity();
+	@GetMapping("/all")
+	public ResponseEntity<Iterable<Humidity>> findAllHumidity() {
+		Iterable<Humidity> list = service.findAllHumidity();
 		Humidity humidity = new Humidity();
-		humidity.add(linkTo(methodOn(HumidityController.class).getAllHumidity()).withSelfRel());
-		return new ResponseEntity<List<Humidity>>(list, HttpStatus.OK);
+		humidity.add(linkTo(methodOn(HumidityController.class).findAllHumidity()).withSelfRel());
+		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);
+	}
 
+	@GetMapping("/room/{id}")
+	public ResponseEntity<Iterable<Humidity>> findAllHumidity(@PathVariable("id") int room_id) {
+		Iterable<Humidity> list = service.findByHumidityRoom(room_id);
+		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);
 	}
 
 }

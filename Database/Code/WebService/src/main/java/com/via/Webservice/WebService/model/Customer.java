@@ -19,7 +19,7 @@ public class Customer extends ResourceSupport{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
-	private Integer Id;
+	private int Id;
 
 	@Column(name = "username", nullable = false)
 	private String username;

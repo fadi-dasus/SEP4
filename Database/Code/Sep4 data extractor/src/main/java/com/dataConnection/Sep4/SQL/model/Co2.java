@@ -1,12 +1,11 @@
 package com.dataConnection.Sep4.SQL.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.bson.types.ObjectId;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
+
 
 @Entity
 @Table(name = "Co2")
@@ -14,50 +13,72 @@ public class Co2 {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "co2_id")
-	private Integer id;
+	@Column(name = "Id")
+	private int id;
 
+	@ManyToOne
+	private Room room;
 
+	@Column(name = "status")
+	private String status;
+
+	@Column(name = "value")
+	private String value;
 
 	@Column(name = "timestamp")
 	private Date date;
 
-	@Column(name = "ppm")
-	private String ppm;
-
-	public Co2() {
+	public Co2(){
 
 	}
 
-	public Co2(Date date, String ppm) {
 
-		this.date=date;
-		this.ppm = ppm;
+	public Co2(String status, Date date, String value, Room room) {
+		this.status = status;
+		this.date = date;
+		this.value = value;
+		this.room = room;
 	}
 
-	public Integer getId() {
-		return id;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public String getPpm() {
-		return ppm;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setPpm(String ppm) {
-		this.ppm = ppm;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
-	public Date getDate() { return date; }
+	public String getValue() {
+		return value;
+	}
 
-	public void setDate(Date date) { this.date = date; }
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
 
 	@Override
 	public String toString() {
-		return "Co2 [id=" + id + ", ppm=" + ppm + "]";
+		return "Co2{" +
+				"status='" + status + '\'' +
+				", date=" + date +
+				", value='" + value + '\'' +
+				", room=" + room +
+				'}';
 	}
-
 }

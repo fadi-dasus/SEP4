@@ -1,12 +1,12 @@
 /**
 \file
-\brief Driver to PIR sensor using the HC-SR501 PIR Motion Detector Module.
 
 \author Ib Havn
 \version 1.0.0
 
 \defgroup sr501_driver Driver for PIR sensor
 \{
+\brief Driver to PIR sensor using the HC-SR501 PIR Motion Detector Module.
 
 The datasheet for the HC-SR501 PIR Motion Detector can be found here <a href="https://www.mpja.com/download/31227sc.pdf">HC-SR501 PIR Motion Detector Product Description</a>
 
@@ -96,7 +96,8 @@ hcSr501_p hcSr501Inst = NULL;
 Add to application initialization:
 - Initialise the driver:
 \code
-if ( hcSr501Inst == hcSr501Create(&PORTA, PA6) )
+hcSr501Inst = hcSr501Create(&PORTE, PE5);
+if ( NULL != hcSr501Inst )
 {
 	// Driver created OK
 	// If NULL is returned the driver is not created!!!

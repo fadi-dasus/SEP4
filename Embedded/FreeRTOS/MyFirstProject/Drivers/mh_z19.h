@@ -1,12 +1,13 @@
 /**
 \file
-\brief Driver to CO<sub>2</sub> using the Intelligent Infrared CO2 Module MH-Z19.
+\brief Driver to CO2 using the Intelligent Infrared CO2 Module MH-Z19.
 
 \author Ib Havn
 \version 1.0.0
 
-\defgroup mh_z19_driver Driver for MH-Z19 CO<sub>2</sub> sensor
+\defgroup mh_z19_driver Driver for MH-Z19 CO2 sensor
 \{
+\brief Driver to CO2 using the Intelligent Infrared CO2 Module MH-Z19.
 
 The simple user manual for MH-Z19 can be found here <a href="https://www.winsen-sensor.com/d/files/PDF/Infrared%20Gas%20Sensor/NDIR%20CO2%20SENSOR/MH-Z19%20CO2%20Ver1.0.pdf">Intelligent Infrared CO2 Module
 (Model: MH-Z19) User's Manual (Version: 1.0)</a>
@@ -33,14 +34,11 @@ These functions will not normally be used, and be very careful to know what you 
 \}
 */
 
-
 #ifndef MH_Z19_H_
 #define MH_Z19_H_
 #include <stdbool.h>
 #include <stdint.h>
 #include <serial.h>
-
-//mh_z19_return_code_t rc;
 
 /**
 \ingroup mh_z19_driver_driver_return_codes
@@ -78,7 +76,7 @@ void mh_z19_create(e_com_port_t com_port,void(*mh_z19_call_back )(uint16_t ppm))
 /* ======================================================================================================================= */
 /**
 \ingroup mh_z19_driver_basic_function
-\brief Perform a new CO<sub>2</sub> meassuring.
+\brief Perform a new CO2 meassuring.
 
 Ask the module to take a new meassuring.
 
@@ -91,7 +89,7 @@ mh_z19_return_code_t mh_z19_take_meassuring(void);
 /* ======================================================================================================================= */
 /**
 \ingroup mh_z19_driver_basic_function
-\brief Get latest CO<sub>2</sub> value.
+\brief Get latest CO2 value.
 
 \param[out] ppm pointer to the variable where the ppm value will be returned.
 
@@ -130,14 +128,14 @@ mh_z19_return_code_t mh_z19_calibrate_zero_point(void);
 
 \note Don't use if you don't know what you are doing - Can destroy the module!!!!
 
-\param[in] ppm the CO<sub>2</sub> ppm to calibrate the sensor to.
+\param[in] ppm the CO2 ppm to calibrate the sensor to.
 
 \return Result of the call - see mh_z19_return_code_t.
 */
 mh_z19_return_code_t mh_z19_calibrate_span_point(uint16_t ppm);
 
 /**
-\page mh_z19_driver_quick_start Quick start guide for MH-Z19 CO<sub>2</sub> Driver
+\page mh_z19_driver_quick_start Quick start guide for MH-Z19 CO2 Driver
 
 This is the quick start guide for the \ref mh_z19_driver, with
 step-by-step instructions on how to configure and use the driver in simple use cases.
@@ -164,23 +162,23 @@ void my_co2_call_back(uint16_t ppm)
 }
 \endcode
 
- The call back function will be called by the driver when a new CO<sub>2</sub> value is returned by the sensor.
+ The call back function will be called by the driver when a new CO2 value is returned by the sensor.
 
 -# Add to application initialization:
 Initialise the driver:
 \code
-	// The first parameter is the USART port the MH-Z19 sensor is connected to - in this case USART2
+	// The first parameter is the USART port the MH-Z19 sensor is connected to - in this case USART3
 	// The second parameter is the address of the call back function
-	mh_z19_create(ser_USART2, my_co2_call_back); 
+	mh_z19_create(ser_USART3, my_co2_call_back); 
 \endcode
 
-\section lora_perform_co2_meassuring Perform a CO<sub>2</sub> meassuring
+\section lora_perform_co2_meassuring Perform a CO2 measuring
 
-In this use case, a CO<sub>2</sub> meassuring will be performed.
+In this use case, a CO2 measuring will be performed.
 
 \note The driver must be initialised \ref mh_z19_initialise before a measuring can be performed.
 
--# Define a variable to get the CO<sub>2</sub> ppm in and a return code variable.
+-# Define a variable to get the CO2 ppm in and a return code variable.
 \code
 	uint16_t ppm;
 	mh_z19_return_code_t rc;
@@ -195,7 +193,7 @@ In this use case, a CO<sub>2</sub> meassuring will be performed.
 	}
  \endcode
 
--# When the driver has received the new ppm value from the sensor the speciefied call back function (see \ref mh_z19_initialise) will be called.
+-# When the driver has received the new ppm value from the sensor the specified call back function (see \ref mh_z19_initialise) will be called.
 */
 
 #endif /* MH_Z19_H_ */

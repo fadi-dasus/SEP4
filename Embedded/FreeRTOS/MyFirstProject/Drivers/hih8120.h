@@ -1,12 +1,13 @@
 /**
 \file
-\brief Honeywell HumidIcon™ Digital Humidity/Temperature Sensor HIH8220 driver.
 
 \author Ib Havn
 \version 1.0.0
 
 \defgroup hih8120_driver HIH8120 Driver
 \{
+\brief Honeywell HumidIcon Digital Humidity/Temperature Sensor HIH8220 driver.
+
 The user manual for HIH8120 can be found here <a href="https://sensing.honeywell.com/i2c-comms-humidicon-tn-009061-2-en-final-07jun12.pdf">I2C Communication with the Honeywell HumidIcon Digital Humidity/Temperature Sensors (Version: 1.0)</a>
 
 The implementation works with interrupt, meaning that there are no busy-waiting involved.

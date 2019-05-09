@@ -6,69 +6,117 @@
  */ 
 
 #include "myLora.h"
+#include "lora_driver.h"
 
+#define LORA_appEUI "e5459c2af2d9061f"
+#define LORA_appKEY "d94d399f47f5e355abbc2f63ad9181e1"
 
-static char _out_buf[100];
+#define LORA_INIT_TASK_PRIORITY 7
+
+static lora_payload_t uplink_payload;
+
+//static char _out_buf[100];
 
 void lora_init() {
 	
-	printf("lora init");
-	e_LoRa_return_code_t rc;
+		
+		
+		hal_create(LORA_INIT_TASK_PRIORITY+1);
+		lora_driver_create(ser_USART3);
 
-	// Factory reset the transceiver
-	printf("FactoryReset >%s<\n", lora_driver_map_return_code_to_text(lora_driver_rn2483_factory_reset()));
-	
-	// Configure to EU868 LoRaWAN standards
-	printf("Configure to EU868 >%s<\n", lora_driver_map_return_code_to_text(lora_driver_configure_to_eu868()));
 
-	// Get the transceivers HW EUI
-	rc = lora_driver_get_rn2483_hweui(_out_buf);
-	printf("Get HWEUI >%s<: %s\n",lora_driver_map_return_code_to_text(rc), _out_buf);
 
-	// Set the HWEUI as DevEUI in the LoRaWAN software stack in the transceiver
-	printf("Set DevEUI: %s >%s<\n", _out_buf, lora_driver_map_return_code_to_text(lora_driver_set_device_identifier(_out_buf)));
+		
+		e_LoRa_return_code_t rc;
+		
+		
+		
+		
+		// Join the LoRaWAN
+		uint8_t maxJoinTriesLeft = 5;
+		do {
+			 rc = lora_driver_join(LoRa_OTAA);
+			printf("Join Network TriesLeft:%d >%s<\n", maxJoinTriesLeft, lora_driver_map_return_code_to_text(rc));
 
-	// Set Over The Air Activation parameters to be ready to join the LoRaWAN
-	printf("Set OTAA Identity appEUI:%s appKEY:%s devEUI:%s >%s<\n", LORA_appEUI, LORA_appKEY, _out_buf, lora_driver_map_return_code_to_text(lora_driver_set_otaa_identity(LORA_appEUI,LORA_appKEY,_out_buf)));
+			if ( rc != LoRa_ACCEPTED)
+			{
+				// Wait 5 sec and lets try again
+				vTaskDelay(pdMS_TO_TICKS(5000UL));
+			}
+			else
+			{
+				break;
+			}
+		} while (--maxJoinTriesLeft);
 
-	// Save all the MAC settings in the transceiver
-	printf("Save mac >%s<\n",lora_driver_map_return_code_to_text(lora_driver_save_mac()));
-
-	// Enable Adaptive Data Rate
-	printf("Set Adaptive Data Rate: ON >%s<\n", lora_driver_map_return_code_to_text(lora_driver_set_adaptive_data_rate(LoRa_ON)));
-
-	// Join the LoRaWAN
-	uint8_t maxJoinTriesLeft = 5;
-	do {
-		rc = lora_driver_join(LoRa_OTAA);
-		printf("Join Network TriesLeft:%d >%s<\n", maxJoinTriesLeft, lora_driver_map_return_code_to_text(rc));
-
-		if ( rc != LoRa_ACCEPTED)
+		if (rc == LoRa_ACCEPTED)
 		{
-			// Wait 5 sec and lets try again
-			vTaskDelay(pdMS_TO_TICKS(5000UL));
+			// Connected to LoRaWAN :-)
 		}
 		else
 		{
-			break;
-		}
-	} while (--maxJoinTriesLeft);
+			// Something went wrong
 
-	if (rc == LoRa_ACCEPTED)
-	{
-		// Connected to LoRaWAN :-)
-	}
-	else
-	{
-		// Something went wrong
-
-		// Lets stay here
-		while (1)
-		{
-			taskYIELD();
+			// Lets stay here
+			while (1)
+			{
+				taskYIELD();
+			}
 		}
-	}
 }
+
+
+void lora_start(){
+	
+	e_LoRa_return_code_t rc;
+	
+	
+		lora_driver_reset_rn2483(1);
+		vTaskDelay(2);
+		lora_driver_reset_rn2483(0);
+		vTaskDelay(150);
+
+
+
+
+		if (lora_driver_rn2483_factory_reset() != LoRA_OK)
+		{
+			printf("FACTORY_RESET_FAILURE \n");
+		}
+		vTaskDelay(150);
+
+		if (lora_driver_configure_to_eu868() != LoRA_OK)
+		{
+			printf("CONFIGURE_BREAK \n");
+		}
+		static char dev_eui[17]; // It is static to avoid it to occupy stack space in the task
+		if (lora_driver_get_rn2483_hweui(dev_eui) != LoRA_OK)
+		{
+			printf("HWUI_ERROR \n");
+		}	else printf("%s, DEV_EUI \n",dev_eui);
+
+		if (lora_driver_set_otaa_identity(LORA_appEUI,LORA_appKEY,dev_eui) != LoRA_OK)
+		{
+			printf("IDENTITY_BREAK \n");
+		}
+		//e_LoRa_return_code_t rc;
+		if ((rc=lora_driver_join(LoRa_OTAA)) == LoRa_ACCEPTED)
+		{
+			printf("LORA_ACCEPTED \n");
+			}else if(rc==7){
+			for (int i = 0; i < 5; ++i) {
+				rc=lora_driver_join(LoRa_OTAA);
+				if(rc==7){
+					printf("LORA_DENIED\n");
+					continue;
+					}else{
+					printf("LORA_ACCEPTED\n");
+					break;
+				}
+			}
+		
+}
+			}
 
 void lora_send_data() {
 	
@@ -78,7 +126,7 @@ void lora_send_data() {
 	// Some dummy payload
 	uint16_t hum = 12345; // Dummy humidity
 	int16_t temp = 675; // Dummy temp
-	uint16_t co2_ppm = co2_get_value(); // Dummy CO2
+	uint16_t co2_ppm = 1111;//co2_get_value(); // Dummy CO2
 
 	uplink_payload.bytes[0] = hum >> 8;
 	uplink_payload.bytes[1] = hum & 0xFF;

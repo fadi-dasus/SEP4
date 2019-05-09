@@ -23,7 +23,7 @@
 void co2_sensor_init();
 void co2_callback(uint16_t co2_ppm);
 void co2_measure();
-uint16_t* co2_get_value();
+uint16_t co2_get_value();
 
 
 

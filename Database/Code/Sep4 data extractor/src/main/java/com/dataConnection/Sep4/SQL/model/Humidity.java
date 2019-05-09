@@ -1,6 +1,9 @@
 package com.dataConnection.Sep4.SQL.model;
 
+import org.bson.types.ObjectId;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -9,46 +12,72 @@ public class Humidity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "humidity_id")
-	private Integer id;
+	@Column(name = "Id")
+	private int id;
 
+	@ManyToOne
+	private Room room;
 
+	@Column(name = "status")
+	private String status;
+
+	@Column(name = "value")
+	private String value;
 
 	@Column(name = "timestamp")
 	private Date date;
 
-	@Column(name = "percentage")
-	private String percentage;
-
-	public Humidity() {
+	public Humidity(){
 
 	}
 
-	public Humidity(Date date, String percentage) {
 
-		this.date=date;
-		this.percentage = percentage;
+	public Humidity(String status, Date date, String value, Room room) {
+		this.status = status;
+		this.date = date;
+		this.value = value;
+		this.room = room;
 	}
 
-	public Integer getId() {
-		return id;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public String getPercentage() { return percentage; }
+	public Date getDate() {
+		return date;
+	}
 
-	public void setPercentage(String percentage) { this.percentage = percentage; }
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-	public Date getDate() { return date; }
+	public String getValue() {
+		return value;
+	}
 
-	public void setDate(Date date) { this.date = date; }
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
 
 	@Override
 	public String toString() {
-		return "Humidity [id=" + id + ", percentage=" + percentage + "]";
+		return "Humidity{" +
+				"status='" + status + '\'' +
+				", date=" + date +
+				", value='" + value + '\'' +
+				", room=" + room +
+				'}';
 	}
-
 }

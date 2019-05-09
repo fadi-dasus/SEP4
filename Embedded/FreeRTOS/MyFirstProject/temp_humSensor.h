@@ -22,8 +22,8 @@
 
 void temp_hum_sensor_init();
 void temp_hum_measure();
-float temp_get_value();
-float hum_get_value();
+uint16_t temp_get_value();
+uint16_t hum_get_value();
 
 
 #endif /* TEMP_HUMSENSORS_H_ */

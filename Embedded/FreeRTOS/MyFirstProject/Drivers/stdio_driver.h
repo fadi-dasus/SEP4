@@ -1,12 +1,12 @@
 /**
 \file
-\brief Driver to connect a USART to standard IO.
 
 \author Ib Havn
 \version 1.0.0
 
 \defgroup stdio_driver Driver for connecting standard IO.
 \{
+\brief Driver to connect a USART to standard IO.
 
 \defgroup stdio_driver_creation Functions to create and initialize the driver.
 \brief How to create the driver.
