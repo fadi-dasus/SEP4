@@ -28,7 +28,8 @@ main.d main.o: .././main.c \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  ../FreeRTOS/src/timers.h .././co2Sensor.h ../Drivers/serial.h \
  ../Drivers/mh_z19.h .././myTasks.h ../FreeRTOS/src/task.h \
- .././mySemaphores.h .././myLora.h ../Drivers/lora_driver.h
+ .././mySemaphores.h .././myLora.h ../Drivers/lora_driver.h \
+ .././temp_humSensor.h ../Drivers/hih8120.h
 
 d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -113,3 +114,7 @@ d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 .././myLora.h:
 
 ../Drivers/lora_driver.h:
+
+.././temp_humSensor.h:
+
+../Drivers/hih8120.h:

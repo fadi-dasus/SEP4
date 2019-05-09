@@ -20,6 +20,7 @@
 #include "myTasks.h"
 #include "mySemaphores.h"
 #include "myLora.h"
+#include "temp_humSensor.h"
 
 
 int main(void)
@@ -35,16 +36,17 @@ int main(void)
 	timers_init();
 	// sensors
 	co2_sensor_init();
+	temp_hum_sensor_init();
 	// lora
-	lora_init();
+	//lora_init();
 	
 	// tasks
 	create_tasks();
 	
 	// timers start
-	//xTimerStart(TempHumTimer, 0);
+	xTimerStart(TempHumTimer, 0);
 	//xTimerStart(CO2Timer, 0);
-	xTimerStart(LoRaTimer, 0);
+	//xTimerStart(LoRaTimer, 0);
 	
 	vTaskStartScheduler(); // initialize and run the freeRTOS scheduler. Execution should never return here.
 

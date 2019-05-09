@@ -1,11 +1,13 @@
 /**
 \file
-\brief LoRaWAN library using MicroChip RN2483 LoRaWAN module,
+
 \author Ib Havn
 \version 1.0.0
 
 \defgroup lora_driver LoRaWAN Driver using RN2384 Module
 \{
+\brief LoRaWAN library using MicroChip RN2483 LoRaWAN module.
+
 The implementation works with interrupt, meaning that there are no busy-waiting involved.
 
 \note Dependent on FreeRTOS version 10.x.
@@ -566,21 +568,35 @@ the steps for usage can be copied into, e.g., the main application function.
 
 \section lora_driver_use_cases LoRa Driver use cases
 - \ref lora_setup_use_case
-	- \subpage lora_setup_to_OTAA
-	- \subpage lora_setup_to_ABP
+- \subpage lora_setup_to_OTAA
+- \subpage lora_setup_to_ABP
 - \subpage lora_send_uplink_message
 
 \section lora_setup_use_case Initialise the driver
 The following must be added to the project:
 - \code
+#include <ihal.h>
 #include <lora_driver.h>
 \endcode
 
 Add to application initialization:
 - Initialise the driver:
 \code
-lora_driver_create(ser_USART2); // The parameter is the USART port the RN2483 module is connected to - in this case USART2
+hal_create(LED_TASK_PRIORITY); // Must be called first!! LED_TASK_PRIORITY must be a high priority in your system
+lora_driver_create(ser_USART1); // The parameter is the USART port the RN2483 module is connected to - in this case USART1
 \endcode
+
+Then the LoRaWAN transceiver needs to be hardware reset.
+\note This must be done from a FreeRTOS task!!
+\code
+lora_driver_reset_rn2483(1); // Activate reset line
+vTaskDelay(2);
+lora_driver_reset_rn2483(0); // Release reset line
+vTaskDelay(150); // Wait for tranceiver module to wake up after reset
+lora_driver_flush_buffers(); // get rid of first version string from module after reset!
+\endcode
+
+Now you are ready to use the LoRaWAN module :)
 */
 
 /**

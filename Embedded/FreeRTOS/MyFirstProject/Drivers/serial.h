@@ -1,5 +1,4 @@
 /*! @file serial.h
-@brief Serial driver for the USARTs.
 
 @author iha
 

@@ -5,6 +5,7 @@
 #include "mySemaphores.h"
 #include "myTimers.h"
 #include <timers.h>
+#include "temp_humSensor.h"
 
 //int rand_val = 1234;
 
@@ -19,23 +20,23 @@ void create_tasks(void) {
 		&CO2MeasureTask
 	);*/	
 	
-	/*xTaskCreate(
+	xTaskCreate(
 		temp_hum_measure_task,
 		"temp hum Task",
 		configMINIMAL_STACK_SIZE,
 		(void*) 1,
 		2,
 		&TempHumMeasureTask
-	);*/
+	);
 	
-	xTaskCreate(
+	/*xTaskCreate(
 		lora_send_data_task,
 		"LoRa send data",
 		configMINIMAL_STACK_SIZE,
 		(void*) 1,
 		2,
 		&LoRaSendDataTask
-	);
+	);*/
 }
 
 void co2_measure_task(void *pvParameters) {
@@ -62,11 +63,12 @@ void co2_measure_task(void *pvParameters) {
 }
 
 void lora_send_data_task(void *pvParameters) {
-	
+		// remove compiler warnings
+		(void)pvParameters;
 	
 	while(1){
 			printf("task lora");
-			vTaskDelay(1000/portTICK_PERIOD_MS);
+			vTaskDelay(100/portTICK_PERIOD_MS);
 			
 		if(xSemaphoreTake(LoRaSemaphore, portMAX_DELAY) == pdTRUE){
 			vTaskDelay(4000/portTICK_PERIOD_MS);
@@ -88,8 +90,11 @@ void temp_hum_measure_task(void *pvParameters) {
 		//vTaskDelay(50/portTICK_PERIOD_MS);
 		if(xSemaphoreTake(TempHumSemaphore, portMAX_DELAY) == pdTRUE) {
 			vTaskDelay(4000/portTICK_PERIOD_MS);
-			//temp_measure();
-			//printf("temp value = %i \n", /*co2_get_value()*/ rand_val);
+			temp_hum_measure();
+			printf("temp value = %i \n", temp_get_value());
+			vTaskDelay(100/portTICK_PERIOD_MS);
+			printf("hum value = %d \n", hum_get_value());
+			vTaskDelay(100/portTICK_PERIOD_MS);
 			xSemaphoreGive(TempHumSemaphore);
 		}
 	}

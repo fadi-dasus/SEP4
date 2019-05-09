@@ -27,7 +27,8 @@ myTasks.d myTasks.o: .././myTasks.c .././myTasks.h \
  ../FreeRTOS/src/task.h .././co2Sensor.h ../Drivers/serial.h \
  ../Drivers/mh_z19.h .././myLora.h ../Drivers/lora_driver.h \
  .././mySemaphores.h ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h \
- .././myTimers.h ../FreeRTOS/src/timers.h
+ .././myTimers.h ../FreeRTOS/src/timers.h .././temp_humSensor.h \
+ ../Drivers/hih8120.h
 
 .././myTasks.h:
 
@@ -108,3 +109,7 @@ d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 .././myTimers.h:
 
 ../FreeRTOS/src/timers.h:
+
+.././temp_humSensor.h:
+
+../Drivers/hih8120.h:

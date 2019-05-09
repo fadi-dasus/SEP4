@@ -1,6 +1,5 @@
 /**
 \file
-\brief Driver to control the four status leds on the <I>VIA ARDUINO MEGA2560 Shield rev. 2.0</I>.
 
 \author Ib Havn
 \version 1.0.0
@@ -9,6 +8,7 @@
 
 \defgroup led_driver Driver for Status Leds
 \{
+\brief Driver to control the four status leds on the <I>VIA ARDUINO MEGA2560 Shield rev. 2.0</I>.
 
 \defgroup led_driver_creation Functions to create and initialize the driver.
 \brief How to create the driver.

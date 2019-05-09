@@ -7,13 +7,14 @@
  */ 
 
 #include "temp_humSensor.h"
-float hum = 0.0;
-float temp = 0.0;
+
+static int temp_rc;
 
 // create drivers
 void temp_hum_sensor_init() 
 {	
-	if ( HIH8120_OK == hih8120Create() )
+
+	if ( HIH8120_OK == ( temp_rc = hih8120Create()) )
 	{
 		printf("temp_hum_sensor_created \n");
 	}
@@ -22,28 +23,37 @@ void temp_hum_sensor_init()
 // measuring function
 void temp_hum_measure() {
 	
-	
-	
-	if ( HIH8120_OK != hih8120Wakeup() )
+	hih8120DriverReturnCode_t rc;
+
+
+	/*while(!hih8120IsReady()){
+		printf("not ready");
+		vTaskDelay(1000/portTICK_PERIOD_MS);
+	}*/
+	printf("temp sensor -> %d", temp_rc);
+	vTaskDelay(1000/portTICK_PERIOD_MS);
+	if ( HIH8120_OK != ( rc = hih8120Wakeup() ))
 	{
-		printf("temp_hum_SENSOR_ERROR\n");
+		printf("temp_hum_SENSOR_ERROR --> %d", rc);
 	}
-	if ( HIH8120_OK !=  hih8120Meassure() )
+	printf("temp_hum_rc --> %d", rc);
+	vTaskDelay(50/portTICK_PERIOD_MS);
+	if ( HIH8120_OK != ( rc = hih8120Meassure()) )
 	{
-		printf("temp_hum_SENSOR_ERROR1\n");
+		printf("temp_hum_SENSOR_ERROR1 --> %d", rc);
 	}
+	printf("temp_hum_rc --> %d", rc);
+	vTaskDelay(1000/portTICK_PERIOD_MS);
 		
 }
 
 
 
 
-float temp_get_value() {
-	 temp = hih8120GetTemperature();
-	return temp;
+uint16_t temp_get_value() {
+	return hih8120GetTemperature_x10();
 }
 
-float hum_get_value() {
-	 hum= hih8120GetHumidity();
-	return hum;
+uint16_t hum_get_value() {
+	return hih8120GetHumidityPercent_x10();
 }

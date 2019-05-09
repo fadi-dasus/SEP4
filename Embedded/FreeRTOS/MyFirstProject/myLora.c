@@ -19,53 +19,50 @@ static lora_payload_t uplink_payload;
 
 void lora_init() {
 	
-	
-	
-	//hal_create(LORA_INIT_TASK_PRIORITY+1);
-	lora_driver_create(ser_USART3);
+		
+		
+		hal_create(LORA_INIT_TASK_PRIORITY+1);
+		lora_driver_create(ser_USART3);
 
 
 
-	
-	
-	
-	e_LoRa_return_code_t rc;
-	
-	
-	
-	// Join the LoRaWAN
-	uint8_t maxJoinTriesLeft = 5;
-	do {
-		rc = lora_driver_join(LoRa_OTAA);
-		printf("Join Network TriesLeft:%d >%s<\n", maxJoinTriesLeft, lora_driver_map_return_code_to_text(rc));
+		
+		e_LoRa_return_code_t rc;
+		
+		
+		
+		
+		// Join the LoRaWAN
+		uint8_t maxJoinTriesLeft = 5;
+		do {
+			 rc = lora_driver_join(LoRa_OTAA);
+			printf("Join Network TriesLeft:%d >%s<\n", maxJoinTriesLeft, lora_driver_map_return_code_to_text(rc));
 
-		if ( rc != LoRa_ACCEPTED)
+			if ( rc != LoRa_ACCEPTED)
+			{
+				// Wait 5 sec and lets try again
+				vTaskDelay(pdMS_TO_TICKS(5000UL));
+			}
+			else
+			{
+				break;
+			}
+		} while (--maxJoinTriesLeft);
+
+		if (rc == LoRa_ACCEPTED)
 		{
-			printf("waiting 5 sec");
-			// Wait 5 sec and lets try again
-			vTaskDelay(5000/portTICK_PERIOD_MS);
+			// Connected to LoRaWAN :-)
 		}
 		else
 		{
-			break;
-		}
-	} while (--maxJoinTriesLeft);
+			// Something went wrong
 
-	if (rc == LoRa_ACCEPTED)
-	{
-		// Connected to LoRaWAN :-)
-	}
-	else
-	{
-		// Something went wrong
-
-		// Lets stay here
-		while (1)
-		{
-			printf("wtf");
-			taskYIELD();
+			// Lets stay here
+			while (1)
+			{
+				taskYIELD();
+			}
 		}
-	}
 }
 
 
