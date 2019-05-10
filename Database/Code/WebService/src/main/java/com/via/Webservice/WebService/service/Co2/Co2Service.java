@@ -24,9 +24,9 @@ public class Co2Service implements ICo2Service {
 		return dao.findByRoom(room);
 	}
 
-	public Iterable<Co2> findAllCo2(int room_id) {
-		Room room = new Room(room_id);
-		return dao.findByRoom(room);
+	public Iterable<Co2> findAllCo2() {
+		//Room room = new Room(room_id);
+		return dao.findAll();
 	}
 	
 }
