@@ -38,7 +38,7 @@ public interface SensorsAPI {
     @GET("humidity/all")
     Call<List<Humidity>> getAllHumidity();
 
-    @GET("humidity/{id}")
+    @GET("humidity/room/{id}")
     Call<List<Humidity>> getAllHumidityByRoomId(@Path("id") String roomId);
 
     /*

@@ -96,7 +96,8 @@ public class RoomMainFragment extends Fragment {
 
         subscribeObservers();
         setOnClickListeners();
-
+        //Todo: TEMPORARY getRecentLiveData VALUE
+        liveDataViewModel.getRecentLiveData("1");
         return view;
     }
 

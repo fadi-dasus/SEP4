@@ -57,6 +57,8 @@ public class LiveDataViewModel extends ViewModel {
 
     public LiveData<String> getCurrentRoom() {return repository.getCurrentRoom();}
 
+    public void getRecentLiveData(String roomId) {repository.getRecentLiveData(roomId);}
+
     /*
      * SETTERS
      */

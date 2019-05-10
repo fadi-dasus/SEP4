@@ -1,5 +1,7 @@
 package com.example.sensorsproject.business.data.networking;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -63,6 +65,11 @@ public class NetworkHelper {
         co2All = new MutableLiveData<>();
         humidityAll = new MutableLiveData<>();
         temperatureAll = new MutableLiveData<>();
+
+        //Measurements by id
+        co2ByRoomId = new MutableLiveData<>();
+        humidityByRoomId = new MutableLiveData<>();
+        temperatureByRoomId = new MutableLiveData<>();
     }
 
     public static NetworkHelper getInstance(){
@@ -193,7 +200,7 @@ public class NetworkHelper {
         if(getHumiditiesByRoomId != null){
             getHumiditiesByRoomId = null;
         }
-
+        
         getHumiditiesByRoomId = new GetHumiditiesByRoomId(TAG, humidityByRoomId, roomId);
         final Future handler = AppExecutors.getInstance().networkIO().submit(getHumiditiesByRoomId);
 

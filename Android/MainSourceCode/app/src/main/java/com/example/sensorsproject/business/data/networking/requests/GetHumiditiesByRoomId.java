@@ -32,7 +32,7 @@ public class GetHumiditiesByRoomId implements  Runnable{
     public void run() {
         try {
             Response<List<Humidity>> response = getApiCall().execute();
-
+            Log.d(TAG, "run: ");
             if(response.code() == 200){
                 List<Humidity> list = new ArrayList<>(response.body());
                 data.postValue(list);
