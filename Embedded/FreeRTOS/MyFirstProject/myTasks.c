@@ -18,7 +18,7 @@ void create_tasks(void) {
 		(void*) 1,
 		2,
 		&CO2MeasureTask
-	);*/	
+	);	
 	
 	xTaskCreate(
 		temp_hum_measure_task,
@@ -27,16 +27,16 @@ void create_tasks(void) {
 		(void*) 1,
 		2,
 		&TempHumMeasureTask
-	);
+	);*/
 	
-	/*xTaskCreate(
+	xTaskCreate(
 		lora_send_data_task,
 		"LoRa send data",
 		configMINIMAL_STACK_SIZE,
 		(void*) 1,
 		2,
 		&LoRaSendDataTask
-	);*/
+	);
 }
 
 void co2_measure_task(void *pvParameters) {
@@ -66,14 +66,17 @@ void lora_send_data_task(void *pvParameters) {
 		// remove compiler warnings
 		(void)pvParameters;
 	
+	printf("task lora");
+	vTaskDelay(1000/portTICK_PERIOD_MS);
+	lora_start();
+	vTaskDelay(1000/portTICK_PERIOD_MS);
 	while(1){
-			printf("task lora");
-			vTaskDelay(100/portTICK_PERIOD_MS);
-			
+		
 		if(xSemaphoreTake(LoRaSemaphore, portMAX_DELAY) == pdTRUE){
-			vTaskDelay(4000/portTICK_PERIOD_MS);
-			lora_start();
+			vTaskDelay(1000/portTICK_PERIOD_MS);
 			lora_send_data();
+			
+			xSemaphoreGive(LoRaSemaphore);
 		}
 	}
 }

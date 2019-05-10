@@ -30,19 +30,19 @@ void temp_hum_measure() {
 		printf("not ready");
 		vTaskDelay(1000/portTICK_PERIOD_MS);
 	}*/
-	printf("temp sensor -> %d", temp_rc);
+	//printf("temp sensor -> %d", temp_rc);
 	vTaskDelay(1000/portTICK_PERIOD_MS);
 	if ( HIH8120_OK != ( rc = hih8120Wakeup() ))
 	{
 		printf("temp_hum_SENSOR_ERROR --> %d", rc);
 	}
-	printf("temp_hum_rc --> %d", rc);
+	//printf("temp_hum_rc --> %d", rc);
 	vTaskDelay(50/portTICK_PERIOD_MS);
 	if ( HIH8120_OK != ( rc = hih8120Meassure()) )
 	{
 		printf("temp_hum_SENSOR_ERROR1 --> %d", rc);
 	}
-	printf("temp_hum_rc --> %d", rc);
+	//printf("temp_hum_rc --> %d", rc);
 	vTaskDelay(1000/portTICK_PERIOD_MS);
 		
 }
