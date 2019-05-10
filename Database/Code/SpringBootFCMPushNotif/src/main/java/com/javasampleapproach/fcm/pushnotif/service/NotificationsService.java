@@ -62,9 +62,9 @@ public class NotificationsService {
 
 		
 		JSONObject data = new JSONObject();
-		data.put("co2_value", "1050" + "ppm");
-		data.put("hum_value", "20"+"%");
-		data.put("temp_value", "30"+"C");
+		data.put("co2_value", "1050" );
+		data.put("hum_value", "20");
+		data.put("temp_value", "30");
 		data.put("timestamp", time);
 
 		body.put("data", data);
