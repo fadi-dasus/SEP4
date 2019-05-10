@@ -12,5 +12,7 @@ public interface TemperatureRepository extends CrudRepository<Temperature, Integ
 	public List<Temperature> findByRoom(Room room);
 
 	public List<Temperature> findByRoomAndDate(Room room, LocalDate date);
+	
+	public Temperature findTopByRoomOrderByIdDesc(Room room);
 
 }

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.via.Webservice.WebService.dao.Co2.Co2Respository;
+import com.via.Webservice.WebService.dao.Room.RoomRepository;
+import com.via.Webservice.WebService.fcm.NotificationsService;
 import com.via.Webservice.WebService.model.Co2;
 import com.via.Webservice.WebService.model.Room;
 
@@ -16,6 +18,12 @@ public class Co2Service implements ICo2Service {
 
 	@Autowired
 	Co2Respository dao;
+	
+	@Autowired 
+	RoomRepository roomRepository;
+	
+	@Autowired
+	NotificationsService notificationsService;
 
 	public Optional<Co2> findCo2ById(int id) {
 		return dao.findById(id);
@@ -26,11 +34,28 @@ public class Co2Service implements ICo2Service {
 		return dao.findByRoom(room);
 	}
 
-
 	public List<Co2> findByCo2RoomForToday(int room_id) {
 		Room room = new Room(room_id);
 		LocalDate date = LocalDate.now();
 
 		return dao.findByRoomAndDate(room, date);
 	}
+
+	@Override
+	public Co2 findTopByOrderByIdDescAndRoom(String name) {
+		Room room = roomRepository.findByRoomName(name);
+		
+		if (room !=null) {
+			notificationsService.setTopic(name);
+			
+			notificationsService.setRoom(room);
+			
+			notificationsService.setEnabled(true);
+		
+		return dao.findTopByRoomOrderByIdDesc(room);
+		}
+		else return null;
+	}
+
+	
 }

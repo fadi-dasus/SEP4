@@ -24,7 +24,7 @@ public class Temperature extends ResourceSupport {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
-	private int Id;
+	private int id;
 
 	@ManyToOne
 	@JoinColumn(name = "room_id")
@@ -95,7 +95,7 @@ public class Temperature extends ResourceSupport {
 
 	@Override
 	public String toString() {
-		return "Temperature [Id=" + Id + ", room=" + room + ", status=" + status + ", value=" + value + ", date=" + date
+		return "Temperature [Id=" + id + ", room=" + room + ", status=" + status + ", value=" + value + ", date=" + date
 				+ ", timestamp=" + timestamp + "]";
 	}
 

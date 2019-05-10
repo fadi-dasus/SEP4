@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_subscribe;
     private Button btn_unsubscribe;
 
-    private final String TOPIC = "MyTopic";
+    private final String TOPIC = "F306";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

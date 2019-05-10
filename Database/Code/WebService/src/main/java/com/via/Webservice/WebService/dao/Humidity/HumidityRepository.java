@@ -12,5 +12,7 @@ public interface HumidityRepository extends CrudRepository<Humidity, Integer> {
 	public List<Humidity> findByRoom(Room room);
 
 	public List<Humidity> findByRoomAndDate(Room room, LocalDate date);
+	
+	public Humidity findTopByRoomOrderByIdDesc(Room room);
 
 }

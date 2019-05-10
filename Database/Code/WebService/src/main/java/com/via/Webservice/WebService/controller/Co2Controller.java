@@ -43,4 +43,13 @@ public class Co2Controller {
 		Iterable<Co2> list = service.findByCo2RoomForToday(room_id);
 		return new ResponseEntity<Iterable<Co2>>(list, HttpStatus.OK);
 	}
+
+	@GetMapping("/all")
+	public ResponseEntity<Co2> findAllHumidity() {
+
+		Co2 co2 = service.findTopByOrderByIdDescAndRoom("");
+
+		return new ResponseEntity<Co2>(co2, HttpStatus.OK);
+	}
+
 }
