@@ -11,9 +11,9 @@ Room_ID, room_name, device_name
 
 (
 --- today
-select r.id, r.room_name, d.name from 
-dbo.room as r, 
-dbo.device as d
+select r.id, r.room_name, d.device_name from 
+[Sep4_GroupX2].[dbo].[room] as r, 
+[Sep4_GroupX2].[dbo].[device] as d
 )
 
 EXCEPT
@@ -29,7 +29,7 @@ from
 EXCEPT 
 (
 
-select r.id, r.room_name, d.name from 
+select r.id, r.room_name, d.device_name from 
 [Sep4_GroupX2].[dbo].[room] as r, 
 [Sep4_GroupX2].[dbo].[device] as d  
 
