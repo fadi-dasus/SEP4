@@ -48,5 +48,11 @@ public class TemperatureController {
 		Iterable<Temperature> list = service.findByTemperatureRoom(room_id);
 		return new ResponseEntity<Iterable<Temperature>>(list, HttpStatus.OK);
 	}
+	
+	@GetMapping("/roomtoday/{id}")
+	public ResponseEntity<Iterable<Temperature>> findByRoomForToday(@PathVariable("id") int room_id) {
+		Iterable<Temperature> list = service.findByRoomForToday(room_id);
+		return new ResponseEntity<Iterable<Temperature>>(list, HttpStatus.OK);
+	}
 
 }

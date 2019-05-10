@@ -25,9 +25,9 @@ public class Humidity extends ResourceSupport {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
 	private int Id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="room_id")
+	@JoinColumn(name = "room_id")
 	private Room room;
 
 	@Column(name = "status")
@@ -40,6 +40,9 @@ public class Humidity extends ResourceSupport {
 	@Column(name = "value")
 	private String value;
 
+	@Column(name = "date")
+	private LocalDate date;
+
 	@Column(name = "timestamp")
 	private Timestamp timestamp;
 
@@ -48,9 +51,10 @@ public class Humidity extends ResourceSupport {
 	}
 
 	@JsonCreator
-	public Humidity(@JsonProperty("humidity") String value, Timestamp timestamp, Room room) {
+	public Humidity(@JsonProperty("humidity") String value, LocalDate date, Timestamp timestamp, Room room) {
 		this.room = room;
 		this.value = value;
+		this.date = date;
 		this.timestamp = timestamp;
 	}
 
@@ -82,7 +86,6 @@ public class Humidity extends ResourceSupport {
 		this.value = value;
 	}
 
-
 	public Timestamp getTimestamp() {
 		return timestamp;
 	}
@@ -107,11 +110,18 @@ public class Humidity extends ResourceSupport {
 		return lowAcceptableValue;
 	}
 
-	@Override
-	public String toString() {
-		return "Humidity [Id=" + Id + ", room=" + room + ", status=" + status + ", value=" + value + ", timestamp="
-				+ timestamp + "]";
+	public LocalDate getDate() {
+		return date;
 	}
 
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+
+	@Override
+	public String toString() {
+		return "Humidity [Id=" + Id + ", room=" + room + ", status=" + status + ", value=" + value + ", date=" + date
+				+ ", timestamp=" + timestamp + "]";
+	}
 
 }

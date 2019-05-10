@@ -1,6 +1,7 @@
 package com.via.Webservice.WebService.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -43,6 +44,9 @@ public class Temperature extends ResourceSupport {
 	@Column(name = "value")
 	private String value;
 	
+	@Column(name = "date")
+	private LocalDate date;
+	
 	@Column(name = "timestamp")
 	private Timestamp timestamp;
 
@@ -51,7 +55,7 @@ public class Temperature extends ResourceSupport {
 	}
 
 	@JsonCreator
-	public Temperature(@JsonProperty("temperature") Room room, String value, Timestamp timestamp) {
+	public Temperature(@JsonProperty("temperature") Room room, LocalDate date, String value, Timestamp timestamp) {
 		this.room = room;
 		this.value = value;
 		this.timestamp = timestamp;
@@ -97,11 +101,20 @@ public class Temperature extends ResourceSupport {
 	public int getLowacceptablevalue() {
 		return lowAcceptableValue;
 	}
+	
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
 
 	@Override
 	public String toString() {
-		return "Temperature [Id=" + Id + ", room=" + room + ", status=" + status + ", value=" + value + ", timestamp="
-				+ timestamp + "]";
+		return "Temperature [Id=" + Id + ", room=" + room + ", status=" + status + ", value=" + value + ", date=" + date
+				+ ", timestamp=" + timestamp + "]";
 	}
 
 }

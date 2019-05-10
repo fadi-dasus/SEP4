@@ -1,5 +1,6 @@
 package com.via.Webservice.WebService.service.Temperature;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,13 @@ public class TemperatureService implements ITemperatureService{
 	public List<Temperature> findByTemperatureRoom(int room_id) {
 		Room room=new Room(room_id);
 		return dao.findByRoom(room);
+	}
+
+	@Override
+	public List<Temperature> findByRoomForToday(int room_id) {
+		Room room=new Room(room_id);
+		LocalDate date=LocalDate.now();
+		return dao.findByRoomAndDate(room,date);
 	}
 
 }

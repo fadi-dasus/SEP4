@@ -1,9 +1,6 @@
 package com.via.Webservice.WebService.service.Humidity;
 
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +30,14 @@ public class HumidityService implements IHumidityService {
 	public List<Humidity> findByHumidityRoom(int room_id) {
 		Room room=new Room(room_id);
 		return dao.findByRoom(room);
+	}
+
+
+	@Override
+	public List<Humidity> findByRoomForToday(int room_id) {
+		Room room=new Room(room_id);
+		LocalDate date=LocalDate.now();
+		return dao.findByRoomAndDate(room,date);
 	}
 
 	

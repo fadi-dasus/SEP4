@@ -9,5 +9,6 @@ public interface ICo2Service {
 	public Optional<Co2> findCo2ById(int id);
 	//public Iterable<Co2> findAllCo2();
 	public List<Co2> findByCo2Room(int room_id);
+	public List<Co2> findByCo2RoomForToday(int room_id);
 
 }
