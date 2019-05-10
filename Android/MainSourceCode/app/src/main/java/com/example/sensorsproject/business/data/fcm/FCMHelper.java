@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.sensorsproject.business.models.CO2;
 import com.example.sensorsproject.business.models.Humidity;
+import com.example.sensorsproject.business.models.MyRoom;
 import com.example.sensorsproject.business.models.Temperature;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
@@ -15,7 +16,7 @@ public class FCMHelper {
 
     private static FCMHelper sInstance;
     private FirebaseMessaging firebaseMessaging;
-    private MutableLiveData<String> currentRoom;
+    private MutableLiveData<MyRoom> currentRoom;
 
     private MutableLiveData<CO2> liveCo2;
     private MutableLiveData<Humidity> liveHumidity;
@@ -38,10 +39,13 @@ public class FCMHelper {
         return sInstance;
     }
 
-    public void subscribe(String roomName){
-        currentRoom.postValue(roomName);
-        Log.i("TEST", "A BENT JAU SUBSCRIBINI: " + roomName);
-        firebaseMessaging.subscribeToTopic(roomName);
+    public void subscribe(MyRoom room){
+        if(room != null){
+            currentRoom.postValue(room);
+            Log.i("TEST", "A BENT JAU SUBSCRIBINI: " + room.getRoomName());
+            firebaseMessaging.subscribeToTopic(room.getRoomName());
+        }
+
     }
 
     public void unsubscribe(String roomName){
@@ -64,9 +68,9 @@ public class FCMHelper {
         return liveTimestamp;
     }
 
-    public LiveData<String> getCurrentRoom() {return currentRoom;}
+    public LiveData<MyRoom> getCurrentRoom() {return currentRoom;}
 
-    public void setCurrentRoom(String roomName) {currentRoom.postValue(roomName);}
+    public void setCurrentRoom(MyRoom room) {currentRoom.postValue(room);}
 
     public void updateLiveData(CO2 co2, Humidity humidity, Temperature temperature, String timestamp){
         liveCo2.postValue(co2);

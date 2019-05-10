@@ -4,16 +4,21 @@ import com.google.gson.annotations.SerializedName;
 
 public class MyRoom {
 
-	@SerializedName("room")
+	@SerializedName("roomName")
 	private String roomName;
+	private String id;
 
-	public MyRoom(String roomName) {
-
+	public MyRoom(String roomName, String id) {
 		this.roomName = roomName;
+		this.id = id;
 	}
 
 	public String getRoomName() {
 		return roomName;
+	}
+
+	public String getId() {
+		return id;
 	}
 
 	@Override

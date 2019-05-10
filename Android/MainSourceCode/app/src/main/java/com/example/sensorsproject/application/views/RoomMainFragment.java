@@ -27,6 +27,8 @@ import com.example.sensorsproject.business.models.CO2;
 import com.example.sensorsproject.business.models.MyRoom;
 import com.example.sensorsproject.utils.Constants;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.nitri.gauge.Gauge;
@@ -90,14 +92,22 @@ public class RoomMainFragment extends Fragment {
         }
         mainSpinner.setAdapter(spinnerAdapter);
 
+        //Initializes Spinner with a selected currentRoom from RoomChoice fragment
+        List<MyRoom> allRooms = listViewModel.getAllRooms().getValue();
+        MyRoom currentRoom = liveDataViewModel.getCurrentRoom().getValue();
+        for(int i = 0; i < allRooms.size(); i++){
+            if(allRooms.get(i).equals(currentRoom)){
+                mainSpinner.setSelection(i);
+                break;
+            }
+        }
+
         //Set up Gauge
         gauge.setNeedleStepFactor(10f);
         gauge.setDeltaTimeInterval(1);
 
         subscribeObservers();
         setOnClickListeners();
-        //Todo: TEMPORARY getRecentLiveData VALUE
-        liveDataViewModel.getRecentLiveData("1");
         return view;
     }
 
@@ -133,11 +143,14 @@ public class RoomMainFragment extends Fragment {
         mainSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //Todo: UPDATE THE MADNESS OF JUST SETTING A ROOM
                 MyRoom currentRoom = (MyRoom) parent.getItemAtPosition(position);
-                if(liveDataViewModel.getCurrentRoom() != null)
-                    liveDataViewModel.unsubscribe(liveDataViewModel.getCurrentRoom().getValue());
-                liveDataViewModel.subscribe(currentRoom.getRoomName());
-                //Todo: Update liveData according to selected room
+                if(liveDataViewModel.getCurrentRoom().getValue() != null){
+                    liveDataViewModel.unsubscribe(liveDataViewModel.getCurrentRoom().getValue().getRoomName());
+                }
+                liveDataViewModel.setCurrentRoom(currentRoom);
+                liveDataViewModel.subscribe(currentRoom);
+                liveDataViewModel.getRecentLiveData(currentRoom.getId());
             }
 
             @Override

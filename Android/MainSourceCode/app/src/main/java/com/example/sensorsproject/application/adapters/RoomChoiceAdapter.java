@@ -46,7 +46,7 @@ public class RoomChoiceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         // Set the name of the 'NicePlace'
         ((ViewHolder) viewHolder).mText.setText(mMyRoom.get(i).getRoomName());
-        ((ViewHolder) viewHolder).mId.setText(String.valueOf(i));
+        ((ViewHolder) viewHolder).mId.setText(mMyRoom.get(i).getId());
     }
 
     @Override
@@ -77,8 +77,8 @@ public class RoomChoiceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-    public String getRoomNameById(int position){
-        return mMyRoom.get(position).getRoomName();
+    public MyRoom getRoomById(int position){
+        return mMyRoom.get(position);
     }
 
     public interface OnRoomListener{

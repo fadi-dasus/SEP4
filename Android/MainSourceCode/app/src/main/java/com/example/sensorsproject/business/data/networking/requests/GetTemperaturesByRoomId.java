@@ -32,7 +32,6 @@ public class GetTemperaturesByRoomId implements  Runnable{
     public void run() {
         try {
             Response<List<Temperature>> response = getApiCall().execute();
-
             if(response.code() == 200){
                 List<Temperature> list = new ArrayList<>(response.body());
                 data.postValue(list);

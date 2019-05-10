@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.sensorsproject.business.models.CO2;
 import com.example.sensorsproject.business.models.Humidity;
+import com.example.sensorsproject.business.models.MyRoom;
 import com.example.sensorsproject.business.models.Temperature;
 import com.example.sensorsproject.business.repositories.LiveDataRepository;
 
@@ -23,8 +24,8 @@ public class LiveDataViewModel extends ViewModel {
      * SUBSCRIBE & UNSUBSCRIBE
      */
 
-    public void subscribe(String roomName){
-        repository.subscribe(roomName);
+    public void subscribe(MyRoom room){
+        repository.subscribe(room);
     }
 
     public void unsubscribe(String roomName){
@@ -55,7 +56,7 @@ public class LiveDataViewModel extends ViewModel {
         return currentSensor;
     }
 
-    public LiveData<String> getCurrentRoom() {return repository.getCurrentRoom();}
+    public LiveData<MyRoom> getCurrentRoom() {return repository.getCurrentRoom();}
 
     public void getRecentLiveData(String roomId) {repository.getRecentLiveData(roomId);}
 
@@ -67,5 +68,5 @@ public class LiveDataViewModel extends ViewModel {
         currentSensor.postValue(sensorName);
     }
 
-    public void setCurrentRoom(String roomName) {repository.setCurrentRoom(roomName);}
+    public void setCurrentRoom(MyRoom room) {repository.setCurrentRoom(room);}
 }

@@ -34,7 +34,6 @@ public class NetworkHelper {
     //Lists
     private MutableLiveData<List<MyRoom>> roomList;
     private MutableLiveData<List<Warning>> warningList;
-    //Todo: ReportList webview links
 
     //All Measurements
     private MutableLiveData<List<CO2>> co2All;
@@ -211,15 +210,18 @@ public class NetworkHelper {
 
     public void searchTemperatureByRoomId(String roomId){
         //Networking Code
+        Log.d(TAG, "searchTemperatureByRoomId: INIT TEMPERATURE SEARCH");
         if(getTemperaturesByRoomId != null){
             getTemperaturesByRoomId = null;
         }
 
         getTemperaturesByRoomId = new GetTemperaturesByRoomId(TAG, temperatureByRoomId, roomId);
-        final Future handler = AppExecutors.getInstance().networkIO().submit(getTemperaturesByRoomId);
+        Log.d(TAG, "searchTemperatureByRoomId: CREATE TEMPERATURE SEARCH");
+        AppExecutors.getInstance().networkIO().execute(getTemperaturesByRoomId);
 
+        /*final Future handler = AppExecutors.getInstance().networkIO().submit(getTemperaturesByRoomId);
         AppExecutors.getInstance().networkIO().schedule(() -> {
             handler.cancel(true);
-        }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
+        }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);*/
     }
 }

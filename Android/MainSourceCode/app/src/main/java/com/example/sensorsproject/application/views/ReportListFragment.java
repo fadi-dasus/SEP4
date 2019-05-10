@@ -58,7 +58,6 @@ public class ReportListFragment extends Fragment {
         fragmentView = inflater.inflate(R.layout.fragment_report_list, container, false);
         ButterKnife.bind(this, fragmentView);
 
-        liveDataViewModel.subscribe("MyTopic");
         subscribeWebServiceObservers();
         subscribeLiveDataObservers();
         temporaryButtons();
@@ -68,7 +67,6 @@ public class ReportListFragment extends Fragment {
 
     @Override
     public void onStop() {
-        liveDataViewModel.unsubscribe("MyTopic");
         super.onStop();
     }
 

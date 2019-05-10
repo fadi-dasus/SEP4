@@ -1,10 +1,7 @@
 package com.example.sensorsproject.business.repositories;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import com.example.sensorsproject.business.data.fcm.FCMHelper;
 import com.example.sensorsproject.business.data.networking.NetworkHelper;
@@ -82,8 +79,8 @@ public class LiveDataRepository {
      * SUBSCRIBE & UNSUBSCRIBE
      */
 
-    public void subscribe(String roomName){
-        fcmHelper.subscribe(roomName);
+    public void subscribe(MyRoom room){
+        fcmHelper.subscribe(room);
     }
 
     public void unsubscribe(String roomName){
@@ -110,15 +107,13 @@ public class LiveDataRepository {
         return liveTimestamp;
     }
 
-    public LiveData<String> getCurrentRoom() {return fcmHelper.getCurrentRoom();}
+    public LiveData<MyRoom> getCurrentRoom() {return fcmHelper.getCurrentRoom();}
 
     /*
      * SETTERS
      */
 
     public void getRecentLiveData(String roomId){
-        //Todo: temporray solution for setting recent live data
-        setRecentLiveData(roomId);
 
         //Retrieve data to LiveData after 3 seconds so Web API requests are successfully finished beforehand
         AppExecutors.getInstance().networkIO().schedule(new Runnable() {
@@ -159,18 +154,14 @@ public class LiveDataRepository {
         networkHelper.searchCo2ByRoomId(roomId);
         networkHelper.searchHumidityByRoomId(roomId);
         networkHelper.searchTemperatureByRoomId(roomId);
+        //Todo: Not sure if it is the right place to update recent live data
+        getRecentLiveData(roomId);
     }
 
-    public void setCurrentRoom(String roomName) {
-        List<MyRoom> allRooms = networkHelper.getAllRooms().getValue();
-        if(allRooms != null){
-            for(MyRoom room : allRooms){
-                if(room.getRoomName().equals(roomName)){
-                    //Todo: setRecentLiveData roomId from MyRoom
-                }
-            }
+    public void setCurrentRoom(MyRoom room) {
+        if (room != null) {
+            setRecentLiveData(room.getId());
+            fcmHelper.setCurrentRoom(room);
         }
-
-        fcmHelper.setCurrentRoom(roomName);
     }
 }

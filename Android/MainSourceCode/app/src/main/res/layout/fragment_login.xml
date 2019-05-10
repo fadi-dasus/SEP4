@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".application.views.LoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <ImageView
         android:id="@+id/login_photo"
         android:layout_width="90dp"

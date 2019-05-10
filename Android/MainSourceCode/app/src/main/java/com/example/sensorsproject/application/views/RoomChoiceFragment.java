@@ -95,9 +95,10 @@ public class RoomChoiceFragment extends Fragment implements RoomChoiceAdapter.On
     //Implements on room click
     @Override
     public void onRoomClick(int position) {
-        String roomName = mAdapter.getRoomNameById(position);
-        liveDataViewModel.setCurrentRoom(roomName);
-        liveDataViewModel.subscribe(roomName);
+        MyRoom currentRoom = mAdapter.getRoomById(position);
+
+        //Todo: When I will move subscribe to setCurrentRoom remove it from here
+        liveDataViewModel.subscribe(currentRoom);
         MainActivity.navController.navigate(R.id.action_roomChoiceFragment_to_roomMainFragment);
     }
 }
