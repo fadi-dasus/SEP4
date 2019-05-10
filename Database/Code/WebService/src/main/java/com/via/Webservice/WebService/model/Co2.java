@@ -12,19 +12,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.hateoas.ResourceSupport;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 @Entity
 @Table(name = "Co2")
-public class Co2 extends ResourceSupport {
+public class Co2 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
-	private int Id;
+	private int id;
 
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	@ManyToOne
 	@JoinColumn(name="room_id")
@@ -46,8 +49,8 @@ public class Co2 extends ResourceSupport {
 
 	}
 
-	@JsonCreator
-	public Co2(@JsonProperty("co2") String value, LocalDate date, Timestamp timestamp, Room room) {
+	
+	public Co2( String value, LocalDate date, Timestamp timestamp, Room room) {
 		this.room = room;
 		this.date = date;
 		this.value = value;
@@ -97,7 +100,7 @@ public class Co2 extends ResourceSupport {
 
 	@Override
 	public String toString() {
-		return "Co2 [Id=" + Id + ", room=" + room + ", status=" + status + ", value=" + value + ", date=" + date
+		return "Co2 [Id=" + id + ", room=" + room + ", status=" + status + ", value=" + value + ", date=" + date
 				+ ", timestamp=" + timestamp + "]";
 	}
 

@@ -25,34 +25,24 @@
 
 int main(void)
 {
-	DDRA |= _BV(DDA0) | _BV(DDA7);
 	trace_init();
+	// stdio_drivers init
 	stdioCreate(0);
 
 	// initialization of resources
-	// semaphores
+	// rtos
 	semaphores_init();
-	// timers
 	timers_init();
-	// sensors
-	co2_sensor_init();
+	// drivers
+	//co2_sensor_init();
 	//temp_hum_sensor_init();
-	// lora
-	lora_init();
+	//lora_init();
 	
 	// tasks
 	create_tasks();
 	
-	// timers start
-	//xTimerStart(TempHumTimer, 0);
-	//xTimerStart(CO2Timer, 0);
-	xTimerStart(LoRaTimer, 0);
-	
 	vTaskStartScheduler(); // initialize and run the freeRTOS scheduler. Execution should never return here.
 
-	/* Replace with your application code */
-	while (1)
-	{
-	}
+	while (1){} // we never should reach here
 }
 

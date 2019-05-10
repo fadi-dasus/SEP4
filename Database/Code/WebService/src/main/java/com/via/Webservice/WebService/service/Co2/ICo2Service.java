@@ -12,4 +12,6 @@ public interface ICo2Service {
 
 	public List<Co2> findByCo2RoomForToday(int room_id);
 
+	Co2 findTopByOrderByIdDescAndRoom(String name);
+
 }

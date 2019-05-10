@@ -1,6 +1,5 @@
 package com.via.Webservice.WebService.service.Room;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ public class RoomService implements IRoomService {
 		return dao.findAll();
 	}
 
-	public List<Room> findByRoomName(String name) {
+	public Room findByRoomName(String name) {
 		return dao.findByRoomName(name);
 	}
 

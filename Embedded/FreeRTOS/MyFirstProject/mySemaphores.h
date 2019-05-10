@@ -3,16 +3,17 @@
 
 #include "ATMEGA_FreeRTOS.h"
 
-#include <stdbool.h>
-#include <stdint.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #include <semphr.h>
 
-SemaphoreHandle_t CO2Semaphore;
-SemaphoreHandle_t TempHumSemaphore;
-SemaphoreHandle_t LoRaSemaphore;
+SemaphoreHandle_t cycleSemaphore;
+
+SemaphoreHandle_t co2Semaphore;
+SemaphoreHandle_t tempHumSemaphore;
+SemaphoreHandle_t loraSemaphore;
+
+SemaphoreHandle_t queueSemaphore;
 
 void semaphores_init();
 

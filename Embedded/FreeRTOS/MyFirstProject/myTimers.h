@@ -10,14 +10,16 @@
 
 #include <timers.h>
 
-TimerHandle_t CO2Timer;
-TimerHandle_t TempHumTimer;
-TimerHandle_t LoRaTimer;
+TimerHandle_t co2Timer;
+TimerHandle_t tempHumTimer;
+TimerHandle_t loraTimer;
+TimerHandle_t restartCycleTimer;
 
 void timers_init();
 
-void co2_timer_callback(TimerHandle_t pxTimer);
-void temp_hum_timer_callback(TimerHandle_t pxTimer);
-void lora_timer_callback(TimerHandle_t pxTimer);
+void co2_timer_callback( TimerHandle_t pxTimer );
+void temp_hum_timer_callback( TimerHandle_t pxTimer );
+void lora_timer_callback( TimerHandle_t pxTimer );
+void restart_cycle_timer_callback( TimerHandle_t pxTimer);
 
 #endif /* MYTIMERS_H_ */

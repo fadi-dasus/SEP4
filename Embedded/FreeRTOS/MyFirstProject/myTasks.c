@@ -1,23 +1,23 @@
-
 #include "myTasks.h"
-#include "co2Sensor.h"
-#include "myLora.h"
-#include "mySemaphores.h"
-#include "myTimers.h"
-#include <timers.h>
-#include "temp_humSensor.h"
-
-//int rand_val = 1234;
 
 void create_tasks(void) {
 	
-	/*xTaskCreate(
+	xTaskCreate(
+		start_cycle_task,
+		"Start Cycle Task",
+		configMINIMAL_STACK_SIZE,
+		(void*) 1,
+		configMAX_PRIORITIES - 2,
+		&startCycleTaskHandler
+	);
+		
+	xTaskCreate(
 		co2_measure_task,
 		"CO2 Task",
 		configMINIMAL_STACK_SIZE,
 		(void*) 1,
-		2,
-		&CO2MeasureTask
+		configMAX_PRIORITIES - 2,
+		&co2MeasureTask
 	);	
 	
 	xTaskCreate(
@@ -25,80 +25,122 @@ void create_tasks(void) {
 		"temp hum Task",
 		configMINIMAL_STACK_SIZE,
 		(void*) 1,
-		2,
-		&TempHumMeasureTask
-	);*/
+		configMAX_PRIORITIES - 2,
+		&tempHumMeasureTask
+	);
 	
 	xTaskCreate(
 		lora_send_data_task,
 		"LoRa send data",
 		configMINIMAL_STACK_SIZE,
 		(void*) 1,
-		2,
-		&LoRaSendDataTask
+		configMAX_PRIORITIES - 2,
+		&loraSendDataTask
 	);
+
 }
 
-void co2_measure_task(void *pvParameters) {
+void start_cycle_task( void *pvParameters )
+{
 	// remove compiler warnings
-	(void)pvParameters;
+	( void )pvParameters;
 	
-	
-	
-	while(1) {
-	
-		
-		
-		//printf("CO2 task");
-		//vTaskDelay(50/portTICK_PERIOD_MS);
-		if(xSemaphoreTake(CO2Semaphore, portMAX_DELAY) == pdTRUE) {
-			vTaskDelay(8000/portTICK_PERIOD_MS);
-		
-			co2_measure();
-			uint16_t co2 = co2_get_value();
-			printf("CO2 value = %d \n", co2);
-			xSemaphoreGive(CO2Semaphore);
-		}
-	}
-}
-
-void lora_send_data_task(void *pvParameters) {
-		// remove compiler warnings
-		(void)pvParameters;
-	
-	printf("task lora");
-	vTaskDelay(1000/portTICK_PERIOD_MS);
-	lora_start();
-	vTaskDelay(1000/portTICK_PERIOD_MS);
-	while(1){
-		
-		if(xSemaphoreTake(LoRaSemaphore, portMAX_DELAY) == pdTRUE){
-			vTaskDelay(1000/portTICK_PERIOD_MS);
-			lora_send_data();
+	while(1)
+	{
+		if( xSemaphoreTake( cycleSemaphore, portMAX_DELAY ) == pdTRUE )
+		{
+			// take semaphores
+			// we do not care about result
+			// just wanna make sure they are take
+			xSemaphoreTake( co2Semaphore, portMAX_DELAY );
+			xSemaphoreTake( tempHumSemaphore, portMAX_DELAY );
+			xSemaphoreTake( loraSemaphore, portMAX_DELAY );
 			
-			xSemaphoreGive(LoRaSemaphore);
+			// start first timer
+			if( xTimerReset( co2Timer, 0 ) != pdTRUE)
+				xTimerStart( co2Timer,0 );
+			else
+				printf("start timer");
+			
+			xSemaphoreGive( cycleSemaphore );
+			// do not run for 9 minutes
+			// cycle semaphore should be taken after 7 minutes
+			//vTaskDelay( 9 * 60 * ( 1000 / portTICK_PERIOD_MS ));
+			vTaskDelay( 9500 / portTICK_PERIOD_MS );
+			printf("here");
+		}
+		else
+		{
+			printf("we ain have cycle semaphore");
+			
+			vTaskDelay( 1000 / portTICK_PERIOD_MS );
+			
 		}
 	}
 }
 
-
-void temp_hum_measure_task(void *pvParameters) {
+void co2_measure_task( void *pvParameters ) 
+{
 	// remove compiler warnings
-	(void)pvParameters;
+	( void )pvParameters;
 	
-	
-	while(1) {
-		
-		//printf("temp task");
-		//vTaskDelay(50/portTICK_PERIOD_MS);
-		if(xSemaphoreTake(TempHumSemaphore, portMAX_DELAY) == pdTRUE) {
-			vTaskDelay(4000/portTICK_PERIOD_MS);
-			temp_hum_measure();
-			printf("temp value = %i \n", temp_get_value());
-			vTaskDelay(100/portTICK_PERIOD_MS);
-			printf("hum value = %d \n", hum_get_value());
-			vTaskDelay(100/portTICK_PERIOD_MS);
-			xSemaphoreGive(TempHumSemaphore);
+	while(1) 
+	{
+		if( xSemaphoreTake ( co2Semaphore, portMAX_DELAY ) == pdTRUE ) 
+		{
+			// co2_measure();
+			// add measure to queue
+			printf("co2 task");
+			vTaskDelay( 100 );
+			
+			xSemaphoreGive( co2Semaphore );
+			vTaskDelay( 2000 / portTICK_PERIOD_MS );
 		}
 	}
 }
+
+void temp_hum_measure_task( void *pvParameters ) 
+{
+	// remove compiler warnings
+	( void )pvParameters;
+	
+	while(1) 
+	{
+		if( xSemaphoreTake( tempHumSemaphore, portMAX_DELAY ) == pdTRUE ) 
+		{
+			//temp_hum_measure();
+			// add values to queue
+			
+			printf("temp hum task");
+			vTaskDelay( 100 );
+			
+			xSemaphoreGive( tempHumSemaphore );
+			vTaskDelay( 2000 / portTICK_PERIOD_MS );
+		}
+	}
+}
+
+void lora_send_data_task( void *pvParameters ) 
+{
+	// remove compiler warnings
+	( void )pvParameters;
+	
+	//lora_start();
+	//vTaskDelay(100/portTICK_PERIOD_MS);
+	
+	while(1)
+	{
+		if( xSemaphoreTake( loraSemaphore, portMAX_DELAY ) == pdTRUE )
+		{
+			//lora_send_data();
+			printf("lora task");
+			vTaskDelay( 100 );
+			
+			xSemaphoreGive( loraSemaphore );
+			vTaskDelay( 2000 / portTICK_PERIOD_MS );
+		}
+	}
+}
+
+
+

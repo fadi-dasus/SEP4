@@ -24,7 +24,7 @@ public class Humidity extends ResourceSupport {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
-	private int Id;
+	private int id;
 
 	@ManyToOne
 	@JoinColumn(name = "room_id")
@@ -64,7 +64,7 @@ public class Humidity extends ResourceSupport {
 	}
 
 	public void setId(int id) {
-		this.Id = id;
+		this.id = id;
 	}
 
 
@@ -104,7 +104,7 @@ public class Humidity extends ResourceSupport {
 
 	@Override
 	public String toString() {
-		return "Humidity [Id=" + Id + ", room=" + room + ", status=" + status + ", value=" + value + ", date=" + date
+		return "Humidity [Id=" + id + ", room=" + room + ", status=" + status + ", value=" + value + ", date=" + date
 				+ ", timestamp=" + timestamp + "]";
 	}
 
