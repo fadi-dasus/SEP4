@@ -2,13 +2,14 @@ package com.javasampleapproach.fcm.pushnotif.controller;
 
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.javasampleapproach.fcm.pushnotif.service.NotificationsService;
 
 @RestController
+@RequestMapping("/test")
 public class WebController {
 
 	
@@ -16,9 +17,10 @@ public class WebController {
 	@Autowired
 	NotificationsService androidPushNotificationsService;
 
-	@RequestMapping(value = "/send", method = RequestMethod.GET, produces = "application/json")
+	@GetMapping("/job")
 	public void send() throws JSONException {
-		androidPushNotificationsService.send();
+		androidPushNotificationsService.setEnabled(true);
+		
 
 	}
 }
