@@ -36,9 +36,9 @@ public class NetworkHelper {
     private MutableLiveData<List<Warning>> warningList;
 
     //All Measurements
-    private MutableLiveData<List<CO2>> co2Today;
-    private MutableLiveData<List<Humidity>> humidityToday;
-    private MutableLiveData<List<Temperature>> temperatureToday;
+    private MutableLiveData<List<CO2>> co2ByRoomIdToday;
+    private MutableLiveData<List<Humidity>> humidityByRoomIdToday;
+    private MutableLiveData<List<Temperature>> temperatureByRoomIdToday;
 
     //Measurements By Room Id
     private MutableLiveData<List<CO2>> co2ByRoomId;
@@ -61,9 +61,9 @@ public class NetworkHelper {
         warningList = new MutableLiveData<>();
 
         //Measurements
-        co2Today = new MutableLiveData<>();
-        humidityToday = new MutableLiveData<>();
-        temperatureToday = new MutableLiveData<>();
+        co2ByRoomIdToday = new MutableLiveData<>();
+        humidityByRoomIdToday = new MutableLiveData<>();
+        temperatureByRoomIdToday = new MutableLiveData<>();
 
         //Measurements by id
         co2ByRoomId = new MutableLiveData<>();
@@ -87,12 +87,12 @@ public class NetworkHelper {
     }
 
     public LiveData<List<CO2>> getAllCo2sByRoomIdToday() {
-        return co2Today;
+        return co2ByRoomIdToday;
     }
 
-    public LiveData<List<Humidity>> getAllHumiditiesByRoomIdToday() { return humidityToday; }
+    public LiveData<List<Humidity>> getAllHumiditiesByRoomIdToday() { return humidityByRoomIdToday; }
 
-    public LiveData<List<Temperature>> getAllTemperaturesByRoomIdToday() { return temperatureToday; }
+    public LiveData<List<Temperature>> getAllTemperaturesByRoomIdToday() { return temperatureByRoomIdToday; }
 
     public LiveData<List<Warning>> getAllWarnings() {
         return warningList;
@@ -128,7 +128,7 @@ public class NetworkHelper {
             getAllCo2SByRoomIdToday = null;
         }
 
-        getAllCo2SByRoomIdToday = new GetAllCo2sByRoomIdToday(TAG, co2Today, roomId);
+        getAllCo2SByRoomIdToday = new GetAllCo2sByRoomIdToday(TAG, co2ByRoomIdToday, roomId);
         final Future handler = AppExecutors.getInstance().networkIO().submit(getAllCo2SByRoomIdToday);
 
         AppExecutors.getInstance().networkIO().schedule(() -> {
@@ -142,7 +142,7 @@ public class NetworkHelper {
             getAllHumiditiesByRoomIdToday = null;
         }
 
-        getAllHumiditiesByRoomIdToday = new GetAllHumiditiesByRoomIdToday(TAG, humidityToday, roomId);
+        getAllHumiditiesByRoomIdToday = new GetAllHumiditiesByRoomIdToday(TAG, humidityByRoomIdToday, roomId);
         final Future handler = AppExecutors.getInstance().networkIO().submit(getAllHumiditiesByRoomIdToday);
 
         AppExecutors.getInstance().networkIO().schedule(() -> {
@@ -156,7 +156,7 @@ public class NetworkHelper {
             getAllTemperaturesByRoomIdToday = null;
         }
 
-        getAllTemperaturesByRoomIdToday = new GetAllTemperaturesByRoomIdToday(TAG, temperatureToday, roomId);
+        getAllTemperaturesByRoomIdToday = new GetAllTemperaturesByRoomIdToday(TAG, temperatureByRoomIdToday, roomId);
         final Future handler = AppExecutors.getInstance().networkIO().submit(getAllTemperaturesByRoomIdToday);
 
         AppExecutors.getInstance().networkIO().schedule(() -> {

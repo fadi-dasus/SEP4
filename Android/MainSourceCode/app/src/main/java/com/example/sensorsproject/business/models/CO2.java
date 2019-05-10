@@ -3,6 +3,11 @@ package com.example.sensorsproject.business.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class CO2 {
 
     @Expose
@@ -42,6 +47,20 @@ public class CO2 {
 
     public MyRoom getRoom() {
         return room;
+    }
+
+    public GregorianCalendar getGregorianCalendar(){
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-dd-MM'T'HH:mm:ss");
+        try {
+            date = sdf.parse(timestamp);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        GregorianCalendar gregorianCalendar = new GregorianCalendar();
+        gregorianCalendar.setTime(date);
+        return gregorianCalendar;
     }
 
     @Override
