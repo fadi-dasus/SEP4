@@ -25,8 +25,8 @@ public interface SensorsAPI {
      * CO2
      */
 
-    @GET("co2/all")
-    Call<List<CO2>> getAllCo2();
+    @GET("co2/roomtoday/{id}")
+    Call<List<CO2>> getAllCo2ByRoomIdToday(@Path("id") String roomId);
 
     @GET("co2/room/{id}")
     Call<List<CO2>> getAllCo2ByRoomId(@Path("id") String roomId);
@@ -35,8 +35,8 @@ public interface SensorsAPI {
      * HUMIDITY
      */
 
-    @GET("humidity/all")
-    Call<List<Humidity>> getAllHumidity();
+    @GET("humidity/roomtoday/{id}")
+    Call<List<Humidity>> getAllHumidityByRoomIdToday(@Path("id") String roomId);
 
     @GET("humidity/room/{id}")
     Call<List<Humidity>> getAllHumidityByRoomId(@Path("id") String roomId);
@@ -45,8 +45,8 @@ public interface SensorsAPI {
      * TEMPERATURE
      */
 
-    @GET("temperature/all")
-    Call<List<Temperature>> getAllTemperature();
+    @GET("temperature/roomtoday/{id}")
+    Call<List<Temperature>> getAllTemperatureByRoomIdToday(@Path("id") String roomId);
 
     @GET("temperature/room/{id}")
     Call<List<Temperature>> getAllTemperatureByRoomId(@Path("id") String roomId);
@@ -55,6 +55,6 @@ public interface SensorsAPI {
      * WARNING
      */
 
-    @GET("warning/all")
-    Call<List<Warning>> getAllWarnings();
+    @GET("warning/room/{id}")
+    Call<List<Warning>> getAllWarningsByRoomId(@Path("id") String roomId);
 }

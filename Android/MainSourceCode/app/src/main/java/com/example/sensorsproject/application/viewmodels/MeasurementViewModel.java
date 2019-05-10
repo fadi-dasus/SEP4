@@ -22,19 +22,19 @@ public class MeasurementViewModel extends ViewModel {
      * GET LIVE DATA
      */
 
-    public LiveData<List<CO2>> getAllCo2s(){ return repository.getAllCo2s();}
+    public LiveData<List<CO2>> getAllCo2sByRoomIdToday(){ return repository.getAllCo2sByRoomIdToday();}
 
-    public LiveData<List<Humidity>> getAllHumidities() {return repository.getAllHumidities();}
+    public LiveData<List<Humidity>> getAllHumiditiesByRoomIdToday() {return repository.getAllHumiditiesByRoomIdToday();}
 
-    public LiveData<List<Temperature>> getAllTemperatures() {return repository.getAllTemperatures();}
+    public LiveData<List<Temperature>> getAllTemperaturesByRoomIdToday() {return repository.getAllTemperaturesByRoomIdToday();}
 
     /*
      * UPDATE LIVE DATA
      */
 
-    public void searchAllCo2s() {repository.searchAllCo2s();}
+    public void searchAllCo2sByRoomIdToday(String roomId) {repository.searchAllCo2sByRoomIdToday(roomId);}
 
-    public void searchAllHumidities() {repository.searchAllHumidities();}
+    public void searchAllHumiditiesByRoomIdToday(String roomId) {repository.searchAllHumiditiesByRoomIdToday(roomId);}
 
-    public void searchAllTemperatures() {repository.searchAllTemperatures();}
+    public void searchAllTemperaturesByRoomIdToday(String roomId) {repository.searchAllTemperaturesByRoomIdToday(roomId);}
 }

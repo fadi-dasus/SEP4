@@ -50,18 +50,21 @@
 
 *CO2*
 - co2/all - gets all CO2
-- co2/room/{id} - gets all CO2 by room id
+- co2/room/{id} - gets all CO2 from the past by room id
+- co2/roomtoday/{id} - gets all CO2 from today by room id
 
 *Humidity*
 - humidity/all - gets all humidities
-- humidity/room/{id} - gets all humidities by room id
+- humidity/room/{id} - gets all humidities from the past by room id
+- humidity/roomtoday{id} -gets all humidities from today by room id
 
 *Temperature*
 - temperature/all - gets all temperatures
-- temperature/room/{id} - gets all temperatures by room id
+- temperature/room/{id} - gets all temperatures from the past by room id
+- temperature/roomid/{id} - gets all temperatures from today by room id
 
 *Warning*
-- warning/all - gets all warnings
+- warning/room/{id} - gets all warnings by room id
 
 ###Tutorials to read
 

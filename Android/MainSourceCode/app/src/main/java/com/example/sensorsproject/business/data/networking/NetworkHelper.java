@@ -13,10 +13,10 @@ import com.example.sensorsproject.business.models.Humidity;
 import com.example.sensorsproject.business.models.MyRoom;
 import com.example.sensorsproject.business.models.Temperature;
 import com.example.sensorsproject.business.models.Warning;
-import com.example.sensorsproject.business.data.networking.requests.GetAllCo2s;
-import com.example.sensorsproject.business.data.networking.requests.GetAllHumidities;
+import com.example.sensorsproject.business.data.networking.requests.GetAllCo2sByRoomIdToday;
+import com.example.sensorsproject.business.data.networking.requests.GetAllHumiditiesByRoomIdToday;
 import com.example.sensorsproject.business.data.networking.requests.GetAllRooms;
-import com.example.sensorsproject.business.data.networking.requests.GetAllTemperatures;
+import com.example.sensorsproject.business.data.networking.requests.GetAllTemperaturesByRoomIdToday;
 import com.example.sensorsproject.business.data.networking.requests.GetAllWarnings;
 import com.example.sensorsproject.utils.AppExecutors;
 import com.example.sensorsproject.utils.Constants;
@@ -36,9 +36,9 @@ public class NetworkHelper {
     private MutableLiveData<List<Warning>> warningList;
 
     //All Measurements
-    private MutableLiveData<List<CO2>> co2All;
-    private MutableLiveData<List<Humidity>> humidityAll;
-    private MutableLiveData<List<Temperature>> temperatureAll;
+    private MutableLiveData<List<CO2>> co2Today;
+    private MutableLiveData<List<Humidity>> humidityToday;
+    private MutableLiveData<List<Temperature>> temperatureToday;
 
     //Measurements By Room Id
     private MutableLiveData<List<CO2>> co2ByRoomId;
@@ -47,9 +47,9 @@ public class NetworkHelper {
 
     //Runnables
     private GetAllRooms getAllRooms;
-    private GetAllCo2s getAllCo2S;
-    private GetAllHumidities getAllHumidities;
-    private GetAllTemperatures getAllTemperatures;
+    private GetAllCo2sByRoomIdToday getAllCo2SByRoomIdToday;
+    private GetAllHumiditiesByRoomIdToday getAllHumiditiesByRoomIdToday;
+    private GetAllTemperaturesByRoomIdToday getAllTemperaturesByRoomIdToday;
     private GetAllWarnings getAllWarnings;
     private GetCo2sByRoomId getCo2SByRoomId;
     private GetHumiditiesByRoomId getHumiditiesByRoomId;
@@ -61,9 +61,9 @@ public class NetworkHelper {
         warningList = new MutableLiveData<>();
 
         //Measurements
-        co2All = new MutableLiveData<>();
-        humidityAll = new MutableLiveData<>();
-        temperatureAll = new MutableLiveData<>();
+        co2Today = new MutableLiveData<>();
+        humidityToday = new MutableLiveData<>();
+        temperatureToday = new MutableLiveData<>();
 
         //Measurements by id
         co2ByRoomId = new MutableLiveData<>();
@@ -86,15 +86,13 @@ public class NetworkHelper {
         return roomList;
     }
 
-    public LiveData<List<CO2>> getAllCo2s() {
-        return co2All;
+    public LiveData<List<CO2>> getAllCo2sByRoomIdToday() {
+        return co2Today;
     }
 
-    public LiveData<List<Humidity>> getAllHumidities() { return humidityAll; }
+    public LiveData<List<Humidity>> getAllHumiditiesByRoomIdToday() { return humidityToday; }
 
-    public LiveData<List<Temperature>> getAllTemperatures() {
-        return temperatureAll;
-    }
+    public LiveData<List<Temperature>> getAllTemperaturesByRoomIdToday() { return temperatureToday; }
 
     public LiveData<List<Warning>> getAllWarnings() {
         return warningList;
@@ -124,55 +122,55 @@ public class NetworkHelper {
         }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
-    public void searchAllCo2s(){
+    public void searchAllCo2sByRoomIdToday(String roomId){
         //Networking Code
-        if(getAllCo2S != null){
-            getAllCo2S = null;
+        if(getAllCo2SByRoomIdToday != null){
+            getAllCo2SByRoomIdToday = null;
         }
 
-        getAllCo2S = new GetAllCo2s(TAG, co2All);
-        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllCo2S);
+        getAllCo2SByRoomIdToday = new GetAllCo2sByRoomIdToday(TAG, co2Today, roomId);
+        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllCo2SByRoomIdToday);
 
         AppExecutors.getInstance().networkIO().schedule(() -> {
             handler.cancel(true);
         }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
-    public void searchAllHumidities(){
+    public void searchAllHumiditiesByRoomIdToday(String roomId){
         //Networking Code
-        if(getAllHumidities != null){
-            getAllHumidities = null;
+        if(getAllHumiditiesByRoomIdToday != null){
+            getAllHumiditiesByRoomIdToday = null;
         }
 
-        getAllHumidities = new GetAllHumidities(TAG, humidityAll);
-        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllHumidities);
+        getAllHumiditiesByRoomIdToday = new GetAllHumiditiesByRoomIdToday(TAG, humidityToday, roomId);
+        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllHumiditiesByRoomIdToday);
 
         AppExecutors.getInstance().networkIO().schedule(() -> {
             handler.cancel(true);
         }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
-    public void searchAllTemperatures(){
+    public void searchAllTemperaturesByRoomIdToday(String roomId){
         //Networking Code
-        if(getAllTemperatures != null){
-            getAllTemperatures = null;
+        if(getAllTemperaturesByRoomIdToday != null){
+            getAllTemperaturesByRoomIdToday = null;
         }
 
-        getAllTemperatures = new GetAllTemperatures(TAG, temperatureAll);
-        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllTemperatures);
+        getAllTemperaturesByRoomIdToday = new GetAllTemperaturesByRoomIdToday(TAG, temperatureToday, roomId);
+        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllTemperaturesByRoomIdToday);
 
         AppExecutors.getInstance().networkIO().schedule(() -> {
             handler.cancel(true);
         }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
-    public void searchAllWarnings(){
+    public void searchAllWarningsByRoomId(String roomId){
         //Networking Code
         if(getAllWarnings != null){
             getAllWarnings = null;
         }
 
-        getAllWarnings = new GetAllWarnings(TAG, warningList);
+        getAllWarnings = new GetAllWarnings(TAG, warningList, roomId);
         final Future handler = AppExecutors.getInstance().networkIO().submit(getAllWarnings);
 
         AppExecutors.getInstance().networkIO().schedule(() -> {

@@ -30,19 +30,19 @@ public class MeasurementRepository {
      * GET LIVE DATA
      */
 
-    public LiveData<List<CO2>> getAllCo2s(){ return networkHelper.getAllCo2s();}
+    public LiveData<List<CO2>> getAllCo2sByRoomIdToday(){ return networkHelper.getAllCo2sByRoomIdToday();}
 
-    public LiveData<List<Humidity>> getAllHumidities() {return networkHelper.getAllHumidities();}
+    public LiveData<List<Humidity>> getAllHumiditiesByRoomIdToday() {return networkHelper.getAllHumiditiesByRoomIdToday();}
 
-    public LiveData<List<Temperature>> getAllTemperatures() {return networkHelper.getAllTemperatures();}
+    public LiveData<List<Temperature>> getAllTemperaturesByRoomIdToday() {return networkHelper.getAllTemperaturesByRoomIdToday();}
 
     /*
      * UPDATE LIVE DATA
      */
 
-    public void searchAllCo2s() {networkHelper.searchAllCo2s();}
+    public void searchAllCo2sByRoomIdToday(String roomId) {networkHelper.searchAllCo2sByRoomIdToday(roomId);}
 
-    public void searchAllHumidities() {networkHelper.searchAllHumidities();}
+    public void searchAllHumiditiesByRoomIdToday(String roomId) {networkHelper.searchAllHumiditiesByRoomIdToday(roomId);}
 
-    public void searchAllTemperatures() {networkHelper.searchAllTemperatures();}
+    public void searchAllTemperaturesByRoomIdToday(String roomId) {networkHelper.searchAllTemperaturesByRoomIdToday(roomId);}
 }

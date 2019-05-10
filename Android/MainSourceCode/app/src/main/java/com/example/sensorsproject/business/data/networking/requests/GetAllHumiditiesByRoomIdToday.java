@@ -4,7 +4,7 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.sensorsproject.business.models.Temperature;
+import com.example.sensorsproject.business.models.Humidity;
 import com.example.sensorsproject.business.data.networking.ServiceGenerator;
 
 import java.io.IOException;
@@ -14,29 +14,31 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class GetAllTemperatures implements  Runnable{
+public class GetAllHumiditiesByRoomIdToday implements  Runnable{
 
     private ServiceGenerator sg;
-    private MutableLiveData<List<Temperature>> data;
+    private MutableLiveData<List<Humidity>> data;
     private String TAG;
+    private String roomId;
 
-    public GetAllTemperatures(String tag, MutableLiveData<List<Temperature>> list){
+    public GetAllHumiditiesByRoomIdToday(String tag, MutableLiveData<List<Humidity>> list, String roomId){
         this.data = list;
         this.TAG = tag;
         this.sg = ServiceGenerator.getInstance();
+        this.roomId = roomId;
     }
 
     @Override
     public void run() {
         try {
-            Response<List<Temperature>> response = getApiCall().execute();
+            Response<List<Humidity>> response = getApiCall().execute();
 
             if(response.code() == 200){
-                List<Temperature> list = new ArrayList<>(response.body());
+                List<Humidity> list = new ArrayList<>(response.body());
                 data.postValue(list);
-                Log.d(TAG, "onTemperatureListFetchSuccess: Fetched successfully!");
+                Log.d(TAG, "onHumidityListFetchSuccess: Fetched successfully!");
             } else {
-                Log.d(TAG, "onTemperatureListFetchFailure: " + response.errorBody().string());
+                Log.d(TAG, "onHumidityListFetchFailure: " + response.errorBody().string());
                 data.postValue(null);
             }
 
@@ -45,7 +47,7 @@ public class GetAllTemperatures implements  Runnable{
         }
     }
 
-    private Call<List<Temperature>> getApiCall(){
-        return sg.getSensorsAPI().getAllTemperature();
+    private Call<List<Humidity>> getApiCall(){
+        return sg.getSensorsAPI().getAllHumidityByRoomIdToday(roomId);
     }
 }

@@ -19,11 +19,13 @@ public class GetAllWarnings implements  Runnable{
     private ServiceGenerator sg;
     private MutableLiveData<List<Warning>> data;
     private String TAG;
+    private String roomId;
 
-    public GetAllWarnings(String tag, MutableLiveData<List<Warning>> list){
+    public GetAllWarnings(String tag, MutableLiveData<List<Warning>> list, String roomId){
         this.data = list;
         this.TAG = tag;
         this.sg = ServiceGenerator.getInstance();
+        this.roomId = roomId;
     }
 
     @Override
@@ -46,6 +48,6 @@ public class GetAllWarnings implements  Runnable{
     }
 
     private Call<List<Warning>> getApiCall(){
-        return sg.getSensorsAPI().getAllWarnings();
+        return sg.getSensorsAPI().getAllWarningsByRoomId(roomId);
     }
 }

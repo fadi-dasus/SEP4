@@ -26,7 +26,7 @@ public class ListViewModel extends ViewModel {
 
     public LiveData<List<MyRoom>> getAllRooms(){return repository.getAllRooms(); }
 
-    public LiveData<List<Warning>> getAllWarnings() {return repository.getAllWarnings();}
+    public LiveData<List<Warning>> getAllWarningsByRoomId() {return repository.getAllWarnings();}
 
     /*
      * UPDATE LIVE DATA
@@ -34,6 +34,6 @@ public class ListViewModel extends ViewModel {
 
     public void searchAllRooms(){repository.searchAllRooms();}
 
-    public void searchAllWarnings() {repository.searchAllWarnings();}
+    public void searchAllWarningsByRoomId(String roomId) {repository.searchAllWarningsByRoomId(roomId);}
 
 }

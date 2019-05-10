@@ -14,16 +14,18 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class GetAllCo2s implements  Runnable{
+public class GetAllCo2sByRoomIdToday implements  Runnable{
 
     private ServiceGenerator sg;                    //Returns Call for Retrofit Response
     private MutableLiveData<List<CO2>> data;        //LiveData reference from NetworkHelper
     private String TAG;                             //TAG for debugging
+    private String roomId;                          //Room id reference for API
 
-    public GetAllCo2s(String tag, MutableLiveData<List<CO2>> list){
+    public GetAllCo2sByRoomIdToday(String tag, MutableLiveData<List<CO2>> list, String roomId){
         this.data = list;
         this.TAG = tag;
         this.sg = ServiceGenerator.getInstance();
+        this.roomId = roomId;
     }
 
     @Override
@@ -46,6 +48,6 @@ public class GetAllCo2s implements  Runnable{
     }
 
     private Call<List<CO2>> getApiCall(){
-        return sg.getSensorsAPI().getAllCo2();
+        return sg.getSensorsAPI().getAllCo2ByRoomIdToday(roomId);
     }
 }

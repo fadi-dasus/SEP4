@@ -38,7 +38,7 @@ public class ListRepository {
 
     public void searchAllRooms(){networkHelper.searchAllRooms();}
 
-    public void searchAllWarnings() {networkHelper.searchAllWarnings();}
+    public void searchAllWarningsByRoomId(String roomId) {networkHelper.searchAllWarningsByRoomId(roomId);}
 
 
 }

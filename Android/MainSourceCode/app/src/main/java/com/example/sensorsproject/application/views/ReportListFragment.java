@@ -5,9 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
@@ -97,7 +94,7 @@ public class ReportListFragment extends Fragment {
     }
 
     private void subscribeWebServiceObservers(){
-        measurementViewModel.getAllCo2s().observe(this, co2List -> {
+        measurementViewModel.getAllCo2sByRoomIdToday().observe(this, co2List -> {
             if(co2List != null){
                 String toString = "";
                 if(co2List.size() > 0){
@@ -109,7 +106,7 @@ public class ReportListFragment extends Fragment {
             }
         });
 
-        measurementViewModel.getAllHumidities().observe(this, humidityList -> {
+        measurementViewModel.getAllHumiditiesByRoomIdToday().observe(this, humidityList -> {
             if(humidityList != null){
                 String toString = "";
                 if(humidityList.size() > 0){
@@ -121,7 +118,7 @@ public class ReportListFragment extends Fragment {
             }
         });
 
-        measurementViewModel.getAllTemperatures().observe(this, temperatureList -> {
+        measurementViewModel.getAllTemperaturesByRoomIdToday().observe(this, temperatureList -> {
             if(temperatureList != null){
                 String toString = "";
                 if(temperatureList.size() > 0){
@@ -135,14 +132,15 @@ public class ReportListFragment extends Fragment {
     }
 
     private void temporaryButtons(){
+        String roomId = liveDataViewModel.getCurrentRoom().getValue().getId();
         fragmentView.findViewById(R.id.button_get_co2_all)
-                .setOnClickListener((View v) -> measurementViewModel.searchAllCo2s());
+                .setOnClickListener((View v) -> measurementViewModel.searchAllCo2sByRoomIdToday(roomId));
 
         fragmentView.findViewById(R.id.button_get_humidity_all2)
-                .setOnClickListener((View v) -> measurementViewModel.searchAllHumidities());
+                .setOnClickListener((View v) -> measurementViewModel.searchAllHumiditiesByRoomIdToday(roomId));
 
         fragmentView.findViewById(R.id.button_get_temperature_all)
-                .setOnClickListener((View v) -> measurementViewModel.searchAllTemperatures());
+                .setOnClickListener((View v) -> measurementViewModel.searchAllTemperaturesByRoomIdToday(roomId));
     }
 
 }
