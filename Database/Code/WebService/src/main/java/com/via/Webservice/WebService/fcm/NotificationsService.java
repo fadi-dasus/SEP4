@@ -65,7 +65,7 @@ public class NotificationsService {
 		return CompletableFuture.completedFuture(firebaseResponse);
 	}
 
-	@Scheduled(fixedDelay = 1000,initialDelay = 60000)
+	@Scheduled(fixedDelay = 1000,initialDelay = 6000)
 	@Async
 	public void send() {
 
