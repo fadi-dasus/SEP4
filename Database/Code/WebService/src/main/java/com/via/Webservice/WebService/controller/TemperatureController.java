@@ -35,13 +35,13 @@ public class TemperatureController {
 
 	}
 
-//	@GetMapping("/room/all")
-//	public ResponseEntity<Iterable<Temperature>> findAllTemperature(@PathVariable("id") int room_id) {
-//		Iterable<Temperature> list = service.findAllTemperature(room_id);
-//		Temperature temperature = new Temperature();
-//		temperature.add(linkTo(methodOn(TemperatureController.class).findAllTemperature(room_id)).withSelfRel());
-//		return new ResponseEntity<Iterable<Temperature>>(list, HttpStatus.OK);
-//	}
+	@GetMapping("/all")
+	public ResponseEntity<Iterable<Temperature>> findAllTemperature() {
+		Iterable<Temperature> list = service.findAllTemperature();
+		Temperature temperature = new Temperature();
+		temperature.add(linkTo(methodOn(TemperatureController.class).findAllTemperature()).withSelfRel());
+		return new ResponseEntity<Iterable<Temperature>>(list, HttpStatus.OK);
+	}
 
 	@GetMapping("/room/{id}")
 	public ResponseEntity<Iterable<Temperature>> findByTemperatureRoom(@PathVariable("id") int room_id) {

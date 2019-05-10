@@ -9,5 +9,4 @@ import com.via.Webservice.WebService.model.Room;
 
 public interface Co2Respository extends CrudRepository<Co2,Integer> {
 	public List<Co2> findByRoom(Room room);
-	//public List<Co2> findAllByRoom(Room room);
 }

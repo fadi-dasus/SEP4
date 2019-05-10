@@ -24,10 +24,9 @@ public class HumidityService implements IHumidityService {
 		return dao.findById(id);
 	}
 
-//	public Iterable<Humidity> findAll(int room_id) {
-//		Room room=new Room(room_id);
-//		return dao.findAll(room);
-//	}
+	public Iterable<Humidity> findAll() {
+		return dao.findAll();
+	}
 
 
 	@Override
