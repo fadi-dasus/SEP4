@@ -1,6 +1,5 @@
 package com.via.Webservice.WebService.service.Co2;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,13 +24,9 @@ public class Co2Service implements ICo2Service {
 		return dao.findByRoom(room);
 	}
 
-	public Iterable<Co2> findAllCo2() {
-		return dao.findAll();
+	public Iterable<Co2> findAllCo2(int room_id) {
+		Room room = new Room(room_id);
+		return dao.findByRoom(room);
 	}
 	
-	public List<Co2> findByDate() {
-		LocalDateTime date = LocalDateTime.now();
-		return dao.findByDate(date);
-
-	}
 }

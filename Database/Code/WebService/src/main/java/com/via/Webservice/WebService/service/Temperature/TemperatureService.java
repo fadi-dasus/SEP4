@@ -22,9 +22,10 @@ public class TemperatureService implements ITemperatureService{
 		return dao.findById(id);
 	}
 
-	public Iterable<Temperature> findAllTemperature() {
-		return dao.findAll();
-	}
+//	public Iterable<Temperature> findAllTemperature(int room_id) {
+//		Room room=new Room(room_id);
+//		return dao.findAll(room);
+//	}
 
 	@Override
 	public List<Temperature> findByTemperatureRoom(int room_id) {

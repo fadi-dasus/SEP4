@@ -35,16 +35,16 @@ public class HumidityController {
 
 	}
 
-	@GetMapping("/all")
-	public ResponseEntity<Iterable<Humidity>> findAllHumidity() {
-		Iterable<Humidity> list = service.findAllHumidity();
-		Humidity humidity = new Humidity();
-		humidity.add(linkTo(methodOn(HumidityController.class).findAllHumidity()).withSelfRel());
-		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);
-	}
+//	@GetMapping("/room/all")
+//	public ResponseEntity<Iterable<Humidity>> findAllHumidity(@PathVariable("id") int room_id) {
+//		Iterable<Humidity> list = service.findAll(room_id);
+//		Humidity humidity = new Humidity();
+//		humidity.add(linkTo(methodOn(HumidityController.class).findAllHumidity(room_id)).withSelfRel());
+//		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);
+//	}
 
 	@GetMapping("/room/{id}")
-	public ResponseEntity<Iterable<Humidity>> findAllHumidity(@PathVariable("id") int room_id) {
+	public ResponseEntity<Iterable<Humidity>> findByHumidityRoom(@PathVariable("id") int room_id) {
 		Iterable<Humidity> list = service.findByHumidityRoom(room_id);
 		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);
 	}

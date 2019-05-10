@@ -1,6 +1,8 @@
 package com.via.Webservice.WebService.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.hateoas.ResourceSupport;
 
@@ -38,6 +42,7 @@ public class Temperature extends ResourceSupport {
 
 	@Column(name = "value")
 	private String value;
+	
 	@Column(name = "timestamp")
 	private Timestamp timestamp;
 
@@ -48,7 +53,6 @@ public class Temperature extends ResourceSupport {
 	@JsonCreator
 	public Temperature(@JsonProperty("temperature") Room room, String value, Timestamp timestamp) {
 		this.room = room;
-
 		this.value = value;
 		this.timestamp = timestamp;
 	}
@@ -96,11 +100,8 @@ public class Temperature extends ResourceSupport {
 
 	@Override
 	public String toString() {
-		return "Temperature [Id=" + Id + ", room=" + room + ", status=" + status + ", higheAcceptableValue="
-				+ higheAcceptableValue + ", lowAcceptableValue=" + lowAcceptableValue + ", value=" + value
-				+ ", timestamp=" + timestamp + "]";
+		return "Temperature [Id=" + Id + ", room=" + room + ", status=" + status + ", value=" + value + ", timestamp="
+				+ timestamp + "]";
 	}
-
-	
 
 }

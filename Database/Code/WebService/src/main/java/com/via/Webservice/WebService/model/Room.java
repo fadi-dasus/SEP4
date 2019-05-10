@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "Room")
-public class Room extends ResourceSupport {
+public class Room {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
@@ -35,10 +35,11 @@ public class Room extends ResourceSupport {
 		this.Id = id;
 	}
 
-	@JsonCreator
-	public Room(@JsonProperty("room") String roomName, Device device) {
+	
+	public Room(int id, String roomName, Device device) {
 		this.roomName = roomName;
 		this.device=device;
+		this.Id=id;
 	}
 
 	public String getRoomName() {
@@ -60,6 +61,15 @@ public class Room extends ResourceSupport {
 
 	public void setDevice(Device device) {
 		this.device = device;
+	}
+	
+
+	public int getId() {
+		return Id;
+	}
+
+	public void setId(int id) {
+		Id = id;
 	}
 
 	@Override

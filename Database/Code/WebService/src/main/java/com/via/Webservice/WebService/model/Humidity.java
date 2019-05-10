@@ -40,10 +40,6 @@ public class Humidity extends ResourceSupport {
 	@Column(name = "value")
 	private String value;
 
-	//@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "date")
-	private LocalDate date;
-
 	@Column(name = "timestamp")
 	private Timestamp timestamp;
 
@@ -52,10 +48,8 @@ public class Humidity extends ResourceSupport {
 	}
 
 	@JsonCreator
-	public Humidity(@JsonProperty("humidity") String value, LocalDate date, Timestamp timestamp, Room room) {
+	public Humidity(@JsonProperty("humidity") String value, Timestamp timestamp, Room room) {
 		this.room = room;
-		this.date = date;
-
 		this.value = value;
 		this.timestamp = timestamp;
 	}
@@ -88,13 +82,6 @@ public class Humidity extends ResourceSupport {
 		this.value = value;
 	}
 
-	public LocalDate getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
 
 	public Timestamp getTimestamp() {
 		return timestamp;
@@ -122,8 +109,9 @@ public class Humidity extends ResourceSupport {
 
 	@Override
 	public String toString() {
-		return "Humidity [Id=" + Id + ", room=" + room + ", status=" + status + ", value=" + value + ", date=" + date
-				+ ", timestamp=" + timestamp + "]";
+		return "Humidity [Id=" + Id + ", room=" + room + ", status=" + status + ", value=" + value + ", timestamp="
+				+ timestamp + "]";
 	}
+
 
 }
