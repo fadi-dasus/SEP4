@@ -51,6 +51,5 @@ public class Co2Controller {
 	public ResponseEntity<Iterable<Co2>> findByRoomAndTodayCo2(@PathVariable("id") int room_id) {
 		Iterable<Co2> list = service.findByCo2RoomForToday(room_id);
 		return new ResponseEntity<Iterable<Co2>>(list, HttpStatus.OK);
-
 	}
 }
