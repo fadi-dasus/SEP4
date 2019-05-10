@@ -41,8 +41,6 @@ public class NotificationsService {
 
 	private String topic;
 	private Room room;
-
-	// private final String TOPIC = "E303";
 	// this is my key for my android app
 	private static final String FIREBASE_SERVER_KEY = "AAAADWTqU4s:APA91bFkQrNdtVcVVGMhBhYvMjPFggoYDlZzJg-1NgnHkgP4tF5oYeqxBbfn5trCN_dYkmKNsW5_ZMwQ-mGeKW3v0GmSUg7-pGl1ECQt5-mI8aFZAPI-aBSfY16LgzNsksKDPOpqgfoL";
 
@@ -67,7 +65,8 @@ public class NotificationsService {
 		return CompletableFuture.completedFuture(firebaseResponse);
 	}
 
-	@Scheduled(fixedRate = 10000)
+	@Scheduled(fixedDelay = 1000,initialDelay = 60000)
+	@Async
 	public void send() {
 
 		if (isEnabled) {
@@ -83,6 +82,7 @@ public class NotificationsService {
 				data.put("hum_value", dto.getHumidity());
 				data.put("temp_value", dto.getTemperature());
 				data.put("timestamp", dto.getTime().toString());
+				data.put("topic", this.topic);
 
 				body.put("data", data);
 
@@ -98,6 +98,7 @@ public class NotificationsService {
 		this.isEnabled = isEnabled;
 	}
 
+	@Async
 	public DTObject getDataForTheTopic() {
 		Co2 co2 = co2Respository.findTopByRoomOrderByIdDesc(this.room);
 		Temperature temperature = temperatureRepository.findTopByRoomOrderByIdDesc(this.room);
@@ -131,21 +132,5 @@ public class NotificationsService {
 	public boolean isEnabled() {
 		return isEnabled;
 	}
-//	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-//	LocalDateTime now = LocalDateTime.now();
-//	String time = dtf.format(now);
-//
-//	if (isEnabled) {
-//		JSONObject body = new JSONObject();
-//		body.put("to", "/topics/" + topic);
-//		body.put("priority", "high");
-//
-//		JSONObject data = new JSONObject();
-//		data.put("co2_value", "1050");
-//		data.put("hum_value", "20");
-//		data.put("temp_value", "30");
-//		data.put("timestamp", time);
-//
-//		body.put("data", data);
 
 }
