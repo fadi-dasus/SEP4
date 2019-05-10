@@ -18,7 +18,7 @@ public class WarningController {
 	@Autowired
 	IWarningService service;
 
-	@GetMapping("/roomId/{id}")
+	@GetMapping("/room/{id}")
 	public ResponseEntity<Iterable<Warning>> findAllWarnings(@PathVariable("id") int id) {
 		Room room = new Room(id);
 		Iterable<Warning> list = service.findAllWarningByRoomId(room);
