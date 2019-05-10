@@ -20,17 +20,16 @@ import com.via.Webservice.WebService.service.Admin.AdminService;
 public class AdminController {
 	@Autowired
 	AdminService adminService;
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Admin>> getAdminById(@PathVariable("id") Integer id) {
 		Optional<Admin> admin = adminService.findAdminById(id);
-		return new ResponseEntity<Optional<Admin>>(admin,HttpStatus.OK);
+		return new ResponseEntity<Optional<Admin>>(admin, HttpStatus.OK);
 
 	}
 
 	@GetMapping("/username")
-	public ResponseEntity<List<Admin>> getAdminByUsername(@RequestParam("username") String username)
-			 {
+	public ResponseEntity<List<Admin>> getAdminByUsername(@RequestParam("username") String username) {
 
 		List<Admin> admin = adminService.findByUsername(username);
 

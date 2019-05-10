@@ -25,22 +25,18 @@ public class Humidity extends ResourceSupport {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
 	private int Id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="room_id")
+	@JoinColumn(name = "room_id")
 	private Room room;
 
 	@Column(name = "status")
 	private String status;
 
-	final transient int higheAcceptableValue = 1;
-
-	final transient int lowAcceptableValue = 0;
 
 	@Column(name = "value")
 	private String value;
 
-	//@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date")
 	private LocalDate date;
 
@@ -54,9 +50,8 @@ public class Humidity extends ResourceSupport {
 	@JsonCreator
 	public Humidity(@JsonProperty("humidity") String value, LocalDate date, Timestamp timestamp, Room room) {
 		this.room = room;
-		this.date = date;
-
 		this.value = value;
+		this.date = date;
 		this.timestamp = timestamp;
 	}
 
@@ -72,13 +67,7 @@ public class Humidity extends ResourceSupport {
 		this.Id = id;
 	}
 
-	public int getHigheAcceptableValue() {
-		return higheAcceptableValue;
-	}
 
-	public int getLowAcceptableValue() {
-		return lowAcceptableValue;
-	}
 
 	public String getValue() {
 		return value;
@@ -86,14 +75,6 @@ public class Humidity extends ResourceSupport {
 
 	public void setValue(String value) {
 		this.value = value;
-	}
-
-	public LocalDate getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDate date) {
-		this.date = date;
 	}
 
 	public Timestamp getTimestamp() {
@@ -112,12 +93,13 @@ public class Humidity extends ResourceSupport {
 		this.room = room;
 	}
 
-	public int getHigheacceptablevalue() {
-		return higheAcceptableValue;
+
+	public LocalDate getDate() {
+		return date;
 	}
 
-	public int getLowacceptablevalue() {
-		return lowAcceptableValue;
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 
 	@Override

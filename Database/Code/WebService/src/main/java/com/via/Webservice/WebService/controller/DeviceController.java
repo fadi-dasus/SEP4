@@ -28,13 +28,10 @@ public class DeviceController {
 	public ResponseEntity<Optional<Device>> getDeviceById(@PathVariable("id") int id) {
 		Optional<Device> device = service.findDeviceById(id);
 		System.out.println(device.toString());
-		if(device!=null) {
-			return new ResponseEntity<Optional<Device>>(device,HttpStatus.OK);
-		}
-		else
-		return new ResponseEntity<Optional<Device>>(HttpStatus.NOT_FOUND);
-		
+		return new ResponseEntity<Optional<Device>>(device, HttpStatus.OK);
+
 	}
+
 	@GetMapping("/all")
 	public ResponseEntity<Iterable<Device>> findAllDevice() {
 		Iterable<Device> list = service.findAllDevice();
@@ -43,16 +40,15 @@ public class DeviceController {
 		return new ResponseEntity<Iterable<Device>>(list, HttpStatus.OK);
 
 	}
-	
+
 	@GetMapping("/name")
 	public ResponseEntity<List<Device>> findDeviceByName(@RequestParam("name") String name) {
 		List<Device> device = service.findByDiviceName(name);
-		if(device!=null) {
-			return new ResponseEntity<List<Device>>(HttpStatus.OK);
-		}
-		else
-		return new ResponseEntity<List<Device>>(HttpStatus.NOT_FOUND);
-		
+		if (device != null) {
+			return new ResponseEntity<List<Device>>(device,HttpStatus.OK);
+		} else
+			return new ResponseEntity<List<Device>>(device,HttpStatus.NOT_FOUND);
+
 	}
 
 }

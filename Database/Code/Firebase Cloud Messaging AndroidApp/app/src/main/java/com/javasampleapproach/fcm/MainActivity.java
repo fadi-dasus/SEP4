@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
         btn_subscribe = (Button) findViewById(R.id.btn_subscribe);
         btn_unsubscribe = (Button) findViewById(R.id.btn_unsubscribe);
 
+
+
         btn_subscribe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

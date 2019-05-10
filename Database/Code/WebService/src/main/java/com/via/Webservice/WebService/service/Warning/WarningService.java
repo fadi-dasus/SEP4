@@ -4,14 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.via.Webservice.WebService.dao.Warning.WarningRepository;
+import com.via.Webservice.WebService.model.Room;
 import com.via.Webservice.WebService.model.Warning;
 
 @Service
-public class WarningService {
-	
+public class WarningService implements IWarningService {
+
 	@Autowired
 	WarningRepository dao;
-	public Iterable<Warning> findAllWarning() {
-		return dao.findAll();
+
+	@Override
+	public Iterable<Warning> findAllWarningByRoomId(Room room) {
+
+		return dao.findByRoom(room);
 	}
 }

@@ -1,9 +1,12 @@
 package com.javasampleapproach.fcm.pushnotif.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.scheduling.annotation.Async;
@@ -13,8 +16,21 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class NotificationsService {
+	
+	@Value("${jobs.enabled:false}")
+	  private boolean isEnabled;
+	
+	
+	
+
 	private final String TOPIC = "MyTopic";
+	// this is my key for my android app
 	private static final String FIREBASE_SERVER_KEY = "AAAADWTqU4s:APA91bFkQrNdtVcVVGMhBhYvMjPFggoYDlZzJg-1NgnHkgP4tF5oYeqxBbfn5trCN_dYkmKNsW5_ZMwQ-mGeKW3v0GmSUg7-pGl1ECQt5-mI8aFZAPI-aBSfY16LgzNsksKDPOpqgfoL";
+	
+//	// this is Ainis server key
+//	private static final String FIREBASE_SERVER_KEY = "AAAAbmqSls4:APA91bEq9UgyryzDjfaqEUDMvyAEZJq6E3K143Mup8p1gzXzJABbEBnMKYAqVDsU9zIio1dLkMMNDXfaZHI6xRIe6HzDmepCk8YwkzNxr4GT61HynCP-BfPpeafezVkgX40QLb8ntrC9";
+
+	
 	private static final String FIREBASE_API_URL = "https://fcm.googleapis.com/fcm/send";
 	
 	@Async
@@ -32,28 +48,38 @@ public class NotificationsService {
 		return CompletableFuture.completedFuture(firebaseResponse);
 	}
 	
-	@Scheduled(fixedRate = 4000)
+	@Scheduled(fixedRate = 1000)
 	public void send() {
-
+		 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		   LocalDateTime now = LocalDateTime.now(); 
+		  String time =  dtf.format(now);
+		   
+		 if(isEnabled) {
 		JSONObject body = new JSONObject();
 		body.put("to", "/topics/" + TOPIC);
 		body.put("priority", "high");
-
-		JSONObject notification = new JSONObject();
-		notification.put("title", "My Notification");
-		notification.put("body", "Happy Coding!");
-		
+	
 		JSONObject data = new JSONObject();
-		data.put("Key-1", "My Data 1");
+		data.put("co2_value", "1050" );
+		data.put("hum_value", "20");
+		data.put("temp_value", "30");
+		data.put("timestamp", time);
 
-
-		body.put("notification", notification);
 		body.put("data", data);
 
 		HttpEntity<String> request = new HttpEntity<>(body.toString());
 
 		CompletableFuture<String> pushNotification = init(request);
 		CompletableFuture.allOf(pushNotification).join();
+	}
+	}
+	
+	public boolean isEnabled() {
+		return isEnabled;
+	}
+
+	public void setEnabled(boolean isEnabled) {
+		this.isEnabled = isEnabled;
 	}
 	
 	

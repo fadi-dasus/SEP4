@@ -1,8 +1,5 @@
 package com.via.Webservice.WebService.controller;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -39,8 +36,6 @@ public class RoomController {
 	@GetMapping("/all")
 	public ResponseEntity<Iterable<Room>> findAllRoom() {
 		Iterable<Room> list = service.findAllRoom();
-		Room room = new Room();
-		room.add(linkTo(methodOn(RoomController.class).findAllRoom()).withSelfRel());
 		return new ResponseEntity<Iterable<Room>>(list, HttpStatus.OK);
 
 	}

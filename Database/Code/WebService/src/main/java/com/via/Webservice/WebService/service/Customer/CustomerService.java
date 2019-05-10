@@ -10,19 +10,18 @@ import com.via.Webservice.WebService.dao.Customer.CustomerRepository;
 import com.via.Webservice.WebService.model.Customer;
 
 @Service
-public class CustomerService {
+public class CustomerService implements ICustomerService {
 
 	@Autowired
 	public CustomerRepository dao;
-	
-	
+
 	public Optional<Customer> findCustomerById(int id) {
 		return dao.findById(id);
 	}
 
-	public List<Customer> findByUsername(String username)  {
+	public List<Customer> findByUsername(String username) {
 
 		return dao.findByUsername(username);
 	}
-	
+
 }

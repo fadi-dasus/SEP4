@@ -29,7 +29,7 @@ void timers_init() {
 }
 
 void co2_timer_callback(TimerHandle_t pxTimer) {
-	printf("unblock co2 semaphore");
+	//printf("unblock co2 semaphore");
 	if( xSemaphoreGive( CO2Semaphore ) != pdTRUE )
 	{
 		// We would expect this call to fail because we cannot give
@@ -43,7 +43,7 @@ void co2_timer_callback(TimerHandle_t pxTimer) {
 }
 
 void temp_hum_timer_callback(TimerHandle_t pxTimer){
-	printf("unblock temphum semaphore");
+	//printf("unblock temphum semaphore");
 	if( xSemaphoreGive( TempHumSemaphore ) != pdTRUE )
 	{
 		// We would expect this call to fail because we cannot give

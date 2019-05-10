@@ -25,12 +25,11 @@ public class CustomerController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Customer>> getCustomerById(@PathVariable("id") Integer id) {
 		Optional<Customer> customer = customerService.findCustomerById(id);
-		return new ResponseEntity<Optional<Customer>>(customer,HttpStatus.OK);
+		return new ResponseEntity<Optional<Customer>>(customer, HttpStatus.OK);
 	}
 
 	@GetMapping("/username")
-	public ResponseEntity<List<Customer>> getCustomerByUsername(@RequestParam("username") String username)
-			 {
+	public ResponseEntity<List<Customer>> getCustomerByUsername(@RequestParam("username") String username) {
 
 		List<Customer> customer = customerService.findByUsername(username);
 

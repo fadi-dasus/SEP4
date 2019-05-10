@@ -1,7 +1,7 @@
 package com.via.Webservice.WebService.model;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,9 +25,6 @@ public class Co2 extends ResourceSupport {
 	@Column(name = "Id")
 	private int Id;
 
-	final transient int higheAcceptableValue = 1;
-
-	final transient int lowAcceptableValue = 0;
 
 	@ManyToOne
 	@JoinColumn(name="room_id")
@@ -40,7 +37,7 @@ public class Co2 extends ResourceSupport {
 	private String value;
 
 	@Column(name = "date")
-	private LocalDateTime date;
+	private LocalDate date;
 
 	@Column(name = "timestamp")
 	private Timestamp timestamp;
@@ -50,7 +47,7 @@ public class Co2 extends ResourceSupport {
 	}
 
 	@JsonCreator
-	public Co2(@JsonProperty("co2") String value, LocalDateTime date, Timestamp timestamp, Room room) {
+	public Co2(@JsonProperty("co2") String value, LocalDate date, Timestamp timestamp, Room room) {
 		this.room = room;
 		this.date = date;
 		this.value = value;
@@ -89,19 +86,12 @@ public class Co2 extends ResourceSupport {
 		this.timestamp = timestamp;
 	}
 
-	public int getHigheacceptablevalue() {
-		return higheAcceptableValue;
-	}
 
-	public int getLowacceptablevalue() {
-		return lowAcceptableValue;
-	}
-
-	public LocalDateTime getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDateTime date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

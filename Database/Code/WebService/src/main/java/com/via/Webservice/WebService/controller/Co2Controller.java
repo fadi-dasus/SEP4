@@ -1,9 +1,5 @@
 package com.via.Webservice.WebService.controller;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
-
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.via.Webservice.WebService.model.Co2;
-import com.via.Webservice.WebService.model.Room;
 import com.via.Webservice.WebService.service.Co2.Co2Service;
 
 @RestController
@@ -35,18 +30,17 @@ public class Co2Controller {
 			return new ResponseEntity<Optional<Co2>>(HttpStatus.NOT_FOUND);
 
 	}
-	@GetMapping("/all")
-	public ResponseEntity<Iterable<Co2>> findAllCo2() {
-		Iterable<Co2> list = service.findAllCo2();
-		Co2 co2 = new Co2();
-		co2.add(linkTo(methodOn(Co2Controller.class).findAllCo2()).withSelfRel());
-		return new ResponseEntity<Iterable<Co2>>(list, HttpStatus.OK);
-	}
 
 	@GetMapping("/room/{id}")
 	public ResponseEntity<Iterable<Co2>> findAllCo2(@PathVariable("id") int room_id) {
 		Iterable<Co2> list = service.findByCo2Room(room_id);
 		return new ResponseEntity<Iterable<Co2>>(list, HttpStatus.OK);
 
+	}
+
+	@GetMapping("/roomtoday/{id}")
+	public ResponseEntity<Iterable<Co2>> findByRoomAndTodayCo2(@PathVariable("id") int room_id) {
+		Iterable<Co2> list = service.findByCo2RoomForToday(room_id);
+		return new ResponseEntity<Iterable<Co2>>(list, HttpStatus.OK);
 	}
 }

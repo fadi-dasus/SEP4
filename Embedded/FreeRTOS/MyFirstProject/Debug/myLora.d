@@ -22,7 +22,7 @@ myLora.d myLora.o: .././myLora.c .././myLora.h \
  ../FreeRTOS/src/ATMEGA_FreeRTOS.h ../FreeRTOS/src/task.h \
  ../FreeRTOS/src/list.h ../Drivers/lora_driver.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
- ../Drivers/serial.h
+ ../Drivers/serial.h ../Drivers/ihal.h
 
 .././myLora.h:
 
@@ -83,3 +83,5 @@ d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h:
 
 ../Drivers/serial.h:
+
+../Drivers/ihal.h:
