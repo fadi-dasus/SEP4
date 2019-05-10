@@ -41,7 +41,7 @@ create table "Calendar_D"(
   DECLARE @StartDate DATETIME 
   DECLARE @EndDate DATETIME 
   SET @StartDate= '2019-05-01' 
-   SET @EndDate= DATEADD(d, 1095, @StartDate)
+   SET @EndDate= DATEADD(d, 60, @StartDate)
    WHILE @StartDate<= @EndDate
    BEGIN 
    INSERT INTO [Calendar_D](CalendarDate,WeekDayName,MonthName)
@@ -49,7 +49,7 @@ create table "Calendar_D"(
    @StartDate,DATENAME(weekday,@startDate),
    DATENAME(month, @StartDate)SET @StartDate= DATEADD(dd, 1, @StartDate)END
 
-
+   select * from Calendar_D;
    CREATE TABLE "Time_D"
 (
   T_ID int identity (1,1) not null
