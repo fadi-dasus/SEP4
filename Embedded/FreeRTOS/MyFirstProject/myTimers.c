@@ -1,68 +1,82 @@
 #include "myTimers.h"
 #include "mySemaphores.h"
 
-void timers_init() {
+void timers_init() 
+{
+	// total 10 minute cycle
+	// timers do not restart automatically 
 	
-	CO2Timer = xTimerCreate(
+	co2Timer = xTimerCreate(
 		"CO2 Timer",
-		(2000/portTICK_PERIOD_MS),
-		pdTRUE,
-		(void*) 0,
+		( 1000/portTICK_PERIOD_MS ) /** 60*/ * 7,	// 7 minute
+		pdFALSE,
+		( void* ) 0,
 		co2_timer_callback
 	);
 	
-	TempHumTimer = xTimerCreate(
+	tempHumTimer = xTimerCreate(
 		"Temp Hum Timer",
-		(3000/portTICK_PERIOD_MS),
-		pdTRUE,
-		(void*) 1,
+		( 1000/portTICK_PERIOD_MS ) /** 60*/ * 1 ,	// 1 minute
+		pdFALSE,
+		( void* ) 1,
 		temp_hum_timer_callback
 	);
 	
-	LoRaTimer = xTimerCreate(
+	loraTimer = xTimerCreate(
 		"LoRa Timer",
-		(3000/portTICK_PERIOD_MS),
-		pdTRUE,
-		(void*) 2,
+		( 1000/portTICK_PERIOD_MS ) /** 60*/ * 1,	// 1 minute
+		pdFALSE,
+		( void* ) 2,
 		lora_timer_callback
+	);
+	
+	restartCycleTimer = xTimerCreate(
+		"Restart Cycle Timer",
+		( 1000/portTICK_PERIOD_MS ) /** 60*/ * 1,	// 1 minute
+		pdFALSE,
+		( void* ) 3,
+		restart_cycle_timer_callback
 	);
 }
 
-void co2_timer_callback(TimerHandle_t pxTimer) {
-	//printf("unblock co2 semaphore");
-	if( xSemaphoreGive( CO2Semaphore ) != pdTRUE )
-	{
-		// We would expect this call to fail because we cannot give
-		// a semaphore without first "taking" it!
-		printf("we dont have ");
-		//vTaskDelay(50/portTICK_PERIOD_MS);
-	}
+void co2_timer_callback(TimerHandle_t pxTimer) 
+{
+	printf("7m co2 callback");
+	if( xSemaphoreTake( cycleSemaphore, portMAX_DELAY ) != pdTRUE )
+		printf("ERROR : Cycle semaphore not taken back.");
+	if( xSemaphoreGive( co2Semaphore ) != pdTRUE )
+		printf("ERROR : CO2 semaphore not given.");
 	
-	//vTaskDelay(4000/portTICK_PERIOD_MS);
-	//xSemaphoreTake(CO2Semaphore, portMAX_DELAY);
+	xTimerStart( tempHumTimer, 0 );
 }
 
-void temp_hum_timer_callback(TimerHandle_t pxTimer){
-	//printf("unblock temphum semaphore");
-	if( xSemaphoreGive( TempHumSemaphore ) != pdTRUE )
-	{
-		// We would expect this call to fail because we cannot give
-		// a semaphore without first "taking" it!
-		printf("we dont have ");
-		//vTaskDelay(50/portTICK_PERIOD_MS);
-	}
+void temp_hum_timer_callback(TimerHandle_t pxTimer)
+{
+	printf("1m temp_hum callback");
+	if( xSemaphoreTake( co2Semaphore, portMAX_DELAY ) != pdTRUE )
+		printf("ERROR : CO2 semaphore not taken back.");
+	if( xSemaphoreGive( tempHumSemaphore ) != pdTRUE )
+		printf("ERROR : TempHum semaphore not given.");
 	
-	//vTaskDelay(6000/portTICK_PERIOD_MS);
-	//xSemaphoreTake(TempHumSemaphore, portMAX_DELAY);
+	xTimerStart( loraTimer, 0 );
 }
 
-void lora_timer_callback(TimerHandle_t pxTimer) {
-	printf("unblock lora semaphore ");
-	if( xSemaphoreGive( LoRaSemaphore ) != pdTRUE )
-	{
-		// We would expect this call to fail because we cannot give
-		// a semaphore without first "taking" it!
-		printf("we dont have ");
-		//vTaskDelay(50/portTICK_PERIOD_MS);
-	}
+void lora_timer_callback(TimerHandle_t pxTimer) 
+{
+	printf("1m lora callback");
+	if( xSemaphoreTake( tempHumSemaphore, portMAX_DELAY ) != pdTRUE )
+		printf("ERROR : TempHum semaphore not taken back.");
+	if( xSemaphoreGive( loraSemaphore ) != pdTRUE )		
+		printf("ERROR : LoRa semaphore not given.");
+		
+	xTimerStart( restartCycleTimer, 0 );
+}
+
+void restart_cycle_timer_callback(TimerHandle_t pxTimer)
+{
+	printf("1m restart cycle callback");
+	if( xSemaphoreTake( loraSemaphore, portMAX_DELAY ) != pdTRUE )
+		printf("ERROR : LoRa semaphore not taken back.");
+	if( xSemaphoreGive( cycleSemaphore ) != pdTRUE )
+		printf("ERROR : Cycle semaphore not given.");
 }

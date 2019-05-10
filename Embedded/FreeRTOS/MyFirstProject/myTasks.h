@@ -16,17 +16,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "co2Sensor.h"
+#include "myLora.h"
+#include "mySemaphores.h"
+#include "myTimers.h"
+#include "temp_humSensor.h"
+
 #include <task.h>
+#include <timers.h>
 
-TaskHandle_t CO2MeasureTask;
-TaskHandle_t TempHumMeasureTask;
-TaskHandle_t LoRaSendDataTask;
+TaskHandle_t startCycleTaskHandler;
 
-void create_tasks(void);
+TaskHandle_t co2MeasureTask;
+TaskHandle_t tempHumMeasureTask;
+TaskHandle_t loraSendDataTask;
 
-void co2_measure_task(void *pvParameters);
-void temp_hum_measure_task(void *pvParameters);
-void lora_send_data_task( void *pvParameters);
+void create_tasks( void );
 
+void start_cycle_task( void *pvParameters );
+void co2_measure_task( void *pvParameters );
+void temp_hum_measure_task( void *pvParameters );
+void lora_send_data_task( void *pvParameters );
 
 #endif /* MYTASKS_H_ */
