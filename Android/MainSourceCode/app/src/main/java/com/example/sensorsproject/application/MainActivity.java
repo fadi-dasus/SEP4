@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.sensorsproject.R;
+import com.example.sensorsproject.application.viewmodels.LiveDataViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import butterknife.BindView;
@@ -33,11 +36,16 @@ public class MainActivity extends AppCompatActivity {
     private MenuItem logoutItem;
     private MenuItem todayDataItem;
 
+    private LiveDataViewModel liveDataViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        //Set up VIewModel
+        liveDataViewModel = ViewModelProviders.of(this).get(LiveDataViewModel.class);
 
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
@@ -127,5 +135,17 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        if(liveDataViewModel.getCurrentRoom().getValue() != null){
+            String roomName;
+            roomName = liveDataViewModel.getCurrentRoom().getValue().getRoomName();
+            liveDataViewModel.unsubscribe(roomName);
+        }
+
+        super.onDestroy();
     }
 }

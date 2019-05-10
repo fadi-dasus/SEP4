@@ -49,12 +49,9 @@ public class RoomMainFragment extends Fragment {
     @BindView(R.id.temp_main_textView) TextView tempMainTextView;
     @BindView(R.id.hum_main_textView) TextView humMainTextView;
     @BindView(R.id.timestamp_main_textView) TextView timestampMainTextView;
-    @BindView(R.id.nextFragmentBtn) Button nextFragmentBtn;
     @BindView(R.id.co2_main_logo) ImageView co2MainLogoView;
     @BindView(R.id.temp_main_logo) ImageView tempMainLogoView;
     @BindView(R.id.hum_main_logo) ImageView humMaimLogoView;
-    @BindView(R.id.reset) Button reset;
-    @BindView(R.id.startBtn) Button start;
     public RoomMainFragment() {
         // Required empty public constructor
     }
@@ -112,15 +109,6 @@ public class RoomMainFragment extends Fragment {
     }
 
     private void setOnClickListeners(){
-        nextFragmentBtn.setOnClickListener(v ->
-                MainActivity.navController.navigate(R.id.action_roomMainFragment_to_reportListFragment));
-
-        reset.setOnClickListener(v ->
-                gauge.moveToValue(0));
-
-        start.setOnClickListener(v ->
-                gauge.moveToValue(400));
-
         tempMainLogoView.setOnClickListener(v -> {
             //Checks if the same sensor is not selected already
             if(!liveDataViewModel.getCurrentSensor().getValue().equals("temperature"))
@@ -166,9 +154,11 @@ public class RoomMainFragment extends Fragment {
         liveDataViewModel.getLiveCo2().observe(this, co2 -> {
             if(co2 != null){
                 co2mainTextView.setText(co2.getValue());
-                if(liveDataViewModel.getCurrentSensor().getValue().equals("co2")){
-                    float f = Float.parseFloat(co2.getValue());
-                    gauge.moveToValue(f);
+                if(liveDataViewModel.getCurrentSensor().getValue() != null){
+                    if(liveDataViewModel.getCurrentSensor().getValue().equals("co2")){
+                        float f = Float.parseFloat(co2.getValue());
+                        gauge.moveToValue(f);
+                    }
                 }
             }
         });
@@ -176,9 +166,11 @@ public class RoomMainFragment extends Fragment {
         liveDataViewModel.getLiveTemperature().observe(this, temp -> {
             if(temp != null){
                 tempMainTextView.setText(temp.getValue());
-                if(liveDataViewModel.getCurrentSensor().getValue().equals("temperature")){
-                    float f = Float.parseFloat(temp.getValue());
-                    gauge.moveToValue(f);
+                if(liveDataViewModel.getCurrentSensor().getValue() != null){
+                    if(liveDataViewModel.getCurrentSensor().getValue().equals("temperature")){
+                        float f = Float.parseFloat(temp.getValue());
+                        gauge.moveToValue(f);
+                    }
                 }
             }
         });
@@ -186,9 +178,11 @@ public class RoomMainFragment extends Fragment {
         liveDataViewModel.getLiveHumidity().observe(this, hum -> {
             if (hum != null) {
                 humMainTextView.setText(hum.getValue());
-                if(liveDataViewModel.getCurrentSensor().getValue().equals("humidity")){
-                    float f = Float.parseFloat(hum.getValue());
-                    gauge.moveToValue(f);
+                if(liveDataViewModel.getCurrentSensor().getValue() != null){
+                    if(liveDataViewModel.getCurrentSensor().getValue().equals("humidity")){
+                        float f = Float.parseFloat(hum.getValue());
+                        gauge.moveToValue(f);
+                    }
                 }
             }
         });

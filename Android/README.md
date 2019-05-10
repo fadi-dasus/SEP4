@@ -32,7 +32,7 @@
 10. Expanded RoomChoice ✓
 11. Updated Models ✓
 12. Connection to Spring Framework ✓
-13. Firebase Cloud Messaging 
+13. Firebase Cloud Messaging ✓
 14. Expanded ReportList
 15. Expanded WarningList
 16. Apply Material Design to the whole project
