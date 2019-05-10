@@ -1,6 +1,7 @@
 package com.dataConnection.Sep4.SQL.model;
 
 import org.bson.types.ObjectId;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -27,6 +28,8 @@ public class Co2 {
 
 	@Column(name = "timestamp")
 	private Date date;
+
+
 
 	public Co2(){
 

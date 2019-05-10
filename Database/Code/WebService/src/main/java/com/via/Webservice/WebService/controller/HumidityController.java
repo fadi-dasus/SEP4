@@ -41,7 +41,7 @@ public class HumidityController {
 		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);
 	}
 
-	@GetMapping("/	{id}")
+	@GetMapping("/room/{id}")
 	public ResponseEntity<Iterable<Humidity>> findByHumidityRoom(@PathVariable("id") int room_id) {
 		Iterable<Humidity> list = service.findByHumidityRoom(room_id);
 		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);

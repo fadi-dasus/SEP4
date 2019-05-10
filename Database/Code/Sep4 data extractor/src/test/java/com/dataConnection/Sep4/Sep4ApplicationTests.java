@@ -2,9 +2,7 @@ package com.dataConnection.Sep4;
 
 import java.util.List;
 
-import com.dataConnection.Sep4.SQL.dao.DeviceRepository;
-import com.dataConnection.Sep4.SQL.dao.HumidityRepository;
-import com.dataConnection.Sep4.SQL.dao.TemperatureRepository;
+import com.dataConnection.Sep4.SQL.dao.*;
 import com.dataConnection.Sep4.SQL.model.Device;
 import com.dataConnection.Sep4.SQL.model.Humidity;
 import com.dataConnection.Sep4.SQL.model.Temperature;
@@ -17,7 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.dataConnection.Sep4.SQL.dao.Co2Repository;
 import com.dataConnection.Sep4.SQL.model.Co2;
 
 @RunWith(SpringRunner.class)
@@ -38,6 +35,12 @@ public class Sep4ApplicationTests {
 
 	@Autowired
 	EUIMongoRepository er;
+
+	@Autowired
+	RoomRepository rr;
+
+	@Autowired
+	DeviceRepository dr;
 
 	private List<EUIMongo> EUI;
 
