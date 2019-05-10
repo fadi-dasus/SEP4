@@ -25,20 +25,17 @@ public class HumidityService implements IHumidityService {
 		return dao.findAll();
 	}
 
-
 	@Override
 	public List<Humidity> findByHumidityRoom(int room_id) {
-		Room room=new Room(room_id);
+		Room room = new Room(room_id);
 		return dao.findByRoom(room);
 	}
 
-
 	@Override
 	public List<Humidity> findByRoomForToday(int room_id) {
-		Room room=new Room(room_id);
-		LocalDate date=LocalDate.now();
-		return dao.findByRoomAndDate(room,date);
+		Room room = new Room(room_id);
+		LocalDate date = LocalDate.now();
+		return dao.findByRoomAndDate(room, date);
 	}
 
-	
 }

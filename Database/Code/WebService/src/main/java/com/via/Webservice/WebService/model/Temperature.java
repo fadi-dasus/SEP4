@@ -2,8 +2,6 @@ package com.via.Webservice.WebService.model;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.springframework.hateoas.ResourceSupport;
 
@@ -31,22 +27,18 @@ public class Temperature extends ResourceSupport {
 	private int Id;
 
 	@ManyToOne
-	@JoinColumn(name="room_id")
+	@JoinColumn(name = "room_id")
 	private Room room;
 
 	@Column(name = "status")
 	private String status;
 
-	final transient int higheAcceptableValue = 1;
-
-	final transient int lowAcceptableValue = 0;
-
 	@Column(name = "value")
 	private String value;
-	
+
 	@Column(name = "date")
 	private LocalDate date;
-	
+
 	@Column(name = "timestamp")
 	private Timestamp timestamp;
 
@@ -55,13 +47,12 @@ public class Temperature extends ResourceSupport {
 	}
 
 	@JsonCreator
-	public Temperature(@JsonProperty("temperature") Room room, LocalDate date, String value, Timestamp timestamp) {
+	public Temperature(@JsonProperty("temperature") String value, Room room, LocalDate date, Timestamp timestamp) {
 		this.room = room;
 		this.value = value;
 		this.timestamp = timestamp;
 	}
-	
-	
+
 	public String getStatus() {
 		return status;
 	}
@@ -93,15 +84,6 @@ public class Temperature extends ResourceSupport {
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}
-
-	public int getHigheacceptablevalue() {
-		return higheAcceptableValue;
-	}
-
-	public int getLowacceptablevalue() {
-		return lowAcceptableValue;
-	}
-	
 
 	public LocalDate getDate() {
 		return date;

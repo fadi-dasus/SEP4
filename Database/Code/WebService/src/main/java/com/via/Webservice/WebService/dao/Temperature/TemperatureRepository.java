@@ -10,6 +10,7 @@ import com.via.Webservice.WebService.model.Temperature;
 
 public interface TemperatureRepository extends CrudRepository<Temperature, Integer> {
 	public List<Temperature> findByRoom(Room room);
-	public List<Temperature> findByRoomAndDate(Room room,LocalDate date);
-	
+
+	public List<Temperature> findByRoomAndDate(Room room, LocalDate date);
+
 }

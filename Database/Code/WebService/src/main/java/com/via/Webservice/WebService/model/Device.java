@@ -25,7 +25,7 @@ public class Device extends ResourceSupport {
 	private String uie;
 
 	public Device() {
-		super();
+	
 	}
 
 	@JsonCreator

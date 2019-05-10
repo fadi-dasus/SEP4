@@ -10,17 +10,17 @@ import com.via.Webservice.WebService.dao.Admin.AdminRepository;
 import com.via.Webservice.WebService.model.Admin;
 
 @Service
-public class AdminService implements IAdminService{
+public class AdminService implements IAdminService {
 	@Autowired
 	public AdminRepository dao;
-		
+
 	public Optional<Admin> findAdminById(int id) {
 		return dao.findById(id);
 	}
 
-	public List<Admin> findByUsername(String username)  {
+	public List<Admin> findByUsername(String username) {
 
 		return dao.findByUsername(username);
 	}
-	
+
 }

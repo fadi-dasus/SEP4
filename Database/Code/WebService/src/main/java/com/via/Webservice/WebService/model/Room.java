@@ -8,18 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.hateoas.ResourceSupport;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 @Entity
 @Table(name = "Room")
 public class Room {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
-	private int Id;
+	private int id;
 
 	@Column(name = "roomName")
 	private String roomName;
@@ -32,14 +27,14 @@ public class Room {
 	}
 
 	public Room(int id) {
-		this.Id = id;
+		this.id = id;
 	}
 
 	
 	public Room(int id, String roomName, Device device) {
 		this.roomName = roomName;
 		this.device=device;
-		this.Id=id;
+		this.id=id;
 	}
 
 	public String getRoomName() {
@@ -51,7 +46,7 @@ public class Room {
 	}
 
 	public void setId(Integer id) {
-		Id = id;
+		id = id;
 	}
 
 
@@ -65,16 +60,14 @@ public class Room {
 	
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
-	public void setId(int id) {
-		Id = id;
-	}
+	
 
 	@Override
 	public String toString() {
-		return "Room [Id=" + Id + ", roomName=" + roomName + ", device=" + device + "]";
+		return "Room [Id=" + id + ", roomName=" + roomName + ", device=" + device + "]";
 	}
 
 }

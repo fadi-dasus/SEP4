@@ -1,6 +1,6 @@
 package com.via.Webservice.WebService.model;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,25 +10,20 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.hateoas.ResourceSupport;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 @Entity
 @Table(name = "Warning")
-public class Warning extends ResourceSupport {
+public class Warning {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
-	private int Id;
+	private int id;
 
 	@Column(name = "MeasurementType")
 	private String MeasurementType;
 
 	@Column(name = "timeStamp")
-	private Timestamp timeStamp;
+	private LocalDate localDate;
 
 	@Column(name = "value")
 	private double value;
@@ -43,13 +38,13 @@ public class Warning extends ResourceSupport {
 
 	}
 
-	@JsonCreator
-	public Warning(@JsonProperty("warning") Integer id, String measurementType, Timestamp timeStamp, double value,
+	
+	public Warning(Integer id, String measurementType, LocalDate localDate, double value,
 			Room room) {
 
-		Id = id;
+		id = id;
 		MeasurementType = measurementType;
-		this.timeStamp = timeStamp;
+		this.localDate = localDate;
 
 		this.value = value;
 		this.room = room;
@@ -65,7 +60,7 @@ public class Warning extends ResourceSupport {
 	}
 
 	public void setId(int id) {
-		Id = id;
+		id = id;
 	}
 
 	public String getMeasurementType() {
@@ -76,12 +71,17 @@ public class Warning extends ResourceSupport {
 		MeasurementType = measurementType;
 	}
 
-	public Timestamp getTimeStamp() {
-		return timeStamp;
+
+	public LocalDate getLocalDate() {
+		return localDate;
 	}
 
-	public void setTimeStamp(Timestamp timeStamp) {
-		this.timeStamp = timeStamp;
+	public void setLocalDate(LocalDate localDate) {
+		this.localDate = localDate;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public double getValue() {
@@ -102,7 +102,7 @@ public class Warning extends ResourceSupport {
 
 	@Override
 	public String toString() {
-		return "Warning [Id=" + Id + ", MeasurementType=" + MeasurementType + ", timeStamp=" + timeStamp + ", value="
+		return "Warning [Id=" + id + ", MeasurementType=" + MeasurementType + ", timeStamp=" + localDate + ", value="
 				+ value + ", room=" + room + ", status=" + status + "]";
 	}
 

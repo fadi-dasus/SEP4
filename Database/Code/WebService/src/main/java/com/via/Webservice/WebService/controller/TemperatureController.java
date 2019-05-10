@@ -3,7 +3,6 @@ package com.via.Webservice.WebService.controller;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.via.Webservice.WebService.model.Humidity;
 import com.via.Webservice.WebService.model.Temperature;
 import com.via.Webservice.WebService.service.Temperature.TemperatureService;
 
@@ -48,7 +46,7 @@ public class TemperatureController {
 		Iterable<Temperature> list = service.findByTemperatureRoom(room_id);
 		return new ResponseEntity<Iterable<Temperature>>(list, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/roomtoday/{id}")
 	public ResponseEntity<Iterable<Temperature>> findByRoomForToday(@PathVariable("id") int room_id) {
 		Iterable<Temperature> list = service.findByRoomForToday(room_id);

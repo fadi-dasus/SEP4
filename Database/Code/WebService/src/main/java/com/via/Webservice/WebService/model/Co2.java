@@ -25,9 +25,6 @@ public class Co2 extends ResourceSupport {
 	@Column(name = "Id")
 	private int Id;
 
-	final transient int higheAcceptableValue = 1;
-
-	final transient int lowAcceptableValue = 0;
 
 	@ManyToOne
 	@JoinColumn(name="room_id")
@@ -89,13 +86,6 @@ public class Co2 extends ResourceSupport {
 		this.timestamp = timestamp;
 	}
 
-	public int getHigheacceptablevalue() {
-		return higheAcceptableValue;
-	}
-
-	public int getLowacceptablevalue() {
-		return lowAcceptableValue;
-	}
 
 	public LocalDate getDate() {
 		return date;

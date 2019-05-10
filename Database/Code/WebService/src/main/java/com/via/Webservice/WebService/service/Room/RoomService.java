@@ -13,7 +13,7 @@ import com.via.Webservice.WebService.model.Room;
 public class RoomService implements IRoomService {
 	@Autowired
 	RoomRepository dao;
-	
+
 	public Optional<Room> findRoomById(int id) {
 		return dao.findById(id);
 	}
@@ -21,6 +21,7 @@ public class RoomService implements IRoomService {
 	public Iterable<Room> findAllRoom() {
 		return dao.findAll();
 	}
+
 	public List<Room> findByRoomName(String name) {
 		return dao.findByRoomName(name);
 	}

@@ -7,6 +7,8 @@ import com.via.Webservice.WebService.model.Humidity;
 
 public interface IHumidityService {
 	public Optional<Humidity> findHumidityById(int id);
+
 	public List<Humidity> findByHumidityRoom(int room_id);
+
 	public List<Humidity> findByRoomForToday(int room_id);
 }

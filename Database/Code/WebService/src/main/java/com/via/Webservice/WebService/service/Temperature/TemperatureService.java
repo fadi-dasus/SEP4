@@ -12,13 +12,14 @@ import org.springframework.stereotype.Service;
 import com.via.Webservice.WebService.dao.Temperature.TemperatureRepository;
 import com.via.Webservice.WebService.model.Room;
 import com.via.Webservice.WebService.model.Temperature;
+
 @Service
-public class TemperatureService implements ITemperatureService{
-	
+public class TemperatureService implements ITemperatureService {
+
 	@Autowired
 	TemperatureRepository dao;
 	public EntityManager entityManager;
-	
+
 	public Optional<Temperature> findTemperatureById(int id) {
 		return dao.findById(id);
 	}
@@ -29,15 +30,15 @@ public class TemperatureService implements ITemperatureService{
 
 	@Override
 	public List<Temperature> findByTemperatureRoom(int room_id) {
-		Room room=new Room(room_id);
+		Room room = new Room(room_id);
 		return dao.findByRoom(room);
 	}
 
 	@Override
 	public List<Temperature> findByRoomForToday(int room_id) {
-		Room room=new Room(room_id);
-		LocalDate date=LocalDate.now();
-		return dao.findByRoomAndDate(room,date);
+		Room room = new Room(room_id);
+		LocalDate date = LocalDate.now();
+		return dao.findByRoomAndDate(room, date);
 	}
 
 }

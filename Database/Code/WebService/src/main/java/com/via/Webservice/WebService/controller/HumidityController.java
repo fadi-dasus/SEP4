@@ -3,7 +3,6 @@ package com.via.Webservice.WebService.controller;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.via.Webservice.WebService.model.Co2;
 import com.via.Webservice.WebService.model.Humidity;
 import com.via.Webservice.WebService.service.Humidity.HumidityService;
 
@@ -43,11 +41,12 @@ public class HumidityController {
 		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);
 	}
 
-	@GetMapping("/room/{id}")
+	@GetMapping("/	{id}")
 	public ResponseEntity<Iterable<Humidity>> findByHumidityRoom(@PathVariable("id") int room_id) {
 		Iterable<Humidity> list = service.findByHumidityRoom(room_id);
 		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);
 	}
+
 	@GetMapping("/roomtoday/{id}")
 	public ResponseEntity<Iterable<Humidity>> findByRoomForToday(@PathVariable("id") int room_id) {
 		Iterable<Humidity> list = service.findByRoomForToday(room_id);

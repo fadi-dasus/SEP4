@@ -58,9 +58,7 @@ public class NotificationsService {
 		JSONObject body = new JSONObject();
 		body.put("to", "/topics/" + TOPIC);
 		body.put("priority", "high");
-
-
-		
+	
 		JSONObject data = new JSONObject();
 		data.put("co2_value", "1050" );
 		data.put("hum_value", "20");

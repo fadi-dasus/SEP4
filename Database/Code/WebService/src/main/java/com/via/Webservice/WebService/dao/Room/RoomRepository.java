@@ -8,4 +8,5 @@ import com.via.Webservice.WebService.model.Room;
 
 public interface RoomRepository extends CrudRepository<Room, Integer> {
 	public List<Room> findByRoomName(String roomName);
+
 }
