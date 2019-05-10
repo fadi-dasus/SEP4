@@ -1,4 +1,5 @@
-package com.javasampleapproach.fcm.pushnotif.service;
+package com.via.Webservice.WebService.fcm;
+
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
