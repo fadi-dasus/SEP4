@@ -8,7 +8,6 @@ import com.via.Webservice.WebService.model.Humidity;
 import com.via.Webservice.WebService.model.Room;
 
 public interface HumidityRepository extends CrudRepository<Humidity,Integer> {
-	//public List<Humidity> findAll(Room room);
 	public List<Humidity> findByRoom(Room room);
 
 }
