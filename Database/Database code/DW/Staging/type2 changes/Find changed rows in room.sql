@@ -3,7 +3,7 @@ go
 (
 
 --- today
-select r.id, r.room_name, d.name from 
+select r.id, r.room_name, d.device_name from 
 dbo.room as r, 
 dbo.device as d
 
@@ -19,7 +19,7 @@ from
 
 EXCEPT 
 
-( select r.id, r.room_name, d.name from 
+( select r.id, r.room_name, d.device_name from 
 [Sep4_GroupX2].[dbo].[room] as r, 
 [Sep4_GroupX2].[dbo].[device] as d  
 

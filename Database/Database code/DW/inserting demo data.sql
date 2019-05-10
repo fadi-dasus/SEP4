@@ -2,7 +2,7 @@ USE [Sep4_GroupX2]
 GO
 
 INSERT INTO [dbo].[device]
-           ([name]
+           ([device_name]
            ,[uie])
      VALUES
            ('arduino', '123');
@@ -14,14 +14,15 @@ GO
 
 INSERT INTO [dbo].[co2]
            ([status]
-           ,[timestamp]
+           ,[date]
            ,[value]
-           ,[room_id])
+		   ,[timestamp]
+           )
      VALUES
-           ('high', '2019-5-01', 50, 1),
-		   ('low', '2019-5-03', -50, 2);
+           ('high', '2019-05-01', 50, '2019-05-01T18:10:00' ),
+		   ('low', '2019-05-03', -50, '2019-05-01T18:11:00');
 GO
-
+select * from  [dbo].[co2];
 USE [Sep4_GroupX2]
 GO
 
@@ -31,25 +32,26 @@ INSERT INTO [dbo].[room]
      VALUES
            ('B02',1);
 GO
+select * from warning; 
 
 INSERT INTO [dbo].[temperature]
            ([status]
-           ,[timestamp]
+           ,[date]
            ,[value]
-           ,[room_id])
+		   ,[timestamp])
      VALUES
-           ('high', '2019-5-01', 40, 1),
-		   ('low', '2019-5-03', -40, 2);
+           ('high', '2019-05-03', -40, '2019-05-01T18:11:00'),
+		   ('low', '2019-05-03', -40, '2019-05-01T18:11:00');
 GO
 
 INSERT INTO [dbo].[humidity]
            ([status]
-           ,[timestamp]
+           ,[date]
            ,[value]
-           ,[room_id])
+		   ,[timestamp])
      VALUES
-           ('high', '2019-5-01', 10, 1),
-		   ('low', '2019-5-03', -10, 2);
+           ('high', '2019-05-01', 10, '2019-05-01T18:11:00'),
+		   ('low', '2019-05-03', -10,'2019-05-01T18:11:00');
 GO
 
 INSERT INTO [dbo].[warning]
@@ -57,14 +59,14 @@ INSERT INTO [dbo].[warning]
            ,[status]
            ,[time_stamp]
            ,[value]
-           ,[room_id])
+           )
      VALUES
-           ('CO2','high', '2019-05-01',50, 1),
-		   ('CO2','low', '2019-05-01',-50, 2),
-		   ('Temperature','high', '2019-05-01',40, 1),
-		   ('Temperature','low', '2019-05-01',-40, 2),
-		   ('humidity','high', '2019-05-01',10, 1),
-		   ('humidity','low', '2019-05-01',-10, 2);
+           ('CO2','high', '2019-05-01',50 ),
+		   ('CO2','low', '2019-05-01',-50 ),
+		   ('Temperature','high', '2019-05-01',40 ),
+		   ('Temperature','low', '2019-05-01',-40 ),
+		   ('humidity','high', '2019-05-01',10 ),
+		   ('humidity','low', '2019-05-01',-10 );
 GO
 
 

@@ -1,7 +1,7 @@
 use Sep4_GroupX2;
 go 
 --- find added rows
-select r.id, r.room_name, d.name from 
+select r.id, r.room_name, d.device_name from 
 dbo.room as r, 
 dbo.device as d
 
