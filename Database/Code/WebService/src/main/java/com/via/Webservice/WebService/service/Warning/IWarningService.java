@@ -4,5 +4,5 @@ import com.via.Webservice.WebService.model.Room;
 import com.via.Webservice.WebService.model.Warning;
 
 public interface IWarningService {
-	public Iterable<Warning> findAllWarningByRoomId(Room room);
+	public Iterable<Warning> getAllWarningByRoomId(Room room);
 }

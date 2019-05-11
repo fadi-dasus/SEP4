@@ -22,7 +22,7 @@ public class FcmController {
 	public ResponseEntity<String> subscribeFCM(@PathVariable("topic") String topic) {
 		
 
-		Co2 co2 = service.findTopByOrderByIdDescAndRoom(topic);
+		Co2 co2 = service.getTopByOrderByIdDescAndRoom(topic);
 		if (co2 != null) {
 			String msg = " The last record we have from our database for " + topic + " recorded at : "
 					+ co2.getDate().toString();

@@ -14,11 +14,11 @@ public class AdminService implements IAdminService {
 	@Autowired
 	public AdminRepository dao;
 
-	public Optional<Admin> findAdminById(int id) {
+	public Optional<Admin> getAdminById(int id) {
 		return dao.findById(id);
 	}
 
-	public List<Admin> findByUsername(String username) {
+	public List<Admin> getAdminByUsername(String username) {
 
 		return dao.findByUsername(username);
 	}

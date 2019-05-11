@@ -20,22 +20,18 @@ public class TemperatureService implements ITemperatureService {
 	TemperatureRepository dao;
 	public EntityManager entityManager;
 
-	public Optional<Temperature> findTemperatureById(int id) {
+	public Optional<Temperature> getTemperatureById(int id) {
 		return dao.findById(id);
 	}
 
-	public Iterable<Temperature> findAllTemperature() {
-		return dao.findAll();
-	}
-
 	@Override
-	public List<Temperature> findByTemperatureRoom(int room_id) {
+	public List<Temperature> getTemperatureByRoom(int room_id) {
 		Room room = new Room(room_id);
 		return dao.findByRoom(room);
 	}
 
 	@Override
-	public List<Temperature> findByRoomForToday(int room_id) {
+	public List<Temperature> getTemperatureByRoomForToday(int room_id) {
 		Room room = new Room(room_id);
 		LocalDate date = LocalDate.now();
 		return dao.findByRoomAndDate(room, date);

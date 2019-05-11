@@ -22,7 +22,7 @@ public class Co2Controller {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Co2>> getCo2ById(@PathVariable("id") Integer id) {
-		Optional<Co2> co2 = service.findCo2ById(id);
+		Optional<Co2> co2 = service.getCo2ById(id);
 		if (co2 != null) {
 
 			return new ResponseEntity<Optional<Co2>>(co2, HttpStatus.OK);
@@ -32,22 +32,22 @@ public class Co2Controller {
 	}
 
 	@GetMapping("/room/{id}")
-	public ResponseEntity<Iterable<Co2>> findAllCo2(@PathVariable("id") int room_id) {
-		Iterable<Co2> list = service.findByCo2Room(room_id);
+	public ResponseEntity<Iterable<Co2>> getAllCo2ByRoomId(@PathVariable("id") int room_id) {
+		Iterable<Co2> list = service.getCo2ByRoom(room_id);
 		return new ResponseEntity<Iterable<Co2>>(list, HttpStatus.OK);
 
 	}
 
 	@GetMapping("/roomtoday/{id}")
-	public ResponseEntity<Iterable<Co2>> findByRoomAndTodayCo2(@PathVariable("id") int room_id) {
-		Iterable<Co2> list = service.findByCo2RoomForToday(room_id);
+	public ResponseEntity<Iterable<Co2>> getAllCo2ByRoomForToday(@PathVariable("id") int room_id) {
+		Iterable<Co2> list = service.getCo2ByRoomForToday(room_id);
 		return new ResponseEntity<Iterable<Co2>>(list, HttpStatus.OK);
 	}
 
 	@GetMapping("/all")
-	public ResponseEntity<Co2> findAllHumidity() {
+	public ResponseEntity<Co2> getAllCo2() {
 
-		Co2 co2 = service.findTopByOrderByIdDescAndRoom("");
+		Co2 co2 = service.getTopByOrderByIdDescAndRoom("");
 
 		return new ResponseEntity<Co2>(co2, HttpStatus.OK);
 	}

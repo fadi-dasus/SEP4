@@ -6,10 +6,10 @@ import java.util.Optional;
 import com.via.Webservice.WebService.model.Temperature;
 
 public interface ITemperatureService {
-	public Optional<Temperature> findTemperatureById(int id);
+	public Optional<Temperature> getTemperatureById(int id);
 
-	public List<Temperature> findByTemperatureRoom(int room_id);
+	public List<Temperature> getTemperatureByRoom(int room_id);
 
-	public List<Temperature> findByRoomForToday(int room_id);
+	public List<Temperature> getTemperatureByRoomForToday(int room_id);
 
 }

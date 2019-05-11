@@ -6,8 +6,8 @@ import java.util.Optional;
 import com.via.Webservice.WebService.model.Customer;
 
 public interface ICustomerService {
-	public Optional<Customer> findCustomerById(int id);
+	public Optional<Customer> getCustomerById(int id);
 
-	public List<Customer> findByUsername(String username);
+	public List<Customer> getCustomerByUsername(String username);
 
 }

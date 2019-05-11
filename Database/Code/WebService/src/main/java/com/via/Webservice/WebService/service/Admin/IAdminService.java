@@ -7,8 +7,8 @@ import com.via.Webservice.WebService.model.Admin;
 
 public interface IAdminService {
 
-	public Optional<Admin> findAdminById(int id);
+	public Optional<Admin> getAdminById(int id);
 
-	public List<Admin> findByUsername(String username);
+	public List<Admin> getAdminByUsername(String username);
 
 }

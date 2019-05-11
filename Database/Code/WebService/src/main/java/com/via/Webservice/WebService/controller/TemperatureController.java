@@ -23,8 +23,8 @@ public class TemperatureController {
 	TemperatureService service;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<Temperature>> findTemperatureById(@PathVariable("id") Integer id) {
-		Optional<Temperature> temperature = service.findTemperatureById(id);
+	public ResponseEntity<Optional<Temperature>> getTemperatureById(@PathVariable("id") Integer id) {
+		Optional<Temperature> temperature = service.getTemperatureById(id);
 		if (temperature != null) {
 
 			return new ResponseEntity<Optional<Temperature>>(temperature, HttpStatus.OK);
@@ -33,23 +33,23 @@ public class TemperatureController {
 
 	}
 
-	@GetMapping("/all")
-	public ResponseEntity<Iterable<Temperature>> findAllTemperature() {
-		Iterable<Temperature> list = service.findAllTemperature();
-		Temperature temperature = new Temperature();
-		temperature.add(linkTo(methodOn(TemperatureController.class).findAllTemperature()).withSelfRel());
-		return new ResponseEntity<Iterable<Temperature>>(list, HttpStatus.OK);
-	}
+//	@GetMapping("/all")
+//	public ResponseEntity<Iterable<Temperature>> getAllTemperature() {
+//		Iterable<Temperature> list = service.getAllTemperature();
+//		Temperature temperature = new Temperature();
+//		temperature.add(linkTo(methodOn(TemperatureController.class).getAllTemperature()).withSelfRel());
+//		return new ResponseEntity<Iterable<Temperature>>(list, HttpStatus.OK);
+//	}
 
 	@GetMapping("/room/{id}")
-	public ResponseEntity<Iterable<Temperature>> findByTemperatureRoom(@PathVariable("id") int room_id) {
-		Iterable<Temperature> list = service.findByTemperatureRoom(room_id);
+	public ResponseEntity<Iterable<Temperature>> getByTemperatureRoom(@PathVariable("id") int room_id) {
+		Iterable<Temperature> list = service.getTemperatureByRoom(room_id);
 		return new ResponseEntity<Iterable<Temperature>>(list, HttpStatus.OK);
 	}
 
 	@GetMapping("/roomtoday/{id}")
 	public ResponseEntity<Iterable<Temperature>> findByRoomForToday(@PathVariable("id") int room_id) {
-		Iterable<Temperature> list = service.findByRoomForToday(room_id);
+		Iterable<Temperature> list = service.getTemperatureByRoomForToday(room_id);
 		return new ResponseEntity<Iterable<Temperature>>(list, HttpStatus.OK);
 	}
 

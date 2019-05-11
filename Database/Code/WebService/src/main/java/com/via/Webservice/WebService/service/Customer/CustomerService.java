@@ -15,11 +15,11 @@ public class CustomerService implements ICustomerService {
 	@Autowired
 	public CustomerRepository dao;
 
-	public Optional<Customer> findCustomerById(int id) {
+	public Optional<Customer> getCustomerById(int id) {
 		return dao.findById(id);
 	}
 
-	public List<Customer> findByUsername(String username) {
+	public List<Customer> getCustomerByUsername(String username) {
 
 		return dao.findByUsername(username);
 	}

@@ -24,14 +24,14 @@ public class CustomerController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Customer>> getCustomerById(@PathVariable("id") Integer id) {
-		Optional<Customer> customer = customerService.findCustomerById(id);
+		Optional<Customer> customer = customerService.getCustomerById(id);
 		return new ResponseEntity<Optional<Customer>>(customer, HttpStatus.OK);
 	}
 
 	@GetMapping("/username")
 	public ResponseEntity<List<Customer>> getCustomerByUsername(@RequestParam("username") String username) {
 
-		List<Customer> customer = customerService.findByUsername(username);
+		List<Customer> customer = customerService.getCustomerByUsername(username);
 
 		return new ResponseEntity<List<Customer>>(customer, HttpStatus.OK);
 	}

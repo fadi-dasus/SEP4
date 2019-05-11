@@ -5,10 +5,10 @@ import java.util.Optional;
 import com.via.Webservice.WebService.model.Room;
 
 public interface IRoomService {
-	public Optional<Room> findRoomById(int id);
+	public Optional<Room> getRoomById(int id);
 
-	public Iterable<Room> findAllRoom();
+	public Iterable<Room> getAllRoom();
 
-	public Room findByRoomName(String name);
+	public Room getRoomByRoomName(String name);
 
 }

@@ -23,7 +23,7 @@ public class AdminController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Admin>> getAdminById(@PathVariable("id") Integer id) {
-		Optional<Admin> admin = adminService.findAdminById(id);
+		Optional<Admin> admin = adminService.getAdminById(id);
 		return new ResponseEntity<Optional<Admin>>(admin, HttpStatus.OK);
 
 	}
@@ -31,7 +31,7 @@ public class AdminController {
 	@GetMapping("/username")
 	public ResponseEntity<List<Admin>> getAdminByUsername(@RequestParam("username") String username) {
 
-		List<Admin> admin = adminService.findByUsername(username);
+		List<Admin> admin = adminService.getAdminByUsername(username);
 
 		return new ResponseEntity<List<Admin>>(admin, HttpStatus.OK);
 	}

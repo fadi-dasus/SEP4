@@ -23,7 +23,7 @@ public class RoomController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Room>> getRoomById(@PathVariable("id") Integer id) {
-		Optional<Room> room = service.findRoomById(id);
+		Optional<Room> room = service.getRoomById(id);
 		if (room != null) {
 
 			return new ResponseEntity<Optional<Room>>(room, HttpStatus.OK);
@@ -33,15 +33,15 @@ public class RoomController {
 	}
 
 	@GetMapping("/all")
-	public ResponseEntity<Iterable<Room>> findAllRoom() {
-		Iterable<Room> list = service.findAllRoom();
+	public ResponseEntity<Iterable<Room>> getAllRoom() {
+		Iterable<Room> list = service.getAllRoom();
 		return new ResponseEntity<Iterable<Room>>(list, HttpStatus.OK);
 
 	}
 
 	@GetMapping("/name/{name}")
 	public ResponseEntity<Room> getRoomByName(@PathVariable("name") String name) {
-		Room room = service.findByRoomName(name);
+		Room room = service.getRoomByRoomName(name);
 		if (room != null) {
 
 			return new ResponseEntity<Room>(room, HttpStatus.OK);

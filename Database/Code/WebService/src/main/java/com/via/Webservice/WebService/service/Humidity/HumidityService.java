@@ -17,22 +17,19 @@ public class HumidityService implements IHumidityService {
 	@Autowired
 	HumidityRepository dao;
 
-	public Optional<Humidity> findHumidityById(int id) {
+	public Optional<Humidity> getHumidityById(int id) {
 		return dao.findById(id);
 	}
 
-	public Iterable<Humidity> findAll() {
-		return dao.findAll();
-	}
 
 	@Override
-	public List<Humidity> findByHumidityRoom(int room_id) {
+	public List<Humidity> getHumidityByRoom(int room_id) {
 		Room room = new Room(room_id);
 		return dao.findByRoom(room);
 	}
 
 	@Override
-	public List<Humidity> findByRoomForToday(int room_id) {
+	public List<Humidity> getHumidityByRoomForToday(int room_id) {
 		Room room = new Room(room_id);
 		LocalDate date = LocalDate.now();
 		return dao.findByRoomAndDate(room, date);
