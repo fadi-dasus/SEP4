@@ -28,6 +28,10 @@ public class CO2Service {
 
     private List<EUIMongo> EUI;
 
+    SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    String strDate;
+    Date dt;
+
     @Scheduled(fixedRate = 5000)
     public void updateCO2() {
         EUI = er.findAll();
@@ -35,11 +39,16 @@ public class CO2Service {
 
         int value = EUI.size() - co2.findAll().size();
 
+        try {
         for (int i = EUI.size() - value; i < EUI.size(); i++) {
-            co2.save(new Co2("NORMAL",EUI.get(i).getDate(), EUI.get(i).getCo2(),rr.findAll().get(EUI.get(i).getRoomId())));
+
+            co2.save(new Co2("NORMAL",dt = sm.parse(strDate = sm.format(EUI.get(i).getDate())), EUI.get(i).getCo2(),rr.findAll().get(EUI.get(i).getRoomId())));
+        }
+        }catch (Exception e){
+
         }
 
-    }else
+        }else
         {
             System.out.println("No values in db");
         }
