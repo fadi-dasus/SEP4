@@ -35,9 +35,9 @@ public class GetHumiditiesByRoomId implements  Runnable{
             if(response.code() == 200){
                 List<Humidity> list = new ArrayList<>(response.body());
                 data.postValue(list);
-                Log.d(TAG, "onHumidityListFetchSuccess: Fetched successfully!");
+                Log.d(TAG, "onHumidityListByIdFetchSuccess: Fetched successfully!");
             } else {
-                Log.d(TAG, "onHumidityListFetchFailure: " + response.errorBody().string());
+                Log.d(TAG, "onHumidityListByIdFetchFailure: " + response.errorBody().string());
                 data.postValue(null);
             }
 

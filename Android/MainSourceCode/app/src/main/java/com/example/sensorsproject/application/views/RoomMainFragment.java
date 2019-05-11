@@ -139,6 +139,8 @@ public class RoomMainFragment extends Fragment {
                 liveDataViewModel.setCurrentRoom(currentRoom);
                 liveDataViewModel.subscribe(currentRoom);
                 liveDataViewModel.getRecentLiveData(currentRoom.getId());
+                //Todo: Subscribes only to one room here, SHOULD BE TEMPORARY IN A WAY
+                liveDataViewModel.subscribeToFcm();
             }
 
             @Override

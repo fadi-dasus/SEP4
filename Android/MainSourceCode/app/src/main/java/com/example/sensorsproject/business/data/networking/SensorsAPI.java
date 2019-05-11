@@ -57,4 +57,11 @@ public interface SensorsAPI {
 
     @GET("warning/room/{id}")
     Call<List<Warning>> getAllWarningsByRoomId(@Path("id") String roomId);
+
+    /*
+     * Firebase Cloud Messaging
+     */
+
+    @GET("fcm/subscribe")
+    Call<String> subscribeToFcm();
 }

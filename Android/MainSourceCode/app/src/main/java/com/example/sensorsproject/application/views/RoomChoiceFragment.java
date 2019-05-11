@@ -73,6 +73,11 @@ public class RoomChoiceFragment extends Fragment implements RoomChoiceAdapter.On
                 if (myRoomList != null)
                 {
                     mAdapter.updateRoomList(myRoomList);
+                    String roomName = "";
+                    for(int i = 0; i < myRoomList.size(); i++){
+                        roomName = myRoomList.get(i).getRoomName();
+                        liveDataViewModel.unsubscribe(roomName);
+                    }
                 }
 
             }

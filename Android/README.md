@@ -36,10 +36,11 @@
 14. Expanded ReportList
 15. Expanded WarningList
 16. Apply Material Design to the whole project
-17. Toolbar
+17. Toolbar ✓
 18. Expanding on fragments for report list, warning list, report itself
-19. Bottom Navigation View 
+19. Bottom Navigation View ✓ 
 20. Notifications to warn user
+21. MPAndroidChart for displaying today's data
 
 ### Web API To Follow
 
@@ -64,7 +65,10 @@
 - temperature/roomid/{id} - gets all temperatures from today by room id
 
 *Warning*
-- warning/room/{id} - gets all warnings by room id
+- warning/roosm/{id} - gets all warnings by room id
+
+*Firebase Cloud Messaging*
+- fcm/subscribe - confirms in data tier to start sending FCM to Android
 
 ###Tutorials to read
 

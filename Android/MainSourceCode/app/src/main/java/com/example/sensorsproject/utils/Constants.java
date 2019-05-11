@@ -11,6 +11,6 @@ public class Constants {
     public static final int HUMIDITY_MAX_VALUE = 100;
     public static final int HUMIDITY_MIN_VALUE = 0;
 
-    public static final int TEMPERATURE_MAX_VALUE = 30;
-    public static final int TEMPERATURE_MIN_VALUE = 0;
+    public static final int TEMPERATURE_MAX_VALUE = 50;
+    public static final int TEMPERATURE_MIN_VALUE = -50;
 }
