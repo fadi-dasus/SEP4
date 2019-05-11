@@ -50,6 +50,8 @@ create table "Calendar_D"(
    DATENAME(month, @StartDate)SET @StartDate= DATEADD(dd, 1, @StartDate)END
 
    select * from Calendar_D;
+
+
    CREATE TABLE "Time_D"
 (
   T_ID int identity (1,1) not null
@@ -88,6 +90,8 @@ D_ID   int,
 R_ID int,
 T_ID    int,
 value varchar(255),
+date date,
+timestamp datetime, 
 
 primary key (D_ID,R_ID, T_ID),
 foreign key ("D_ID") references [DW].[dbo].[Calendar_D] ( "D_ID" ),
@@ -102,7 +106,8 @@ D_ID   int,
 R_ID int,
 T_ID    int,
 value varchar(255),
-
+date date,
+timestamp datetime, 
 primary key (D_ID,R_ID,  T_ID),
 foreign key ("D_ID") references [DW].[dbo].[Calendar_D] ( "D_ID" ),
 foreign key ("R_ID") references [DW].[dbo].[Room_D] ( "R_ID" ),
@@ -117,6 +122,8 @@ D_ID   int,
 R_ID int,
 T_ID    int,
 value varchar(255),
+date date,
+timestamp datetime, 
 
 primary key (D_ID,R_ID, T_ID),
 foreign key ("D_ID") references [DW].[dbo].[Calendar_D] ( "D_ID" ),
@@ -133,6 +140,8 @@ T_ID    int,
 value varchar(255),
 m_Type     varchar(50),
 status    varchar(50),
+date date,
+ 
 
 primary key (D_ID,R_ID, T_ID),
 foreign key ("D_ID") references [DW].[dbo].[Calendar_D] ( "D_ID" ),
