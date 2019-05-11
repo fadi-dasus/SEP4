@@ -6,7 +6,6 @@ import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -22,9 +21,12 @@ public class EUIMongo {
     @Field("Name")
     private String name;
 
-    @Field("Timestamp")
-    private Date timestamp;
+    @Field("RoomId")
+    private int roomId;
 
+    @Field("Timestamp")
+    private Date date;
+    
     @Field("CO2")
     private String co2;
 
@@ -41,28 +43,37 @@ public class EUIMongo {
         this._id=_id;
     }
 
-    public ObjectId get_id() {
-        return _id;
-    }
-
-    public void set_id(ObjectId _id) {
-        this._id = _id;
-    }
 
     public String getUie() {
         return uie;
     }
 
-    public void setUie(String eui) {
-        this.uie = eui;
+    public void setUie(String uie) {
+        this.uie = uie;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
+    public String getName() {
+        return name;
     }
 
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getCo2() {
@@ -85,14 +96,8 @@ public class EUIMongo {
         return temperature;
     }
 
-    public void setTemperature(String temperature) { this.temperature = temperature; }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
     }
 
     @Override
@@ -101,11 +106,11 @@ public class EUIMongo {
                 "_id=" + _id +
                 ", uie='" + uie + '\'' +
                 ", name='" + name + '\'' +
-                ", timestamp='" + timestamp + '\'' +
+                ", roomId=" + roomId +
+                ", date=" + date +
                 ", co2='" + co2 + '\'' +
                 ", humidity='" + humidity + '\'' +
                 ", temperature='" + temperature + '\'' +
                 '}';
     }
-
 }

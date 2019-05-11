@@ -1,10 +1,9 @@
 package com.dataConnection.Sep4.SQL.model;
 
-import org.bson.types.ObjectId;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Date;
+
 
 @Entity
 @Table(name = "Humidity")
@@ -24,7 +23,7 @@ public class Humidity {
 	@Column(name = "value")
 	private String value;
 
-	@Column(name = "timestamp")
+	@Column(name = "Timestamp")
 	private Date date;
 
 	public Humidity(){
@@ -32,7 +31,7 @@ public class Humidity {
 	}
 
 
-	public Humidity(String status, Date date, String value, Room room) {
+	public Humidity(String status, Date date, String value,  Room room) {
 		this.status = status;
 		this.date = date;
 		this.value = value;
@@ -45,14 +44,6 @@ public class Humidity {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 
 	public String getValue() {
@@ -70,6 +61,14 @@ public class Humidity {
 	public void setRoom(Room room) {
 		this.room = room;
 	}
+
+	public int getId() { return id; }
+
+	public void setId(int id) { this.id = id; }
+
+	public Date getDate() { return date; }
+
+	public void setDate(Date date) { this.date = date; }
 
 	@Override
 	public String toString() {
