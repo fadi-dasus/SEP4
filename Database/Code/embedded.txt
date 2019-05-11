@@ -1,0 +1,13 @@
+first 
+run the script
+I should be inside the folder (C:\Users\fadid\OneDrive\Dokumenter\GitHub\SEP4\Embedded\websocket)
+shift and right click and powershell
+python main.py
+
+second 
+open Hterm
+port= COM4
+baud = 57600
+then connect 
+
+

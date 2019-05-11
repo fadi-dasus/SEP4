@@ -66,7 +66,7 @@ go
 DECLARE @Hour TIME
 DECLARE @EndHour TIME
 SET @Hour = '08:20:01'
-SET @EndHour = DATEADD(second,27900,@Hour)
+SET @EndHour = DATEADD(second,56000,@Hour)
 WHILE (@Hour <= @EndHour)
 BEGIN
 INSERT INTO [Time_D]
