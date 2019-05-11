@@ -14,7 +14,7 @@ public class WarningService implements IWarningService {
 	WarningRepository dao;
 
 	@Override
-	public Iterable<Warning> findAllWarningByRoomId(Room room) {
+	public Iterable<Warning> getAllWarningByRoomId(Room room) {
 
 		return dao.findByRoom(room);
 	}

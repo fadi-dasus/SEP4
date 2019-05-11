@@ -25,16 +25,16 @@ public class Co2Service implements ICo2Service {
 	@Autowired
 	NotificationsService notificationsService;
 
-	public Optional<Co2> findCo2ById(int id) {
+	public Optional<Co2> getCo2ById(int id) {
 		return dao.findById(id);
 	}
 
-	public List<Co2> findByCo2Room(int room_id) {
+	public List<Co2> getCo2ByRoom(int room_id) {
 		Room room = new Room(room_id);
 		return dao.findByRoom(room);
 	}
 
-	public List<Co2> findByCo2RoomForToday(int room_id) {
+	public List<Co2> getCo2ByRoomForToday(int room_id) {
 		Room room = new Room(room_id);
 		LocalDate date = LocalDate.now();
 
@@ -42,7 +42,7 @@ public class Co2Service implements ICo2Service {
 	}
 
 	@Override
-	public Co2 findTopByOrderByIdDescAndRoom(String name) {
+	public Co2 getTopByOrderByIdDescAndRoom(String name) {
 		Room room = roomRepository.findByRoomName(name);
 		
 		if (room !=null) {
@@ -56,6 +56,4 @@ public class Co2Service implements ICo2Service {
 		}
 		else return null;
 	}
-
-	
 }

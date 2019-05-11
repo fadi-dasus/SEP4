@@ -14,15 +14,15 @@ public class DeviceService implements IDeviceService {
 	@Autowired
 	public DeviceRepository dao;
 
-	public Optional<Device> findDeviceById(int id) {
+	public Optional<Device> getDeviceById(int id) {
 		return dao.findById(id);
 	}
 
-	public Iterable<Device> findAllDevice() {
+	public Iterable<Device> getAllDevice() {
 		return dao.findAll();
 	}
 
-	public List<Device> findByDiviceName(String name) {
+	public List<Device> getDeviceByName(String name) {
 		return dao.findByDeviceName(name);
 	}
 

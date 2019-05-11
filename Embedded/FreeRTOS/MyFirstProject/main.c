@@ -34,9 +34,17 @@ int main(void)
 	semaphores_init();
 	timers_init();
 	// drivers
-	//co2_sensor_init();
-	//temp_hum_sensor_init();
-	//lora_init();
+	co2_sensor_init();
+	temp_hum_sensor_init();
+	lora_init();
+	
+	
+	// take semaphores
+	// we do not care about result
+	// just wanna make sure they are take
+	xSemaphoreTake( co2Semaphore, portMAX_DELAY );
+	xSemaphoreTake( tempHumSemaphore, portMAX_DELAY );
+	xSemaphoreTake( loraSemaphore, portMAX_DELAY );
 	
 	// tasks
 	create_tasks();

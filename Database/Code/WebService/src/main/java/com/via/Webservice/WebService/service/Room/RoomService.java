@@ -13,15 +13,15 @@ public class RoomService implements IRoomService {
 	@Autowired
 	RoomRepository dao;
 
-	public Optional<Room> findRoomById(int id) {
+	public Optional<Room> getRoomById(int id) {
 		return dao.findById(id);
 	}
 
-	public Iterable<Room> findAllRoom() {
+	public Iterable<Room> getAllRoom() {
 		return dao.findAll();
 	}
 
-	public Room findByRoomName(String name) {
+	public Room getRoomByRoomName(String name) {
 		return dao.findByRoomName(name);
 	}
 

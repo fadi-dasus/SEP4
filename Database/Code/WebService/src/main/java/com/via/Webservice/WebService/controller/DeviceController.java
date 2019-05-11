@@ -26,24 +26,24 @@ public class DeviceController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Device>> getDeviceById(@PathVariable("id") int id) {
-		Optional<Device> device = service.findDeviceById(id);
+		Optional<Device> device = service.getDeviceById(id);
 		System.out.println(device.toString());
 		return new ResponseEntity<Optional<Device>>(device, HttpStatus.OK);
 
 	}
 
 	@GetMapping("/all")
-	public ResponseEntity<Iterable<Device>> findAllDevice() {
-		Iterable<Device> list = service.findAllDevice();
+	public ResponseEntity<Iterable<Device>> getAllDevice() {
+		Iterable<Device> list = service.getAllDevice();
 		Device device = new Device();
-		device.add(linkTo(methodOn(RoomController.class).findAllRoom()).withSelfRel());
+		device.add(linkTo(methodOn(DeviceController.class).getAllDevice()).withSelfRel());
 		return new ResponseEntity<Iterable<Device>>(list, HttpStatus.OK);
 
 	}
 
 	@GetMapping("/name")
-	public ResponseEntity<List<Device>> findDeviceByName(@RequestParam("name") String name) {
-		List<Device> device = service.findByDiviceName(name);
+	public ResponseEntity<List<Device>> getDeviceByName(@RequestParam("name") String name) {
+		List<Device> device = service.getDeviceByName(name);
 		if (device != null) {
 			return new ResponseEntity<List<Device>>(device,HttpStatus.OK);
 		} else

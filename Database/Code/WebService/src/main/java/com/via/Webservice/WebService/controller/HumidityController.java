@@ -1,8 +1,5 @@
 package com.via.Webservice.WebService.controller;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
-
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +20,8 @@ public class HumidityController {
 	HumidityService service;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<Humidity>> findHumidityById(@PathVariable("id") Integer id) {
-		Optional<Humidity> humidity = service.findHumidityById(id);
+	public ResponseEntity<Optional<Humidity>> getHumidityById(@PathVariable("id") Integer id) {
+		Optional<Humidity> humidity = service.getHumidityById(id);
 		if (humidity != null) {
 
 			return new ResponseEntity<Optional<Humidity>>(humidity, HttpStatus.OK);
@@ -33,23 +30,23 @@ public class HumidityController {
 
 	}
 
-	@GetMapping("/all")
-	public ResponseEntity<Iterable<Humidity>> findAllHumidity() {
-		Iterable<Humidity> list = service.findAll();
-		Humidity humidity = new Humidity();
-		humidity.add(linkTo(methodOn(HumidityController.class).findAllHumidity()).withSelfRel());
-		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);
-	}
+//	@GetMapping("/all")
+//	public ResponseEntity<Iterable<Humidity>> getAllHumidity() {
+//		Iterable<Humidity> list = service.getAll();
+//		Humidity humidity = new Humidity();
+//		humidity.add(linkTo(methodOn(HumidityController.class).findAllHumidity()).withSelfRel());
+//		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);
+//	}
 
 	@GetMapping("/room/{id}")
-	public ResponseEntity<Iterable<Humidity>> findByHumidityRoom(@PathVariable("id") int room_id) {
-		Iterable<Humidity> list = service.findByHumidityRoom(room_id);
+	public ResponseEntity<Iterable<Humidity>> getHumidityByRoom(@PathVariable("id") int room_id) {
+		Iterable<Humidity> list = service.getHumidityByRoom(room_id);
 		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);
 	}
 
 	@GetMapping("/roomtoday/{id}")
-	public ResponseEntity<Iterable<Humidity>> findByRoomForToday(@PathVariable("id") int room_id) {
-		Iterable<Humidity> list = service.findByRoomForToday(room_id);
+	public ResponseEntity<Iterable<Humidity>> getHumidityByRoomForToday(@PathVariable("id") int room_id) {
+		Iterable<Humidity> list = service.getHumidityByRoomForToday(room_id);
 		return new ResponseEntity<Iterable<Humidity>>(list, HttpStatus.OK);
 	}
 

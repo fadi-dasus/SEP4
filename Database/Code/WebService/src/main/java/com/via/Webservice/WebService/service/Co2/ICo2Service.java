@@ -6,12 +6,12 @@ import java.util.Optional;
 import com.via.Webservice.WebService.model.Co2;
 
 public interface ICo2Service {
-	public Optional<Co2> findCo2ById(int id);
+	public Optional<Co2> getCo2ById(int id);
 
-	public List<Co2> findByCo2Room(int room_id);
+	public List<Co2> getCo2ByRoom(int room_id);
 
-	public List<Co2> findByCo2RoomForToday(int room_id);
+	public List<Co2> getCo2ByRoomForToday(int room_id);
 
-	Co2 findTopByOrderByIdDescAndRoom(String name);
+	Co2 getTopByOrderByIdDescAndRoom(String name);
 
 }
