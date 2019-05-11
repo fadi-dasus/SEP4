@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,6 +31,10 @@ public class HumidityService {
 
     private List<EUIMongo> EUI;
 
+    SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    String strDate;
+    Date dt;
+
     @Scheduled(fixedRate = 5000)
     public void updateHumidity()
     {
@@ -37,11 +43,15 @@ public class HumidityService {
 
         int value = EUI.size()-humidity.findAll().size();
 
+        try {
         for(int i =EUI.size()-value; i<EUI.size(); i++)
         {
-            humidity.save(new Humidity("NORMAL",EUI.get(i).getDate(), EUI.get(i).getHumidity(),rr.findAll().get(EUI.get(i).getRoomId())));
+            humidity.save(new Humidity("NORMAL",dt = sm.parse(strDate = sm.format(EUI.get(i).getDate())), EUI.get(i).getHumidity(),rr.findAll().get(EUI.get(i).getRoomId())));
         }
-    }else{
+        }catch (Exception e){
+
+        }
+        }else{
             System.out.println("No values in db");
         }
     }

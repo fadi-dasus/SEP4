@@ -1,4 +1,4 @@
-use Sep4_GroupX2;
+use Sep4;
 
  go 
 
@@ -15,7 +15,7 @@ from [DW].[dbo].[Room_D]
  (
  --- today
 select [id]
-from [Sep4_GroupX2].[dbo].[Room]
+from [Sep4].[dbo].[Room]
 
 )
 )
