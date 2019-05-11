@@ -8,125 +8,141 @@ D_ID   int null ,
 R_ID int null ,
 T_ID    int null , 
 
-Date_ID   int null ,
 Room_ID int null ,
-Time_ID    int null , 
-value varchar(255));
+value varchar(255),
+date date,
+timestamp datetime);
 
-insert into TEM_FACT_CO2 (Date_ID, Room_ID,  Time_ID, value)
+insert into TEM_FACT_CO2 ( Room_ID,  value, date, timestamp)
 
-select calendar.D_ID , room.id, time.T_ID , co2.value 
+select  room.id, co2.value , co2.date , co2.timestamp
 
-from [DW].[dbo].[Calendar_D] as calendar,
-[DW].[dbo].[Time_D] as time,
+from 
 [Sep4_GroupX2].[dbo].[co2] as co2 ,
 [Sep4_GroupX2].[dbo].[room] as room
 
 go
 
-UPDATE [TEM_FACT_CO2] SET D_ID =(select D_ID from [DW].[dbo].[Calendar_D] where [DW].[dbo].[Calendar_D].D_ID = TEM_FACT_CO2.D_ID)
-UPDATE [TEM_FACT_CO2] SET T_ID =(select T_ID from [DW].[dbo].[Time_D] where [DW].[dbo].[Time_D].T_ID = TEM_FACT_CO2.T_ID)
+UPDATE [TEM_FACT_CO2] SET D_ID =(select D_ID from [DW].[dbo].[Calendar_D] where [DW].[dbo].[Calendar_D].CalendarDate = TEM_FACT_CO2.date)
+UPDATE [TEM_FACT_CO2] SET T_ID =(select T_ID from [DW].[dbo].[Time_D] where [DW].[dbo].[Time_D].TimeStamp = TEM_FACT_CO2.timestamp)
 UPDATE [TEM_FACT_CO2] SET R_ID =(select R_ID from [DW].[dbo].[Room_D] where [DW].[dbo].[Room_D].Room_ID = TEM_FACT_CO2.Room_ID)
 
+select * from [TEM_FACT_CO2];
 
+insert into [DW].[dbo].[Fact_CO2]
+	(D_ID,R_ID,T_ID, value, date, timestamp) 
+select 
+	D_ID,R_ID,T_ID, value, date, timestamp
+from [TEM_FACT_CO2];
 
 
 GO
 
 
-create table TEM_FACT_temp (
+create table TEM_FACT_Temperature(
 
 D_ID   int null ,
 R_ID int null ,
 T_ID    int null , 
 
-Date_ID   int null ,
 Room_ID int null ,
-Time_ID    int null , 
-value varchar(255));
+value varchar(255),
+date date,
+timestamp datetime);
 
-insert into TEM_FACT_tem (Date_ID, Room_ID,  Time_ID, value)
+insert into TEM_FACT_Temperature( Room_ID,  value, date, timestamp)
 
-select calendar.D_ID , room.id, time.T_ID , tem.value 
+select  room.id, Tem.value , Tem.date , Tem.timestamp
 
-from [DW].[dbo].[Calendar_D] as calendar,
-[DW].[dbo].[Time_D] as time,
-[Sep4_GroupX2].[dbo].[temperature] as tem ,
+from 
+[Sep4_GroupX2].[dbo].[temperature] as Tem ,
 [Sep4_GroupX2].[dbo].[room] as room
 
 go
 
-UPDATE [TEM_FACT_Tem] SET D_ID =(select D_ID from [DW].[dbo].[Calendar_D] where [DW].[dbo].[Calendar_D].D_ID = TEM_FACT_Tem.D_ID)
-UPDATE [TEM_FACT_Tem] SET T_ID =(select T_ID from [DW].[dbo].[Time_D] where [DW].[dbo].[Time_D].T_ID = TEM_FACT_Temp.T_ID)
-UPDATE [TEM_FACT_Tem] SET R_ID =(select R_ID from [DW].[dbo].[Room_D] where [DW].[dbo].[Room_D].Room_ID = TEM_FACT_Temp.Room_ID)
+UPDATE [TEM_FACT_Temperature] SET D_ID =(select D_ID from [DW].[dbo].[Calendar_D] where [DW].[dbo].[Calendar_D].CalendarDate = TEM_FACT_Temperature.date)
+UPDATE [TEM_FACT_Temperature] SET T_ID =(select T_ID from [DW].[dbo].[Time_D] where [DW].[dbo].[Time_D].TimeStamp = TEM_FACT_Temperature.timestamp)
+UPDATE [TEM_FACT_Temperature] SET R_ID =(select R_ID from [DW].[dbo].[Room_D] where [DW].[dbo].[Room_D].Room_ID = TEM_FACT_Temperature.Room_ID)
 
+select * from [TEM_FACT_CO2];
 
+insert into [DW].[dbo].[Fact_Temperature]
+	(D_ID,R_ID,T_ID, value, date, timestamp) 
+select 
+	D_ID,R_ID,T_ID, value, date, timestamp
+from [TEM_FACT_CO2];
 
 
 GO
 
-
-create table TEM_FACT_hum (
+create table TEM_FACT_hum(
 
 D_ID   int null ,
 R_ID int null ,
 T_ID    int null , 
 
-Date_ID   int null ,
 Room_ID int null ,
-Time_ID    int null , 
-value varchar(255));
+value varchar(255),
+date date,
+timestamp datetime);
 
-insert into TEM_FACT_hum (Date_ID, Room_ID,  Time_ID, value)
+insert into TEM_FACT_Temperature( Room_ID,  value, date, timestamp)
 
-select calendar.D_ID , room.id, time.T_ID , hum.value 
+select  room.id, hum.value , hum.date , hum.timestamp
 
-from [DW].[dbo].[Calendar_D] as calendar,
-[DW].[dbo].[Time_D] as time,
+from 
 [Sep4_GroupX2].[dbo].[humidity] as hum ,
 [Sep4_GroupX2].[dbo].[room] as room
 
 go
 
-UPDATE [TEM_FACT_hum] SET D_ID =(select D_ID from [DW].[dbo].[Calendar_D] where [DW].[dbo].[Calendar_D].D_ID = Tem_FACT_hum.D_ID)
-UPDATE [TEM_FACT_hum] SET T_ID =(select T_ID from [DW].[dbo].[Time_D] where [DW].[dbo].[Time_D].T_ID = TEM_FACT_hum.T_ID)
+UPDATE [TEM_FACT_hum] SET D_ID =(select D_ID from [DW].[dbo].[Calendar_D] where [DW].[dbo].[Calendar_D].CalendarDate = TEM_FACT_hum.date)
+UPDATE [TEM_FACT_hum] SET T_ID =(select T_ID from [DW].[dbo].[Time_D] where [DW].[dbo].[Time_D].TimeStamp = TEM_FACT_hum.timestamp)
 UPDATE [TEM_FACT_hum] SET R_ID =(select R_ID from [DW].[dbo].[Room_D] where [DW].[dbo].[Room_D].Room_ID = TEM_FACT_hum.Room_ID)
 
+select * from [TEM_FACT_CO2];
 
+insert into [DW].[dbo].[Fact_Humidity]
+	(D_ID,R_ID,T_ID, value, date, timestamp) 
+select 
+	D_ID,R_ID,T_ID, value, date, timestamp
+from [TEM_FACT_hum];
 
 
 GO
 
-
-
-create table TEM_FACT_Warning (
+create table TEM_FACT_Warning(
 
 D_ID   int null ,
 R_ID int null ,
 T_ID    int null , 
 
-Date_ID   int null ,
 Room_ID int null ,
-Time_ID    int null , 
-value varchar(255));
+value varchar(255),
+m_type   varchar(50),
+status varchar(50),
+date date);
 
-insert into TEM_FACT_Warning (Date_ID, Room_ID,  Time_ID, value)
+insert into TEM_FACT_Warning( Room_ID,  value, date, m_type, status )
 
-select calendar.D_ID , room.id, time.T_ID , w.value 
+select  room.id, w.value , w.time_stamp , w.measurement_type,  w.status
 
-from [DW].[dbo].[Calendar_D] as calendar,
-[DW].[dbo].[Time_D] as time,
+from 
 [Sep4_GroupX2].[dbo].[warning] as w ,
 [Sep4_GroupX2].[dbo].[room] as room
 
 go
 
-UPDATE [TEM_FACT_Warning] SET D_ID =(select D_ID from [DW].[dbo].[Calendar_D] where [DW].[dbo].[Calendar_D].D_ID = TEM_FACT_Warning.D_ID)
-UPDATE [TEM_FACT_Warning] SET T_ID =(select T_ID from [DW].[dbo].[Time_D] where [DW].[dbo].[Time_D].T_ID = TEM_FACT_Warning.T_ID)
+UPDATE [TEM_FACT_Warning] SET D_ID =(select D_ID from [DW].[dbo].[Calendar_D] where [DW].[dbo].[Calendar_D].CalendarDate = TEM_FACT_Warning.date)
 UPDATE [TEM_FACT_Warning] SET R_ID =(select R_ID from [DW].[dbo].[Room_D] where [DW].[dbo].[Room_D].Room_ID = TEM_FACT_Warning.Room_ID)
 
+select * from [TEM_FACT_CO2];
 
+insert into [DW].[dbo].[Fact_Warning]
+	(D_ID,R_ID,T_ID, value, date, m_type, status) 
+select 
+	D_ID,R_ID,T_ID, value, date, m_type, status 
+from [TEM_FACT_Warning];
 
 
 GO
-
