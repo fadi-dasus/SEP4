@@ -36,9 +36,9 @@ public class GetAllTemperaturesByRoomIdToday implements  Runnable{
             if(response.code() == 200){
                 List<Temperature> list = new ArrayList<>(response.body());
                 data.postValue(list);
-                Log.d(TAG, "onTemperatureListFetchSuccess: Fetched successfully!");
+                Log.d(TAG, "onTemperatureListTodayFetchSuccess: Fetched successfully!");
             } else {
-                Log.d(TAG, "onTemperatureListFetchFailure: " + response.errorBody().string());
+                Log.d(TAG, "onTemperatureListTodayFetchFailure: " + response.errorBody().string());
                 data.postValue(null);
             }
 

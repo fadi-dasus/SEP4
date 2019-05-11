@@ -53,16 +53,7 @@
             android:id="@+id/warningListFragment"
             android:name="com.example.sensorsproject.application.views.WarningListFragment"
             android:label="Warning List"
-            tools:layout="@layout/fragment_warning_list">
-            <action
-                android:id="@+id/action_warningListFragment_to_warningFragment"
-                app:destination="@id/warningFragment" />
-        </fragment>
-        <fragment
-            android:id="@+id/warningFragment"
-            android:name="com.example.sensorsproject.application.views.WarningFragment"
-            android:label="Warning"
-            tools:layout="@layout/fragment_warning" />
+            tools:layout="@layout/fragment_warning_list"/>
         <fragment
             android:id="@+id/reportFragment"
             android:name="com.example.sensorsproject.application.views.ReportFragment"

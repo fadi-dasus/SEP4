@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.sensorsproject.business.data.networking.requests.GetCo2sByRoomId;
 import com.example.sensorsproject.business.data.networking.requests.GetHumiditiesByRoomId;
 import com.example.sensorsproject.business.data.networking.requests.GetTemperaturesByRoomId;
+import com.example.sensorsproject.business.data.networking.requests.SubscribeToFcm;
 import com.example.sensorsproject.business.models.CO2;
 import com.example.sensorsproject.business.models.Humidity;
 import com.example.sensorsproject.business.models.MyRoom;
@@ -54,6 +55,7 @@ public class NetworkHelper {
     private GetCo2sByRoomId getCo2SByRoomId;
     private GetHumiditiesByRoomId getHumiditiesByRoomId;
     private GetTemperaturesByRoomId getTemperaturesByRoomId;
+    private SubscribeToFcm subscribeToFcm;
 
     private NetworkHelper(){
         //Lists
@@ -208,18 +210,29 @@ public class NetworkHelper {
 
     public void searchTemperatureByRoomId(String roomId){
         //Networking Code
-        Log.d(TAG, "searchTemperatureByRoomId: INIT TEMPERATURE SEARCH");
         if(getTemperaturesByRoomId != null){
             getTemperaturesByRoomId = null;
         }
 
         getTemperaturesByRoomId = new GetTemperaturesByRoomId(TAG, temperatureByRoomId, roomId);
-        Log.d(TAG, "searchTemperatureByRoomId: CREATE TEMPERATURE SEARCH");
-        AppExecutors.getInstance().networkIO().execute(getTemperaturesByRoomId);
+        //AppExecutors.getInstance().networkIO().execute(getTemperaturesByRoomId);
 
-        /*final Future handler = AppExecutors.getInstance().networkIO().submit(getTemperaturesByRoomId);
+        final Future handler = AppExecutors.getInstance().networkIO().submit(getTemperaturesByRoomId);
         AppExecutors.getInstance().networkIO().schedule(() -> {
             handler.cancel(true);
-        }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);*/
+        }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
+    }
+
+    public void subscribeToFcm(){
+        if(subscribeToFcm != null){
+            subscribeToFcm = null;
+        }
+
+        subscribeToFcm = new SubscribeToFcm(TAG);
+
+        final Future handler = AppExecutors.getInstance().networkIO().submit(subscribeToFcm);
+        AppExecutors.getInstance().networkIO().schedule(() -> {
+            handler.cancel(true);
+        }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 }

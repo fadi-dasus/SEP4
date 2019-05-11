@@ -21,6 +21,7 @@ import android.widget.Button;
 
 import com.example.sensorsproject.R;
 import com.example.sensorsproject.application.viewmodels.LiveDataViewModel;
+import com.example.sensorsproject.business.models.MyRoom;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import butterknife.BindView;
@@ -46,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Set up VIewModel
         liveDataViewModel = ViewModelProviders.of(this).get(LiveDataViewModel.class);
-
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
 
@@ -72,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
                     setUiVisible(false);
                 } else if(destination.getId() == R.id.roomChoiceFragment){
                     setUiVisible(false);
-                } else if(destination.getId() == R.id.warningFragment){
-                    bottomNav.setVisibility(View.GONE);
                 } else if(destination.getId() == R.id.reportFragment){
                     bottomNav.setVisibility(View.GONE);
                 } else if(destination.getId() == R.id.action_today_data){
@@ -138,13 +136,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onResume() {
+        super.onResume();
+        if(liveDataViewModel.getCurrentRoom().getValue() != null){
+            MyRoom room;
+            room = liveDataViewModel.getCurrentRoom().getValue();
+            liveDataViewModel.subscribe(room);
+        }
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
         if(liveDataViewModel.getCurrentRoom().getValue() != null){
             String roomName;
             roomName = liveDataViewModel.getCurrentRoom().getValue().getRoomName();
             liveDataViewModel.unsubscribe(roomName);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+
+
 
         super.onDestroy();
     }

@@ -35,10 +35,11 @@ public class GetAllCo2sByRoomIdToday implements  Runnable{
 
             if(response.code() == 200){
                 List<CO2> list = new ArrayList<>(response.body());
+                //Log.d(TAG, "");
                 data.postValue(list);
-                Log.d(TAG, "onCO2ListFetchSuccess: Fetched successfully!");
+                Log.d(TAG, "onCO2ListTodayFetchSuccess: Fetched successfully!");
             } else {
-                Log.d(TAG, "onCO2ListFetchFailure: " + response.errorBody().string());
+                Log.d(TAG, "onCO2ListTodayFetchFailure: " + response.errorBody().string());
                 data.postValue(null);
             }
 

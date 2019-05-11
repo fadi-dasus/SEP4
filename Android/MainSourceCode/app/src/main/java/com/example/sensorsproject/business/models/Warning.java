@@ -7,56 +7,56 @@ import java.util.GregorianCalendar;
 
 public class Warning {
 
-    private String measurementType;
+    private String id;
 
-    private String timeStamp;
+    private String localDate;
 
-    private boolean high;
-
-    private boolean low;
+    private String status;
 
     private double value;
 
-    private String roomName;
+    private MyRoom room;
 
-    public Warning(String measurementType, boolean high, boolean low, double value, String roomName, String timeStamp) {
-        this.measurementType = measurementType;
-        this.high = high;
-        this.low = low;
+    private String measurementType;
+
+    public Warning(String id, String localDate, String status, double value, MyRoom room, String measurementType) {
+        this.id = id;
+        this.localDate = localDate;
+        this.status = status;
         this.value = value;
-        this.roomName = roomName;
-        this.timeStamp = timeStamp;
+        this.room = room;
+        this.measurementType = measurementType;
     }
 
-    public String getMeasurementType() {
-        return measurementType;
+    public String getId() {
+        return id;
     }
 
-    public String getTimeStamp() {
-        return timeStamp;
+    public String getLocalDate() {
+        return localDate;
     }
 
-    public boolean isHigh() {
-        return high;
-    }
-
-    public boolean isLow() {
-        return low;
+    public String getStatus() {
+        return status;
     }
 
     public double getValue() {
         return value;
     }
 
-    public String getRoomName() {
-        return roomName;
+    public MyRoom getRoom() {
+        return room;
+    }
+
+    public String getMeasurementType() {
+        return measurementType;
     }
 
     public GregorianCalendar getGregorianCalendar(){
         java.util.Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-dd-MM");
         try {
-            date = sdf.parse(timeStamp);
+            date = sdf.parse(localDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -68,7 +68,13 @@ public class Warning {
 
     @Override
     public String toString() {
-        return "Warning [measurementType=" + measurementType + ", timeStamp=" + timeStamp + ", high="
-                + high + ", low=" + low + ", value=" + value + ", roomName=" + roomName + "]";
+        return "Warning{" +
+                "id='" + id + '\'' +
+                ", localDate='" + localDate + '\'' +
+                ", status='" + status + '\'' +
+                ", value=" + value +
+                ", room=" + room +
+                ", measurementType='" + measurementType + '\'' +
+                '}';
     }
 }
