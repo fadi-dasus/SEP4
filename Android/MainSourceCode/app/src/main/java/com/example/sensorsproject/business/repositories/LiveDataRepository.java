@@ -130,6 +130,7 @@ public class LiveDataRepository {
                     if(co2List.size() > 0){
                         CO2 co2 = co2List.get(co2List.size() - 1);
                         liveCo2.postValue(co2);
+                        String nTimestamp = "";
                         liveTimestamp.postValue(co2.getTimestamp());
                     }
                 }

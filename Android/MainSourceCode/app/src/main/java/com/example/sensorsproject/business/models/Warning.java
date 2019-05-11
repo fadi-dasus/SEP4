@@ -13,13 +13,13 @@ public class Warning {
 
     private String status;
 
-    private double value;
+    private String value;
 
     private MyRoom room;
 
     private String measurementType;
 
-    public Warning(String id, String localDate, String status, double value, MyRoom room, String measurementType) {
+    public Warning(String id, String localDate, String status, String value, MyRoom room, String measurementType) {
         this.id = id;
         this.localDate = localDate;
         this.status = status;
@@ -40,7 +40,7 @@ public class Warning {
         return status;
     }
 
-    public double getValue() {
+    public String getValue() {
         return value;
     }
 
