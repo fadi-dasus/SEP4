@@ -8,7 +8,7 @@ void timers_init()
 	
 	co2Timer = xTimerCreate(
 		"CO2 Timer",
-		( 1000/portTICK_PERIOD_MS ) /** 60*/ * 7,	// 7 minute
+		( 1000/portTICK_PERIOD_MS ) /** 60*/ * 45,	// 7 minute
 		pdFALSE,
 		( void* ) 0,
 		co2_timer_callback
@@ -16,7 +16,7 @@ void timers_init()
 	
 	tempHumTimer = xTimerCreate(
 		"Temp Hum Timer",
-		( 1000/portTICK_PERIOD_MS ) /** 60*/ * 1 ,	// 1 minute
+		( 1000/portTICK_PERIOD_MS ) /** 60*/ *5 ,	// 1 minute
 		pdFALSE,
 		( void* ) 1,
 		temp_hum_timer_callback
@@ -24,7 +24,7 @@ void timers_init()
 	
 	loraTimer = xTimerCreate(
 		"LoRa Timer",
-		( 1000/portTICK_PERIOD_MS ) /** 60*/ * 1,	// 1 minute
+		( 1000/portTICK_PERIOD_MS ) /** 60*/ * 5,	// 1 minute
 		pdFALSE,
 		( void* ) 2,
 		lora_timer_callback
@@ -32,7 +32,7 @@ void timers_init()
 	
 	restartCycleTimer = xTimerCreate(
 		"Restart Cycle Timer",
-		( 1000/portTICK_PERIOD_MS ) /** 60*/ * 1,	// 1 minute
+		( 1000/portTICK_PERIOD_MS ) /** 60*/ * 15,	// 1 minute
 		pdFALSE,
 		( void* ) 3,
 		restart_cycle_timer_callback

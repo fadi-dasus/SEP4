@@ -6,6 +6,8 @@
  */ 
 
 #include "myLora.h"
+#include "temp_humSensor.h"
+#include "co2Sensor.h"
 
 #define LORA_appEUI "e5459c2af2d9061f"
 #define LORA_appKEY "d94d399f47f5e355abbc2f63ad9181e1"
@@ -81,14 +83,40 @@ void lora_start()
 
 void lora_send_data()
 {
-	vTaskDelay(500);
+	// just in case it didnt join last time
+	// should skip after first if
+	e_LoRa_return_code_t rc;
+	/*if ((rc=lora_driver_join(LoRa_OTAA)) == LoRa_ACCEPTED)
+	{
+		printf("LORA_ACCEPTED \n");
+	}
+	else if(rc==7)
+	{
+		for (int i = 0; i < 5; ++i)
+		{
+			rc=lora_driver_join(LoRa_OTAA);
+			if(rc==7)
+			{
+				printf("LORA_DENIED\n");
+				continue;
+			}
+			else
+			{
+				printf("LORA_ACCEPTED\n");
+				break;
+			}
+		}
+	}*/
+	
+	vTaskDelay(100/portTICK_PERIOD_MS);
 	
 	lora_driver_flush_buffers(); // get rid of first version string from module after reset!
 
+	vTaskDelay(100/portTICK_PERIOD_MS);
 	// Some dummy payload
-	uint16_t hum = 321; // Dummy humidity
-	int16_t temp = 642; // Dummy temp
-	uint16_t co2_ppm = 1111; // Dummy CO2
+	uint16_t hum = hum_get_value(); // Dummy humidity
+	int16_t temp = temp_get_value(); // Dummy temp
+	uint16_t co2_ppm = co2_get_value(); // Dummy CO2
 
 	lora_payload_t uplink_payload;
 	
@@ -101,8 +129,6 @@ void lora_send_data()
 	uplink_payload.bytes[3] = temp & 0xFF;
 	uplink_payload.bytes[4] = co2_ppm >> 8;
 	uplink_payload.bytes[5] = co2_ppm & 0xFF;
-	
-	e_LoRa_return_code_t rc;
 	
 	if ((rc = lora_driver_sent_upload_message(false, &uplink_payload)) == LoRa_MAC_TX_OK )
 	{
@@ -117,5 +143,7 @@ void lora_send_data()
 		// everything went ok, message sent
 		printf("Return code (Send upload message) -> %i ",rc); 
 	}
+	else 
+		printf(">%s<", lora_driver_map_return_code_to_text(rc));
 	// total delay 0seconds 500ticks
 }
