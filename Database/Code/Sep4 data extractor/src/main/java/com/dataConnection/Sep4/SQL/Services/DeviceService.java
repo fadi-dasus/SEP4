@@ -25,18 +25,6 @@ public class DeviceService {
 
     private List<EUIMongo> EUI;
 
-    public void loadDevice() {
-        device.deleteAll();
-        EUI = er.findAll();
-        for(int i =0; i< EUI.size(); i++)
-        {
-            device.save(new Device(EUI.get(i).getName(),EUI.get(i).getUie()));
-        }
-
-        device.findAll().forEach(System.out::println);
-        System.out.println("_______________________________");
-    }
-
     @Scheduled(fixedRate = 5000)
     public void updateDevie() {
         EUI = er.findAll();

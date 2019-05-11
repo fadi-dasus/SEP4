@@ -1,9 +1,13 @@
 package com.dataConnection.Sep4.SQL.model;
 
+import org.bson.types.BSONTimestamp;
 import org.bson.types.ObjectId;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
+
 
 @Entity
 @Table(name = "Temperature")
@@ -23,14 +27,15 @@ public class Temperature {
 	@Column(name = "value")
 	private String value;
 
-	@Column(name = "timestamp")
+	@Column(name = "Timestamp")
 	private Date date;
 
 	public Temperature(){
 
 	}
 
-	public Temperature(String status, Date date, String value, Room room) {
+
+	public Temperature(String status, Date date, String value,  Room room) {
 		this.status = status;
 		this.date = date;
 		this.value = value;
@@ -43,14 +48,6 @@ public class Temperature {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 
 	public String getValue() {
@@ -68,6 +65,14 @@ public class Temperature {
 	public void setRoom(Room room) {
 		this.room = room;
 	}
+
+	public int getId() { return id; }
+
+	public void setId(int id) { this.id = id; }
+
+	public Date getDate() { return date; }
+
+	public void setDate(Date date) { this.date = date; }
 
 	@Override
 	public String toString() {

@@ -24,6 +24,10 @@ public class Room {
 	@OneToOne
 	private Device device;
 
+	public Room(){
+
+	}
+
 	public Room(String roomName, Device device) {
 		this.roomName = roomName;
 		this.device = device;
