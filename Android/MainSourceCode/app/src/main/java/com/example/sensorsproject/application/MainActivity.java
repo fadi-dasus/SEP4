@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
                     setUiVisible(false);
                 } else if(destination.getId() == R.id.reportFragment){
                     bottomNav.setVisibility(View.GONE);
+                } else if(destination.getId() == R.id.todayDataFragment){
+                    bottomNav.setVisibility(View.GONE);
                 } else if(destination.getId() == R.id.action_today_data){
                     bottomNav.setVisibility(View.GONE);
                 }
