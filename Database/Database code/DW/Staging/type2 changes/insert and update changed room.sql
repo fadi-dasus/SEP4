@@ -1,5 +1,5 @@
 
-use Sep4_GroupX2;
+use Sep4;
 use DW_STAGING;
 
 go
@@ -11,9 +11,10 @@ Room_ID, room_name, device_name
 
 (
 --- today
-select r.id, r.room_name, d.device_name from 
-[Sep4_GroupX2].[dbo].[room] as r, 
-[Sep4_GroupX2].[dbo].[device] as d
+select  
+  a.id, a.room_name ,  b.device_name
+	  FROM Sep4.dbo.room a JOIN Sep4.dbo.device b 
+	  ON a.device_id = b.id
 )
 
 EXCEPT
@@ -29,11 +30,12 @@ from
 EXCEPT 
 (
 
-select r.id, r.room_name, d.device_name from 
-[Sep4_GroupX2].[dbo].[room] as r, 
-[Sep4_GroupX2].[dbo].[device] as d  
+select  
+  a.id, a.room_name ,  b.device_name
+	  FROM Sep4.dbo.room a JOIN Sep4.dbo.device b 
+	  ON a.device_id = b.id
 
-where r.id NOT In (SELECT  
+where a.id NOT In (SELECT  
 Room_ID
 FROM
 [DW].[dbo].[Room_D] )
@@ -42,6 +44,8 @@ FROM
 
 
 go 
+
+
 
 use DW;
 

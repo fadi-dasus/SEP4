@@ -1,14 +1,15 @@
-use Sep4_GroupX2;
+use Sep4;
 go 
 --- find added rows
-select r.id, r.room_name, d.device_name from 
-dbo.room as r, 
-dbo.device as d
+select  
+  a.id, a.room_name ,  b.device_name
+	  FROM Sep4.dbo.room a JOIN Sep4.dbo.device b 
+	  ON a.device_id = b.id
 
-where r.id in 
+where a.id in 
 ((
 --- today
-select id from [Sep4_GroupX2].[dbo].[room]
+select id from [Sep4].[dbo].[room]
 
 ) 
 

@@ -19,7 +19,7 @@ time time);
 --------------------------------- insert
 insert into TEM_FACT_CO2 ( Room_ID,  value, date,time)
 
-select  co2.room_id, co2.value , co2.date, cast([timestamp] as time) [time]
+select  co2.room_id, co2.value , cast(timestamp as date) [date], cast([timestamp] as time) [time]
 from 
 [Sep4].[dbo].[co2] as co2 
 ----------------------------------
@@ -86,7 +86,7 @@ select * from TEM_FACT_Temperature
 
 insert into TEM_FACT_Temperature( Room_ID,  value, date,time)
 
-select  t.room_id, t.value , t.date, cast([timestamp] as time) [time]
+select  t.room_id, t.value ,cast(timestamp as date) [date], cast([timestamp] as time) [time]
 from 
 [Sep4].[dbo].[temperature] as t 
 
@@ -131,7 +131,7 @@ time time);
 
 insert into TEM_FACT_hum( Room_ID,  value, date,time)
 
-select  t.room_id, t.value , t.date, cast([timestamp] as time) [time]
+select  t.room_id, t.value , cast(timestamp as date) [date], cast([timestamp] as time) [time]
 from 
 [Sep4].[dbo].[humidity] as t 
 
