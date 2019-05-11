@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -25,21 +28,6 @@ public class CO2Service {
 
     private List<EUIMongo> EUI;
 
-    public void loadCo2() {
-        co2.deleteAll();
-        EUI = er.findAll();
-
-        int value = rr.findAll().size()-1;
-
-        for (int i = 0; i < EUI.size(); i++) {
-            co2.save(new Co2("NORMAL", EUI.get(i).getTimestamp(), EUI.get(i).getCo2(),null));
-        }
-
-        co2.findAll().forEach(System.out::println);
-        System.out.println("_______________________________");
-    }
-    
-
     @Scheduled(fixedRate = 5000)
     public void updateCO2() {
         EUI = er.findAll();
@@ -47,10 +35,10 @@ public class CO2Service {
 
         int value = EUI.size() - co2.findAll().size();
 
-        
         for (int i = EUI.size() - value; i < EUI.size(); i++) {
-            co2.save(new Co2("NORMAL", EUI.get(i).getTimestamp(), EUI.get(i).getCo2(),null));
+            co2.save(new Co2("NORMAL",EUI.get(i).getDate(), EUI.get(i).getCo2(),rr.findAll().get(EUI.get(i).getRoomId())));
         }
+
     }else
         {
             System.out.println("No values in db");
