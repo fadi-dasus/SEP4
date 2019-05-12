@@ -11,6 +11,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class CO2Service {
     SimpleDateFormat mm = new SimpleDateFormat("yyyy-MM-dd");
     String strDate;
     Date dt;
-    Date ld;
+    LocalDate ld;
 
     @Scheduled(fixedRate = 5000)
     public void updateCO2() {
@@ -44,7 +46,8 @@ public class CO2Service {
             try {
                 for(int i =EUI.size()-value; i<EUI.size(); i++)
                 {
-                    co2.save(new Co2(ld = mm.parse(strDate = mm.format(EUI.get(i).getDate())),"NORMAL",dt = sm.parse(strDate = sm.format(EUI.get(i).getDate())), EUI.get(i).getCo2(),rr.findAll().get(EUI.get(i).getRoomId())));
+                    ld = mm.parse(strDate = mm.format(EUI.get(i).getDate())).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    co2.save(new Co2(ld,"NORMAL",dt = sm.parse(strDate = sm.format(EUI.get(i).getDate())), EUI.get(i).getCo2(),rr.findAll().get(EUI.get(i).getRoomId())));
                 }
             }catch (Exception e){
 

@@ -1,6 +1,7 @@
 package com.dataConnection.Sep4.SQL.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -26,14 +27,14 @@ public class Temperature {
     private String value;
 
     @Column(name = "date")
-    private Date localDate;
+    private LocalDate localDate;
 
 
     public Temperature(){
 
     }
 
-    public Temperature(Date localDate, String status, Date date, String value,  Room room) {
+    public Temperature(LocalDate localDate, String status, Date date, String value,  Room room) {
         this.localDate = localDate;
         this.status = status;
         this.date = date;
@@ -74,11 +75,11 @@ public class Temperature {
     public void setDate(Date date) { this.date = date; }
 
 
-    public Date getLocalDate() {
+    public LocalDate getLocalDate() {
         return localDate;
     }
 
-    public void setLocalDate(Date localDate) {
+    public void setLocalDate(LocalDate localDate) {
         this.localDate = localDate;
     }
 
