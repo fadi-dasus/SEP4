@@ -39,7 +39,6 @@ C:\Users\yabis\OneDrive\Skrivebord\SEP4\Database\WebApplication\WebApplication\b
 C:\Users\yabis\OneDrive\Skrivebord\SEP4\Database\WebApplication\WebApplication\bin\System.Web.WebPages.Razor.xml
 C:\Users\yabis\OneDrive\Skrivebord\SEP4\Database\WebApplication\WebApplication\bin\Antlr3.Runtime.pdb
 C:\Users\yabis\OneDrive\Skrivebord\SEP4\Database\WebApplication\WebApplication\bin\Newtonsoft.Json.xml
-C:\Users\yabis\OneDrive\Skrivebord\SEP4\Database\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache
 C:\Users\yabis\OneDrive\Skrivebord\SEP4\Database\WebApplication\WebApplication\obj\Debug\WebApplication.dll
 C:\Users\yabis\OneDrive\Skrivebord\SEP4\Database\WebApplication\WebApplication\obj\Debug\WebApplication.pdb
 C:\Users\yabis\OneDrive\Skrivebord\SEP4\Database\WebApplication\WebApplication\bin\ApplicationInsights.config
@@ -55,3 +54,6 @@ C:\Users\yabis\OneDrive\Skrivebord\SEP4\Database\WebApplication\WebApplication\b
 C:\Users\yabis\OneDrive\Skrivebord\SEP4\Database\WebApplication\WebApplication\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\yabis\OneDrive\Skrivebord\SEP4\Database\WebApplication\WebApplication\bin\Microsoft.AI.Web.xml
 C:\Users\yabis\OneDrive\Skrivebord\SEP4\Database\WebApplication\WebApplication\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\yabis\OneDrive\Skrivebord\SEP4\Database\WebApplication\WebApplication\obj\Debug\WebApplication.csprojAssemblyReference.cache
+C:\Users\yabis\OneDrive\Skrivebord\SEP4\Database\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.CoreCompileInputs.cache
+C:\Users\yabis\OneDrive\Skrivebord\SEP4\Database\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.CopyComplete
