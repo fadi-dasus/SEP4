@@ -58,14 +58,14 @@ create table "Calendar_D"(
    select * from Calendar_D;
 
 
-   CREATE TABLE "Time_D"
+  CREATE TABLE "Time_D"
 (
-  T_ID int identity (1,1) not null
+ T_ID int identity (1,1) not null
 , TimeStamp  TIME not null
 , Minutes tinyint not null
 , Seconds tinyint not null
 ,constraint "PK_Time_ID" primary key(
-		"T_ID"
+        "T_ID"
 )
 )
 go
@@ -87,7 +87,6 @@ SELECT
 ,DATENAME(second, @Hour )
 SET @Hour = DATEADD(second,1, @Hour)
 END
-
 
 
 

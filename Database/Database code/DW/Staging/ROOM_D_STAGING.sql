@@ -14,7 +14,7 @@ device_name   varchar(50)
 
 insert into ROOM_D_STAGE( Room_ID, room_name, device_name) select  
   a.id, a.room_name ,  b.device_name
-	  FROM Sep4.dbo.room a JOIN Sep4.dbo.device b 
+	  FROM Sep4_GroupX2.dbo.room a JOIN Sep4_GroupX2.dbo.device b 
 	  ON a.device_id = b.id
 
  select * from Room_D_STAGE;

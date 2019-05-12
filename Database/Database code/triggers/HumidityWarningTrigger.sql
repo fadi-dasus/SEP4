@@ -2,7 +2,7 @@ use Sep4
  Go
 
 
-CREATE TRIGGER [dbo].[HumidityWarningConfigureStatus]
+ALTER TRIGGER [dbo].[HumidityWarningConfigureStatus]
 ON [dbo].[humidity]
 AFTER UPDATE
 AS
@@ -12,22 +12,25 @@ BEGIN
 	DECLARE @value AS INT
 	DECLARE @roomID AS INT
 	DECLARE @type AS VARCHAR(10) = 'Humidity'
+    DECLARE @date AS DATE
 
-	SELECT @status = status, @timeStamp = timestamp,@value = value,@roomID = room_id
+	SELECT @status = status, @timeStamp = timestamp,@value = value,@roomID = room_id, @date = date 
 	FROM Inserted
 
 	IF (@status = 'HIGH' OR @status = 'LOW')
 		INSERT INTO dbo.warning (
 	   [measurement_type]
       ,[status]
-      ,[time_stamp]
+      ,[timestamp]
       ,[value]
-      ,[room_id]) values (
+      ,[room_id]
+	  ,[date]) values (
 	  @type,
 	  @status,
 	  @timeStamp,
 	  @value,
-	  @roomID)
+	  @roomID, 
+	  @date)
 		
 
 
