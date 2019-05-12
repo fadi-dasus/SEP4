@@ -1,0 +1,474 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Sep4_GroupX2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="255" />
+          <Property Name="username" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="co2">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" />
+          <Property Name="status" Type="varchar" MaxLength="255" />
+          <Property Name="timestamp" Type="datetime2" Precision="7" />
+          <Property Name="value" Type="varchar" MaxLength="255" />
+          <Property Name="room_id" Type="int" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="device">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="device_name" Type="varchar" MaxLength="255" />
+          <Property Name="uie" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="humidity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" />
+          <Property Name="status" Type="varchar" MaxLength="255" />
+          <Property Name="timestamp" Type="datetime2" Precision="7" />
+          <Property Name="value" Type="varchar" MaxLength="255" />
+          <Property Name="room_id" Type="int" />
+        </EntityType>
+        <EntityType Name="room">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="room_name" Type="varchar" MaxLength="255" />
+          <Property Name="device_id" Type="int" />
+        </EntityType>
+        <EntityType Name="temperature">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" />
+          <Property Name="status" Type="varchar" MaxLength="255" />
+          <Property Name="timestamp" Type="datetime2" Precision="7" />
+          <Property Name="value" Type="varchar" MaxLength="255" />
+          <Property Name="room_id" Type="int" />
+        </EntityType>
+        <EntityType Name="warning">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="measurement_type" Type="varchar" MaxLength="255" />
+          <Property Name="time_stamp" Type="date" />
+          <Property Name="status" Type="varchar" MaxLength="255" />
+          <Property Name="value" Type="float" />
+          <Property Name="room_id" Type="int" />
+        </EntityType>
+        <Association Name="FK5695brobhhiauxcpf1dao1dn8">
+          <End Role="room" Type="Self.room" Multiplicity="0..1" />
+          <End Role="warning" Type="Self.warning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="warning">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKbur0pdle6iywrn8vee1f3d5op">
+          <End Role="device" Type="Self.device" Multiplicity="0..1" />
+          <End Role="room" Type="Self.room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="device">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="room">
+              <PropertyRef Name="device_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKbvh0u2ip7583gp2l3yp34uiw7">
+          <End Role="room" Type="Self.room" Multiplicity="0..1" />
+          <End Role="temperature" Type="Self.temperature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="temperature">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKcm5c7v0hf55369f6dotak0a0t">
+          <End Role="room" Type="Self.room" Multiplicity="0..1" />
+          <End Role="co2" Type="Self.co2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="co2">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKcpeog82mkik7iw6qte5l42xbw">
+          <End Role="room" Type="Self.room" Multiplicity="0..1" />
+          <End Role="humidity" Type="Self.humidity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="humidity">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Sep4_GroupX2ModelStoreContainer">
+          <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="co2" EntityType="Self.co2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="device" EntityType="Self.device" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="humidity" EntityType="Self.humidity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="room" EntityType="Self.room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="temperature" EntityType="Self.temperature" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="warning" EntityType="Self.warning" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK5695brobhhiauxcpf1dao1dn8" Association="Self.FK5695brobhhiauxcpf1dao1dn8">
+            <End Role="room" EntitySet="room" />
+            <End Role="warning" EntitySet="warning" />
+          </AssociationSet>
+          <AssociationSet Name="FKbur0pdle6iywrn8vee1f3d5op" Association="Self.FKbur0pdle6iywrn8vee1f3d5op">
+            <End Role="device" EntitySet="device" />
+            <End Role="room" EntitySet="room" />
+          </AssociationSet>
+          <AssociationSet Name="FKbvh0u2ip7583gp2l3yp34uiw7" Association="Self.FKbvh0u2ip7583gp2l3yp34uiw7">
+            <End Role="room" EntitySet="room" />
+            <End Role="temperature" EntitySet="temperature" />
+          </AssociationSet>
+          <AssociationSet Name="FKcm5c7v0hf55369f6dotak0a0t" Association="Self.FKcm5c7v0hf55369f6dotak0a0t">
+            <End Role="room" EntitySet="room" />
+            <End Role="co2" EntitySet="co2" />
+          </AssociationSet>
+          <AssociationSet Name="FKcpeog82mkik7iw6qte5l42xbw" Association="Self.FKcpeog82mkik7iw6qte5l42xbw">
+            <End Role="room" EntitySet="room" />
+            <End Role="humidity" EntitySet="humidity" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Sep4_GroupX2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="co2">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="timestamp" Type="DateTime" Precision="7" />
+          <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="room_id" Type="Int32" />
+          <NavigationProperty Name="room" Relationship="Self.FKcm5c7v0hf55369f6dotak0a0t" FromRole="co2" ToRole="room" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="device">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="device_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="uie" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="rooms" Relationship="Self.FKbur0pdle6iywrn8vee1f3d5op" FromRole="device" ToRole="room" />
+        </EntityType>
+        <EntityType Name="humidity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="timestamp" Type="DateTime" Precision="7" />
+          <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="room_id" Type="Int32" />
+          <NavigationProperty Name="room" Relationship="Self.FKcpeog82mkik7iw6qte5l42xbw" FromRole="humidity" ToRole="room" />
+        </EntityType>
+        <EntityType Name="room">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="room_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="device_id" Type="Int32" />
+          <NavigationProperty Name="co2" Relationship="Self.FKcm5c7v0hf55369f6dotak0a0t" FromRole="room" ToRole="co2" />
+          <NavigationProperty Name="device" Relationship="Self.FKbur0pdle6iywrn8vee1f3d5op" FromRole="room" ToRole="device" />
+          <NavigationProperty Name="humidities" Relationship="Self.FKcpeog82mkik7iw6qte5l42xbw" FromRole="room" ToRole="humidity" />
+          <NavigationProperty Name="warnings" Relationship="Self.FK5695brobhhiauxcpf1dao1dn8" FromRole="room" ToRole="warning" />
+          <NavigationProperty Name="temperatures" Relationship="Self.FKbvh0u2ip7583gp2l3yp34uiw7" FromRole="room" ToRole="temperature" />
+        </EntityType>
+        <EntityType Name="temperature">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="timestamp" Type="DateTime" Precision="7" />
+          <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="room_id" Type="Int32" />
+          <NavigationProperty Name="room" Relationship="Self.FKbvh0u2ip7583gp2l3yp34uiw7" FromRole="temperature" ToRole="room" />
+        </EntityType>
+        <EntityType Name="warning">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="measurement_type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="time_stamp" Type="DateTime" Precision="0" />
+          <Property Name="status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="value" Type="Double" />
+          <Property Name="room_id" Type="Int32" />
+          <NavigationProperty Name="room" Relationship="Self.FK5695brobhhiauxcpf1dao1dn8" FromRole="warning" ToRole="room" />
+        </EntityType>
+        <Association Name="FKcm5c7v0hf55369f6dotak0a0t">
+          <End Role="room" Type="Self.room" Multiplicity="0..1" />
+          <End Role="co2" Type="Self.co2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="co2">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKbur0pdle6iywrn8vee1f3d5op">
+          <End Role="device" Type="Self.device" Multiplicity="0..1" />
+          <End Role="room" Type="Self.room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="device">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="room">
+              <PropertyRef Name="device_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKcpeog82mkik7iw6qte5l42xbw">
+          <End Role="room" Type="Self.room" Multiplicity="0..1" />
+          <End Role="humidity" Type="Self.humidity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="humidity">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK5695brobhhiauxcpf1dao1dn8">
+          <End Role="room" Type="Self.room" Multiplicity="0..1" />
+          <End Role="warning" Type="Self.warning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="warning">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKbvh0u2ip7583gp2l3yp34uiw7">
+          <End Role="room" Type="Self.room" Multiplicity="0..1" />
+          <End Role="temperature" Type="Self.temperature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="temperature">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Sep4_GroupX2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admins" EntityType="Self.admin" />
+          <EntitySet Name="co2" EntityType="Self.co2" />
+          <EntitySet Name="customers" EntityType="Self.customer" />
+          <EntitySet Name="devices" EntityType="Self.device" />
+          <EntitySet Name="humidities" EntityType="Self.humidity" />
+          <EntitySet Name="rooms" EntityType="Self.room" />
+          <EntitySet Name="temperatures" EntityType="Self.temperature" />
+          <EntitySet Name="warnings" EntityType="Self.warning" />
+          <AssociationSet Name="FKcm5c7v0hf55369f6dotak0a0t" Association="Self.FKcm5c7v0hf55369f6dotak0a0t">
+            <End Role="room" EntitySet="rooms" />
+            <End Role="co2" EntitySet="co2" />
+          </AssociationSet>
+          <AssociationSet Name="FKbur0pdle6iywrn8vee1f3d5op" Association="Self.FKbur0pdle6iywrn8vee1f3d5op">
+            <End Role="device" EntitySet="devices" />
+            <End Role="room" EntitySet="rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FKcpeog82mkik7iw6qte5l42xbw" Association="Self.FKcpeog82mkik7iw6qte5l42xbw">
+            <End Role="room" EntitySet="rooms" />
+            <End Role="humidity" EntitySet="humidities" />
+          </AssociationSet>
+          <AssociationSet Name="FK5695brobhhiauxcpf1dao1dn8" Association="Self.FK5695brobhhiauxcpf1dao1dn8">
+            <End Role="room" EntitySet="rooms" />
+            <End Role="warning" EntitySet="warnings" />
+          </AssociationSet>
+          <AssociationSet Name="FKbvh0u2ip7583gp2l3yp34uiw7" Association="Self.FKbvh0u2ip7583gp2l3yp34uiw7">
+            <End Role="room" EntitySet="rooms" />
+            <End Role="temperature" EntitySet="temperatures" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Sep4_GroupX2ModelStoreContainer" CdmEntityContainer="Sep4_GroupX2Entities">
+          <EntitySetMapping Name="admins">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.admin">
+              <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="co2">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.co2">
+              <MappingFragment StoreEntitySet="co2">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customers">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="devices">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.device">
+              <MappingFragment StoreEntitySet="device">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="device_name" ColumnName="device_name" />
+                <ScalarProperty Name="uie" ColumnName="uie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="humidities">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.humidity">
+              <MappingFragment StoreEntitySet="humidity">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rooms">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.room">
+              <MappingFragment StoreEntitySet="room">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="room_name" ColumnName="room_name" />
+                <ScalarProperty Name="device_id" ColumnName="device_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="temperatures">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.temperature">
+              <MappingFragment StoreEntitySet="temperature">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="warnings">
+            <EntityTypeMapping TypeName="Sep4_GroupX2Model.warning">
+              <MappingFragment StoreEntitySet="warning">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="measurement_type" ColumnName="measurement_type" />
+                <ScalarProperty Name="time_stamp" ColumnName="time_stamp" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
