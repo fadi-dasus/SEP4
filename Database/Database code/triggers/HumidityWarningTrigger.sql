@@ -2,7 +2,7 @@ use Sep4
  Go
 
 
-ALTER TRIGGER [dbo].[HumidityWarningConfigureStatus]
+CREATE TRIGGER [dbo].[HumidityWarningConfigureStatus]
 ON [dbo].[humidity]
 AFTER UPDATE
 AS

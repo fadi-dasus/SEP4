@@ -74,4 +74,9 @@ FROM [DW_STAGING].[dbo].[changed_Room]
 
  go;
 
+ SELECT * FROM [DW_STAGING].[dbo].[changed_Room]
+ GO
+
+
  Delete From [DW_STAGING].[dbo].[changed_Room]
+

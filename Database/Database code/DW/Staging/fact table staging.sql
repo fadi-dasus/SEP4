@@ -16,6 +16,9 @@ Room_ID int null ,
 value varchar(255),
 date date,
 time time);
+ CREATE  INDEX "TEM_FACT_CO2_Date" ON "dbo"."TEM_FACT_CO2"("date")
+ CREATE  INDEX "TEM_FACT_CO2_Time" ON "dbo"."TEM_FACT_CO2"("time")
+ GO
 --------------------------------- insert
 insert into TEM_FACT_CO2 ( Room_ID,  value, date,time)
 
@@ -23,7 +26,6 @@ select  co2.room_id, co2.value , cast(timestamp as date) [date], cast([timestamp
 from 
 [Sep4].[dbo].[co2] as co2 
 ----------------------------------
-
 
 select * from TEM_FACT_CO2
 
@@ -46,9 +48,7 @@ UPDATE [TEM_FACT_CO2] SET R_ID =(select R_ID from [DW].[dbo].[Room_D] where [DW]
 -- filtering the data and remove NULL values if it exists 
     UPDATE [DW_STAGING].[dbo].[TEM_FACT_CO2] SET value = 'NO VALUE' WHERE value IS NULL;
 
-
 -------------------populate to the fact table
-
 
 select * from [TEM_FACT_CO2];
 
@@ -68,7 +68,7 @@ select * from [Fact_CO2]
 
 
 -------------------------------------------------------------------
-
+use DW_STAGING;
  drop table if EXISTS  TEM_FACT_Temperature
 create table TEM_FACT_Temperature(
 
@@ -95,6 +95,7 @@ UPDATE [TEM_FACT_Temperature] SET D_ID =(select D_ID from [DW].[dbo].[Calendar_D
 UPDATE [TEM_FACT_Temperature] SET T_ID =(select T_ID from [DW].[dbo].[Time_D] where [DW].[dbo].[Time_D].TimeStamp = TEM_FACT_Temperature.time)
 UPDATE [TEM_FACT_Temperature] SET R_ID =(select R_ID from [DW].[dbo].[Room_D] where [DW].[dbo].[Room_D].Room_ID = TEM_FACT_Temperature.Room_ID)
 
+select * from TEM_FACT_Temperature 
 -------------- populate the data
 
 --some checking 
@@ -102,8 +103,8 @@ UPDATE [TEM_FACT_Temperature] SET R_ID =(select R_ID from [DW].[dbo].[Room_D] wh
     UPDATE [DW_STAGING].[dbo].[TEM_FACT_Temperature] SET value = 'NO VALUE' WHERE value IS NULL;
 
 ----
-use DW_Staging
-select * from [TEM_FACT_Temperature];
+use DW_STAGING;
+
 
 insert into [DW].[dbo].[Fact_Temperature]
 	(D_ID,R_ID,T_ID, value) 
@@ -113,8 +114,12 @@ from [TEM_FACT_CO2];
 
 
 GO
+
+select * from [DW].[dbo].[Fact_Temperature];
 ------------------------
 
+use DW_STAGING;
+GO
 
 create table TEM_FACT_hum(
 
@@ -144,7 +149,7 @@ UPDATE TEM_FACT_hum SET R_ID =(select R_ID from [DW].[dbo].[Room_D] where [DW].[
 
 select * from TEM_FACT_hum;
 
------ populate the data 
+
 -- do some checking
 
     UPDATE [DW_STAGING].[dbo].[TEM_FACT_Temperature] SET value = 'NO VALUE' WHERE value IS NULL;
@@ -159,7 +164,11 @@ from [TEM_FACT_hum];
 
 GO
 
+SELECT * FROM [DW].[dbo].[Fact_Humidity]
+
 ----------
+use DW_STAGING;
+GO
 
 drop table if EXISTS  TEM_FACT_Warning
 create table TEM_FACT_Warning(
@@ -178,7 +187,7 @@ time time);
 --insert values 
 insert into TEM_FACT_Warning( Room_ID,  value, date,time, m_type, status )
 
-select  w.room_id, w.value ,cast(time_stamp as date) [date] ,cast(time_stamp as time) [time] , w.measurement_type,  w.status
+select  w.room_id, w.value ,cast(w.time_stamp as date) [date] ,cast(w.time_stamp as time) [time] , w.measurement_type,  w.status
 
 from 
 [Sep4].[dbo].[warning] as w 
@@ -208,4 +217,7 @@ select
 from [TEM_FACT_Warning];
 
 
+GO
+
+select * from [DW].[dbo].[Fact_Warning]
 GO

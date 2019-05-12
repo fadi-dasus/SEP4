@@ -9,7 +9,8 @@ Room_ID  int,
 room_name     varchar(50),
 device_name   varchar(50)
 );
-
+  CREATE  INDEX "room_name" ON "dbo"."ROOM_D_STAGE"("room_name")
+  CREATE  INDEX "device_name" ON "dbo"."ROOM_D_STAGE"("device_name")
 
 insert into ROOM_D_STAGE( Room_ID, room_name, device_name) select  
   a.id, a.room_name ,  b.device_name
@@ -28,12 +29,16 @@ insert into ROOM_D_STAGE( Room_ID, room_name, device_name) select
   GO
 
    -- detecting duplicated rows and delete them 
+   SELECT * FROM ROOM_D_STAGE
+   GO
+
 	   WITH ROOM_D_STAGECTE AS
 	(SELECT *,ROW_NUMBER() OVER (PARTITION BY room_name ORDER BY  room_name) AS RowNumber
 	FROM ROOM_D_STAGE )
 	DELETE  FROM ROOM_D_STAGECTE WHERE RowNumber > 1
  
  GO
+ SELECT * FROM ROOM_D_STAGE
 
  --insert data
  insert into [DW].[dbo].[Room_D] (

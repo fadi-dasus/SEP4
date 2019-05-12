@@ -25,6 +25,8 @@ device_name    varchar(50),
 
 primary key (R_ID)
 );
+ CREATE  INDEX "room_name" ON "dbo"."Room_D"("room_name")
+ GO
 
 create table "Calendar_D"(
 	"D_ID" int identity (1, 1) NOT NULL,--identity (1,1) means autoincrement by 1, starting at 1
@@ -48,6 +50,10 @@ create table "Calendar_D"(
    SELECT 
    @StartDate,DATENAME(weekday,@startDate),
    DATENAME(month, @StartDate)SET @StartDate= DATEADD(dd, 1, @StartDate)END
+
+
+ 
+
 
    select * from Calendar_D;
 
