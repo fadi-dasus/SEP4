@@ -1,12 +1,10 @@
 package com.dataConnection.Sep4.SQL.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -16,7 +14,7 @@ public class Room {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
-	private int Id;
+	private int id;
 
 	@Column(name = "roomName")
 	private String roomName;
@@ -24,17 +22,19 @@ public class Room {
 	@OneToOne
 	private Device device;
 
-	public Room(){
+	public Room() {
 
 	}
 
-	public Room(String roomName, Device device) {
-		this.roomName = roomName;
-		this.device = device;
+	public Room(int id) {
+		this.id = id;
 	}
 
-	public Room(String roomName) {
+	
+	public Room(int id, String roomName, Device device) {
 		this.roomName = roomName;
+		this.device=device;
+		this.id=id;
 	}
 
 	public String getRoomName() {
@@ -46,8 +46,9 @@ public class Room {
 	}
 
 	public void setId(Integer id) {
-		Id = id;
+		id = id;
 	}
+
 
 	public Device getDevice() {
 		return device;
@@ -56,10 +57,17 @@ public class Room {
 	public void setDevice(Device device) {
 		this.device = device;
 	}
+	
+
+	public int getId() {
+		return id;
+	}
+
+	
 
 	@Override
 	public String toString() {
-		return "Room [Id=" + Id + ", roomName=" + roomName + ", device=" + device + "]";
+		return "Room [Id=" + id + ", roomName=" + roomName + ", device=" + device + "]";
 	}
 
 }

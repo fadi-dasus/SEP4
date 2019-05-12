@@ -1,4 +1,4 @@
-use Sep4
+use Sep4_GroupX2
  Go
 
 
@@ -11,7 +11,8 @@ BEGIN
 	DECLARE @max AS INT = 35
 	DECLARE @min AS INT = 0
 	DECLARE @originalValue AS INT
-
+	UPDATE Co2 SET status = 'NORMAL'
+		WHERE Co2.id IN (SELECT id FROM Inserted)
 
 	SELECT @status = status
 	FROM Inserted

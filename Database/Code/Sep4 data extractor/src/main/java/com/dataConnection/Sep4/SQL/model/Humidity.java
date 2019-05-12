@@ -1,45 +1,55 @@
 package com.dataConnection.Sep4.SQL.model;
 
-import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 
 
 @Entity
 @Table(name = "Humidity")
-public class Humidity {
+public class Humidity  {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
 	private int id;
 
 	@ManyToOne
+	@JoinColumn(name = "room_id")
 	private Room room;
 
 	@Column(name = "status")
 	private String status;
 
-	@Column(name = "Timestamp")
-	private Date date;
 
 	@Column(name = "value")
 	private String value;
 
 	@Column(name = "date")
-	private LocalDate localDate;
+	private LocalDate date;
 
+	@Column(name = "timestamp")
+	private Timestamp timestamp;
 
-	public Humidity(){
+	public Humidity() {
 
 	}
 
-	public Humidity(LocalDate localDate, String status, Date date, String value, Room room) {
-		this.localDate = localDate;
-		this.status = status;
-		this.date = date;
-		this.value = value;
+	
+	public Humidity( String value, LocalDate date, Timestamp timestamp, Room room) {
 		this.room = room;
+		this.value = value;
+		this.date = date;
+		this.timestamp = timestamp;
 	}
 
 	public String getStatus() {
@@ -50,12 +60,26 @@ public class Humidity {
 		this.status = status;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
 	public String getValue() {
 		return value;
 	}
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public Timestamp getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
 	}
 
 	public Room getRoom() {
@@ -66,32 +90,19 @@ public class Humidity {
 		this.room = room;
 	}
 
-	public int getId() { return id; }
 
-	public void setId(int id) { this.id = id; }
-
-	public Date getDate() { return date; }
-
-	public void setDate(Date date) { this.date = date; }
-
-
-	public LocalDate getLocalDate() {
-		return localDate;
+	public LocalDate getDate() {
+		return date;
 	}
 
-	public void setLocalDate(LocalDate localDate) {
-		this.localDate = localDate;
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 
 	@Override
 	public String toString() {
-		return "Humidity{" +
-				"id=" + id +
-				", room=" + room +
-				", status='" + status + '\'' +
-				", date=" + date +
-				", value='" + value + '\'' +
-				", localDate=" + localDate +
-				'}';
+		return "Humidity [Id=" + id + ", room=" + room + ", status=" + status + ", value=" + value + ", date=" + date
+				+ ", timestamp=" + timestamp + "]";
 	}
+
 }

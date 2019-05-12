@@ -1,45 +1,60 @@
 package com.dataConnection.Sep4.SQL.model;
 
-import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "Co2")
 public class Co2 {
-
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id")
 	private int id;
 
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	@ManyToOne
+	@JoinColumn(name="room_id")
 	private Room room;
 
 	@Column(name = "status")
 	private String status;
 
-	@Column(name = "Timestamp")
-	private Date date;
-
 	@Column(name = "value")
 	private String value;
 
 	@Column(name = "date")
-	private LocalDate localDate;
+	private LocalDate date;
 
+	@Column(name = "timestamp")
+	private Timestamp timestamp;
 
-	public Co2(){
+	public Co2() {
 
 	}
 
-	public Co2(LocalDate localDate, String status, Date date, String value,  Room room) {
-		this.localDate = localDate;
-		this.status = status;
+	
+	public Co2( String value, LocalDate date, Timestamp timestamp, Room room) {
+		this.room = room;
 		this.date = date;
 		this.value = value;
-		this.room = room;
+		this.timestamp = timestamp;
 	}
 
 	public String getStatus() {
@@ -50,14 +65,6 @@ public class Co2 {
 		this.status = status;
 	}
 
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
-
 	public Room getRoom() {
 		return room;
 	}
@@ -66,32 +73,35 @@ public class Co2 {
 		this.room = room;
 	}
 
-	public int getId() { return id; }
-
-	public void setId(int id) { this.id = id; }
-
-	public Date getDate() { return date; }
-
-	public void setDate(Date date) { this.date = date; }
-
-
-	public LocalDate getLocalDate() {
-		return localDate;
+	public String getValue() {
+		return value;
 	}
 
-	public void setLocalDate(LocalDate localDate) {
-		this.localDate = localDate;
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public Timestamp getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
+	}
+
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 
 	@Override
 	public String toString() {
-		return "Co2{" +
-				"id=" + id +
-				", room=" + room +
-				", status='" + status + '\'' +
-				", date=" + date +
-				", value='" + value + '\'' +
-				", localDate=" + localDate +
-				'}';
+		return "Co2 [Id=" + id + ", room=" + room + ", status=" + status + ", value=" + value + ", date=" + date
+				+ ", timestamp=" + timestamp + "]";
 	}
+
 }

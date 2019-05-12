@@ -1,9 +1,10 @@
 package com.dataConnection.Sep4.SQL.dao;
 
-import com.dataConnection.Sep4.SQL.model.Co2;
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
+import com.dataConnection.Sep4.SQL.model.Co2;
 
 public interface Co2Repository extends CrudRepository<Co2, Integer> {
     @Override

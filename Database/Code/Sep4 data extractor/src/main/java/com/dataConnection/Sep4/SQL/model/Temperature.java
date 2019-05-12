@@ -1,97 +1,98 @@
 package com.dataConnection.Sep4.SQL.model;
 
-import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 
 @Entity
 @Table(name = "Temperature")
-public class Temperature {
+public class Temperature{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "Id")
-    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "Id")
+	private int id;
 
-    @ManyToOne
-    private Room room;
+	@ManyToOne
+	@JoinColumn(name = "room_id")
+	private Room room;
 
-    @Column(name = "status")
-    private String status;
+	@Column(name = "status")
+	private String status;
 
-    @Column(name = "Timestamp")
-    private Date date;
+	@Column(name = "value")
+	private String value;
 
-    @Column(name = "value")
-    private String value;
+	@Column(name = "date")
+	private LocalDate date;
 
-    @Column(name = "date")
-    private LocalDate localDate;
+	@Column(name = "timestamp")
+	private Timestamp timestamp;
 
+	public Temperature() {
 
-    public Temperature(){
+	}
 
-    }
+	
+	public Temperature( String value, Room room, LocalDate date, Timestamp timestamp) {
+		this.room = room;
+		this.value = value;
+		this.timestamp = timestamp;
+	}
 
-    public Temperature(LocalDate localDate, String status, Date date, String value,  Room room) {
-        this.localDate = localDate;
-        this.status = status;
-        this.date = date;
-        this.value = value;
-        this.room = room;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public String getStatus() {
-        return status;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+	public String getValue() {
+		return value;
+	}
 
-    public String getValue() {
-        return value;
-    }
+	public void setValue(String value) {
+		this.value = value;
+	}
 
-    public void setValue(String value) {
-        this.value = value;
-    }
+	public Room getRoom() {
+		return room;
+	}
 
-    public Room getRoom() {
-        return room;
-    }
+	public void setRoom(Room room) {
+		this.room = room;
+	}
 
-    public void setRoom(Room room) {
-        this.room = room;
-    }
+	public Timestamp getTimestamp() {
+		return timestamp;
+	}
 
-    public int getId() { return id; }
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
+	}
 
-    public void setId(int id) { this.id = id; }
+	public LocalDate getDate() {
+		return date;
+	}
 
-    public Date getDate() { return date; }
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
 
-    public void setDate(Date date) { this.date = date; }
+	@Override
+	public String toString() {
+		return "Temperature [Id=" + id + ", room=" + room + ", status=" + status + ", value=" + value + ", date=" + date
+				+ ", timestamp=" + timestamp + "]";
+	}
 
-
-    public LocalDate getLocalDate() {
-        return localDate;
-    }
-
-    public void setLocalDate(LocalDate localDate) {
-        this.localDate = localDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Temperature{" +
-                "id=" + id +
-                ", room=" + room +
-                ", status='" + status + '\'' +
-                ", date=" + date +
-                ", value='" + value + '\'' +
-                ", localDate=" + localDate +
-                '}';
-    }
 }

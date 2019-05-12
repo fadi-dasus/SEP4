@@ -6,6 +6,7 @@ import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -25,7 +26,7 @@ public class EUIMongo {
     private int roomId;
 
     @Field("Timestamp")
-    private Date date;
+    private Date timestamp;
     
     @Field("CO2")
     private String co2;
@@ -69,11 +70,11 @@ public class EUIMongo {
     }
 
     public Date getDate() {
-        return date;
+        return timestamp;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.timestamp = date;
     }
 
     public String getCo2() {
@@ -107,7 +108,7 @@ public class EUIMongo {
                 ", uie='" + uie + '\'' +
                 ", name='" + name + '\'' +
                 ", roomId=" + roomId +
-                ", date=" + date +
+                ", date=" + timestamp +
                 ", co2='" + co2 + '\'' +
                 ", humidity='" + humidity + '\'' +
                 ", temperature='" + temperature + '\'' +
