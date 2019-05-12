@@ -24,7 +24,7 @@ insert into TEM_FACT_CO2 ( Room_ID,  value, date,time)
 
 select  co2.room_id, co2.value , cast(timestamp as date) [date], cast([timestamp] as time) [time]
 from 
-[Sep4].[dbo].[co2] as co2 
+[Sep4_GroupX2].[dbo].[co2] as co2 
 ----------------------------------
 
 select * from TEM_FACT_CO2
@@ -88,7 +88,7 @@ insert into TEM_FACT_Temperature( Room_ID,  value, date,time)
 
 select  t.room_id, t.value ,cast(timestamp as date) [date], cast([timestamp] as time) [time]
 from 
-[Sep4].[dbo].[temperature] as t 
+[Sep4_GroupX2].[dbo].[temperature] as t 
 
 ------------ update
 UPDATE [TEM_FACT_Temperature] SET D_ID =(select D_ID from [DW].[dbo].[Calendar_D] where [DW].[dbo].[Calendar_D].CalendarDate = TEM_FACT_Temperature.date)
@@ -138,7 +138,7 @@ insert into TEM_FACT_hum( Room_ID,  value, date,time)
 
 select  t.room_id, t.value , cast(timestamp as date) [date], cast([timestamp] as time) [time]
 from 
-[Sep4].[dbo].[humidity] as t 
+[Sep4_GroupX2].[dbo].[humidity] as t 
 
 go
 ---- update the keys
@@ -187,10 +187,10 @@ time time);
 --insert values 
 insert into TEM_FACT_Warning( Room_ID,  value, date,time, m_type, status )
 
-select  w.room_id, w.value ,cast(w.time_stamp as date) [date] ,cast(w.time_stamp as time) [time] , w.measurement_type,  w.status
+select  w.room_id, w.value ,cast(w.timestamp as date) [date] ,cast(w.timestamp as time) [time] , w.measurement_type,  w.status
 
 from 
-[Sep4].[dbo].[warning] as w 
+[Sep4_GroupX2].[dbo].[warning] as w 
 
 
 go
