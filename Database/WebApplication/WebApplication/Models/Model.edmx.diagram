@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0d24d4e845ff47518d9b7caa716478eb" Name="Diagram1">
+        <EntityTypeShape EntityType="Sep4_GroupX2Model.admin" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sep4_GroupX2Model.co2" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sep4_GroupX2Model.customer" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sep4_GroupX2Model.device" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sep4_GroupX2Model.humidity" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sep4_GroupX2Model.room" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sep4_GroupX2Model.temperature" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sep4_GroupX2Model.warning" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="Sep4_GroupX2Model.FKcm5c7v0hf55369f6dotak0a0t" ManuallyRouted="false" />
+        <AssociationConnector Association="Sep4_GroupX2Model.FKbur0pdle6iywrn8vee1f3d5op" ManuallyRouted="false" />
+        <AssociationConnector Association="Sep4_GroupX2Model.FKcpeog82mkik7iw6qte5l42xbw" ManuallyRouted="false" />
+        <AssociationConnector Association="Sep4_GroupX2Model.FK5695brobhhiauxcpf1dao1dn8" ManuallyRouted="false" />
+        <AssociationConnector Association="Sep4_GroupX2Model.FKbvh0u2ip7583gp2l3yp34uiw7" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
