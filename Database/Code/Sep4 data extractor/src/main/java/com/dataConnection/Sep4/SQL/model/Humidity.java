@@ -1,6 +1,5 @@
 package com.dataConnection.Sep4.SQL.model;
 
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -20,18 +19,22 @@ public class Humidity {
 	@Column(name = "status")
 	private String status;
 
+	@Column(name = "Timestamp")
+	private Date date;
+
 	@Column(name = "value")
 	private String value;
 
-	@Column(name = "Timestamp")
-	private Date date;
+	@Column(name = "date")
+	private Date localDate;
+
 
 	public Humidity(){
 
 	}
 
-
-	public Humidity(String status, Date date, String value,  Room room) {
+	public Humidity(Date localDate, String status, Date date, String value,  Room room) {
+		this.localDate = localDate;
 		this.status = status;
 		this.date = date;
 		this.value = value;
@@ -70,13 +73,24 @@ public class Humidity {
 
 	public void setDate(Date date) { this.date = date; }
 
+
+	public Date getLocalDate() {
+		return localDate;
+	}
+
+	public void setLocalDate(Date localDate) {
+		this.localDate = localDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Humidity{" +
-				"status='" + status + '\'' +
+				"id=" + id +
+				", room=" + room +
+				", status='" + status + '\'' +
 				", date=" + date +
 				", value='" + value + '\'' +
-				", room=" + room +
+				", localDate=" + localDate +
 				'}';
 	}
 }

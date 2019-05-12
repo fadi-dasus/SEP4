@@ -30,12 +30,18 @@ public class DeviceService {
         EUI = er.findAll();
         if (EUI != null && device.findAll() != null) {
             int value = EUI.size() - device.findAll().size();
-
             for (int i = EUI.size() - value; i < EUI.size(); i++) {
-                device.save(new Device(EUI.get(i).getName(), EUI.get(i).getUie()));
+
+                Device d = device.findByUie(EUI.get(i).getUie());
+                if (d != null) {
+                    System.out.println("No values in db");
+                } else {
+                    device.save(new Device(EUI.get(i).getName(), EUI.get(i).getUie()));
+                }
             }
-        }else {
+
+        } else {
             System.out.println("No values in db");
         }
-        }
     }
+}

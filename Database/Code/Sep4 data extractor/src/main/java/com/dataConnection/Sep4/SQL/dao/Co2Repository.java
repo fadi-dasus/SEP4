@@ -1,8 +1,7 @@
 package com.dataConnection.Sep4.SQL.dao;
 
-import org.springframework.data.repository.CrudRepository;
-
 import com.dataConnection.Sep4.SQL.model.Co2;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 

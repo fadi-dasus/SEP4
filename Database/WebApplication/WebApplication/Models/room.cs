@@ -11,7 +11,8 @@ namespace WebApplication.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class room
     {
         public room()
@@ -23,6 +24,7 @@ namespace WebApplication.Models
         }
     
         public int id { get; set; }
+        [Required]
         public string room_name { get; set; }
         public Nullable<int> device_id { get; set; }
     

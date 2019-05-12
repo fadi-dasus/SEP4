@@ -3,6 +3,7 @@ package com.dataConnection.Sep4.SQL.Services;
 import com.dataConnection.Sep4.SQL.dao.Co2Repository;
 import com.dataConnection.Sep4.SQL.dao.RoomRepository;
 import com.dataConnection.Sep4.SQL.model.Co2;
+import com.dataConnection.Sep4.SQL.model.Humidity;
 import com.dataConnection.Sep4.mongo.EUIMongoRepository;
 import com.dataConnection.Sep4.mongo.MongoModel.EUIMongo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -29,27 +29,27 @@ public class CO2Service {
     private List<EUIMongo> EUI;
 
     SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat mm = new SimpleDateFormat("yyyy-MM-dd");
     String strDate;
     Date dt;
+    Date ld;
 
     @Scheduled(fixedRate = 5000)
     public void updateCO2() {
         EUI = er.findAll();
         if(EUI!= null && co2.findAll() != null) {
 
-        int value = EUI.size() - co2.findAll().size();
+            int value = EUI.size()-co2.findAll().size();
 
-        try {
-        for (int i = EUI.size() - value; i < EUI.size(); i++) {
+            try {
+                for(int i =EUI.size()-value; i<EUI.size(); i++)
+                {
+                    co2.save(new Co2(ld = mm.parse(strDate = mm.format(EUI.get(i).getDate())),"NORMAL",dt = sm.parse(strDate = sm.format(EUI.get(i).getDate())), EUI.get(i).getCo2(),rr.findAll().get(EUI.get(i).getRoomId())));
+                }
+            }catch (Exception e){
 
-            co2.save(new Co2("NORMAL",dt = sm.parse(strDate = sm.format(EUI.get(i).getDate())), EUI.get(i).getCo2(),rr.findAll().get(EUI.get(i).getRoomId())));
-        }
-        }catch (Exception e){
-
-        }
-
-        }else
-        {
+            }
+        }else{
             System.out.println("No values in db");
         }
     }

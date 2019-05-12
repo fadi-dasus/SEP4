@@ -1,11 +1,6 @@
 package com.dataConnection.Sep4.SQL.model;
 
-import org.bson.types.BSONTimestamp;
-import org.bson.types.ObjectId;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -24,18 +19,22 @@ public class Co2 {
 	@Column(name = "status")
 	private String status;
 
+	@Column(name = "Timestamp")
+	private Date date;
+
 	@Column(name = "value")
 	private String value;
 
-	@Column(name = "Timestamp")
-	private Date date;
+	@Column(name = "date")
+	private Date localDate;
+
 
 	public Co2(){
 
 	}
 
-
-	public Co2(String status, Date date, String value,  Room room) {
+	public Co2(Date localDate, String status, Date date, String value,  Room room) {
+		this.localDate = localDate;
 		this.status = status;
 		this.date = date;
 		this.value = value;
@@ -74,13 +73,24 @@ public class Co2 {
 
 	public void setDate(Date date) { this.date = date; }
 
+
+	public Date getLocalDate() {
+		return localDate;
+	}
+
+	public void setLocalDate(Date localDate) {
+		this.localDate = localDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Co2{" +
-				"status='" + status + '\'' +
+				"id=" + id +
+				", room=" + room +
+				", status='" + status + '\'' +
 				", date=" + date +
 				", value='" + value + '\'' +
-				", room=" + room +
+				", localDate=" + localDate +
 				'}';
 	}
 }

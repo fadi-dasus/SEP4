@@ -53,8 +53,17 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.rooms.Add(room);
-                db.SaveChanges();
+                var Exist = db.rooms.Where(x => x.room_name == room.room_name).Count();
+
+                Console.WriteLine(Exist.ToString());
+
+                if (Exist != 1)
+                {
+                    db.rooms.Add(room);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
                 return RedirectToAction("Index");
             }
 
