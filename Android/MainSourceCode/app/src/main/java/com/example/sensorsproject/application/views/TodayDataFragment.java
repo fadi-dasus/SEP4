@@ -141,6 +141,7 @@ public class TodayDataFragment extends Fragment {
             LineData data = new LineData(dataSets);
             lineChart.setData(data);
         }
+        lineChart.invalidate();
     }
 
     public void setupHumChart(List<Humidity> humidityList){
@@ -191,6 +192,7 @@ public class TodayDataFragment extends Fragment {
             LineData data = new LineData(dataSets);
             lineChart.setData(data);
         }
+        lineChart.invalidate();
     }
 
     public void setupTempChart(List<Temperature> temperatureList){
@@ -221,7 +223,7 @@ public class TodayDataFragment extends Fragment {
             lineChart.getData().notifyDataChanged();
             lineChart.notifyDataSetChanged();
         } else {
-            set1 = new LineDataSet(values, "Humidity Data");
+            set1 = new LineDataSet(values, "Temperature Data");
             set1.setDrawIcons(false);
             set1.enableDashedLine(LINE_LENGTH, SPACE_LENGTH, 0f);
             set1.enableDashedHighlightLine(LINE_LENGTH, SPACE_LENGTH, 0f);
@@ -241,6 +243,7 @@ public class TodayDataFragment extends Fragment {
             LineData data = new LineData(dataSets);
             lineChart.setData(data);
         }
+        lineChart.invalidate();
     }
 
     public void setupLineChart(){

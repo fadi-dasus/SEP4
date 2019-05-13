@@ -12,6 +12,8 @@ import com.example.sensorsproject.business.models.Temperature;
 import com.example.sensorsproject.utils.AppExecutors;
 import com.example.sensorsproject.utils.Constants;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -130,8 +132,31 @@ public class LiveDataRepository {
                     if(co2List.size() > 0){
                         CO2 co2 = co2List.get(co2List.size() - 1);
                         liveCo2.postValue(co2);
-                        String nTimestamp = "";
-                        liveTimestamp.postValue(co2.getTimestamp());
+                        GregorianCalendar gc = co2.getGregorianCalendar();
+                        String month = gc.get(Calendar.MONTH) + "";
+                        String day = gc.get(Calendar.DAY_OF_MONTH) + "";
+                        String hour = gc.get(Calendar.HOUR) + "";
+                        String minute = gc.get(Calendar.MINUTE) + "";
+                        String second = gc.get(Calendar.SECOND) + "";
+
+                        if(gc.get(Calendar.MONTH) < 10){
+                            month = "0" + gc.get(Calendar.MONTH);
+                        }
+                        if(gc.get(Calendar.DAY_OF_MONTH) < 10){
+                            day = "0" + gc.get(Calendar.DAY_OF_MONTH);
+                        }
+                        if(gc.get(Calendar.HOUR) < 10){
+                            hour = gc.get(Calendar.HOUR) + "0";
+                        }
+                        if(gc.get(Calendar.MINUTE) < 10){
+                            minute = gc.get(Calendar.MINUTE) + "0";
+                        }
+                        if(gc.get(Calendar.SECOND) < 10){
+                            second = gc.get(Calendar.SECOND) + "0";
+                        }
+
+                        String nTimestamp = gc.get(Calendar.YEAR) + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
+                        liveTimestamp.postValue(nTimestamp);
                     }
                 }
 

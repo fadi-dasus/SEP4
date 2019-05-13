@@ -33,14 +33,13 @@
 11. Updated Models ✓
 12. Connection to Spring Framework ✓
 13. Firebase Cloud Messaging ✓
-14. Expanded ReportList
-15. Expanded WarningList
-16. Apply Material Design to the whole project
-17. Toolbar ✓
-18. Expanding on fragments for report list, warning list, report itself
-19. Bottom Navigation View ✓ 
-20. Notifications to warn user
-21. MPAndroidChart for displaying today's data
+14. Expanded WarningList ✓
+15. Toolbar ✓
+16. Bottom Navigation View ✓ 
+17. MPAndroidChart for displaying today's data ✓
+18. Expanded Report
+19. Apply Material Design to the whole project
+20. Firebase Authentication
 
 ### Web API To Follow
 

@@ -62,10 +62,6 @@ public class RoomChoiceFragment extends Fragment implements RoomChoiceAdapter.On
 
         mMainActivityViewModel = ViewModelProviders.of(this).get(ListViewModel.class);
 
-        view.findViewById(R.id.button_next_fragment).setOnClickListener((View v) -> {
-            MainActivity.navController.navigate(R.id.action_roomChoiceFragment_to_roomMainFragment);
-        });
-
         mMainActivityViewModel.getAllRooms().observe(this, new Observer<List<MyRoom>>() {
 
             //override
