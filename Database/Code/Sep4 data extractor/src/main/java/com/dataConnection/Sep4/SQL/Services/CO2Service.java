@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.dataConnection.Sep4.SQL.model.Device;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -39,32 +40,46 @@ public class CO2Service {
     Timestamp timestamp;
     LocalDate ld;
 
+    Timestamp t1;
+    Timestamp t;
+    String Co2_value;
+    double co2IntValue;
+    Room room;
+    Co2 co2New;
+
+
     @Scheduled(initialDelay = 1200, fixedRate = 5000)
     public void updateCO2() {
         EUI = er.findAll();
         if(EUI!= null && co2.findAll() != null) {
 
-            int value = EUI.size()-co2.findAll().size();
+            if(co2.findAll().size() !=0) {
+                t1 = co2.findAll().get(co2.findAll().size() - 1).getTimestamp();
+            } else{
+                t1 = new Timestamp(0);
+            }
 
             try {
-                for(int i =EUI.size()-value; i<EUI.size(); i++)
+                for(int i =0; i<EUI.size(); i++)
                 {
-                	
-                	Timestamp t = new Timestamp(EUI.get(i).getDate().getTime());   
+                    t = new Timestamp(EUI.get(i).getDate().getTime());
                     ld = mm.parse(strDate = mm.format(EUI.get(i).getDate())).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    String Co2_value  = EUI.get(i).getCo2();          	
-                	double co2IntValue = Double.parseDouble(Co2_value);
+                    Co2_value = EUI.get(i).getCo2();
+                    co2IntValue = Double.parseDouble(Co2_value);
                     timestamp = t;
-                    Room room = rr.findAll().get(EUI.get(i).getRoomId());
-                    Co2 co2New  = new Co2(co2IntValue,ld,timestamp,room);
-                    
-                    co2.save(co2New);
+                    room = rr.findAll().get(EUI.get(i).getRoomId());
+                    co2New = new Co2(co2IntValue, ld, timestamp, room);
+
+                    if(t.after(t1)) {
+                        co2.save(co2New);
+                    }else
+                    {
+                        System.out.println("no update");
+                    }
+
                 }
             }catch (Exception e){
-e.printStackTrace();
+                e.printStackTrace();
             }
-        }else{
-            System.out.println("No values in db");
-        }
     }
-}
+}}
