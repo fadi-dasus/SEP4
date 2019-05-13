@@ -70,7 +70,7 @@ public class LoginFragment extends Fragment {
         loginProgress.setVisibility(View.INVISIBLE);
         btnLogin.setOnClickListener(v -> {
             loginProgress.setVisibility(View.VISIBLE);
-            btnLogin.setVisibility(View.INVISIBLE);
+             btnLogin.setVisibility(View.INVISIBLE);
 
             final String mail = userMail.getText().toString();
             final String password = userPassword.getText().toString();
@@ -85,9 +85,9 @@ public class LoginFragment extends Fragment {
         });
         // end
 
-        view.findViewById(R.id.login_button).setOnClickListener((View v) -> {
+        /*view.findViewById(R.id.login_button).setOnClickListener((View v) -> {
             MainActivity.navController.navigate(R.id.action_loginFragment_to_roomChoiceFragment);
-        });
+        });*/
 
         return view;
     }
@@ -104,7 +104,7 @@ public class LoginFragment extends Fragment {
 
 
                     Toast.makeText(getContext(), "Logged in successfully!", Toast.LENGTH_LONG).show();
-                    btnLogin.setOnClickListener((View v) -> MainActivity.navController.navigate(R.id.action_loginFragment_to_roomChoiceFragment));
+                    MainActivity.navController.navigate(R.id.action_loginFragment_to_roomChoiceFragment);
                 } else {
                     showMessage(task.getException().getMessage());
                     btnLogin.setVisibility(View.VISIBLE);
