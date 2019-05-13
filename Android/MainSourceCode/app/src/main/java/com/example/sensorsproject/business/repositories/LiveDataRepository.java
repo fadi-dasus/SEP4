@@ -89,7 +89,7 @@ public class LiveDataRepository {
         fcmHelper.unsubscribe(roomName);
     }
 
-    public void subscribeToFcm() {networkHelper.subscribeToFcm();}
+    public void subscribeToFcm(String roomName) {networkHelper.subscribeToFcm(roomName);}
 
     /*
      * GET LIVE DATA

@@ -62,6 +62,6 @@ public interface SensorsAPI {
      * Firebase Cloud Messaging
      */
 
-    @GET("fcm/subscribe")
-    Call<String> subscribeToFcm();
+    @GET("fcm/subscribe/{topic}")
+    Call<String> subscribeToFcm(@Path("topic") String roomName);
 }

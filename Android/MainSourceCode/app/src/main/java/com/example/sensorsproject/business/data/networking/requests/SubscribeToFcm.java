@@ -13,10 +13,12 @@ public class SubscribeToFcm implements  Runnable{
 
     private ServiceGenerator sg;
     private String TAG;
+    private String roomName;
 
-    public SubscribeToFcm(String tag){
+    public SubscribeToFcm(String tag, String roomName){
         this.TAG = tag;
         this.sg = ServiceGenerator.getInstance();
+        this.roomName = roomName;
     }
 
     @Override
@@ -35,6 +37,6 @@ public class SubscribeToFcm implements  Runnable{
     }
 
     private Call<String> getApiCall(){
-        return sg.getSensorsAPI().subscribeToFcm();
+        return sg.getSensorsAPI().subscribeToFcm(roomName);
     }
 }

@@ -223,12 +223,12 @@ public class NetworkHelper {
         }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
-    public void subscribeToFcm(){
+    public void subscribeToFcm(String roomName){
         if(subscribeToFcm != null){
             subscribeToFcm = null;
         }
 
-        subscribeToFcm = new SubscribeToFcm(TAG);
+        subscribeToFcm = new SubscribeToFcm(TAG, roomName);
 
         final Future handler = AppExecutors.getInstance().networkIO().submit(subscribeToFcm);
         AppExecutors.getInstance().networkIO().schedule(() -> {

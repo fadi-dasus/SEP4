@@ -32,7 +32,7 @@ public class LiveDataViewModel extends ViewModel {
         repository.unsubscribe(roomName);
     }
 
-    public void subscribeToFcm() {repository.subscribeToFcm();}
+    public void subscribeToFcm(String roomName) {repository.subscribeToFcm(roomName);}
 
     /*
      * GET LIVE DATA
