@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="horizontal"
+              android:padding="8dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+  <ImageView
+      android:id="@+id/imageView"
+      android:layout_width="70dp"
+      android:layout_height="70dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:src="@drawable/ic_warning_black_24dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/label_measure_type"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="Measurement: "
+      app:layout_constraintStart_toEndOf="@+id/imageView"
+      app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+  <TextView
+      android:id="@+id/label_measure_value"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:text="Value:"
+      app:layout_constraintBottom_toBottomOf="@+id/imageView"
+      app:layout_constraintStart_toEndOf="@+id/imageView"
+      app:layout_constraintTop_toBottomOf="@+id/label_measure_time" />
+
+  <TextView
+      android:id="@+id/label_measure_time"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:text="Time occured: "
+      app:layout_constraintStart_toEndOf="@+id/imageView"
+      app:layout_constraintTop_toBottomOf="@+id/label_measure_type" />
+
+  <TextView
+      android:id="@+id/warning_status_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginBottom="8dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="HIGH" />
+
+  <TextView
+      android:id="@+id/warning_measurement_type"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      app:layout_constraintStart_toEndOf="@+id/label_measure_type"
+      app:layout_constraintTop_toTopOf="@+id/imageView"
+      tools:text="CO2" />
+
+  <TextView
+      android:id="@+id/warning_time"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      app:layout_constraintStart_toEndOf="@+id/label_measure_time"
+      app:layout_constraintTop_toBottomOf="@+id/warning_measurement_type"
+      tools:text="2019-05-15" />
+
+  <TextView
+      android:id="@+id/warning_value"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      app:layout_constraintBottom_toBottomOf="@+id/imageView"
+      app:layout_constraintStart_toStartOf="@+id/warning_time"
+      app:layout_constraintTop_toBottomOf="@+id/warning_time"
+      tools:text="555 ppm" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
