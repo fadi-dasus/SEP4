@@ -1,16 +1,16 @@
-use Sep4_GroupX2
+use Sep4
  Go
 
 
-CREATE TRIGGER [dbo].[HumidityConfigureStatus]
+ALTER TRIGGER [dbo].[HumidityConfigureStatus]
 ON [dbo].[humidity]
 AFTER INSERT
 AS
 BEGIN 
 	DECLARE @status AS varchar(15)
-	DECLARE @max AS INT = 35
-	DECLARE @min AS INT = 0
-	DECLARE @originalValue AS INT
+	DECLARE @max AS float = 35
+	DECLARE @min AS float = 0
+	DECLARE @originalValue AS float
 
 	UPDATE Co2 SET status = 'NORMAL'
 		WHERE Co2.id IN (SELECT id FROM Inserted)

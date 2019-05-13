@@ -37,7 +37,7 @@ public class Co2 {
 	private String status;
 
 	@Column(name = "value")
-	private String value;
+	private double value;
 
 	@Column(name = "date")
 	private LocalDate date;
@@ -50,7 +50,7 @@ public class Co2 {
 	}
 
 	
-	public Co2( String value, LocalDate date, Timestamp timestamp, Room room) {
+	public Co2( double value, LocalDate date, Timestamp timestamp, Room room) {
 		this.room = room;
 		this.date = date;
 		this.value = value;
@@ -74,11 +74,11 @@ public class Co2 {
 		this.room = room;
 	}
 
-	public String getValue() {
+	public double getValue() {
 		return value;
 	}
 
-	public void setValue(String value) {
+	public void setValue(double value) {
 		this.value = value;
 	}
 

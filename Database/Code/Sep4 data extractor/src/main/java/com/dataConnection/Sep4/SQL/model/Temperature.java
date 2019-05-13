@@ -30,7 +30,7 @@ public class Temperature{
 	private String status;
 
 	@Column(name = "value")
-	private String value;
+	private double value;
 
 	@Column(name = "date")
 	private LocalDate date;
@@ -43,7 +43,7 @@ public class Temperature{
 	}
 
 	
-	public Temperature(String value, Room room, LocalDate date, Timestamp timestamp) {
+	public Temperature(double value, Room room, LocalDate date, Timestamp timestamp) {
 		this.room = room;
 		this.value = value;
 		this.timestamp = timestamp;
@@ -59,11 +59,11 @@ public class Temperature{
 		this.status = status;
 	}
 
-	public String getValue() {
+	public double getValue() {
 		return value;
 	}
 
-	public void setValue(String value) {
+	public void setValue(double value) {
 		this.value = value;
 	}
 

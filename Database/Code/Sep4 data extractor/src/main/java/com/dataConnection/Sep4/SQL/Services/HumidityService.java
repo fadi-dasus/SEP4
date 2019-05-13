@@ -52,10 +52,15 @@ public class HumidityService {
                 {
                 	Timestamp t = new Timestamp(EUI.get(i).getDate().getTime()); 
                     ld = mm.parse(strDate = mm.format(EUI.get(i).getDate())).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    String Humidity_value  = EUI.get(i).getCo2();
+                    String Humidity_value  = EUI.get(i).getHumidity();
+                   
+                    
+                	
+                	double HumidityIntvalue = Double.parseDouble(Humidity_value);
+                    
                     timestamp = t;
                     Room room = rr.findAll().get(EUI.get(i).getRoomId());
-                    Humidity humidityNew  = new Humidity(Humidity_value,ld,timestamp,room);
+                    Humidity humidityNew  = new Humidity(HumidityIntvalue,ld,timestamp,room);
                     
                     humidity.save(humidityNew);
 

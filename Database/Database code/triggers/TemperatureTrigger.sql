@@ -1,8 +1,8 @@
-use Sep4_GroupX2
+use Sep4
  Go
 
 
-CREATE TRIGGER [dbo].[TemperatureConfigureStatus]
+ALTER TRIGGER [dbo].[TemperatureConfigureStatus]
 ON [dbo].[temperature]
 AFTER INSERT
 AS
