@@ -71,4 +71,10 @@ dependencies {
 
     //MPAndroidChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // firebase core
+    implementation 'com.google.firebase:firebase-core:16.0.9'
+    //firebase auth
+    implementation 'com.google.firebase:firebase-auth:17.0.0'
 }
+apply plugin: 'com.google.gms.google-services'
