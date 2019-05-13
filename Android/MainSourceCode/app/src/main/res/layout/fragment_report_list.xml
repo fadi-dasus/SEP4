@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".application.views.ReportListFragment">
+
+    <TextView
+        android:id="@+id/report_room_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="E303" />
+
+    <TextView
+        android:id="@+id/label_report_temp_high"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:text="Highest value of temperature today: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/report_room_name" />
+
+    <TextView
+        android:id="@+id/label_report_temp_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Lowest value of temperature today:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_report_temp_high" />
+
+    <TextView
+        android:id="@+id/label_report_hum_high"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="Highest value of humidity today:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_report_temp_low" />
+
+    <TextView
+        android:id="@+id/label_report_hum_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Lowest value of humidity today:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_report_hum_high" />
+
+    <TextView
+        android:id="@+id/label_report_co2_high"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="Highest value of CO2 today:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_report_hum_low" />
+
+    <TextView
+        android:id="@+id/label_report_co2_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Lowest value of CO2 today:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_report_co2_high" />
+
+    <TextView
+        android:id="@+id/label_report_sample_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:text="Sample data collected today: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_report_co2_low" />
+
+    <Button
+        android:id="@+id/button_powerbi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="64dp"
+        android:text="Power BI"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/report_temp_high"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/label_report_temp_high"
+        app:layout_constraintStart_toEndOf="@+id/label_report_temp_high"
+        tools:text="27C" />
+
+    <TextView
+        android:id="@+id/report_temp_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/label_report_temp_low"
+        app:layout_constraintStart_toEndOf="@+id/label_report_temp_low"
+        tools:text="15C" />
+
+    <TextView
+        android:id="@+id/report_hum_high"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/label_report_hum_high"
+        app:layout_constraintStart_toEndOf="@+id/label_report_hum_high"
+        tools:text="55%" />
+
+    <TextView
+        android:id="@+id/report_hum_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/label_report_hum_low"
+        app:layout_constraintStart_toEndOf="@+id/label_report_hum_low"
+        tools:text="25%" />
+
+    <TextView
+        android:id="@+id/report_co2_high"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/label_report_co2_high"
+        app:layout_constraintStart_toEndOf="@+id/label_report_co2_high"
+        tools:text="1050ppm" />
+
+    <TextView
+        android:id="@+id/report_co2_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/label_report_co2_low"
+        app:layout_constraintStart_toEndOf="@+id/label_report_co2_low"
+        tools:text="555ppm" />
+
+    <TextView
+        android:id="@+id/report_sample_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/label_report_sample_data"
+        app:layout_constraintStart_toEndOf="@+id/label_report_sample_data"
+        tools:text="55" />
+</androidx.constraintlayout.widget.ConstraintLayout>
