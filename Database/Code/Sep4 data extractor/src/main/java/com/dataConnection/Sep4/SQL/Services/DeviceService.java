@@ -25,7 +25,7 @@ public class DeviceService {
 
     private List<EUIMongo> EUI;
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(initialDelay = 1200, fixedRate = 5000)
     public void updateDevie() {
         EUI = er.findAll();
         if (EUI != null && device.findAll() != null) {

@@ -55,6 +55,7 @@ public class Co2 {
 		this.date = date;
 		this.value = value;
 		this.timestamp = timestamp;
+		this.status="NORMAL";
 	}
 
 	public String getStatus() {
