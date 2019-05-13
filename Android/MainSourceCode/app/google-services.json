@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "474234394318",
+    "firebase_url": "https://playground-b18f3.firebaseio.com",
+    "project_id": "playground-b18f3",
+    "storage_bucket": "playground-b18f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474234394318:android:5d8bbc12b5ffa559",
+        "android_client_info": {
+          "package_name": "com.example.sensorsproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474234394318-mm462hiaudvb41leu0ganvbvernaslrt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWLDV7v_oOssYaTaCNhPhLrzfLkOK6emI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474234394318-mm462hiaudvb41leu0ganvbvernaslrt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
