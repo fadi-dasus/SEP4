@@ -6,13 +6,16 @@ drop table if EXISTS  TEM_FACT_Temperature
 drop table if EXISTS  TEM_FACT_hum
 drop table if EXISTS  TEM_FACT_Warning
 -----------------------
+
+-- creating TEM_FACT_CO2 table 
+
 create table TEM_FACT_CO2 (
 
-D_ID   int null ,
-R_ID int null ,
-T_ID    int null , 
+D_ID   int null , -- surrogate key
+R_ID int null ,-- surrogate key
+T_ID    int null , -- surrogate key
 
-Room_ID int null ,
+Room_ID int null , -- business key from Room_D
 value varchar(255),
 date date,
 time time);
@@ -70,11 +73,14 @@ select * from [Fact_CO2]
 -------------------------------------------------------------------
 use DW_STAGING;
  drop table if EXISTS  TEM_FACT_Temperature
+
+ -- creating TEM_FACT_Temperature table 
+
 create table TEM_FACT_Temperature(
 
-D_ID   int null ,
-R_ID int null ,
-T_ID    int null , 
+D_ID   int null ,-- surrogate key
+R_ID int null ,-- surrogate key
+T_ID    int null , -- surrogate key
 
 Room_ID int null ,
 value varchar(255),
@@ -105,7 +111,7 @@ select * from TEM_FACT_Temperature
 ----
 use DW_STAGING;
 
-
+---- final insert 
 insert into [DW].[dbo].[Fact_Temperature]
 	(D_ID,R_ID,T_ID, value) 
 select 
@@ -120,7 +126,7 @@ select * from [DW].[dbo].[Fact_Temperature];
 
 use DW_STAGING;
 GO
-
+-- creating TEM_FACT_hum table 
 create table TEM_FACT_hum(
 
 D_ID   int null ,
@@ -171,11 +177,12 @@ use DW_STAGING;
 GO
 
 drop table if EXISTS  TEM_FACT_Warning
+-- craeting the TEM_FACT_Warning table 
 create table TEM_FACT_Warning(
 
-D_ID   int null ,
-R_ID int null ,
-T_ID    int null , 
+D_ID   int null ,-- surrogate key
+R_ID int null ,-- surrogate key
+T_ID    int null , -- surrogate key
 
 Room_ID int null ,
 value varchar(255),

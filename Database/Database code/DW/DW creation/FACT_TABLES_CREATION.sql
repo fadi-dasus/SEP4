@@ -13,11 +13,11 @@ drop table if exists Time_D
 go 
 
 
-
+-- creating the room dimension. 
 
 create table Room_D(
-R_ID  int  IDENTITY, 
-Room_ID  int,
+R_ID  int  IDENTITY, -- surragate key
+Room_ID  int, -- busniness key 
 room_name     varchar(50),
 device_name    varchar(50),
 "ValidFrom" nvarchar(20) not null DEFAULT '01/05/2019',
@@ -27,7 +27,8 @@ primary key (R_ID)
 );
  CREATE  INDEX "room_name" ON "dbo"."Room_D"("room_name")
  GO
-
+ 
+-- creating the Calender dimension.
 create table "Calendar_D"(
 	"D_ID" int identity (1, 1) NOT NULL,--identity (1,1) means autoincrement by 1, starting at 1
 	
@@ -57,7 +58,8 @@ create table "Calendar_D"(
 
    select * from Calendar_D;
 
-
+   
+-- creating the time dimension.
   CREATE TABLE "Time_D"
 (
  T_ID int identity (1,1) not null
@@ -89,11 +91,12 @@ SET @Hour = DATEADD(second,1, @Hour)
 END
 
 
+-- craeting CO2 fact table
 
 create table Fact_CO2 (
-D_ID   int,
-R_ID int,
-T_ID    int,
+D_ID   int,-- surragate key
+R_ID int,-- surragate key
+T_ID    int,-- surragate key
 value varchar(255),
 
 
@@ -105,10 +108,11 @@ foreign key ("T_ID") references [DW].[dbo].[Time_D] ( "T_ID" )
 );
 
 
+-- craeting Fact_Temperature table
 create table Fact_Temperature (
-D_ID   int,
-R_ID int,
-T_ID    int,
+D_ID   int,-- surragate key
+R_ID int,-- surragate key
+T_ID    int,-- surragate key
 value varchar(255),
 
 primary key (D_ID,R_ID,  T_ID),
@@ -120,10 +124,12 @@ foreign key ("T_ID") references [DW].[dbo].[Time_D] ( "T_ID" )
 
 
 
+
+-- craeting Fact_Humidity table
 create table Fact_Humidity (
-D_ID   int,
-R_ID int,
-T_ID    int,
+D_ID   int,-- surragate key
+R_ID int,-- surragate key
+T_ID    int,-- surragate key
 value varchar(255),
  
 
@@ -135,10 +141,13 @@ foreign key ("T_ID") references [DW].[dbo].[Time_D] ( "T_ID" )
 );
 
 
+-- craeting Fact_Warning table
+
+
 create table Fact_Warning (
-D_ID   int,
-R_ID int,
-T_ID    int,
+D_ID   int,-- surragate key
+R_ID int,-- surragate key
+T_ID    int,-- surragate key
 value varchar(255),
 m_Type     varchar(50),
 status    varchar(50),

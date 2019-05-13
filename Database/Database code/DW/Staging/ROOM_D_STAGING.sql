@@ -2,15 +2,17 @@ use DW_STAGING;
 Drop table if exists ROOM_D_STAGE
 
 go 
- 
+ --creating the room staging table that hat the same fiedls as the Room_D
 create table ROOM_D_STAGE (
 R_ID   int identity ,
-Room_ID  int,
+Room_ID  int, 
 room_name     varchar(50),
 device_name   varchar(50)
 );
   CREATE  INDEX "room_name" ON "dbo"."ROOM_D_STAGE"("room_name")
   CREATE  INDEX "device_name" ON "dbo"."ROOM_D_STAGE"("device_name")
+
+  -- getting the values from the room and device tables in the sousce code and inserting them in the staging table fields 
 
 insert into ROOM_D_STAGE( Room_ID, room_name, device_name) select  
   a.id, a.room_name ,  b.device_name
@@ -40,7 +42,7 @@ insert into ROOM_D_STAGE( Room_ID, room_name, device_name) select
  GO
  SELECT * FROM ROOM_D_STAGE
 
- --insert data
+ --insert data into the dimension 
  insert into [DW].[dbo].[Room_D] (
      [Room_ID]
      ,[room_name]
