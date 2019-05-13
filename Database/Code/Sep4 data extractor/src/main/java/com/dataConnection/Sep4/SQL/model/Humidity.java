@@ -32,7 +32,7 @@ public class Humidity  {
 
 
 	@Column(name = "value")
-	private String value;
+	private double value;
 
 	@Column(name = "date")
 	private LocalDate date;
@@ -45,7 +45,7 @@ public class Humidity  {
 	}
 
 	
-	public Humidity( String value, LocalDate date, Timestamp timestamp, Room room) {
+	public Humidity( double value, LocalDate date, Timestamp timestamp, Room room) {
 		this.room = room;
 		this.value = value;
 		this.date = date;
@@ -67,11 +67,11 @@ public class Humidity  {
 
 
 
-	public String getValue() {
+	public double getValue() {
 		return value;
 	}
 
-	public void setValue(String value) {
+	public void setValue(double value) {
 		this.value = value;
 	}
 

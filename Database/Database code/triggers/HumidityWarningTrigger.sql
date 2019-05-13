@@ -9,7 +9,7 @@ AS
 BEGIN 
 	DECLARE @status AS VARCHAR(15)
 	DECLARE @timeStamp AS DATETIME
-	DECLARE @value AS INT
+	DECLARE @value AS float
 	DECLARE @roomID AS INT
 	DECLARE @type AS VARCHAR(10) = 'Humidity'
     DECLARE @date AS DATE

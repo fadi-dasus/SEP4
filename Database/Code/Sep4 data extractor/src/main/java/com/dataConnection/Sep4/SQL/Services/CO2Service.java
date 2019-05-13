@@ -53,9 +53,13 @@ public class CO2Service {
                 	Timestamp t = new Timestamp(EUI.get(i).getDate().getTime());   
                     ld = mm.parse(strDate = mm.format(EUI.get(i).getDate())).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     String Co2_value  = EUI.get(i).getCo2();
+                    
+                	
+                	
+                	double co2IntValue = Double.parseDouble(Co2_value);
                     timestamp = t;
                     Room room = rr.findAll().get(EUI.get(i).getRoomId());
-                    Co2 co2New  = new Co2(Co2_value,ld,timestamp,room);
+                    Co2 co2New  = new Co2(co2IntValue,ld,timestamp,room);
                     
                     co2.save(co2New);
                 }

@@ -55,16 +55,20 @@ public class TemperatureService {
                 	Timestamp t = new Timestamp(EUI.get(i).getDate().getTime()); 
                     ld = mm.parse(strDate = mm.format(EUI.get(i).getDate())).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     String Temperature_value  = EUI.get(i).getTemperature();
+                    
+                    
+                    double TemperatureIntValue = Double.parseDouble(Temperature_value);
+                    
                     timestamp = t;
                     Room room = rr.findAll().get(EUI.get(i).getRoomId());
-                    Temperature temperatureNew  = new Temperature(Temperature_value,room, ld, timestamp);
+                    Temperature temperatureNew  = new Temperature(TemperatureIntValue,room, ld, timestamp);
                     
                     temperature.save(temperatureNew);
 
 //                    co2.save(new Co2(ld,"NORMAL",dt = sm.parse(strDate = sm.format(EUI.get(i).getDate())), EUI.get(i).getCo2(),rr.findAll().get(EUI.get(i).getRoomId())));
                 }
             }catch (Exception e){
-
+            		e.printStackTrace();
             }
         }else{
             System.out.println("No values in db");
