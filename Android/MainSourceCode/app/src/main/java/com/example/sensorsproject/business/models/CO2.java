@@ -16,7 +16,6 @@ public class CO2 {
     @Expose
     private final double lowAcceptableValue = 0.1;
 
-    @SerializedName("co2")
     private String value;
     private String timestamp;
     private MyRoom room;

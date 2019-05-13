@@ -30,12 +30,15 @@ import butterknife.ButterKnife;
  */
 public class ReportListFragment extends Fragment {
 
-    private View fragmentView;
+    @BindView(R.id.report_co2_high) TextView textCo2High;
+    @BindView(R.id.report_co2_low) TextView textCo2Low;
+    @BindView(R.id.report_hum_high) TextView textHumHigh;
+    @BindView(R.id.report_hum_low) TextView textHumLow;
+    @BindView(R.id.report_temp_high) TextView textTempHigh;
+    @BindView(R.id.report_temp_low) TextView textTempLow;
+    @BindView(R.id.report_room_name) TextView textSampleData;
 
-    @BindView(R.id.text_live_co2) TextView textLiveCo2;
-    @BindView(R.id.text_live_humidity) TextView textLiveHumidity;
-    @BindView(R.id.text_live_temperature) TextView textLiveTemperature;
-    @BindView(R.id.text_live_timestamp) TextView textLiveTimestamp;
+    private View fragmentView;
 
     private MeasurementViewModel measurementViewModel;
     private LiveDataViewModel liveDataViewModel;
@@ -56,10 +59,10 @@ public class ReportListFragment extends Fragment {
                              Bundle savedInstanceState) {
         fragmentView = inflater.inflate(R.layout.fragment_report_list, container, false);
         ButterKnife.bind(this, fragmentView);
+        //
+
 
         subscribeWebServiceObservers();
-        subscribeLiveDataObservers();
-        temporaryButtons();
 
         return fragmentView;
     }
@@ -67,32 +70,6 @@ public class ReportListFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-    }
-
-    private void subscribeLiveDataObservers(){
-        liveDataViewModel.getLiveCo2().observe(this, co2 -> {
-            if(co2 != null){
-                textLiveCo2.setText(co2.getValue());
-            }
-        });
-
-        liveDataViewModel.getLiveHumidity().observe(this, humidity -> {
-            if(humidity != null){
-                textLiveHumidity.setText(humidity.getValue());
-            }
-        });
-
-        liveDataViewModel.getLiveTemperature().observe(this, temperature -> {
-            if(temperature != null){
-                textLiveTemperature.setText(temperature.getValue());
-            }
-        });
-
-        liveDataViewModel.getLiveTimestamp().observe(this, timestamp -> {
-            if(timestamp != null){
-                textLiveTimestamp.setText(timestamp);
-            }
-        });
     }
 
     private void subscribeWebServiceObservers(){
@@ -132,17 +109,4 @@ public class ReportListFragment extends Fragment {
             }
         });
     }
-
-    private void temporaryButtons(){
-        String roomId = liveDataViewModel.getCurrentRoom().getValue().getId();
-        fragmentView.findViewById(R.id.button_get_co2_all)
-                .setOnClickListener((View v) -> measurementViewModel.searchAllCo2sByRoomIdToday(roomId));
-
-        fragmentView.findViewById(R.id.button_get_humidity_all2)
-                .setOnClickListener((View v) -> measurementViewModel.searchAllHumiditiesByRoomIdToday(roomId));
-
-        fragmentView.findViewById(R.id.button_get_temperature_all)
-                .setOnClickListener((View v) -> measurementViewModel.searchAllTemperaturesByRoomIdToday(roomId));
-    }
-
 }
