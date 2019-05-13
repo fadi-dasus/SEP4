@@ -56,7 +56,7 @@ def on_message(ws, message):
                 "Room" : 1, 
                 "Name": "RANDOM_NAME", 
                 "Timestamp" : ts_datetime, 
-                "CO2" : str(co2/10), 
+                "CO2" : str(co2), 
                 "Humidity" : str(hum/10), 
                 "Temperature" : str(temp/10)     
             }

@@ -3,7 +3,7 @@
 
 void timers_init() 
 {
-	// total 10 minute cycle
+	// total 1m:10s cycle
 	// timers do not restart automatically 
 	
 	co2Timer = xTimerCreate(
@@ -41,7 +41,7 @@ void timers_init()
 
 void co2_timer_callback(TimerHandle_t pxTimer) 
 {
-	printf("7m co2 callback");
+	printf("45s co2 callback");
 	if( xSemaphoreTake( cycleSemaphore, portMAX_DELAY ) != pdTRUE )
 		printf("ERROR : Cycle semaphore not taken back.");
 	if( xSemaphoreGive( co2Semaphore ) != pdTRUE )
@@ -52,7 +52,7 @@ void co2_timer_callback(TimerHandle_t pxTimer)
 
 void temp_hum_timer_callback(TimerHandle_t pxTimer)
 {
-	printf("1m temp_hum callback");
+	printf("5s temp_hum callback");
 	if( xSemaphoreTake( co2Semaphore, portMAX_DELAY ) != pdTRUE )
 		printf("ERROR : CO2 semaphore not taken back.");
 	if( xSemaphoreGive( tempHumSemaphore ) != pdTRUE )
@@ -63,7 +63,7 @@ void temp_hum_timer_callback(TimerHandle_t pxTimer)
 
 void lora_timer_callback(TimerHandle_t pxTimer) 
 {
-	printf("1m lora callback");
+	printf("5s lora callback");
 	if( xSemaphoreTake( tempHumSemaphore, portMAX_DELAY ) != pdTRUE )
 		printf("ERROR : TempHum semaphore not taken back.");
 	if( xSemaphoreGive( loraSemaphore ) != pdTRUE )		
@@ -74,7 +74,7 @@ void lora_timer_callback(TimerHandle_t pxTimer)
 
 void restart_cycle_timer_callback(TimerHandle_t pxTimer)
 {
-	printf("1m restart cycle callback");
+	printf("5s restart cycle callback");
 	if( xSemaphoreTake( loraSemaphore, portMAX_DELAY ) != pdTRUE )
 		printf("ERROR : LoRa semaphore not taken back.");
 	if( xSemaphoreGive( cycleSemaphore ) != pdTRUE )
