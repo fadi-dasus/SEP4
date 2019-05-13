@@ -40,7 +40,7 @@ public class HumidityService {
     Timestamp timestamp;
     LocalDate ld;
 
-    @Scheduled(fixedRate = 5000,initialDelay = 20000)
+    @Scheduled(initialDelay = 1200, fixedRate = 5000)
     public void updateCO2() {
         EUI = er.findAll();
         if(EUI!= null && humidity.findAll() != null) {

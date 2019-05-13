@@ -50,6 +50,7 @@ public class Humidity  {
 		this.value = value;
 		this.date = date;
 		this.timestamp = timestamp;
+		this.status="NORMAL";
 	}
 
 	public String getStatus() {

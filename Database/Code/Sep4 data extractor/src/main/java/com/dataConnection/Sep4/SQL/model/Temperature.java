@@ -43,10 +43,12 @@ public class Temperature{
 	}
 
 	
-	public Temperature( String value, Room room, LocalDate date, Timestamp timestamp) {
+	public Temperature(String value, Room room, LocalDate date, Timestamp timestamp) {
 		this.room = room;
 		this.value = value;
 		this.timestamp = timestamp;
+		this.date = date;
+		this.status="NORMAL";
 	}
 
 	public String getStatus() {

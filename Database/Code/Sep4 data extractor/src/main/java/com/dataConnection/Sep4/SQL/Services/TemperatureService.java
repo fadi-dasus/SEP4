@@ -42,7 +42,7 @@ public class TemperatureService {
     Timestamp timestamp;
     LocalDate ld;
 
-    @Scheduled(fixedRate = 5000,initialDelay = 20000)
+    @Scheduled(initialDelay = 1200, fixedRate = 5000)
     public void updateCO2() {
         EUI = er.findAll();
         if(EUI!= null && temperature.findAll() != null) {
@@ -57,7 +57,7 @@ public class TemperatureService {
                     String Temperature_value  = EUI.get(i).getTemperature();
                     timestamp = t;
                     Room room = rr.findAll().get(EUI.get(i).getRoomId());
-                    Temperature temperatureNew  = new Temperature(Temperature_value,room,ld,timestamp);
+                    Temperature temperatureNew  = new Temperature(Temperature_value,room, ld, timestamp);
                     
                     temperature.save(temperatureNew);
 

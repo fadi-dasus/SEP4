@@ -39,7 +39,7 @@ public class CO2Service {
     Timestamp timestamp;
     LocalDate ld;
 
-    @Scheduled(fixedRate = 5000,initialDelay = 20000)
+    @Scheduled(initialDelay = 1200, fixedRate = 5000)
     public void updateCO2() {
         EUI = er.findAll();
         if(EUI!= null && co2.findAll() != null) {
@@ -58,11 +58,9 @@ public class CO2Service {
                     Co2 co2New  = new Co2(Co2_value,ld,timestamp,room);
                     
                     co2.save(co2New);
-
-//                    co2.save(new Co2(ld,"NORMAL",dt = sm.parse(strDate = sm.format(EUI.get(i).getDate())), EUI.get(i).getCo2(),rr.findAll().get(EUI.get(i).getRoomId())));
                 }
             }catch (Exception e){
-
+e.printStackTrace();
             }
         }else{
             System.out.println("No values in db");
