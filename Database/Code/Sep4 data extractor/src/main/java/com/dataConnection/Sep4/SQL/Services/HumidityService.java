@@ -40,45 +40,37 @@ public class HumidityService {
     Timestamp timestamp;
     LocalDate ld;
 
-    Timestamp t1;
-    Timestamp t;
-    String Humidity_value;
-    double HumidityIntValue;
-    Room room;
-    Humidity humidityNew;
-
-
     @Scheduled(initialDelay = 1200, fixedRate = 5000)
-    public void updateHumidity() {
+    public void updateCO2() {
         EUI = er.findAll();
-        if (EUI != null && humidity.findAll() != null) {
+        if(EUI!= null && humidity.findAll() != null) {
 
-            if (humidity.findAll().size() != 0) {
-                t1 = humidity.findAll().get(humidity.findAll().size() - 1).getTimestamp();
-            } else {
-                t1 = new Timestamp(0);
-            }
+            int value = EUI.size()-humidity.findAll().size();
 
             try {
-                for (int i = 0; i < EUI.size(); i++) {
-                    t = new Timestamp(EUI.get(i).getDate().getTime());
+                for(int i =EUI.size()-value; i<EUI.size(); i++)
+                {
+                	Timestamp t = new Timestamp(EUI.get(i).getDate().getTime()); 
                     ld = mm.parse(strDate = mm.format(EUI.get(i).getDate())).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    Humidity_value = EUI.get(i).getHumidity();
-                    HumidityIntValue = Double.parseDouble(Humidity_value);
+                    String Humidity_value  = EUI.get(i).getHumidity();
+                   
+                    
+                	
+                	double HumidityIntvalue = Double.parseDouble(Humidity_value);
+                    
                     timestamp = t;
-                    room = rr.findAll().get(EUI.get(i).getRoomId());
-                    humidityNew = new Humidity(HumidityIntValue, ld, timestamp, room);
+                    Room room = rr.findAll().get(EUI.get(i).getRoomId());
+                    Humidity humidityNew  = new Humidity(HumidityIntvalue,ld,timestamp,room);
+                    
+                    humidity.save(humidityNew);
 
-                    if (t.after(t1)) {
-                        humidity.save(humidityNew);
-                    } else {
-                        System.out.println("no update");
-                    }
-
+//                    co2.save(new Co2(ld,"NORMAL",dt = sm.parse(strDate = sm.format(EUI.get(i).getDate())), EUI.get(i).getCo2(),rr.findAll().get(EUI.get(i).getRoomId())));
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            }catch (Exception e){
+
             }
+        }else{
+            System.out.println("No values in db");
         }
     }
 }

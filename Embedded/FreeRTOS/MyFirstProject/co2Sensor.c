@@ -1,6 +1,6 @@
 #include "co2Sensor.h"
 
-uint16_t co2_ppm_pointer;
+uint16_t* co2_ppm_pointer;
 
 // create drivers
 void co2_sensor_init() {	
@@ -26,11 +26,11 @@ void co2_measure() {
 
 // call back function for getting co2 value
 void co2_callback(uint16_t co2_ppm) {
-	co2_ppm_pointer = co2_ppm;
+	co2_ppm_pointer = &co2_ppm;
 }
 
 
 uint16_t co2_get_value() {
-	return co2_ppm_pointer;
+	return *co2_ppm_pointer;
 }
 

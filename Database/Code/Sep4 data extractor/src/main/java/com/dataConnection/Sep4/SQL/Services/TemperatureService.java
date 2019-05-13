@@ -42,46 +42,36 @@ public class TemperatureService {
     Timestamp timestamp;
     LocalDate ld;
 
-    Timestamp t1;
-    Timestamp t;
-    String Temperature_value;
-    double TemperatureIntValue;
-    Room room;
-    Temperature TemperatureNew;
-
     @Scheduled(initialDelay = 1200, fixedRate = 5000)
-    public void updateTemperature() {
+    public void updateCO2() {
         EUI = er.findAll();
-        if(EUI!= null && temperature.findAll()!=null) {
+        if(EUI!= null && temperature.findAll() != null) {
 
-            if(temperature.findAll().size() !=0) {
-                t1 = temperature.findAll().get(temperature.findAll().size() - 1).getTimestamp();
-            } else{
-                t1 = new Timestamp(0);
-            }
+            int value = EUI.size()-temperature.findAll().size();
+
             try {
-                for(int i =0; i<EUI.size(); i++)
+                for(int i =EUI.size()-value; i<EUI.size(); i++)
                 {
-                    t = new Timestamp(EUI.get(i).getDate().getTime());
+                	Timestamp t = new Timestamp(EUI.get(i).getDate().getTime()); 
                     ld = mm.parse(strDate = mm.format(EUI.get(i).getDate())).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    Temperature_value = EUI.get(i).getTemperature();
-                    TemperatureIntValue = Double.parseDouble(Temperature_value);
+                    String Temperature_value  = EUI.get(i).getTemperature();
+                    
+                    
+                    double TemperatureIntValue = Double.parseDouble(Temperature_value);
+                    
                     timestamp = t;
-                    room = rr.findAll().get(EUI.get(i).getRoomId());
-                    TemperatureNew = new Temperature(TemperatureIntValue, room, ld, t);
+                    Room room = rr.findAll().get(EUI.get(i).getRoomId());
+                    Temperature temperatureNew  = new Temperature(TemperatureIntValue,room, ld, timestamp);
+                    
+                    temperature.save(temperatureNew);
 
-                    if(t.after(t1)) {
-                        temperature.save(TemperatureNew);
-                    }else
-                    {
-                        System.out.println("no update");
-                    }
-
+//                    co2.save(new Co2(ld,"NORMAL",dt = sm.parse(strDate = sm.format(EUI.get(i).getDate())), EUI.get(i).getCo2(),rr.findAll().get(EUI.get(i).getRoomId())));
                 }
             }catch (Exception e){
-                e.printStackTrace();
+            		e.printStackTrace();
             }
-
+        }else{
+            System.out.println("No values in db");
+        }
     }
-}}
-
+}
