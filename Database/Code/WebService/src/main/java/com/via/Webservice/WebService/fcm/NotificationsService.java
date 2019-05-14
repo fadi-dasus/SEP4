@@ -24,32 +24,25 @@ import com.via.Webservice.WebService.model.Temperature;
 
 @Service
 public class NotificationsService {
-	@Value("${jobs.enabled:false}")
-	private boolean isEnabled;
-
-	@Autowired
-	Co2Respository co2Respository;
-
-	@Autowired
-	TemperatureRepository temperatureRepository;
-
-	@Autowired
-	HumidityRepository humidityRespository;
-
-	@Autowired
-	RoomRepository roomRepository;
-
+	
 	private String topic;
 	private Room room;
-	// this is my key for my android app
+	
+	
+	
+	
+	@Value("${jobs.enabled:false}")
+	private boolean isEnabled;
+	@Autowired
+	Co2Respository co2Respository;
+	@Autowired
+	TemperatureRepository temperatureRepository;
+	@Autowired
+	HumidityRepository humidityRespository;
+	@Autowired
+	RoomRepository roomRepository;	
 	private static final String FIREBASE_SERVER_KEY = "AAAADWTqU4s:APA91bFkQrNdtVcVVGMhBhYvMjPFggoYDlZzJg-1NgnHkgP4tF5oYeqxBbfn5trCN_dYkmKNsW5_ZMwQ-mGeKW3v0GmSUg7-pGl1ECQt5-mI8aFZAPI-aBSfY16LgzNsksKDPOpqgfoL";
-
-	// this is Ainis server key
-	// private static final String FIREBASE_SERVER_KEY =
-	// "AAAAbmqSls4:APA91bEq9UgyryzDjfaqEUDMvyAEZJq6E3K143Mup8p1gzXzJABbEBnMKYAqVDsU9zIio1dLkMMNDXfaZHI6xRIe6HzDmepCk8YwkzNxr4GT61HynCP-BfPpeafezVkgX40QLb8ntrC9";
-
 	private static final String FIREBASE_API_URL = "https://fcm.googleapis.com/fcm/send";
-
 	@Async
 	public CompletableFuture<String> init(HttpEntity<String> entity) {
 
