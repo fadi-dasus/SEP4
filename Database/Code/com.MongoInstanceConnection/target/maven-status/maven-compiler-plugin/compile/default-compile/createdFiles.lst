@@ -1,9 +1,0 @@
-MongoBango\com\MongoInstanceConnection\connection\DataMapper.class
-MongoBango\com\MongoInstanceConnection\customerDao\CustomerDAOService$1.class
-MongoBango\com\MongoInstanceConnection\MongoConnection.class
-MongoBango\com\MongoInstanceConnection\customerDao\CustomerDAOService.class
-MongoBango\com\MongoInstanceConnection\connection\DatabaseHelper.class
-MongoBango\com\MongoInstanceConnection\App.class
-MongoBango\com\MongoInstanceConnection\customerDao\Customer.class
-MongoBango\com\MongoInstanceConnection\connection\ConnectionManager.class
-MongoBango\com\MongoInstanceConnection\customerDao\CustomerDAOService$CustomerMapper.class
