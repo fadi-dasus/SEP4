@@ -13,7 +13,7 @@
 	<artifactId>WebService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>WebService</name>
-	<description>project for exporting the data to the android device throug </description>
+	<description>project for exporting data using web service </description>
 
 	<properties>
 		<java.version>1.8</java.version>

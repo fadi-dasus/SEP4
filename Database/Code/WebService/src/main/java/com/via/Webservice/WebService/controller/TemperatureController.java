@@ -33,13 +33,6 @@ public class TemperatureController {
 
 	}
 
-//	@GetMapping("/all")
-//	public ResponseEntity<Iterable<Temperature>> getAllTemperature() {
-//		Iterable<Temperature> list = service.getAllTemperature();
-//		Temperature temperature = new Temperature();
-//		temperature.add(linkTo(methodOn(TemperatureController.class).getAllTemperature()).withSelfRel());
-//		return new ResponseEntity<Iterable<Temperature>>(list, HttpStatus.OK);
-//	}
 
 	@GetMapping("/room/{id}")
 	public ResponseEntity<Iterable<Temperature>> getByTemperatureRoom(@PathVariable("id") int room_id) {
