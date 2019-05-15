@@ -85,9 +85,9 @@ public class LoginFragment extends Fragment {
         });
         // end
 
-        /*view.findViewById(R.id.login_button).setOnClickListener((View v) -> {
+        view.findViewById(R.id.login_button).setOnClickListener((View v) -> {
             MainActivity.navController.navigate(R.id.action_loginFragment_to_roomChoiceFragment);
-        });*/
+        });
 
         return view;
     }

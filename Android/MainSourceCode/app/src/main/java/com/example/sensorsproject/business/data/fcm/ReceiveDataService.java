@@ -21,6 +21,11 @@ public class ReceiveDataService extends FirebaseMessagingService {
             String timestamp = map.get("timestamp");
             MyRoom room = FCMHelper.getInstance().getCurrentRoom().getValue();
 
+            Log.d("TEST", "CO2: " + co2_value);
+            Log.d("TEST", "HUMIDITY: " + hum_value);
+            Log.d("TEST", "TEMP: " + temp_value);
+            Log.d("TEST", "TIMESTAMP: " + timestamp);
+
             CO2 co2 = new CO2(co2_value, timestamp, room);
             Humidity humidity = new Humidity(hum_value, timestamp, room);
             Temperature temperature = new Temperature(temp_value, timestamp, room);
