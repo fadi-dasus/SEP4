@@ -7,24 +7,33 @@ import java.nio.ByteBuffer;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
+import org.bson.Document;
+
 import com.google.gson.Gson;
 
 import mongodb.MongoDbHandler;
+import sqlServer.SQLDatabaseConnection;
 
 
 public class LoRaClient implements WebSocket.Listener {
 
 	private MongoDbHandler mongoHandler;
 	private Gson gson;
+	private SQLDatabaseConnection sql;
 	
-    public LoRaClient() {
+    @SuppressWarnings("unused")
+	public LoRaClient() {
         HttpClient client = HttpClient.newHttpClient();
         CompletableFuture<WebSocket> ws = client.newWebSocketBuilder()
                 .buildAsync(URI.create("wss://iotnet.teracom.dk/app?token=vnoRdgAAABFpb3RuZXQudGVyYWNvbS5kawxTf4lxpFpToHDb5b5vLKk="), this);
 //                .buildAsync(URI.create("wss://iotnet.teracom.dk/app?token=vnoRLgAAABFpb3RuZXQudGVyYWNvbS5kazamWO1sXD3jq2ov9DGJBNA="), this);
         
+        // mongo connection
         mongoHandler = new MongoDbHandler();
         gson = new Gson();
+        
+        // sql connection
+		sql = new SQLDatabaseConnection();
     }
     //onOpen()
     public void onOpen(WebSocket webSocket) {
@@ -61,10 +70,13 @@ public class LoRaClient implements WebSocket.Listener {
     };
     //onText()
     public CompletionStage<?> onText(WebSocket webSocket, CharSequence data, boolean last) {
-        //System.out.println(data);
+        System.out.println(data);
     	LoRaMessage message = gson.fromJson(data.toString(), LoRaMessage.class);
-    	mongoHandler.insertDoc(message.transformToMongo());
-        webSocket.request(1);
+    	Document doc = message.transformToMongo(sql);
+    	if(doc != null)
+    		mongoHandler.insertDoc(doc);
+    	//System.out.println(message.toString());
+    	webSocket.request(1);
         return null; // new CompletableFuture().completedFuture("onText() completed.").thenAccept(System.out::println);
     };
 }
