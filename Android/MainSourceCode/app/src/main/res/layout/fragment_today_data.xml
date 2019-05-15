@@ -13,7 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:textColor="#ffffff"
+        android:background="@drawable/reg_btn_style"
         android:text="CO2"
+        app:layout_constraintEnd_toStartOf="@+id/button_hum"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,7 +27,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:textColor="#ffffff"
+        android:background="@drawable/reg_btn_style"
         android:text="Humidity"
+        app:layout_constraintEnd_toStartOf="@+id/button_temp"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button_co2"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +41,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:textColor="#ffffff"
+        android:background="@drawable/reg_btn_style"
         android:text="Temperature"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button_hum"
         app:layout_constraintTop_toTopOf="parent" />
 

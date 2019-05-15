@@ -42,7 +42,6 @@ public class FCMHelper {
     public void subscribe(MyRoom room){
         if(room != null){
             currentRoom.postValue(room);
-            Log.i("TEST", "A BENT JAU SUBSCRIBINI: " + room.getRoomName());
             firebaseMessaging.subscribeToTopic(room.getRoomName());
         }
 

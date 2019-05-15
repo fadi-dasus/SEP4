@@ -85,7 +85,6 @@ public class TodayDataFragment extends Fragment {
         subscribeHumData();
         subscribeTempData();
         setOnClickListeners();
-
         setupLineChart();
 
         return view;
@@ -107,8 +106,6 @@ public class TodayDataFragment extends Fragment {
             dates[i] = co2List.get(i).getTimestamp();
             values.add(new Entry(pos, value));
         }
-
-        Log.d("TEST", "setupCo2Chart: " + dates[0]);
 
         XAxis axis = lineChart.getXAxis();
         axis.setValueFormatter(new DateValueFormatter(dates));
@@ -259,22 +256,6 @@ public class TodayDataFragment extends Fragment {
         });
     }
 
-    private void subscribeHumData(){
-        measurementViewModel.getAllHumiditiesByRoomIdToday().observe(this, humidities -> {
-            if(humidities != null && humidities.size() > 0){
-                setupHumChart(humidities);
-            }
-        });
-    }
-
-    private void subscribeTempData(){
-        measurementViewModel.getAllTemperaturesByRoomIdToday().observe(this, temperatures -> {
-            if(temperatures != null && temperatures.size() > 0) {
-                setupTempChart(temperatures);
-            }
-        });
-    }
-
     private void setOnClickListeners(){
 
         buttonCo2.setOnClickListener(v -> {
@@ -290,4 +271,19 @@ public class TodayDataFragment extends Fragment {
         });
     }
 
+    private void subscribeHumData(){
+        measurementViewModel.getAllHumiditiesByRoomIdToday().observe(this, humidities -> {
+            if(humidities != null && humidities.size() > 0){
+                setupHumChart(humidities);
+            }
+        });
+    }
+
+    private void subscribeTempData(){
+        measurementViewModel.getAllTemperaturesByRoomIdToday().observe(this, temperatures -> {
+            if(temperatures != null && temperatures.size() > 0) {
+                setupTempChart(temperatures);
+            }
+        });
+    }
 }
