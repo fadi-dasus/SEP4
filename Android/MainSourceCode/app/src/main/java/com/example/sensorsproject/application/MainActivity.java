@@ -23,6 +23,7 @@ import com.example.sensorsproject.R;
 import com.example.sensorsproject.application.viewmodels.LiveDataViewModel;
 import com.example.sensorsproject.business.models.MyRoom;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,8 +46,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        //Set up VIewModel
+        //Set up ViewModel
         liveDataViewModel = ViewModelProviders.of(this).get(LiveDataViewModel.class);
+
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
 
@@ -120,13 +122,12 @@ public class MainActivity extends AppCompatActivity {
 
         switch(id){
             case R.id.action_today_data: {
-                //Todo: Fix a bug when TodayData icon is pressed, it presses on log out somehow :O
                 navController.navigate(R.id.action_global_todayDataFragment);
             }
 
             case R.id.action_logout: {
-                //navController.navigate(R.id.action_global_loginFragment);
-                //Todo: handle logout stuff here
+                navController.navigate(R.id.action_global_loginFragment);
+                FirebaseAuth.getInstance().signOut();
             }
 
             default: {
@@ -157,9 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-
-
-
+        FirebaseAuth.getInstance().signOut();
         super.onDestroy();
     }
 }

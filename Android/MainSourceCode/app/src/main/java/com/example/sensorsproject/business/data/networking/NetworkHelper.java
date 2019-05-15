@@ -92,6 +92,20 @@ public class NetworkHelper {
         return co2ByRoomIdToday;
     }
 
+    public void searchAllCo2sByRoomIdToday(String roomId){
+        //Networking Code
+        if(getAllCo2SByRoomIdToday != null){
+            getAllCo2SByRoomIdToday = null;
+        }
+
+        getAllCo2SByRoomIdToday = new GetAllCo2sByRoomIdToday(TAG, co2ByRoomIdToday, roomId);
+        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllCo2SByRoomIdToday);
+
+        AppExecutors.getInstance().networkIO().schedule(() -> {
+            handler.cancel(true);
+        }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
+    }
+
     public LiveData<List<Humidity>> getAllHumiditiesByRoomIdToday() { return humidityByRoomIdToday; }
 
     public LiveData<List<Temperature>> getAllTemperaturesByRoomIdToday() { return temperatureByRoomIdToday; }
@@ -124,19 +138,7 @@ public class NetworkHelper {
         }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
-    public void searchAllCo2sByRoomIdToday(String roomId){
-        //Networking Code
-        if(getAllCo2SByRoomIdToday != null){
-            getAllCo2SByRoomIdToday = null;
-        }
 
-        getAllCo2SByRoomIdToday = new GetAllCo2sByRoomIdToday(TAG, co2ByRoomIdToday, roomId);
-        final Future handler = AppExecutors.getInstance().networkIO().submit(getAllCo2SByRoomIdToday);
-
-        AppExecutors.getInstance().networkIO().schedule(() -> {
-            handler.cancel(true);
-        }, Constants.NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
-    }
 
     public void searchAllHumiditiesByRoomIdToday(String roomId){
         //Networking Code
