@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\bin",
+    "\\bin\\src",
+    "\\bin\\src\\test",
+    "\\bin\\src\\test\\java",
+    "\\bin\\src\\test\\java\\com",
+    "\\bin\\src\\test\\java\\com\\dataConnection",
+    "\\bin\\src\\test\\java\\com\\dataConnection\\Sep4",
+    "\\src",
+    "\\src\\bin"
+  ],
+  "SelectedNode": "\\bin\\src\\test\\java\\com\\dataConnection\\Sep4\\Sep4ApplicationTests.class",
+  "PreviewInSolutionExplorer": false
+}
